@@ -1,0 +1,73 @@
+\documentclass[a4paper,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{indentfirst}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage[format=plain,font=it]{caption}
+\usepackage{subcaption}
+\usepackage{standalone}
+\usepackage[nottoc]{tocbibind}
+\usepackage[noabbrev,capitalize,nameinlink]{cleveref}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{csvsimple}
+\usepackage[super]{nth}
+
+% Custom commands
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\titleformat*{\section}{\normalsize\bfseries}
+
+%opening
+\title{
+	\textbf{ECSE 526 \\ Assignment 3}
+	\\ \large Reinforcement Learning
+}
+\author{Sean Stappas \\ 260639512}
+\date{November \nth{7}, 2017}
+
+\begin{document}
+	\sloppy
+	\maketitle
+	\twocolumn
+	
+	\section*{Introduction}
+	
+	
+	\section{Description of approach to generalization}
+	% 10. provides expression for distance metric between two states and describes state representation used by the RL agent, also includes rationale for choice of components of the distance metric
+	
+	
+	\section{Results of generalization}
+	% 10. results provided for at least 3 different generalization approaches (i.e., choice of components of the distance metric) and meaningful discussion regarding consequences to behaviour of game agent
+	
+	
+	\section{Description of approach to exploration}
+	% 10 provides expression for optimistic prior for (state, action) pairs with clear explanation of how agent chose action at each step and convincing rationale for the approach taken
+	
+	
+	\section{Results of exploration}
+	% 10. results provided for at least 2 different exploration functions (i.e., weighting or N[s,a] in optimistic prior calculation) and meaningful discussion regarding consequences to behaviour of game agent
+	
+	
+	\section{Agent Performance}
+	% 30. as above, including analysis of effects of game events on agent behaviour and strategies (e.g., ghost avoidance) AND explanation of results over trials with multiple seeds to demonstrate generalization of learning
+
+	\section*{Conclusion}
+	
+	
+	% 
+	
+	%\renewcommand\refname{}
+	%\bibliographystyle{unsrt}
+	%\bibliography{readings}{}
+	
+\end{document}
