@@ -8,6 +8,7 @@ import sys
 from random import randrange
 from ale_python_interface import ALEInterface
 
+NUM_EPISODES = 10
 USE_SDL = True
 ACTIONS = [
     'noop',
@@ -55,16 +56,22 @@ def play_random_agent():
 
     # Get the list of legal actions
     legal_actions = ale.getLegalActionSet()
-    print('Legal actions: {}'.format(legal_actions))
+    minimal_actions = ale.getMinimalActionSet()
+    print('Legal actions: {}'.format([ACTIONS[i] for i in legal_actions]))
+    print('Minimal actions: {}'.format([ACTIONS[i] for i in minimal_actions]))
 
     # Play 10 episodes
-    for episode in range(10):
+    for episode in range(NUM_EPISODES):
         total_reward = 0
         while not ale.game_over():
             a = legal_actions[randrange(len(legal_actions))]
             # Apply an action and get the resulting reward
             reward = ale.act(a)
             if reward > 0:
+                print('RAM: {}'.format(ale.getRAM()))
+                # print('Screen: {}'.format(ale.getScreen()))
+                # print('Screen RGB: {}'.format(ale.getScreenRGB()))
+                # print('Screen Grayscale: {}'.format(ale.getScreenGrayscale()))
                 print('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
             total_reward += reward
         print('Episode %d ended with score: %d' % (episode, total_reward))
@@ -96,3 +103,9 @@ if __name__ == '__main__':
     # Guo: no actions can change state of game while falling from cubes (can ignore these states if possible)
 
     # Probable best choice: Basic + Q-learning
+
+    # TODO: Use pickle to save parameter weights
+
+    # TODO: Only consider left, right, up, down actions
+
+    # Human high scores: 15825, 27000
