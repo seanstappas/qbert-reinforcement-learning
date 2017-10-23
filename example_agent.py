@@ -73,3 +73,6 @@ def play_random_agent():
 
 if __name__ == '__main__':
     play_random_agent()
+
+    # TODO: see and select actions on every kth frame: recommended every 4th frame
+    # TODO: OR act at 12 steps/second (frame skip=5 within the stellarc configuration file.)
