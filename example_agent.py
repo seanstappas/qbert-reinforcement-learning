@@ -8,7 +8,7 @@ import sys
 from random import randrange
 from ale_python_interface import ALEInterface
 
-USE_SDL = False
+USE_SDL = True
 ACTIONS = [
     'noop',
     'fire',
@@ -32,10 +32,6 @@ ACTIONS = [
 
 
 def play_random_agent():
-    if len(sys.argv) < 2:
-        print('Usage: %s rom_file' % sys.argv[0])
-        sys.exit()
-
     ale = ALEInterface()
 
     # Get & Set the desired settings
@@ -55,8 +51,7 @@ def play_random_agent():
         ale.setBool('display_screen', True)
 
     # Load the ROM file
-    rom_file = str.encode(sys.argv[1])
-    ale.loadROM(rom_file)
+    ale.loadROM('qbert.bin')
 
     # Get the list of legal actions
     legal_actions = ale.getLegalActionSet()
