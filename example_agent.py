@@ -8,43 +8,73 @@ import sys
 from random import randrange
 from ale_python_interface import ALEInterface
 
-if len(sys.argv) < 2:
-    print('Usage: %s rom_file' % sys.argv[0])
-    sys.exit()
+USE_SDL = False
+ACTIONS = [
+    'noop',
+    'fire',
+    'up',
+    'right',
+    'left',
+    'down',
+    'up-right',
+    'up-left',
+    'down-right',
+    'down-left',
+    'up-fire',
+    'right-fire',
+    'left-fire',
+    'down-fire',
+    'up-right-fire',
+    'up-left-fire',
+    'down-right-fire',
+    'down-left-fire'
+]
 
-ale = ALEInterface()
 
-# Get & Set the desired settings
-ale.setInt(b'random_seed', 123)
+def play_random_agent():
+    if len(sys.argv) < 2:
+        print('Usage: %s rom_file' % sys.argv[0])
+        sys.exit()
 
-# Set USE_SDL to true to display the screen. ALE must be compilied
-# with SDL enabled for this to work. On OSX, pygame init is used to
-# proxy-call SDL_main.
-USE_SDL = True
-if USE_SDL:
-    if sys.platform == 'darwin':
-        import pygame
+    ale = ALEInterface()
 
-        pygame.init()
-        ale.setBool('sound', False)  # Sound doesn't work on OSX
-    elif sys.platform.startswith('linux'):
-        ale.setBool('sound', True)
-    ale.setBool('display_screen', True)
+    # Get & Set the desired settings
+    ale.setInt(b'random_seed', 123)
 
-# Load the ROM file
-rom_file = str.encode(sys.argv[1])
-ale.loadROM(rom_file)
+    # Set USE_SDL to true to display the screen. ALE must be compilied
+    # with SDL enabled for this to work. On OSX, pygame init is used to
+    # proxy-call SDL_main.
+    if USE_SDL:
+        if sys.platform == 'darwin':
+            import pygame
 
-# Get the list of legal actions
-legal_actions = ale.getLegalActionSet()
+            pygame.init()
+            ale.setBool('sound', True)  # Sound doesn't work on OSX
+        elif sys.platform.startswith('linux'):
+            ale.setBool('sound', True)
+        ale.setBool('display_screen', True)
 
-# Play 10 episodes
-for episode in range(10):
-    total_reward = 0
-    while not ale.game_over():
-        a = legal_actions[randrange(len(legal_actions))]
-        # Apply an action and get the resulting reward
-        reward = ale.act(a)
-        total_reward += reward
-    print('Episode %d ended with score: %d' % (episode, total_reward))
-    ale.reset_game()
+    # Load the ROM file
+    rom_file = str.encode(sys.argv[1])
+    ale.loadROM(rom_file)
+
+    # Get the list of legal actions
+    legal_actions = ale.getLegalActionSet()
+    print('Legal actions: {}'.format(legal_actions))
+
+    # Play 10 episodes
+    for episode in range(10):
+        total_reward = 0
+        while not ale.game_over():
+            a = legal_actions[randrange(len(legal_actions))]
+            # Apply an action and get the resulting reward
+            reward = ale.act(a)
+            if reward > 0:
+                print('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
+            total_reward += reward
+        print('Episode %d ended with score: %d' % (episode, total_reward))
+        ale.reset_game()
+
+
+if __name__ == '__main__':
+    play_random_agent()
