@@ -5,6 +5,7 @@
 # This is a direct port to python of the shared library example from
 # ALE provided in doc/examples/sharedLibraryInterfaceExample.cpp
 import sys
+import numpy as np
 from random import randrange
 from ale_python_interface import ALEInterface
 
@@ -59,6 +60,7 @@ def play_random_agent():
     minimal_actions = ale.getMinimalActionSet()
     print('Legal actions: {}'.format([ACTIONS[i] for i in legal_actions]))
     print('Minimal actions: {}'.format([ACTIONS[i] for i in minimal_actions]))
+    # np.set_printoptions(threshold='nan')
 
     # Play 10 episodes
     for episode in range(NUM_EPISODES):
@@ -70,7 +72,9 @@ def play_random_agent():
             if reward > 0:
                 print('RAM: {}'.format(ale.getRAM()))
                 # print('Screen: {}'.format(ale.getScreen()))
-                # print('Screen RGB: {}'.format(ale.getScreenRGB()))
+                print('Screen shape: {}'.format(ale.getScreen().shape))
+                print('Screen RGB shape: {}'.format(ale.getScreenRGB().shape))  # TODO: initialize array beforehand
+                print('Screen RGB: {}'.format(ale.getScreenRGB()))
                 # print('Screen Grayscale: {}'.format(ale.getScreenGrayscale()))
                 print('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
             total_reward += reward
