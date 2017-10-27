@@ -1,0 +1,47 @@
+A.L.E: Arcade Learning Environment (version 0.5.1)
+[Powered by Stella]
+Use -help for help screen.
+
+ ***************************************************************************
+ * Welcome to A.L.E (Arcade Learning Environment)
+ * (Powered by Stella)
+ ***************************************************************************
+
+ Usage: ale [options ...] romfile
+
+ Main arguments:
+   -help -- prints out help information
+   -game_controller [fifo|fifo_named] (default: unset)
+      Defines how Stella communicates with the player agent:
+            - 'fifo':       Control occurs through FIFO pipes
+            - 'fifo_named': Control occurs through named FIFO pipes
+   -random_seed [n|time] (default: time)
+     Sets the seed used for random number generation
+   -display_screen [true|false] (default: false)
+     Displays the game screen
+   -sound [true|false] (default: false)
+     Enable game sounds
+
+ Environment arguments:
+   -max_num_frames m (default: 0)
+     The program will quit after this number of frames. 0 means never.
+   -max_num_frames_per_episode m (default: 0)
+     Ends each episode after this number of frames. 0 means never.
+   -color_averaging [true|false] (default: false)
+     Phosphor blends screens to reduce flicker
+   -record_screen_dir [save_directory]
+     Saves game screen images to save_directory
+   -repeat_action_probability (default: 0.25)
+     Stochasticity in the environment. It is the probability the previous action will repeated without executing the new one.
+
+ FIFO Controller arguments:
+   -run_length_encoding [true|false] (default: true)
+     Encodes data using run-length encoding
+
+ Misc. arguments:
+   -ld [A/B] (default: B)
+     Left player difficulty. B means easy.
+   -rd [A/B] (default: B)
+     Right player difficulty. B means easy.
+
+No ROM File specified.

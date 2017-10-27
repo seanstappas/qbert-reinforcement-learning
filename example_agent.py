@@ -8,6 +8,19 @@ import sys
 import numpy as np
 from random import randrange
 from ale_python_interface import ALEInterface
+import matplotlib.pyplot as plt
+
+BLOCK_POSITIONS = [
+    (38, 77),
+    (66, 65), (66, 93),
+    (95, 53), (95, 77), (95, 105),
+    (124, 42), (124, 65), (124, 93), (124, 118),
+    (153, 30), (153, 53), (153, 77), (153, 105), (153, 130),
+    (182, 18), (182, 42), (182, 65), (182, 93), (182, 118), (182, 142),
+]
+
+SCORE_Y, SCORE_X = (10, 70)
+INITIAL_COLOR = 210, 210, 64  # Yellow
 
 NUM_EPISODES = 10
 USE_SDL = True
@@ -37,7 +50,8 @@ def play_random_agent():
     ale = ALEInterface()
 
     # Get & Set the desired settings
-    ale.setInt(b'random_seed', 123)
+    ale.setInt('random_seed', 123)
+    ale.setInt('frame_skip', 4)
 
     # Set USE_SDL to true to display the screen. ALE must be compilied
     # with SDL enabled for this to work. On OSX, pygame init is used to
@@ -63,6 +77,8 @@ def play_random_agent():
     # np.set_printoptions(threshold='nan')
 
     # Play 10 episodes
+    width, height = ale.getScreenDims()
+    rgb_screen = np.empty([height, width, 3], dtype=np.uint8)
     for episode in range(NUM_EPISODES):
         total_reward = 0
         while not ale.game_over():
@@ -71,10 +87,19 @@ def play_random_agent():
             reward = ale.act(a)
             if reward > 0:
                 print('RAM: {}'.format(ale.getRAM()))
+                print('RAM size: {}'.format(ale.getRAM().size))
                 # print('Screen: {}'.format(ale.getScreen()))
-                print('Screen shape: {}'.format(ale.getScreen().shape))
-                print('Screen RGB shape: {}'.format(ale.getScreenRGB().shape))  # TODO: initialize array beforehand
-                print('Screen RGB: {}'.format(ale.getScreenRGB()))
+                # print('Screen shape: {}'.format(ale.getScreen().shape))
+                # print('Screen RGB shape: {}'.format(ale.getScreenRGB().shape))  # TODO: initialize array beforehand
+                # print('Screen RGB: {}'.format(ale.getScreenRGB())) #  210 x 160 x 3 = 100, 800 entries
+                ale.getScreenRGB(rgb_screen)
+                print('Color at {} is {}'.format((SCORE_Y, SCORE_X), rgb_screen[SCORE_Y][SCORE_X]))
+                # for y, x in BLOCK_POSITIONS:
+                #     print('Color at {} is {}'.format((y, x), rgb_screen[y][x]))
+
+                # plt.imshow(rgb_screen)
+                # plt.show()
+
                 # print('Screen Grayscale: {}'.format(ale.getScreenGrayscale()))
                 print('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
             total_reward += reward
