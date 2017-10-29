@@ -4,12 +4,14 @@
 #
 # This is a direct port to python of the shared library example from
 # ALE provided in doc/examples/sharedLibraryInterfaceExample.cpp
+import logging
 import sys
 import numpy as np
 from random import randrange
 from ale_python_interface import ALEInterface
 import matplotlib.pyplot as plt
 
+from main import setup_logging
 from map import World
 
 BLOCK_POSITIONS = [
@@ -47,6 +49,7 @@ ACTIONS = [
     'down-left-fire'
 ]
 
+
 # Minimal actions: ['noop', 'fire', 'up', 'right', 'left', 'down']
 
 def play_random_agent():
@@ -54,7 +57,8 @@ def play_random_agent():
 
     # Get & Set the desired settings
     ale.setInt('random_seed', 123)
-    ale.setInt('frame_skip', 5)
+    ale.setInt('frame_skip', 60)
+    ale.setFloat('repeat_action_probability', 0)
 
     # Set USE_SDL to true to display the screen. ALE must be compilied
     # with SDL enabled for this to work. On OSX, pygame init is used to
@@ -75,48 +79,38 @@ def play_random_agent():
     # Get the list of legal actions
     legal_actions = ale.getLegalActionSet()
     minimal_actions = ale.getMinimalActionSet()
-    print('Legal actions: {}'.format([ACTIONS[i] for i in legal_actions]))
-    print('Minimal actions: {}'.format([ACTIONS[i] for i in minimal_actions]))
+    logging.debug('Legal actions: {}'.format([ACTIONS[i] for i in legal_actions]))
+    logging.debug('Minimal actions: {}'.format([ACTIONS[i] for i in minimal_actions]))
     # np.set_printoptions(threshold='nan')
 
     # Play 10 episodes
     width, height = ale.getScreenDims()
     rgb_screen = np.empty([height, width, 3], dtype=np.uint8)
-    world = World(rgb_screen)
+    world = World(rgb_screen, ale)
     for episode in range(NUM_EPISODES):
         total_reward = 0
         while not ale.game_over():
+            legal_actions = world.valid_action_numbers()
             a = legal_actions[randrange(len(legal_actions))]
-            # Apply an action and get the resulting reward
             reward = ale.act(a)
-            if reward > 0:
-                # print('RAM: {}'.format(ale.getRAM()))
-                # print('RAM size: {}'.format(ale.getRAM().size))
-                # print('Screen: {}'.format(ale.getScreen()))
-                # print('Screen shape: {}'.format(ale.getScreen().shape))
-                # print('Screen RGB shape: {}'.format(ale.getScreenRGB().shape))  # TODO: initialize array beforehand
-                # print('Screen RGB: {}'.format(ale.getScreenRGB())) #  210 x 160 x 3 = 100, 800 entries
-                ale.getScreenRGB(rgb_screen)
-                world.update_colors()
-                print('Desired color: {}'.format(world.desired_color))
-                print('Current row: {}'.format(world.current_row))
-                print('Current col: {}'.format(world.current_col))
-                print('Desired colors: {}'.format(world.desired_colors))
-                # print('Color at {} is {}'.format((SCORE_Y, SCORE_X), rgb_screen[SCORE_Y][SCORE_X]))
-                # for y, x in BLOCK_POSITIONS:
-                #     print('Color at {} is {}'.format((y, x), rgb_screen[y][x]))
-
-                # plt.imshow(rgb_screen)
-                # plt.show()
-
-                # print('Screen Grayscale: {}'.format(ale.getScreenGrayscale()))
-                # print('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
+            logging.debug('Frame number {}'.format(ale.getFrameNumber()))
+            logging.debug('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
+            ale.getScreenRGB(rgb_screen)
+            world.update(a)
+            logging.debug('Desired color: {}'.format(world.desired_color))
+            logging.debug('Current row: {}'.format(world.current_row))
+            logging.debug('Current col: {}'.format(world.current_col))
+            logging.debug('Desired colors: {}'.format(world.desired_colors))
             total_reward += reward
+
+            plt.imshow(rgb_screen)
+            plt.show()
         print('Episode %d ended with score: %d' % (episode, total_reward))
         ale.reset_game()
 
 
 if __name__ == '__main__':
+    setup_logging('debug')
     play_random_agent()
 
     # TODO: see and select actions on every kth frame: recommended every 4th frame
