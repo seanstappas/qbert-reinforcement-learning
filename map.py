@@ -1,3 +1,5 @@
+import logging
+
 import numpy as np
 
 NUM_ROWS = 6
@@ -21,6 +23,16 @@ INITIAL_DESIRED_COLORS = [
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
 ]  # Indicates if the desired colors are obtained at a block position
+
+AGENT_POSITIONS = [
+    [0],
+    [0, 0],
+    [0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+]  # Indicates if another agent is present at a block position (-1: purple, 0: none, +1: green)
+# TODO: detect agents at screen positions
 
 LEFT_EDGE_BLOCKS = [(1, 0), (2, 0), (3, 0), (4, 0)]
 RIGHT_EDGE_BLOCKS = [(1, 1), (2, 2), (3, 3), (4, 4)]
@@ -57,6 +69,9 @@ ACTIONS = [
 
 COLOR_YELLOW = 210, 210, 64  # Yellow
 COLOR_BLACK = 0, 0, 0
+COLOR_QBERT = 181, 83, 40
+
+QBERT_Y_DIFF_FROM_BLOCK = -10
 
 
 class World:
@@ -72,9 +87,9 @@ class World:
         if (self.current_row, self.current_col) == (0, 0):
             return ['noop', 'right', 'down']
         elif (self.current_row, self.current_col) == (5, 0):
-            return ['noop', 'right', 'down']
+            return ['noop', 'up']
         elif (self.current_row, self.current_col) == (5, 5):
-            return ['noop', 'right', 'down']
+            return ['noop', 'left']
         elif (self.current_row, self.current_col) in BOTTOM_BLOCKS:
             return ['noop', 'left', 'up']
         elif (self.current_row, self.current_col) in LEFT_EDGE_BLOCKS:
@@ -92,19 +107,27 @@ class World:
         diff_row, diff_col = ACTION_DIFFS[action]
         return self.current_row + diff_row, self.current_col + diff_col
 
-    def update(self, action):
-        if self.ale.lives() != self.lives:
-            self.lives = self.ale.lives()
-            self.current_row, self.current_col = 0, 0
-        else:
-            a = ACTIONS[action]
-            self.update_position(a)
-        self.update_colors()
+    def perform_action(self, action):
+        a = ACTIONS[action]
+        new_row, new_col = self.result_position(a)
+        logging.debug('Waiting for Qbert to actually move to ({},{})'.format(new_row, new_col))
+        rgb_y, rgb_x = BLOCK_COORDINATES[new_row][new_col]
+        reward_sum = 0
+        while not np.array_equal(self.rgb_screen[rgb_y - 10][rgb_x], COLOR_QBERT):
+            if self.ale.lives() == 0:
+                self.reset_position()
+                return reward_sum
+            reward_sum += self.ale.act(action)
+            self.ale.getScreenRGB(self.rgb_screen)
+        self.update_position(a)
+        self.update_colors()  # TODO: properly identify next level
+        return reward_sum
 
     def update_colors(self):
         score_color = self.rgb_screen[SCORE_Y][SCORE_X]
         if not np.array_equal(score_color, COLOR_BLACK):
             self.desired_color = score_color
+        level_won = True
         for row in range(NUM_ROWS):
             for col in range(row + 1):
                 rgb_y, rgb_x = BLOCK_COORDINATES[row][col]
@@ -112,6 +135,12 @@ class World:
                     self.desired_colors[row][col] = 1
                 else:
                     self.desired_colors[row][col] = 0
+                    level_won = False
+        if level_won:
+            self.reset_position()
 
-    def update_position(self, action):
-        self.current_row, self.current_col = self.result_position(action)
+    def update_position(self, a):
+        self.current_row, self.current_col = self.result_position(a)
+
+    def reset_position(self):
+        self.current_col, self.current_row = 0, 0

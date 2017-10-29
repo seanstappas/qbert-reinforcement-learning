@@ -50,6 +50,9 @@ ACTIONS = [
 ]
 
 
+COLOR_QBERT = 181, 83, 40
+
+
 # Minimal actions: ['noop', 'fire', 'up', 'right', 'left', 'down']
 
 def play_random_agent():
@@ -57,7 +60,7 @@ def play_random_agent():
 
     # Get & Set the desired settings
     ale.setInt('random_seed', 123)
-    ale.setInt('frame_skip', 60)
+    ale.setInt('frame_skip', 0)
     ale.setFloat('repeat_action_probability', 0)
 
     # Set USE_SDL to true to display the screen. ALE must be compilied
@@ -86,25 +89,34 @@ def play_random_agent():
     # Play 10 episodes
     width, height = ale.getScreenDims()
     rgb_screen = np.empty([height, width, 3], dtype=np.uint8)
+    logging.debug('Waiting for Qbert to get into position...')
+    while not np.array_equal(rgb_screen[28][77], COLOR_QBERT):
+        ale.act(0)
+        ale.getScreenRGB(rgb_screen)
+    logging.debug('Qbert in position!')
     world = World(rgb_screen, ale)
     for episode in range(NUM_EPISODES):
         total_reward = 0
+        world.reset_position()
         while not ale.game_over():
             legal_actions = world.valid_action_numbers()
             a = legal_actions[randrange(len(legal_actions))]
-            reward = ale.act(a)
-            logging.debug('Frame number {}'.format(ale.getFrameNumber()))
+            # logging.debug('Frame number {}'.format(ale.getFrameNumber()))
+            reward = world.perform_action(a)
             logging.debug('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
+            logging.debug('Current row/col: ({}, {}): '.format(world.current_row, world.current_col))
             ale.getScreenRGB(rgb_screen)
-            world.update(a)
-            logging.debug('Desired color: {}'.format(world.desired_color))
-            logging.debug('Current row: {}'.format(world.current_row))
-            logging.debug('Current col: {}'.format(world.current_col))
-            logging.debug('Desired colors: {}'.format(world.desired_colors))
+            # logging.debug('Desired color: {}'.format(world.desired_color))
+            # logging.debug('Current row: {}'.format(world.current_row))
+            # logging.debug('Current col: {}'.format(world.current_col))
+            # logging.debug('Desired colors: {}'.format(world.desired_colors))
+            logging.debug('Reward: {}'.format(reward))
             total_reward += reward
 
-            plt.imshow(rgb_screen)
-            plt.show()
+            # print('RAM_{}: {}'.format(i, ale.getRAM()))
+            # plt.imshow(rgb_screen)
+            # plt.savefig('report/screenshots/screenshot_{}'.format(i))
+            # plt.show()
         print('Episode %d ended with score: %d' % (episode, total_reward))
         ale.reset_game()
 
