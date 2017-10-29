@@ -45,13 +45,14 @@ ACTIONS = [
     'down-left-fire'
 ]
 
+# Minimal actions: ['noop', 'fire', 'up', 'right', 'left', 'down']
 
 def play_random_agent():
     ale = ALEInterface()
 
     # Get & Set the desired settings
     ale.setInt('random_seed', 123)
-    ale.setInt('frame_skip', 4)
+    ale.setInt('frame_skip', 5)
 
     # Set USE_SDL to true to display the screen. ALE must be compilied
     # with SDL enabled for this to work. On OSX, pygame init is used to

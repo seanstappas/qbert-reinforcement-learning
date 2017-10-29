@@ -1,18 +1,20 @@
 import numpy as np
 
-RAM_SIZE = 128
-
-
-def initialize_parameters():
-    return np.zeros(RAM_SIZE)
+INITIAL_PARAMETERS = [
+    [0],
+    [0, 0],
+    [0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+]  # Indicates if the desired colors are obtained at a block position
 
 
 class TDParameterLearner:
     def __init__(self, alpha, gamma):
-        self._theta_vector = initialize_parameters()
-        initialize_parameters()  # Parameter for each RAM value index
+        self._theta_vector = INITIAL_PARAMETERS
         self.alpha = alpha
         self.gamma = gamma
 
-    def parameter_update(self, ram_vector, reward):
+    def parameter_update(self, desired_colors, reward):
         self._theta_vector = 0
