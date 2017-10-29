@@ -10,6 +10,8 @@ from random import randrange
 from ale_python_interface import ALEInterface
 import matplotlib.pyplot as plt
 
+from map import World
+
 BLOCK_POSITIONS = [
     (38, 77),
     (66, 65), (66, 93),
@@ -80,6 +82,7 @@ def play_random_agent():
     # Play 10 episodes
     width, height = ale.getScreenDims()
     rgb_screen = np.empty([height, width, 3], dtype=np.uint8)
+    world = World(rgb_screen)
     for episode in range(NUM_EPISODES):
         total_reward = 0
         while not ale.game_over():
@@ -87,14 +90,19 @@ def play_random_agent():
             # Apply an action and get the resulting reward
             reward = ale.act(a)
             if reward > 0:
-                print('RAM: {}'.format(ale.getRAM()))
-                print('RAM size: {}'.format(ale.getRAM().size))
+                # print('RAM: {}'.format(ale.getRAM()))
+                # print('RAM size: {}'.format(ale.getRAM().size))
                 # print('Screen: {}'.format(ale.getScreen()))
                 # print('Screen shape: {}'.format(ale.getScreen().shape))
                 # print('Screen RGB shape: {}'.format(ale.getScreenRGB().shape))  # TODO: initialize array beforehand
                 # print('Screen RGB: {}'.format(ale.getScreenRGB())) #  210 x 160 x 3 = 100, 800 entries
                 ale.getScreenRGB(rgb_screen)
-                print('Color at {} is {}'.format((SCORE_Y, SCORE_X), rgb_screen[SCORE_Y][SCORE_X]))
+                world.update_colors()
+                print('Desired color: {}'.format(world.desired_color))
+                print('Current row: {}'.format(world.current_row))
+                print('Current col: {}'.format(world.current_col))
+                print('Desired colors: {}'.format(world.desired_colors))
+                # print('Color at {} is {}'.format((SCORE_Y, SCORE_X), rgb_screen[SCORE_Y][SCORE_X]))
                 # for y, x in BLOCK_POSITIONS:
                 #     print('Color at {} is {}'.format((y, x), rgb_screen[y][x]))
 
@@ -102,7 +110,7 @@ def play_random_agent():
                 # plt.show()
 
                 # print('Screen Grayscale: {}'.format(ale.getScreenGrayscale()))
-                print('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
+                # print('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
             total_reward += reward
         print('Episode %d ended with score: %d' % (episode, total_reward))
         ale.reset_game()
