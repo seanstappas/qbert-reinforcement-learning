@@ -110,13 +110,14 @@ def play_random_agent():
             # logging.debug('Current row: {}'.format(world.current_row))
             # logging.debug('Current col: {}'.format(world.current_col))
             # logging.debug('Desired colors: {}'.format(world.desired_colors))
+            logging.debug('Agents: {}'.format(world.agents))
             logging.debug('Reward: {}'.format(reward))
             total_reward += reward
 
             # print('RAM_{}: {}'.format(i, ale.getRAM()))
-            # plt.imshow(rgb_screen)
+            plt.imshow(rgb_screen)
+            plt.show()
             # plt.savefig('report/screenshots/screenshot_{}'.format(i))
-            # plt.show()
         print('Episode %d ended with score: %d' % (episode, total_reward))
         ale.reset_game()
 

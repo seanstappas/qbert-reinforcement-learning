@@ -70,8 +70,10 @@ ACTIONS = [
 COLOR_YELLOW = 210, 210, 64  # Yellow
 COLOR_BLACK = 0, 0, 0
 COLOR_QBERT = 181, 83, 40
+COLOR_GREEN = 50, 132, 50
+COLOR_PURPLE = 146, 70, 192
 
-QBERT_Y_DIFF_FROM_BLOCK = -10
+AGENT_OFFSET = -10
 
 
 class World:
@@ -81,6 +83,7 @@ class World:
         self.rgb_screen = rgb_screen
         self.desired_color = COLOR_YELLOW
         self.desired_colors = INITIAL_DESIRED_COLORS
+        self.agents = AGENT_POSITIONS
         self.current_row, self.current_col = 0, 0
 
     def valid_actions(self):
@@ -113,7 +116,7 @@ class World:
         logging.debug('Waiting for Qbert to actually move to ({},{})'.format(new_row, new_col))
         rgb_y, rgb_x = BLOCK_COORDINATES[new_row][new_col]
         reward_sum = 0
-        while not np.array_equal(self.rgb_screen[rgb_y - 10][rgb_x], COLOR_QBERT):
+        while not np.array_equal(self.rgb_screen[rgb_y + AGENT_OFFSET][rgb_x], COLOR_QBERT):
             if self.ale.lives() == 0:
                 self.reset_position()
                 return reward_sum
@@ -131,10 +134,23 @@ class World:
         for row in range(NUM_ROWS):
             for col in range(row + 1):
                 rgb_y, rgb_x = BLOCK_COORDINATES[row][col]
+                # Evaluate color of block
                 if np.array_equal(self.rgb_screen[rgb_y][rgb_x], self.desired_color):
                     self.desired_colors[row][col] = 1
                 else:
                     self.desired_colors[row][col] = 0
+                    level_won = False
+
+                # Evaluate color of possible agents on blocks
+                if np.array_equal(self.rgb_screen[rgb_y + AGENT_OFFSET][rgb_x], COLOR_PURPLE):
+                    # Enemy (purple)
+                    self.agents[row][col] = -1
+                elif np.array_equal(self.rgb_screen[rgb_y + AGENT_OFFSET][rgb_x], COLOR_GREEN):
+                    # Friendly (green)
+                    self.agents[row][col] = 1
+                else:
+                    # No agent detected
+                    self.agents[row][col] = 0
                     level_won = False
         if level_won:
             self.reset_position()
