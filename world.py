@@ -1,4 +1,5 @@
 import logging
+from abc import ABCMeta
 
 import numpy as np
 
@@ -77,6 +78,10 @@ AGENT_OFFSET = -10
 
 
 class World:
+    __metaclass__ = ABCMeta
+
+
+class QbertWorld(World):
     def __init__(self, rgb_screen, ale):
         self.ale = ale
         self.lives = ale.lives()
@@ -160,3 +165,5 @@ class World:
 
     def reset_position(self):
         self.current_col, self.current_row = 0, 0
+
+    # TODO: Keep track of discs

@@ -12,7 +12,7 @@ from ale_python_interface import ALEInterface
 import matplotlib.pyplot as plt
 
 from main import setup_logging
-from map import World
+from world import QbertWorld
 
 BLOCK_POSITIONS = [
     (38, 77),
@@ -94,7 +94,7 @@ def play_random_agent():
         ale.act(0)
         ale.getScreenRGB(rgb_screen)
     logging.debug('Qbert in position!')
-    world = World(rgb_screen, ale)
+    world = QbertWorld(rgb_screen, ale)
     for episode in range(NUM_EPISODES):
         total_reward = 0
         world.reset_position()
