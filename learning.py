@@ -7,14 +7,16 @@ INITIAL_PARAMETERS = [
     [0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
-]  # Indicates if the desired colors are obtained at a block position
+]
 
 
 class TDParameterLearner:
     def __init__(self, alpha, gamma):
-        self._theta_vector = INITIAL_PARAMETERS
+        self.desired_color_parameters = INITIAL_PARAMETERS
+        self.agent_parameters = INITIAL_PARAMETERS
         self.alpha = alpha
         self.gamma = gamma
 
-    def parameter_update(self, desired_colors, reward):
-        self._theta_vector = 0
+    def parameter_update(self, world, reward):
+        self.desired_color_parameters = 0
+        self.agent_parameters = 0
