@@ -53,13 +53,31 @@
 	\section{Description of approach to exploration}
 	% 10 provides expression for optimistic prior for (state, action) pairs with clear explanation of how agent chose action at each step and convincing rationale for the approach taken
 	
+	First, a simple random approach to exploration was implemented, where a random action is chosen with probability $\epsilon$ and the greedy action is chosen otherwise.
+	
+	% TODO: Tabulate score/level/screenshots for epsilon exploration
+	
+	Next, weighting with optimistic priors was implemented, using $N(s, a)$, i.e., the number of times action $a$ has been attempted in state $s$.
+	
+	% TODO: Tabulate score/level/screenshots for optimistic prior
+	
 	
 	\section{Results of exploration}
 	% 10. results provided for at least 2 different exploration functions (i.e., weighting or N[s,a] in optimistic prior calculation) and meaningful discussion regarding consequences to behaviour of game agent
 	
+	The random exploration results can be seen in...
+	
+	% TODO: Tabulate score/level/screenshots for epsilon exploration
+	
+	The weighted prior results can be seen in...
+	
+	% TODO: Tabulate score/level/screenshots for optimistic prior
+	
 	
 	\section{Agent Performance}
-	% 30. as above, including analysis of effects of game events on agent behaviour and strategies (e.g., ghost avoidance) AND explanation of results over trials with multiple seeds to demonstrate generalization of learning
+	% 30. as above, including analysis of effects of game events on agent behaviour and strategies (e.g., enemy avoidance) AND explanation of results over trials with multiple seeds to demonstrate generalization of learning
+	
+	% TODO: Show score as function of number of games played (with multiple seeds, game events [enemies])
 
 	\section*{Conclusion}
 	
