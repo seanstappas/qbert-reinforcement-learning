@@ -140,7 +140,7 @@ def play_learning_agent(world):
             total_reward += agent.action()
         print('Episode %d ended with score: %d' % (episode, total_reward))
         world.ale.reset_game()
-
+    # TODO: plot results here
 
 def play():
     world = setup_world()

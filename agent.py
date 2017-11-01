@@ -41,7 +41,7 @@ class QbertAgent(Agent):
         self.learner = learner
 
     def action(self, exploration='optimistic'):
-        s = self.world.to_state()  # TODO: Use subsumption (2 different states learned by 2 learners...)
+        s = self.world.to_state()  # TODO: Use subsumption (3 different learners: blocks, enemies, greens...)
         if exploration is 'optimistic':
             a = self.learner.get_best_action_optimistic(s)
         else:

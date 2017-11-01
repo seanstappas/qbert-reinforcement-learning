@@ -218,4 +218,5 @@ class QbertWorld(World):
             states.append(self.get_next_state(a))
         return states
 
-        # TODO: Keep track of discs
+    # TODO: Keep track of discs
+    # TODO: Keep track of levels
