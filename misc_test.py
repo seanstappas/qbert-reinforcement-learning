@@ -30,5 +30,16 @@ def numpy_multiply():
     print(a * b)
 
 
+def test_dicts_and_lists():
+    d = {}
+    lst = (1, 2, 3)
+    d[lst] = 'a'
+    print(d[(1, 2, 3)])
+
+    lst = (3, 4), (1, 2, 3)
+    d[lst] = 'b'
+    print(d[(3, 4), (1, 2, 3)])
+
+
 if __name__ == '__main__':
-    numpy_multiply()
+    test_dicts_and_lists()

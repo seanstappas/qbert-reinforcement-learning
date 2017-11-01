@@ -11,6 +11,8 @@ from random import randrange
 from ale_python_interface import ALEInterface
 import matplotlib.pyplot as plt
 
+from agent import QbertAgent
+from learner import QLearner
 from main import setup_logging
 from world import QbertWorld
 
@@ -49,13 +51,12 @@ ACTIONS = [
     'down-left-fire'
 ]
 
-
 COLOR_QBERT = 181, 83, 40
 
 
 # Minimal actions: ['noop', 'fire', 'up', 'right', 'left', 'down']
 
-def play_random_agent():
+def setup_world():
     ale = ALEInterface()
 
     # Get & Set the desired settings
@@ -95,36 +96,61 @@ def play_random_agent():
         ale.getScreenRGB(rgb_screen)
     logging.debug('Qbert in position!')
     world = QbertWorld(rgb_screen, ale)
+    return world
+
+
+def play_random_agent(world):
     for episode in range(NUM_EPISODES):
         total_reward = 0
         world.reset_position()
-        while not ale.game_over():
+        while not world.ale.game_over():
             legal_actions = world.valid_action_numbers()
             a = legal_actions[randrange(len(legal_actions))]
-            # logging.debug('Frame number {}'.format(ale.getFrameNumber()))
             reward = world.perform_action(a)
+
             logging.debug('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
             logging.debug('Current row/col: ({}, {}): '.format(world.current_row, world.current_col))
-            ale.getScreenRGB(rgb_screen)
-            # logging.debug('Desired color: {}'.format(world.desired_color))
-            # logging.debug('Current row: {}'.format(world.current_row))
-            # logging.debug('Current col: {}'.format(world.current_col))
-            # logging.debug('Desired colors: {}'.format(world.desired_colors))
+            logging.debug('Desired color: {}'.format(world.desired_color))
+            logging.debug('Current row: {}'.format(world.current_row))
+            logging.debug('Current col: {}'.format(world.current_col))
+            logging.debug('Desired colors: {}'.format(world.desired_colors))
             logging.debug('Agents: {}'.format(world.agents))
             logging.debug('Reward: {}'.format(reward))
+
             total_reward += reward
 
-            # print('RAM_{}: {}'.format(i, ale.getRAM()))
-            plt.imshow(rgb_screen)
-            plt.show()
+            # plt.imshow(rgb_screen)
+            # plt.show()
             # plt.savefig('report/screenshots/screenshot_{}'.format(i))
         print('Episode %d ended with score: %d' % (episode, total_reward))
-        ale.reset_game()
+        world.ale.reset_game()
+
+
+ALPHA = 0.1
+GAMMA = 0.9
+
+
+def play_learning_agent(world):
+    learner = QLearner(ALPHA, GAMMA)
+    agent = QbertAgent(world, learner)
+    for episode in range(NUM_EPISODES):
+        total_reward = 0
+        world.reset_position()
+        while not world.ale.game_over():
+            total_reward += agent.action()
+        print('Episode %d ended with score: %d' % (episode, total_reward))
+        world.ale.reset_game()
+
+
+def play():
+    world = setup_world()
+    # play_random_agent(world)
+    play_learning_agent(world)
 
 
 if __name__ == '__main__':
     setup_logging('debug')
-    play_random_agent()
+    play()
 
     # TODO: see and select actions on every kth frame: recommended every 4th frame
 

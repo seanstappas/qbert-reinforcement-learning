@@ -3,6 +3,8 @@ from abc import ABCMeta
 
 import numpy as np
 
+from actions import Actions
+
 NUM_ROWS = 6
 NUM_COLS = 6
 
@@ -68,6 +70,23 @@ ACTIONS = [
     'down-left-fire'
 ]
 
+
+ACTION_NUM_DIFFS = {
+    0: (0, 0),
+    2: (-1, 0),
+    3: (1, 1),
+    4: (-1, -1),
+    5: (1, 0)
+}
+
+ACTIONS_TO_NUMBERS = {
+    'noop': 0,
+    'up': 2,
+    'right': 3,
+    'left': 4,
+    'down': 5
+}
+
 COLOR_YELLOW = 210, 210, 64  # Yellow
 COLOR_BLACK = 0, 0, 0
 COLOR_QBERT = 181, 83, 40
@@ -75,6 +94,15 @@ COLOR_GREEN = 50, 132, 50
 COLOR_PURPLE = 146, 70, 192
 
 AGENT_OFFSET = -10
+
+
+def list_to_tuple(lst):
+    return tuple(tuple(x for x in row) for row in lst)
+
+
+def list_to_tuple_with_value(lst, row_num, col_num, val):
+    return tuple(tuple(x if i != row_num or j != col_num else val for j, x in enumerate(row))
+                 for i, row in enumerate(lst))
 
 
 class World:
@@ -91,21 +119,13 @@ class QbertWorld(World):
         self.agents = AGENT_POSITIONS
         self.current_row, self.current_col = 0, 0
 
+    def to_state(self):
+        current_position = self.current_row, self.current_col
+        colors = list_to_tuple(self.desired_colors)
+        return current_position, colors
+
     def valid_actions(self):
-        if (self.current_row, self.current_col) == (0, 0):
-            return ['noop', 'right', 'down']
-        elif (self.current_row, self.current_col) == (5, 0):
-            return ['noop', 'up']
-        elif (self.current_row, self.current_col) == (5, 5):
-            return ['noop', 'left']
-        elif (self.current_row, self.current_col) in BOTTOM_BLOCKS:
-            return ['noop', 'left', 'up']
-        elif (self.current_row, self.current_col) in LEFT_EDGE_BLOCKS:
-            return ['noop', 'up', 'right', 'down']
-        elif (self.current_row, self.current_col) in RIGHT_EDGE_BLOCKS:
-            return ['noop', 'right', 'left', 'down']
-        else:
-            return ['noop', 'up', 'right', 'left', 'down']
+        return Actions.get_valid_actions(self.current_row, self.current_col)
 
     def valid_action_numbers(self):
         valid_actions = self.valid_actions()
@@ -127,6 +147,26 @@ class QbertWorld(World):
                 return reward_sum
             reward_sum += self.ale.act(action)
             self.ale.getScreenRGB(self.rgb_screen)
+
+        self.ale.getScreenRGB(self.rgb_screen)
+        self.update_position(a)
+        self.update_colors()  # TODO: properly identify next level
+        return reward_sum
+
+    def perform_action_name(self, a):
+        action = ACTIONS_TO_NUMBERS[a]
+        new_row, new_col = self.result_position(a)
+        logging.debug('Waiting for Qbert to actually move to ({},{})'.format(new_row, new_col))
+        rgb_y, rgb_x = BLOCK_COORDINATES[new_row][new_col]
+        reward_sum = 0
+        while not np.array_equal(self.rgb_screen[rgb_y + AGENT_OFFSET][rgb_x], COLOR_QBERT):
+            if self.ale.lives() == 0:
+                self.reset_position()
+                return reward_sum
+            reward_sum += self.ale.act(action)
+            self.ale.getScreenRGB(self.rgb_screen)
+
+        self.ale.getScreenRGB(self.rgb_screen)
         self.update_position(a)
         self.update_colors()  # TODO: properly identify next level
         return reward_sum
@@ -166,4 +206,16 @@ class QbertWorld(World):
     def reset_position(self):
         self.current_col, self.current_row = 0, 0
 
-    # TODO: Keep track of discs
+    def get_next_state(self, a):
+        diff_row, diff_col = ACTION_NUM_DIFFS[a]
+        new_position = self.current_row + diff_row, self.current_col + diff_col
+        new_colors = list_to_tuple_with_value(self.desired_colors, new_position[0], new_position[1], 1)
+        return new_position, new_colors
+
+    def get_close_states(self):
+        states = []
+        for a in Actions.get_valid_action_numbers(self.current_row, self.current_col):
+            states.append(self.get_next_state(a))
+        return states
+
+        # TODO: Keep track of discs
