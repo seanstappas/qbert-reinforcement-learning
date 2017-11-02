@@ -1,102 +1,17 @@
-#!/usr/bin/env python
-# python_example.py
-# Author: Ben Goodrich
-#
-# This is a direct port to python of the shared library example from
-# ALE provided in doc/examples/sharedLibraryInterfaceExample.cpp
 import logging
-import sys
-import numpy as np
 from random import randrange
-from ale_python_interface import ALEInterface
-import matplotlib.pyplot as plt
 
+from actions import action_number_to_name
 from agent import QbertAgent
 from learner import QLearner
 from main import setup_logging
-from world import QbertWorld
-
-BLOCK_POSITIONS = [
-    (38, 77),
-    (66, 65), (66, 93),
-    (95, 53), (95, 77), (95, 105),
-    (124, 42), (124, 65), (124, 93), (124, 118),
-    (153, 30), (153, 53), (153, 77), (153, 105), (153, 130),
-    (182, 18), (182, 42), (182, 65), (182, 93), (182, 118), (182, 142),
-]
-
-SCORE_Y, SCORE_X = (10, 70)
-INITIAL_COLOR = 210, 210, 64  # Yellow
+from world import setup_world
 
 NUM_EPISODES = 10
 USE_SDL = True
-ACTIONS = [
-    'noop',
-    'fire',
-    'up',
-    'right',
-    'left',
-    'down',
-    'up-right',
-    'up-left',
-    'down-right',
-    'down-left',
-    'up-fire',
-    'right-fire',
-    'left-fire',
-    'down-fire',
-    'up-right-fire',
-    'up-left-fire',
-    'down-right-fire',
-    'down-left-fire'
-]
-
-COLOR_QBERT = 181, 83, 40
 
 
 # Minimal actions: ['noop', 'fire', 'up', 'right', 'left', 'down']
-
-def setup_world():
-    ale = ALEInterface()
-
-    # Get & Set the desired settings
-    ale.setInt('random_seed', 123)
-    ale.setInt('frame_skip', 0)
-    ale.setFloat('repeat_action_probability', 0)
-
-    # Set USE_SDL to true to display the screen. ALE must be compilied
-    # with SDL enabled for this to work. On OSX, pygame init is used to
-    # proxy-call SDL_main.
-    if USE_SDL:
-        if sys.platform == 'darwin':
-            import pygame
-
-            pygame.init()
-            ale.setBool('sound', True)  # Sound doesn't work on OSX
-        elif sys.platform.startswith('linux'):
-            ale.setBool('sound', True)
-        ale.setBool('display_screen', True)
-
-    # Load the ROM file
-    ale.loadROM('qbert.bin')
-
-    # Get the list of legal actions
-    legal_actions = ale.getLegalActionSet()
-    minimal_actions = ale.getMinimalActionSet()
-    logging.debug('Legal actions: {}'.format([ACTIONS[i] for i in legal_actions]))
-    logging.debug('Minimal actions: {}'.format([ACTIONS[i] for i in minimal_actions]))
-    # np.set_printoptions(threshold='nan')
-
-    # Play 10 episodes
-    width, height = ale.getScreenDims()
-    rgb_screen = np.empty([height, width, 3], dtype=np.uint8)
-    logging.debug('Waiting for Qbert to get into position...')
-    while not np.array_equal(rgb_screen[28][77], COLOR_QBERT):
-        ale.act(0)
-        ale.getScreenRGB(rgb_screen)
-    logging.debug('Qbert in position!')
-    world = QbertWorld(rgb_screen, ale)
-    return world
 
 
 def play_random_agent(world):
@@ -108,7 +23,7 @@ def play_random_agent(world):
             a = legal_actions[randrange(len(legal_actions))]
             reward = world.perform_action(a)
 
-            logging.debug('Chosen action: {}, reward: {}'.format(ACTIONS[a], reward))
+            logging.debug('Chosen action: {}, reward: {}'.format(action_number_to_name(a), reward))
             logging.debug('Current row/col: ({}, {}): '.format(world.current_row, world.current_col))
             logging.debug('Desired color: {}'.format(world.desired_color))
             logging.debug('Current row: {}'.format(world.current_row))
@@ -127,7 +42,7 @@ def play_random_agent(world):
 
 
 def play_learning_agent(world):
-    learner = QLearner()
+    learner = QLearner(world)
     agent = QbertAgent(world, learner)
     for episode in range(NUM_EPISODES):
         total_reward = 0
@@ -140,7 +55,7 @@ def play_learning_agent(world):
 
 
 def play():
-    world = setup_world()
+    world = setup_world(display_screen=True)
     # play_random_agent(world)
     play_learning_agent(world)
 

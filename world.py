@@ -2,13 +2,17 @@ import logging
 from abc import ABCMeta
 
 import numpy as np
+import sys
+from ale_python_interface import ALEInterface
 
-from actions import Actions
+from actions import get_valid_actions, action_name_to_number, get_action_diffs, action_number_to_name, \
+    get_action_number_diffs, get_valid_action_numbers
 
 NUM_ROWS = 6
 NUM_COLS = 6
 
-SCORE_Y, SCORE_X = (10, 70)
+QBERT_Y, QBERT_X = 28, 77
+SCORE_Y, SCORE_X = 10, 70
 BLOCK_COORDINATES = [
     [(38, 77)],
     [(66, 65), (66, 93)],
@@ -49,15 +53,6 @@ COLOR_PURPLE = 146, 70, 192
 AGENT_BLOCK_OFFSET = -10
 
 
-def list_to_tuple(lst):
-    return tuple(tuple(x for x in row) for row in lst)
-
-
-def list_to_tuple_with_value(lst, row_num, col_num, val):
-    return tuple(tuple(x if i != row_num or j != col_num else val for j, x in enumerate(row))
-                 for i, row in enumerate(lst))
-
-
 class World:
     __metaclass__ = ABCMeta
 
@@ -71,6 +66,7 @@ class QbertWorld(World):
         self.desired_colors = INITIAL_DESIRED_COLORS
         self.agents = AGENT_POSITIONS
         self.current_row, self.current_col = 0, 0
+        self.level = 1
 
     def to_state(self):
         current_position = self.current_row, self.current_col
@@ -78,18 +74,18 @@ class QbertWorld(World):
         return current_position, colors
 
     def valid_actions(self):
-        return Actions.get_valid_actions(self.current_row, self.current_col)
+        return get_valid_actions(self.current_row, self.current_col)
 
     def valid_action_numbers(self):
         valid_actions = self.valid_actions()
-        return [Actions.action_name_to_number(a) for a in valid_actions]
+        return [action_name_to_number(a) for a in valid_actions]
 
     def result_position(self, action):
-        diff_row, diff_col = Actions.get_action_diffs(action)
+        diff_row, diff_col = get_action_diffs(action)
         return self.current_row + diff_row, self.current_col + diff_col
 
     def perform_action(self, a):
-        action = Actions.action_number_to_name(a)
+        action = action_number_to_name(a)
         new_row, new_col = self.result_position(action)
         logging.debug('Waiting for Qbert to actually move to ({},{})'.format(new_row, new_col))
         rgb_y, rgb_x = BLOCK_COORDINATES[new_row][new_col]
@@ -107,7 +103,7 @@ class QbertWorld(World):
         return reward_sum
 
     def perform_action_name(self, action):
-        a = Actions.action_name_to_number(action)
+        a = action_name_to_number(action)
         new_row, new_col = self.result_position(action)
         logging.debug('Waiting for Qbert to actually move to ({},{})'.format(new_row, new_col))
         rgb_y, rgb_x = BLOCK_COORDINATES[new_row][new_col]
@@ -151,6 +147,7 @@ class QbertWorld(World):
                     self.agents[row][col] = 0
                     level_won = False
         if level_won:
+            self.level += 1
             self.reset_position()
 
     def update_position(self, a):
@@ -160,16 +157,61 @@ class QbertWorld(World):
         self.current_col, self.current_row = 0, 0
 
     def get_next_state(self, a):
-        diff_row, diff_col = Actions.get_action_number_diffs(a)
+        diff_row, diff_col = get_action_number_diffs(a)
         new_position = self.current_row + diff_row, self.current_col + diff_col
         new_colors = list_to_tuple_with_value(self.desired_colors, new_position[0], new_position[1], 1)
         return new_position, new_colors
 
     def get_close_states(self):
         states = []
-        for a in Actions.get_valid_action_numbers(self.current_row, self.current_col):
+        for a in get_valid_action_numbers(self.current_row, self.current_col):
             states.append(self.get_next_state(a))
         return states
 
-    # TODO: Keep track of discs
-    # TODO: Keep track of levels
+        # TODO: Keep track of discs
+        # TODO: Keep track of levels
+
+
+def list_to_tuple(lst):
+    return tuple(tuple(x for x in row) for row in lst)
+
+
+def list_to_tuple_with_value(lst, row_num, col_num, val):
+    return tuple(tuple(x if i != row_num or j != col_num else val for j, x in enumerate(row))
+                 for i, row in enumerate(lst))
+
+
+def setup_world(random_seed=123, frame_skip=1, repeat_action_probability=0, sound=True, display_screen=False):
+    ale = ALEInterface()
+
+    # Get & Set the desired settings
+    ale.setInt('random_seed', random_seed)
+    ale.setInt('frame_skip', frame_skip)
+    ale.setFloat('repeat_action_probability', repeat_action_probability)
+
+    if display_screen:
+        if sys.platform == 'darwin':
+            import pygame
+            pygame.init()
+        ale.setBool('sound', sound)
+        
+    ale.setBool('display_screen', display_screen)
+
+    # Load the ROM file
+    ale.loadROM('qbert.bin')
+
+    # Get the list of legal actions
+    legal_actions = ale.getLegalActionSet()
+    minimal_actions = ale.getMinimalActionSet()
+    logging.debug('Legal actions: {}'.format([action_number_to_name(a) for a in legal_actions]))
+    logging.debug('Minimal actions: {}'.format([action_number_to_name(a) for a in minimal_actions]))
+
+    width, height = ale.getScreenDims()
+    rgb_screen = np.empty([height, width, 3], dtype=np.uint8)
+    logging.debug('Waiting for Qbert to get into position...')
+    while not np.array_equal(rgb_screen[QBERT_Y][QBERT_X], COLOR_QBERT):
+        ale.act(0)
+        ale.getScreenRGB(rgb_screen)
+    logging.debug('Qbert in position!')
+    world = QbertWorld(rgb_screen, ale)
+    return world

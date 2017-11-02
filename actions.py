@@ -42,7 +42,6 @@ ACTIONS = [
     'down-left-fire'
 ]
 
-
 ACTION_NUM_DIFFS = {
     0: (0, 0),
     2: (-1, 0),
@@ -52,53 +51,51 @@ ACTION_NUM_DIFFS = {
 }
 
 
-class Actions:
-    @staticmethod
-    def get_valid_action_numbers(row, col):
-        if (row, col) == (0, 0):
-            return [3, 5]
-        elif (row, col) == (5, 0):
-            return [2]
-        elif (row, col) == (5, 5):
-            return [4]
-        elif (row, col) in BOTTOM_BLOCKS:
-            return [2, 4]
-        elif (row, col) in LEFT_EDGE_BLOCKS:
-            return [2, 3, 5]
-        elif (row, col) in RIGHT_EDGE_BLOCKS:
-            return [3, 4, 5]
-        else:
-            return [2, 3, 4, 5]
+def get_valid_action_numbers(row, col):
+    if (row, col) == (0, 0):
+        return [3, 5]
+    elif (row, col) == (5, 0):
+        return [2]
+    elif (row, col) == (5, 5):
+        return [4]
+    elif (row, col) in BOTTOM_BLOCKS:
+        return [2, 4]
+    elif (row, col) in LEFT_EDGE_BLOCKS:
+        return [2, 3, 5]
+    elif (row, col) in RIGHT_EDGE_BLOCKS:
+        return [3, 4, 5]
+    else:
+        return [2, 3, 4, 5]
 
-    @staticmethod
-    def get_valid_actions(row, col):
-        if (row, col) == (0, 0):
-            return ['right', 'down']
-        elif (row, col) == (5, 0):
-            return ['up']
-        elif (row, col) == (5, 5):
-            return ['left']
-        elif (row, col) in BOTTOM_BLOCKS:
-            return ['left', 'up']
-        elif (row, col) in LEFT_EDGE_BLOCKS:
-            return ['up', 'right', 'down']
-        elif (row, col) in RIGHT_EDGE_BLOCKS:
-            return ['right', 'left', 'down']
-        else:
-            return ['up', 'right', 'left', 'down']
 
-    @staticmethod
-    def action_number_to_name(a):
-        return ACTIONS[a]
+def get_valid_actions(row, col):
+    if (row, col) == (0, 0):
+        return ['right', 'down']
+    elif (row, col) == (5, 0):
+        return ['up']
+    elif (row, col) == (5, 5):
+        return ['left']
+    elif (row, col) in BOTTOM_BLOCKS:
+        return ['left', 'up']
+    elif (row, col) in LEFT_EDGE_BLOCKS:
+        return ['up', 'right', 'down']
+    elif (row, col) in RIGHT_EDGE_BLOCKS:
+        return ['right', 'left', 'down']
+    else:
+        return ['up', 'right', 'left', 'down']
 
-    @staticmethod
-    def action_name_to_number(action):
-        return ACTIONS_TO_NUMBERS[action]
 
-    @staticmethod
-    def get_action_diffs(action):
-        return ACTION_DIFFS[action]
+def action_number_to_name(a):
+    return ACTIONS[a]
 
-    @staticmethod
-    def get_action_number_diffs(a):
-        return ACTION_NUM_DIFFS[a]
+
+def action_name_to_number(action):
+    return ACTIONS_TO_NUMBERS[action]
+
+
+def get_action_diffs(action):
+    return ACTION_DIFFS[action]
+
+
+def get_action_number_diffs(a):
+    return ACTION_NUM_DIFFS[a]
