@@ -40,20 +40,13 @@ class QbertAgent(Agent):
         self.world = world
         self.learner = learner
 
-    def action(self, exploration='optimistic'):
+    def action(self):
         s = self.world.to_state()  # TODO: Use subsumption (3 different learners: blocks, enemies, greens...)
-        if exploration is 'optimistic':
-            a = self.learner.get_best_action_optimistic(s)
-        else:
-            a = self.learner.get_best_action_random(s)
+        a = self.learner.get_best_action(s)
         logging.debug('Chosen action: {}'.format(ACTIONS[a]))
         reward = self.world.perform_action(a)
         s_next = self.world.to_state()
-        close_states = self.world.get_close_states()
-        if exploration is 'optimistic':
-            self.learner.q_update_optimistic(s, a, s_next, reward, close_states)
-        else:
-            self.learner.q_update(s, a, s_next, reward, close_states)
+        self.learner.q_update(s, a, s_next, reward, self.world.get_close_states())
         logging.debug('Q matrix: {}'.format(self.learner.Q.values()))
         logging.debug('N matrix: {}'.format(self.learner.N.values()))
         return reward

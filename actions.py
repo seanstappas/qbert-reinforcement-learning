@@ -1,5 +1,3 @@
-
-
 NUM_ROWS = 6
 NUM_COLS = 6
 
@@ -21,6 +19,36 @@ ACTION_DIFFS = {
     'right': (1, 1),
     'left': (-1, -1),
     'down': (1, 0)
+}
+
+ACTIONS = [
+    'noop',
+    'fire',
+    'up',
+    'right',
+    'left',
+    'down',
+    'up-right',
+    'up-left',
+    'down-right',
+    'down-left',
+    'up-fire',
+    'right-fire',
+    'left-fire',
+    'down-fire',
+    'up-right-fire',
+    'up-left-fire',
+    'down-right-fire',
+    'down-left-fire'
+]
+
+
+ACTION_NUM_DIFFS = {
+    0: (0, 0),
+    2: (-1, 0),
+    3: (1, 1),
+    4: (-1, -1),
+    5: (1, 0)
 }
 
 
@@ -58,3 +86,19 @@ class Actions:
             return ['right', 'left', 'down']
         else:
             return ['up', 'right', 'left', 'down']
+
+    @staticmethod
+    def action_number_to_name(a):
+        return ACTIONS[a]
+
+    @staticmethod
+    def action_name_to_number(action):
+        return ACTIONS_TO_NUMBERS[action]
+
+    @staticmethod
+    def get_action_diffs(action):
+        return ACTION_DIFFS[action]
+
+    @staticmethod
+    def get_action_number_diffs(a):
+        return ACTION_NUM_DIFFS[a]

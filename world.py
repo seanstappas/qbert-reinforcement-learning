@@ -35,65 +35,18 @@ AGENT_POSITIONS = [
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
 ]  # Indicates if another agent is present at a block position (-1: purple, 0: none, +1: green)
-# TODO: detect agents at screen positions
 
 LEFT_EDGE_BLOCKS = [(1, 0), (2, 0), (3, 0), (4, 0)]
 RIGHT_EDGE_BLOCKS = [(1, 1), (2, 2), (3, 3), (4, 4)]
 BOTTOM_BLOCKS = [(5, 1), (5, 2), (5, 3), (5, 4)]
 
-ACTION_DIFFS = {
-    'noop': (0, 0),
-    'up': (-1, 0),
-    'right': (1, 1),
-    'left': (-1, -1),
-    'down': (1, 0)
-}
-
-ACTIONS = [
-    'noop',
-    'fire',
-    'up',
-    'right',
-    'left',
-    'down',
-    'up-right',
-    'up-left',
-    'down-right',
-    'down-left',
-    'up-fire',
-    'right-fire',
-    'left-fire',
-    'down-fire',
-    'up-right-fire',
-    'up-left-fire',
-    'down-right-fire',
-    'down-left-fire'
-]
-
-
-ACTION_NUM_DIFFS = {
-    0: (0, 0),
-    2: (-1, 0),
-    3: (1, 1),
-    4: (-1, -1),
-    5: (1, 0)
-}
-
-ACTIONS_TO_NUMBERS = {
-    'noop': 0,
-    'up': 2,
-    'right': 3,
-    'left': 4,
-    'down': 5
-}
-
-COLOR_YELLOW = 210, 210, 64  # Yellow
+COLOR_YELLOW = 210, 210, 64
 COLOR_BLACK = 0, 0, 0
 COLOR_QBERT = 181, 83, 40
 COLOR_GREEN = 50, 132, 50
 COLOR_PURPLE = 146, 70, 192
 
-AGENT_OFFSET = -10
+AGENT_BLOCK_OFFSET = -10
 
 
 def list_to_tuple(lst):
@@ -129,45 +82,45 @@ class QbertWorld(World):
 
     def valid_action_numbers(self):
         valid_actions = self.valid_actions()
-        return [ACTIONS.index(a) for a in valid_actions]
+        return [Actions.action_name_to_number(a) for a in valid_actions]
 
     def result_position(self, action):
-        diff_row, diff_col = ACTION_DIFFS[action]
+        diff_row, diff_col = Actions.get_action_diffs(action)
         return self.current_row + diff_row, self.current_col + diff_col
 
-    def perform_action(self, action):
-        a = ACTIONS[action]
-        new_row, new_col = self.result_position(a)
+    def perform_action(self, a):
+        action = Actions.action_number_to_name(a)
+        new_row, new_col = self.result_position(action)
         logging.debug('Waiting for Qbert to actually move to ({},{})'.format(new_row, new_col))
         rgb_y, rgb_x = BLOCK_COORDINATES[new_row][new_col]
         reward_sum = 0
-        while not np.array_equal(self.rgb_screen[rgb_y + AGENT_OFFSET][rgb_x], COLOR_QBERT):
+        while not np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_QBERT):
             if self.ale.lives() == 0:
                 self.reset_position()
                 return reward_sum
-            reward_sum += self.ale.act(action)
+            reward_sum += self.ale.act(a)
             self.ale.getScreenRGB(self.rgb_screen)
 
         self.ale.getScreenRGB(self.rgb_screen)
-        self.update_position(a)
+        self.update_position(action)
         self.update_colors()  # TODO: properly identify next level
         return reward_sum
 
-    def perform_action_name(self, a):
-        action = ACTIONS_TO_NUMBERS[a]
-        new_row, new_col = self.result_position(a)
+    def perform_action_name(self, action):
+        a = Actions.action_name_to_number(action)
+        new_row, new_col = self.result_position(action)
         logging.debug('Waiting for Qbert to actually move to ({},{})'.format(new_row, new_col))
         rgb_y, rgb_x = BLOCK_COORDINATES[new_row][new_col]
         reward_sum = 0
-        while not np.array_equal(self.rgb_screen[rgb_y + AGENT_OFFSET][rgb_x], COLOR_QBERT):
+        while not np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_QBERT):
             if self.ale.lives() == 0:
                 self.reset_position()
                 return reward_sum
-            reward_sum += self.ale.act(action)
+            reward_sum += self.ale.act(a)
             self.ale.getScreenRGB(self.rgb_screen)
 
         self.ale.getScreenRGB(self.rgb_screen)
-        self.update_position(a)
+        self.update_position(action)
         self.update_colors()  # TODO: properly identify next level
         return reward_sum
 
@@ -187,10 +140,10 @@ class QbertWorld(World):
                     level_won = False
 
                 # Evaluate color of possible agents on blocks
-                if np.array_equal(self.rgb_screen[rgb_y + AGENT_OFFSET][rgb_x], COLOR_PURPLE):
+                if np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_PURPLE):
                     # Enemy (purple)
                     self.agents[row][col] = -1
-                elif np.array_equal(self.rgb_screen[rgb_y + AGENT_OFFSET][rgb_x], COLOR_GREEN):
+                elif np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_GREEN):
                     # Friendly (green)
                     self.agents[row][col] = 1
                 else:
@@ -207,7 +160,7 @@ class QbertWorld(World):
         self.current_col, self.current_row = 0, 0
 
     def get_next_state(self, a):
-        diff_row, diff_col = ACTION_NUM_DIFFS[a]
+        diff_row, diff_col = Actions.get_action_number_diffs(a)
         new_position = self.current_row + diff_row, self.current_col + diff_col
         new_colors = list_to_tuple_with_value(self.desired_colors, new_position[0], new_position[1], 1)
         return new_position, new_colors

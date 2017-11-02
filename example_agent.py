@@ -126,21 +126,18 @@ def play_random_agent(world):
         world.ale.reset_game()
 
 
-ALPHA = 0.1
-GAMMA = 0.9
-
-
 def play_learning_agent(world):
-    learner = QLearner(ALPHA, GAMMA)
+    learner = QLearner()
     agent = QbertAgent(world, learner)
     for episode in range(NUM_EPISODES):
         total_reward = 0
         world.reset_position()
         while not world.ale.game_over():
             total_reward += agent.action()
-        print('Episode %d ended with score: %d' % (episode, total_reward))
+        logging.info('Episode %d ended with score: %d' % (episode, total_reward))
         world.ale.reset_game()
-    # TODO: plot results here
+        # TODO: plot results here
+
 
 def play():
     world = setup_world()
@@ -149,7 +146,7 @@ def play():
 
 
 if __name__ == '__main__':
-    setup_logging('debug')
+    setup_logging('info')
     play()
 
     # TODO: see and select actions on every kth frame: recommended every 4th frame
