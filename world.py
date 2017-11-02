@@ -1,5 +1,5 @@
 import logging
-from abc import ABCMeta
+from abc import ABCMeta, abstractmethod
 
 import numpy as np
 import sys
@@ -56,6 +56,18 @@ AGENT_BLOCK_OFFSET = -10
 class World:
     __metaclass__ = ABCMeta
 
+    @abstractmethod
+    def to_state(self):
+        raise NotImplementedError
+
+    @abstractmethod
+    def perform_action(self, a):
+        raise NotImplementedError
+
+    @abstractmethod
+    def valid_actions(self):
+        raise NotImplementedError
+
 
 class QbertWorld(World):
     def __init__(self, rgb_screen, ale):
@@ -73,17 +85,6 @@ class QbertWorld(World):
         colors = list_to_tuple(self.desired_colors)
         return current_position, colors
 
-    def valid_actions(self):
-        return get_valid_actions(self.current_row, self.current_col)
-
-    def valid_action_numbers(self):
-        valid_actions = self.valid_actions()
-        return [action_name_to_number(a) for a in valid_actions]
-
-    def result_position(self, action):
-        diff_row, diff_col = get_action_diffs(action)
-        return self.current_row + diff_row, self.current_col + diff_col
-
     def perform_action(self, a):
         action = action_number_to_name(a)
         new_row, new_col = self.result_position(action)
@@ -99,8 +100,19 @@ class QbertWorld(World):
 
         self.ale.getScreenRGB(self.rgb_screen)
         self.update_position(action)
-        self.update_colors()  # TODO: properly identify next level
+        self.update_colors()
         return reward_sum
+
+    def valid_actions(self):
+        return get_valid_actions(self.current_row, self.current_col)
+
+    def valid_action_numbers(self):
+        valid_actions = self.valid_actions()
+        return [action_name_to_number(a) for a in valid_actions]
+
+    def result_position(self, action):
+        diff_row, diff_col = get_action_diffs(action)
+        return self.current_row + diff_row, self.current_col + diff_col
 
     def perform_action_name(self, action):
         a = action_name_to_number(action)
@@ -169,7 +181,6 @@ class QbertWorld(World):
         return states
 
         # TODO: Keep track of discs
-        # TODO: Keep track of levels
 
 
 def list_to_tuple(lst):

@@ -4,12 +4,6 @@ from abc import ABCMeta, abstractmethod
 
 from actions import get_valid_action_numbers, action_number_to_name
 
-ALPHA = 0.1
-GAMMA = 0.9
-EPSILON = 0.1
-N_e = 1
-UNEXPLORED_REWARD = 5
-
 
 class Learner:
     __metaclass__ = ABCMeta
@@ -24,11 +18,17 @@ class Learner:
 
 
 class QLearner(Learner):
-    def __init__(self, world, exploration_mode='random'):
+    def __init__(self, world, alpha=0.1, gamma=0.9, epsilon=0.1, unexplored_threshold=1, unexplored_reward=5,
+                 exploration='random'):
+        self.alpha = alpha
+        self.gamma = gamma
+        self.epsilon = epsilon
+        self.unexplored_threshold = unexplored_threshold
+        self.unexplored_reward = unexplored_reward
+        self.exploration = exploration
         self.Q = {}
         self.N = {}
         self.world = world
-        self.exploration = exploration_mode
 
     def get_best_action(self, s):
         if self.exploration == 'optimistic':
@@ -53,7 +53,7 @@ class QLearner(Learner):
         row, col = s[0]
         actions = get_valid_action_numbers(row, col)
         logging.debug('Valid actions: {}'.format([action_number_to_name(a) for a in actions]))
-        if random.random() < EPSILON:
+        if random.random() < self.epsilon:
             action = random.choice(actions)
             logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
             return action
@@ -74,7 +74,7 @@ class QLearner(Learner):
         max_action = None
         random.shuffle(actions)
         for a in actions:
-            q = UNEXPLORED_REWARD if self.N.get((s, a), 0) < N_e else self.get_q(s, a)
+            q = self.unexplored_reward if self.N.get((s, a), 0) < self.unexplored_threshold else self.get_q(s, a)
             if q > max_q:
                 max_q = q
                 max_action = a
@@ -89,7 +89,7 @@ class QLearner(Learner):
 
     def q_update_optimistic(self, s, a, s_next, reward):
         old_q = self.get_q(s, a)
-        new_q = old_q + ALPHA * self.N.get((s, a), 0) * (reward + GAMMA * self.get_max_q(s_next) - old_q)
+        new_q = old_q + self.alpha * self.N.get((s, a), 0) * (reward + self.gamma * self.get_max_q(s_next) - old_q)
         self.Q[s, a] = new_q
         self.N[s, a] = self.N.get((s, a), 0) + 1
         for s_close in self.world.get_close_states():
@@ -97,7 +97,7 @@ class QLearner(Learner):
 
     def q_update_random(self, s, a, s_next, reward):
         old_q = self.get_q(s, a)
-        new_q = old_q + ALPHA * (reward + GAMMA * self.get_max_q(s_next) - old_q)
+        new_q = old_q + self.alpha * (reward + self.gamma * self.get_max_q(s_next) - old_q)
         self.Q[s, a] = new_q
         for s_close in self.world.get_close_states():
             self.Q[s_close, a] = new_q
