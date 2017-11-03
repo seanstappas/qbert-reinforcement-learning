@@ -19,29 +19,30 @@ class Learner:
 
 class QLearner(Learner):
     def __init__(self, world, alpha=0.1, gamma=0.9, epsilon=0.1, unexplored_threshold=1, unexplored_reward=5,
-                 exploration='random'):
+                 exploration='random', generalization='simple_distance'):
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
         self.unexplored_threshold = unexplored_threshold
         self.unexplored_reward = unexplored_reward
         self.exploration = exploration
+        self.generalization = generalization
         self.Q = {}
         self.N = {}
         self.world = world
 
     def get_best_action(self, s):
-        if self.exploration == 'optimistic':
+        if self.exploration is 'optimistic':
             return self.get_best_action_optimistic(s)
-        elif self.exploration == 'random':
+        elif self.exploration is 'random':
             return self.get_best_action_random(s)
         else:
             return None
 
     def update(self, s, a, s_next, reward):
-        if self.exploration == 'optimistic':
+        if self.exploration is 'optimistic':
             self.q_update_optimistic(s, a, s_next, reward)
-        elif self.exploration == 'random':
+        elif self.exploration is 'random':
             self.q_update_random(s, a, s_next, reward)
         logging.debug('Q matrix: {}'.format(self.Q.values()))
         logging.debug('N matrix: {}'.format(self.N.values()))
@@ -92,14 +93,16 @@ class QLearner(Learner):
         new_q = old_q + self.alpha * self.N.get((s, a), 0) * (reward + self.gamma * self.get_max_q(s_next) - old_q)
         self.Q[s, a] = new_q
         self.N[s, a] = self.N.get((s, a), 0) + 1
-        for s_close in self.world.get_close_states():
-            self.Q[s_close, a] = new_q
+        if self.generalization is 'simple_distance':
+            for s_close in self.world.get_close_states():
+                self.Q[s_close, a] = new_q
 
     def q_update_random(self, s, a, s_next, reward):
         old_q = self.get_q(s, a)
         new_q = old_q + self.alpha * (reward + self.gamma * self.get_max_q(s_next) - old_q)
         self.Q[s, a] = new_q
-        for s_close in self.world.get_close_states():
-            self.Q[s_close, a] = new_q
+        if self.generalization is 'simple_distance':
+            for s_close in self.world.get_close_states():
+                self.Q[s_close, a] = new_q
 
             # TODO: Implement subsumption: only learn from enemies when they are on the board, and enemies take priority

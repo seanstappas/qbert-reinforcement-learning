@@ -1,8 +1,6 @@
 import logging
 from argparse import ArgumentParser
-from random import randrange
 
-from actions import action_number_to_name
 from agent import QbertAgent
 from learner import QLearner
 from world import setup_world
@@ -16,35 +14,8 @@ LOGGING_LEVELS = {
 }
 
 
-def play_random_agent(world, num_episodes=10):
-    for episode in range(num_episodes):
-        total_reward = 0
-        world.reset_position()
-        while not world.ale.game_over():
-            legal_actions = world.valid_action_numbers()
-            a = legal_actions[randrange(len(legal_actions))]
-            reward = world.perform_action(a)
-
-            logging.debug('Chosen action: {}, reward: {}'.format(action_number_to_name(a), reward))
-            logging.debug('Current row/col: ({}, {}): '.format(world.current_row, world.current_col))
-            logging.debug('Desired color: {}'.format(world.desired_color))
-            logging.debug('Current row: {}'.format(world.current_row))
-            logging.debug('Current col: {}'.format(world.current_col))
-            logging.debug('Desired colors: {}'.format(world.desired_colors))
-            logging.debug('Agents: {}'.format(world.agents))
-            logging.debug('Reward: {}'.format(reward))
-
-            total_reward += reward
-
-            # plt.imshow(rgb_screen)
-            # plt.show()
-            # plt.savefig('report/screenshots/screenshot_{}'.format(i))
-        print('Episode %d ended with score: %d' % (episode, total_reward))
-        world.ale.reset_game()
-
-
-def play_learning_agent(world, num_episodes=10):
-    learner = QLearner(world)
+def play_learning_agent(world, num_episodes=10, exploration='random', generalization='simple_distance'):
+    learner = QLearner(world, exploration=exploration, generalization=generalization)
     agent = QbertAgent(world, learner)
     for episode in range(num_episodes):
         total_reward = 0
@@ -84,10 +55,10 @@ def parse_command_line_arguments():
 
 
 def play():
-    setup_logging('debug')
+    setup_logging('info')
 
     world = setup_world(display_screen=True)
-    play_learning_agent(world)
+    play_learning_agent(world, num_episodes=20, exploration='optimistic', generalization='simple_distance')
 
 
 if __name__ == '__main__':

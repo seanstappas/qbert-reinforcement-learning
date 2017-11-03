@@ -52,6 +52,10 @@ COLOR_PURPLE = 146, 70, 192
 
 AGENT_BLOCK_OFFSET = -10
 
+NO_OP = 0
+
+LOSE_LIFE_PENALTY = -100
+
 
 class World:
     __metaclass__ = ABCMeta
@@ -92,12 +96,14 @@ class QbertWorld(World):
         action = action_number_to_name(a)
         reward_sum = 0
         reward_sum += self.ale.act(a)
+        initial_num_lives = self.ale.lives()
         self.ale.getRAM(self.ram)
         while not (self.ram[0] == 0 and self.ram[self.ram_size - 1] & 1):  # last bit = 1 and first byte = 0
-            # if self.ale.lives() == 0:
-            #     self.reset_position()
-            #     return reward_sum
-            reward_sum += self.ale.act(0)  # NO-OP
+            if self.ale.lives() < initial_num_lives:
+                reward_sum = LOSE_LIFE_PENALTY  # TODO: Put this penalty only when looking at enemies in state...
+            if self.ale.lives() == 0:
+                break
+            reward_sum += self.ale.act(NO_OP)
             self.ale.getRAM(self.ram)
 
         self.ale.getScreenRGB(self.rgb_screen)
@@ -150,6 +156,9 @@ class QbertWorld(World):
         self.current_row, self.current_col = self.result_position(a)
 
     def reset_position(self):
+        while not (self.ram[0] == 0 and self.ram[self.ram_size - 1] & 1):  # last bit = 1 and first byte = 0
+            self.ale.act(NO_OP)
+            self.ale.getRAM(self.ram)
         self.current_col, self.current_row = 0, 0
 
     def get_next_state(self, a):
@@ -203,16 +212,8 @@ def setup_world(random_seed=123, frame_skip=4, repeat_action_probability=0, soun
 
     width, height = ale.getScreenDims()
     rgb_screen = np.empty([height, width, 3], dtype=np.uint8)
-    logging.debug('Waiting for Qbert to get into position...')
 
     ram_size = ale.getRAMSize()
     ram = np.zeros(ram_size, dtype=np.uint8)
-    while not (ram[0] == 0 and ram[ram_size - 1] & 1):  # last bit = 1 and first byte = 0
-        # if self.ale.lives() == 0:
-        #     self.reset_position()
-        #     return reward_sum
-        ale.act(0)  # NO-OP
-        ale.getRAM(ram)
-    logging.debug('Qbert in position!')
     world = QbertWorld(ale, rgb_screen, ram)
     return world
