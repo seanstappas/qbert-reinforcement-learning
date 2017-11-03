@@ -1,6 +1,3 @@
-NUM_ROWS = 6
-NUM_COLS = 6
-
 LEFT_EDGE_BLOCKS = [(1, 0), (2, 0), (3, 0), (4, 0)]
 RIGHT_EDGE_BLOCKS = [(1, 1), (2, 2), (3, 3), (4, 4)]
 BOTTOM_BLOCKS = [(5, 1), (5, 2), (5, 3), (5, 4)]

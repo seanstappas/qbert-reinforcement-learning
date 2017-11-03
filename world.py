@@ -70,10 +70,12 @@ class World:
 
 
 class QbertWorld(World):
-    def __init__(self, rgb_screen, ale):
+    def __init__(self, ale, rgb_screen, ram):
         self.ale = ale
         self.lives = ale.lives()
         self.rgb_screen = rgb_screen
+        self.ram_size = ale.getRAMSize()
+        self.ram = ram
         self.desired_color = COLOR_YELLOW
         self.desired_colors = INITIAL_DESIRED_COLORS
         self.agents = AGENT_POSITIONS
@@ -82,21 +84,21 @@ class QbertWorld(World):
 
     def to_state(self):
         current_position = self.current_row, self.current_col
+        logging.debug('Current position: {}'.format(current_position))
         colors = list_to_tuple(self.desired_colors)
         return current_position, colors
 
     def perform_action(self, a):
         action = action_number_to_name(a)
-        new_row, new_col = self.result_position(action)
-        logging.debug('Waiting for Qbert to actually move to ({},{})'.format(new_row, new_col))
-        rgb_y, rgb_x = BLOCK_COORDINATES[new_row][new_col]
         reward_sum = 0
-        while not np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_QBERT):
-            if self.ale.lives() == 0:
-                self.reset_position()
-                return reward_sum
-            reward_sum += self.ale.act(a)
-            self.ale.getScreenRGB(self.rgb_screen)
+        reward_sum += self.ale.act(a)
+        self.ale.getRAM(self.ram)
+        while not (self.ram[0] == 0 and self.ram[self.ram_size - 1] & 1):  # last bit = 1 and first byte = 0
+            # if self.ale.lives() == 0:
+            #     self.reset_position()
+            #     return reward_sum
+            reward_sum += self.ale.act(0)  # NO-OP
+            self.ale.getRAM(self.ram)
 
         self.ale.getScreenRGB(self.rgb_screen)
         self.update_position(action)
@@ -113,24 +115,6 @@ class QbertWorld(World):
     def result_position(self, action):
         diff_row, diff_col = get_action_diffs(action)
         return self.current_row + diff_row, self.current_col + diff_col
-
-    def perform_action_name(self, action):
-        a = action_name_to_number(action)
-        new_row, new_col = self.result_position(action)
-        logging.debug('Waiting for Qbert to actually move to ({},{})'.format(new_row, new_col))
-        rgb_y, rgb_x = BLOCK_COORDINATES[new_row][new_col]
-        reward_sum = 0
-        while not np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_QBERT):
-            if self.ale.lives() == 0:
-                self.reset_position()
-                return reward_sum
-            reward_sum += self.ale.act(a)
-            self.ale.getScreenRGB(self.rgb_screen)
-
-        self.ale.getScreenRGB(self.rgb_screen)
-        self.update_position(action)
-        self.update_colors()  # TODO: properly identify next level
-        return reward_sum
 
     def update_colors(self):
         score_color = self.rgb_screen[SCORE_Y][SCORE_X]
@@ -192,7 +176,7 @@ def list_to_tuple_with_value(lst, row_num, col_num, val):
                  for i, row in enumerate(lst))
 
 
-def setup_world(random_seed=123, frame_skip=1, repeat_action_probability=0, sound=True, display_screen=False):
+def setup_world(random_seed=123, frame_skip=4, repeat_action_probability=0, sound=True, display_screen=False):
     ale = ALEInterface()
 
     # Get & Set the desired settings
@@ -220,9 +204,15 @@ def setup_world(random_seed=123, frame_skip=1, repeat_action_probability=0, soun
     width, height = ale.getScreenDims()
     rgb_screen = np.empty([height, width, 3], dtype=np.uint8)
     logging.debug('Waiting for Qbert to get into position...')
-    while not np.array_equal(rgb_screen[QBERT_Y][QBERT_X], COLOR_QBERT):
-        ale.act(0)
-        ale.getScreenRGB(rgb_screen)
+
+    ram_size = ale.getRAMSize()
+    ram = np.zeros(ram_size, dtype=np.uint8)
+    while not (ram[0] == 0 and ram[ram_size - 1] & 1):  # last bit = 1 and first byte = 0
+        # if self.ale.lives() == 0:
+        #     self.reset_position()
+        #     return reward_sum
+        ale.act(0)  # NO-OP
+        ale.getRAM(ram)
     logging.debug('Qbert in position!')
-    world = QbertWorld(rgb_screen, ale)
+    world = QbertWorld(ale, rgb_screen, ram)
     return world

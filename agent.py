@@ -19,12 +19,15 @@ class QbertAgent(Agent):
 
     def action(self):
         s = self.world.to_state()  # TODO: Use subsumption (3 different learners: blocks, enemies, greens...)
+        logging.debug('Current state: {}'.format(s))
         a = self.learner.get_best_action(s)
         logging.debug('Chosen action: {}'.format(action_number_to_name(a)))
         reward = self.world.perform_action(a)
         s_next = self.world.to_state()
         self.learner.update(s, a, s_next, reward)
         return reward
+
+    # TODO: Penalty for losing life? (equivalent to hitting an enemy... only valid for enemy subsystem?)
 
     # TODO: see and select actions on every kth frame: recommended every 4th frame
 

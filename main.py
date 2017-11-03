@@ -84,7 +84,7 @@ def parse_command_line_arguments():
 
 
 def play():
-    setup_logging('info')
+    setup_logging('debug')
 
     world = setup_world(display_screen=True)
     play_learning_agent(world)
