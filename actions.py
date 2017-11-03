@@ -47,6 +47,19 @@ ACTION_NUM_DIFFS = {
     5: (1, 0)
 }
 
+INVERSE_ACTIONS = {
+    0: 0,
+    2: 5,
+    3: 4,
+    4: 3,
+    5: 2
+}
+
+
+def get_valid_action_numbers_from_state(s):
+    row, col = s[0]
+    return get_valid_action_numbers(row, col)
+
 
 def get_valid_action_numbers(row, col):
     if (row, col) == (0, 0):
@@ -96,3 +109,7 @@ def get_action_diffs(action):
 
 def get_action_number_diffs(a):
     return ACTION_NUM_DIFFS[a]
+
+
+def get_inverse_action(a):
+    return INVERSE_ACTIONS[a]

@@ -1,8 +1,7 @@
 import logging
 from argparse import ArgumentParser
 
-from agent import QbertAgent
-from learner import QLearner
+from agent import QbertAgent, QbertSubsumptionAgent
 from world import setup_world
 
 LOGGING_LEVELS = {
@@ -14,9 +13,11 @@ LOGGING_LEVELS = {
 }
 
 
-def play_learning_agent(world, num_episodes=10, exploration='random', generalization='simple_distance'):
-    learner = QLearner(world, exploration=exploration, generalization=generalization)
-    agent = QbertAgent(world, learner)
+def play_learning_agent(world, num_episodes=10, exploration='random', distance_metric='simple', subsumption=True):
+    if subsumption:
+        agent = QbertSubsumptionAgent(world, exploration=exploration, distance_metric=distance_metric)
+    else:
+        agent = QbertAgent(world, exploration=exploration, distance_metric=distance_metric)
     for episode in range(num_episodes):
         total_reward = 0
         world.reset_position()
@@ -58,7 +59,7 @@ def play():
     setup_logging('info')
 
     world = setup_world(display_screen=True)
-    play_learning_agent(world, num_episodes=20, exploration='optimistic', generalization='simple_distance')
+    play_learning_agent(world, num_episodes=20, exploration='optimistic', distance_metric='adjacent', subsumption=True)
 
 
 if __name__ == '__main__':

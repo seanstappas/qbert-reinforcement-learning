@@ -6,7 +6,7 @@ import sys
 from ale_python_interface import ALEInterface
 
 from actions import get_valid_actions, action_name_to_number, get_action_diffs, action_number_to_name, \
-    get_action_number_diffs, get_valid_action_numbers
+    get_action_number_diffs, get_valid_action_numbers, get_inverse_action
 
 NUM_ROWS = 6
 NUM_COLS = 6
@@ -22,23 +22,32 @@ BLOCK_COORDINATES = [
     [(182, 18), (182, 42), (182, 65), (182, 93), (182, 118), (182, 142)],
 ]  # (y, x) coordinates of blocks in RGB numpy array
 
-INITIAL_DESIRED_COLORS = [
+INITIAL_COLORS = [
     [0],
     [0, 0],
     [0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
-]  # Indicates if the desired colors are obtained at a block position
+]  # Indicates if the desired colors are obtained at a block position (0 for starting, 1 for destination color)
 
-AGENT_POSITIONS = [
+INITIAL_ENEMY_POSITIONS = [
     [0],
     [0, 0],
     [0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
-]  # Indicates if another agent is present at a block position (-1: purple, 0: none, +1: green)
+]  # Indicates if an enemy (purple) is present at a block position
+
+FRIENDLY_POSITIONS = [
+    [0],
+    [0, 0],
+    [0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+]  # Indicates if a friendly agent (green) is present at a block position
 
 LEFT_EDGE_BLOCKS = [(1, 0), (2, 0), (3, 0), (4, 0)]
 RIGHT_EDGE_BLOCKS = [(1, 1), (2, 2), (3, 3), (4, 4)]
@@ -54,15 +63,13 @@ AGENT_BLOCK_OFFSET = -10
 
 NO_OP = 0
 
+SAM_SCORE = 300
+GREEN_BALL_SCORE = 100
 LOSE_LIFE_PENALTY = -100
 
 
 class World:
     __metaclass__ = ABCMeta
-
-    @abstractmethod
-    def to_state(self):
-        raise NotImplementedError
 
     @abstractmethod
     def perform_action(self, a):
@@ -81,35 +88,53 @@ class QbertWorld(World):
         self.ram_size = ale.getRAMSize()
         self.ram = ram
         self.desired_color = COLOR_YELLOW
-        self.desired_colors = INITIAL_DESIRED_COLORS
-        self.agents = AGENT_POSITIONS
+        self.desired_colors = INITIAL_COLORS
+        self.enemies = INITIAL_ENEMY_POSITIONS
+        self.friendlies = FRIENDLY_POSITIONS
         self.current_row, self.current_col = 0, 0
         self.level = 1
+        self.enemy_present = False
+        self.friendly_present = False
 
-    def to_state(self):
+    def to_state_blocks(self):
         current_position = self.current_row, self.current_col
         logging.debug('Current position: {}'.format(current_position))
         colors = list_to_tuple(self.desired_colors)
         return current_position, colors
 
+    def to_state_enemies(self):
+        current_position = self.current_row, self.current_col
+        enemies = list_to_tuple(self.enemies)
+        return current_position, enemies
+
+    def to_state_friendlies(self):
+        current_position = self.current_row, self.current_col
+        friendlies = list_to_tuple(self.friendlies)
+        return current_position, friendlies
+
     def perform_action(self, a):
         action = action_number_to_name(a)
-        reward_sum = 0
-        reward_sum += self.ale.act(a)
+        score = 0
+        friendly_score = 0
+        enemy_penalty = 0
+        score += self.ale.act(a)
         initial_num_lives = self.ale.lives()
         self.ale.getRAM(self.ram)
         while not (self.ram[0] == 0 and self.ram[self.ram_size - 1] & 1):  # last bit = 1 and first byte = 0
             if self.ale.lives() < initial_num_lives:
-                reward_sum = LOSE_LIFE_PENALTY  # TODO: Put this penalty only when looking at enemies in state...
+                enemy_penalty = LOSE_LIFE_PENALTY
             if self.ale.lives() == 0:
                 break
-            reward_sum += self.ale.act(NO_OP)
+            score_diff = self.ale.act(NO_OP)
+            if score_diff == SAM_SCORE or score_diff == GREEN_BALL_SCORE:
+                friendly_score = score_diff
+            score += score_diff
             self.ale.getRAM(self.ram)
 
         self.ale.getScreenRGB(self.rgb_screen)
         self.update_position(action)
         self.update_colors()
-        return reward_sum
+        return score, friendly_score, enemy_penalty
 
     def valid_actions(self):
         return get_valid_actions(self.current_row, self.current_col)
@@ -127,29 +152,36 @@ class QbertWorld(World):
         if not np.array_equal(score_color, COLOR_BLACK):
             self.desired_color = score_color
         level_won = True
+        self.enemy_present = False
+        self.friendly_present = False
         for row in range(NUM_ROWS):
             for col in range(row + 1):
                 rgb_y, rgb_x = BLOCK_COORDINATES[row][col]
-                # Evaluate color of block
+
+                # Color of block
                 if np.array_equal(self.rgb_screen[rgb_y][rgb_x], self.desired_color):
                     self.desired_colors[row][col] = 1
                 else:
                     self.desired_colors[row][col] = 0
                     level_won = False
 
-                # Evaluate color of possible agents on blocks
+                # Enemy (purple)
                 if np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_PURPLE):
-                    # Enemy (purple)
-                    self.agents[row][col] = -1
-                elif np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_GREEN):
-                    # Friendly (green)
-                    self.agents[row][col] = 1
+                    self.enemies[row][col] = 1
+                    self.enemy_present = True
                 else:
-                    # No agent detected
-                    self.agents[row][col] = 0
-                    level_won = False
+                    self.enemies[row][col] = 0
+
+                # Friendly (green)
+                if np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_GREEN):
+                    self.friendlies[row][col] = 1
+                    self.friendly_present = True
+                else:
+                    self.friendlies[row][col] = 0
+
         if level_won:
             self.level += 1
+            logging.info('Level won! Progressing to level {}'.format(self.level))
             self.reset_position()
 
     def update_position(self, a):
@@ -167,11 +199,19 @@ class QbertWorld(World):
         new_colors = list_to_tuple_with_value(self.desired_colors, new_position[0], new_position[1], 1)
         return new_position, new_colors
 
-    def get_close_states(self):
+    def get_close_states_actions(self, initial_action, distance_metric='simple'):
         states = []
-        for a in get_valid_action_numbers(self.current_row, self.current_col):
-            states.append(self.get_next_state(a))
-        return states
+        actions = []
+        if distance_metric is 'simple':
+            for a in get_valid_action_numbers(self.current_row, self.current_col):
+                states.append(self.get_next_state(a))
+                actions.append(initial_action)
+        elif distance_metric is 'adjacent':
+            for a in get_valid_action_numbers(self.current_row, self.current_col):
+                states.append(self.get_next_state(a))
+                actions.append(get_inverse_action(a))
+        return states, actions
+        # TODO: Also update Q(s',a') for any s',a' leading to the same s_next
 
         # TODO: Keep track of discs
 

@@ -2,6 +2,7 @@ import logging
 from abc import ABCMeta, abstractmethod
 
 from actions import action_number_to_name
+from learner import QLearner
 
 
 class Agent:
@@ -13,21 +14,61 @@ class Agent:
 
 
 class QbertAgent(Agent):
-    def __init__(self, world, learner):
+    def __init__(self, world, exploration, distance_metric):
         self.world = world
-        self.learner = learner
+        self.block_learner = QLearner(world, exploration=exploration, distance_metric=distance_metric)
 
     def action(self):
-        s = self.world.to_state()  # TODO: Use subsumption (3 different learners: blocks, enemies, greens...)
+        s = self.world.to_state_blocks()
+        a = self.block_learner.get_best_action(s)
+        score, friendly_score, enemy_penalty = self.world.perform_action(a)
+        s_next = self.world.to_state_blocks()
+        self.block_learner.update(s, a, s_next, score + enemy_penalty)
         logging.debug('Current state: {}'.format(s))
-        a = self.learner.get_best_action(s)
         logging.debug('Chosen action: {}'.format(action_number_to_name(a)))
-        reward = self.world.perform_action(a)
-        s_next = self.world.to_state()
-        self.learner.update(s, a, s_next, reward)
-        return reward
+        return score
 
-    # TODO: Penalty for losing life? (equivalent to hitting an enemy... only valid for enemy subsystem?)
+
+class QbertSubsumptionAgent(Agent):
+    def __init__(self, world, exploration, distance_metric):
+        self.world = world
+        self.block_learner = QLearner(world, exploration=exploration, distance_metric=distance_metric)
+        self.friendly_learner = QLearner(world, exploration=exploration, distance_metric=distance_metric)
+        self.enemy_learner = QLearner(world, exploration=exploration, distance_metric=distance_metric)
+
+    def action(self):
+        enemy_present = self.world.enemy_present
+        friendly_present = self.world.friendly_present
+        a_enemies = None
+        a_friendlies = None
+        s_enemies = None
+        s_friendlies = None
+        if enemy_present:
+            logging.info('Enemy present!')
+            s_enemies = self.world.to_state_enemies()
+            a_enemies = self.enemy_learner.get_best_action(s_enemies)
+        if friendly_present:
+            logging.info('Friendly present!')
+            s_friendlies = self.world.to_state_friendlies()
+            a_friendlies = self.friendly_learner.get_best_action(s_friendlies)
+        s = self.world.to_state_blocks()
+        a = self.block_learner.get_best_action(s)
+        if enemy_present:
+            chosen_action = a_enemies
+        elif friendly_present:
+            chosen_action = a_friendlies
+        else:
+            chosen_action = a
+        score, friendly_score, enemy_penalty = self.world.perform_action(chosen_action)
+        if enemy_present:
+            s_next_enemies = self.world.to_state_enemies()
+            self.enemy_learner.update(s_enemies, a_enemies, s_next_enemies, enemy_penalty)
+        if friendly_present:
+            s_next_friendlies = self.world.to_state_friendlies()
+            self.friendly_learner.update(s_friendlies, a_friendlies, s_next_friendlies, friendly_score)
+        s_next = self.world.to_state_blocks()
+        self.block_learner.update(s, a, s_next, score)
+        return score
 
     # TODO: see and select actions on every kth frame: recommended every 4th frame
 
@@ -57,3 +98,5 @@ class QbertAgent(Agent):
     # TODO: Only consider left, right, up, down actions
 
     # Human high scores: 15825, 27000
+
+
