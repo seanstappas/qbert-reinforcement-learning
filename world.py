@@ -41,7 +41,7 @@ INITIAL_ENEMY_POSITIONS = [
     [0, 0, 0, 0, 0, 0],
 ]  # Indicates if an enemy (purple) is present at a block position
 
-FRIENDLY_POSITIONS = [
+INITIAL_FRIENDLY_POSITIONS = [
     [0],
     [0, 0],
     [0, 0, 0],
@@ -49,6 +49,15 @@ FRIENDLY_POSITIONS = [
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
 ]  # Indicates if a friendly agent (green) is present at a block position
+
+INITIAL_DISCS = [
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0]
+]  # Indicates if there is a disc at the left or right at each row
 
 LEFT_EDGE_BLOCKS = [(1, 0), (2, 0), (3, 0), (4, 0)]
 RIGHT_EDGE_BLOCKS = [(1, 1), (2, 2), (3, 3), (4, 4)]
@@ -63,6 +72,9 @@ COLOR_PURPLE = 146, 70, 192
 AGENT_BLOCK_OFFSET = -10
 AGENT_BLOCK_OFFSET_RANGE = 10
 
+DISC_OFFSET_Y = 14
+DISC_OFFSET_X = 14
+
 NO_OP = 0
 
 SAM_SCORE = 300
@@ -70,7 +82,6 @@ GREEN_BALL_SCORE = 100
 LOSE_LIFE_PENALTY = -100
 
 LEVEL_WON_THRESHOLD = 1000
-
 
 LEVEL_BYTE = 99
 
@@ -89,15 +100,19 @@ class World:
 
 class QbertWorld(World):
     def __init__(self, ale, rgb_screen, ram):
+        # ALE components
         self.ale = ale
         self.lives = ale.lives()
         self.rgb_screen = rgb_screen
         self.ram_size = ale.getRAMSize()
         self.ram = ram
+
+        # Verbose state representation
         self.desired_color = COLOR_YELLOW
-        self.desired_colors = INITIAL_COLORS
+        self.block_colors = INITIAL_COLORS
         self.enemies = INITIAL_ENEMY_POSITIONS
-        self.friendlies = FRIENDLY_POSITIONS
+        self.friendlies = INITIAL_FRIENDLY_POSITIONS
+        self.discs = INITIAL_DISCS
         self.current_row, self.current_col = 0, 0
         self.level = 1
         self.enemy_present = False
@@ -106,7 +121,7 @@ class QbertWorld(World):
     def to_state_blocks(self):
         current_position = self.current_row, self.current_col
         logging.debug('Current position: {}'.format(current_position))
-        colors = list_to_tuple(self.desired_colors)
+        colors = list_to_tuple(self.block_colors)
         return current_position, colors
 
     def to_state_enemies(self):
@@ -120,7 +135,6 @@ class QbertWorld(World):
         return current_position, friendlies
 
     def perform_action(self, a):
-        action = action_number_to_name(a)
         score = 0
         friendly_score = 0
         enemy_penalty = 0
@@ -138,8 +152,7 @@ class QbertWorld(World):
             score += score_diff
             self.ale.getRAM(self.ram)
 
-        self.update_position(action)
-        self.update_colors()
+        self.update()
 
         if self.ram[LEVEL_BYTE] + 1 != self.level:
             logging.info('Current level: {}'.format(self.level))
@@ -159,11 +172,14 @@ class QbertWorld(World):
         diff_row, diff_col = get_action_diffs(action)
         return self.current_row + diff_row, self.current_col + diff_col
 
-    def update_colors(self):
+    def update(self):
         self.ale.getScreenRGB(self.rgb_screen)
+
+        # Score
         score_color = self.rgb_screen[SCORE_Y][SCORE_X]
         if not np.array_equal(score_color, COLOR_BLACK):
             self.desired_color = score_color
+
         self.enemy_present = False
         self.friendly_present = False
         for row in range(NUM_ROWS):
@@ -172,12 +188,13 @@ class QbertWorld(World):
 
                 # Color of block
                 if np.array_equal(self.rgb_screen[rgb_y][rgb_x], self.desired_color):
-                    self.desired_colors[row][col] = 1
+                    self.block_colors[row][col] = 1
                 else:
-                    self.desired_colors[row][col] = 0
+                    self.block_colors[row][col] = 0
 
                 self.enemies[row][col] = 0
                 self.friendlies[row][col] = 0
+                # Agents
                 for y_offset in range(AGENT_BLOCK_OFFSET_RANGE):
                     agent_offset = AGENT_BLOCK_OFFSET - y_offset
                     # Enemy (purple)
@@ -189,6 +206,23 @@ class QbertWorld(World):
                     if np.array_equal(self.rgb_screen[rgb_y + agent_offset][rgb_x], COLOR_GREEN):
                         self.friendlies[row][col] = 1
                         self.friendly_present = True
+
+                    # Qbert (orange)
+                    if np.array_equal(self.rgb_screen[rgb_y + agent_offset][rgb_x], COLOR_QBERT):
+                        self.current_row, self.current_col = row, col
+
+                # Discs (relative to edge blocks)
+                if col == 0:
+                    if np.array_equal(self.rgb_screen[rgb_y - DISC_OFFSET_Y][rgb_x - DISC_OFFSET_X], COLOR_BLACK):
+                        self.discs[row][0] = 0
+                    else:
+                        self.discs[row][0] = 1
+                if col == row:
+                    if np.array_equal(self.rgb_screen[rgb_y - DISC_OFFSET_Y][rgb_x + DISC_OFFSET_X], COLOR_BLACK):
+                        self.discs[row][1] = 0
+                    else:
+                        self.discs[row][1] = 1
+        logging.debug('Discs: {}'.format(self.discs))
 
     def update_position(self, a):
         self.current_row, self.current_col = self.result_position(a)
@@ -207,7 +241,7 @@ class QbertWorld(World):
     def get_next_state(self, a):
         diff_row, diff_col = get_action_number_diffs(a)
         new_position = self.current_row + diff_row, self.current_col + diff_col
-        new_colors = list_to_tuple_with_value(self.desired_colors, new_position[0], new_position[1], 1)
+        new_colors = list_to_tuple_with_value(self.block_colors, new_position[0], new_position[1], 1)
         return new_position, new_colors
 
     def get_close_states_actions(self, initial_action, distance_metric='simple'):
@@ -222,9 +256,6 @@ class QbertWorld(World):
                 states.append(self.get_next_state(a))
                 actions.append(get_inverse_action(a))
         return states, actions
-        # TODO: Also update Q(s',a') for any s',a' leading to the same s_next
-
-        # TODO: Keep track of discs
 
 
 def list_to_tuple(lst):

@@ -1,4 +1,7 @@
 import logging
+
+import matplotlib.pyplot as plt
+
 from argparse import ArgumentParser
 
 from agent import QbertAgent, QbertSubsumptionAgent
@@ -23,6 +26,8 @@ def play_learning_agent(world, num_episodes=10, exploration='random', distance_m
         world.reset()
         while not world.ale.game_over():
             total_reward += agent.action()
+            # plt.imshow(world.rgb_screen)
+            # plt.show()
         logging.info('Episode {} ended with score: {}'.format(episode + 1, total_reward))
         world.ale.reset_game()
         # TODO: plot results here
