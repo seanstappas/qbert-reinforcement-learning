@@ -1,0 +1,87 @@
+/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/bin/python2.7 /Users/seanstappas1/PycharmProjects/qbert-reinforcement-learning/main.py
+A.L.E: Arcade Learning Environment (version 0.5.1)
+[Powered by Stella]
+Use -help for help screen.
+Warning: couldn't load settings file: ./ale.cfg
+Game console created:
+  ROM file:  qbert.bin
+  Cart Name: Q-bert (1988) (Atari) [!]
+  Cart MD5:  484b0076816a104875e00467d431c2d2
+  Display Format:  AUTO-DETECT ==> NTSC
+  ROM Size:        4096
+  Bankswitch Type: AUTO-DETECT ==> 4K
+
+
+WARNING: Possibly unsupported ROM: mismatched MD5.
+Cartridge_MD5: 484b0076816a104875e00467d431c2d2
+Cartridge_name: Q-bert (1988) (Atari) [!]
+
+Running ROM file...
+Random seed is 123
+04-11-2017:15:51:05,689 INFO     [main.py:play_learning_agent:27] Episode 1 ended with score: 550
+04-11-2017:15:51:06,594 INFO     [main.py:play_learning_agent:27] Episode 2 ended with score: 650
+04-11-2017:15:51:08,50 INFO     [main.py:play_learning_agent:27] Episode 3 ended with score: 575
+04-11-2017:15:51:08,997 INFO     [main.py:play_learning_agent:27] Episode 4 ended with score: 450
+04-11-2017:15:51:09,633 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:10,743 INFO     [main.py:play_learning_agent:27] Episode 5 ended with score: 925
+04-11-2017:15:51:12,279 INFO     [main.py:play_learning_agent:27] Episode 6 ended with score: 800
+04-11-2017:15:51:12,582 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:13,911 INFO     [main.py:play_learning_agent:27] Episode 7 ended with score: 1200
+04-11-2017:15:51:15,646 INFO     [main.py:play_learning_agent:27] Episode 8 ended with score: 575
+04-11-2017:15:51:17,124 INFO     [main.py:play_learning_agent:27] Episode 9 ended with score: 500
+04-11-2017:15:51:17,996 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:18,289 INFO     [main.py:play_learning_agent:27] Episode 10 ended with score: 1400
+04-11-2017:15:51:18,930 INFO     [main.py:play_learning_agent:27] Episode 11 ended with score: 300
+04-11-2017:15:51:20,352 INFO     [main.py:play_learning_agent:27] Episode 12 ended with score: 475
+04-11-2017:15:51:21,29 INFO     [main.py:play_learning_agent:27] Episode 13 ended with score: 500
+04-11-2017:15:51:21,368 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:22,503 INFO     [main.py:play_learning_agent:27] Episode 14 ended with score: 950
+04-11-2017:15:51:22,960 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:24,199 INFO     [main.py:play_learning_agent:27] Episode 15 ended with score: 1100
+04-11-2017:15:51:25,643 INFO     [main.py:play_learning_agent:27] Episode 16 ended with score: 375
+04-11-2017:15:51:25,987 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:27,369 INFO     [main.py:play_learning_agent:27] Episode 17 ended with score: 1250
+04-11-2017:15:51:28,513 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:28,788 INFO     [main.py:play_learning_agent:27] Episode 18 ended with score: 1300
+04-11-2017:15:51:29,681 INFO     [main.py:play_learning_agent:27] Episode 19 ended with score: 800
+04-11-2017:15:51:30,729 INFO     [main.py:play_learning_agent:27] Episode 20 ended with score: 825
+04-11-2017:15:51:31,807 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:32,286 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:32,589 INFO     [main.py:play_learning_agent:27] Episode 21 ended with score: 1600
+04-11-2017:15:51:33,326 INFO     [main.py:play_learning_agent:27] Episode 22 ended with score: 650
+04-11-2017:15:51:34,343 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:34,577 INFO     [main.py:play_learning_agent:27] Episode 23 ended with score: 1100
+04-11-2017:15:51:36,39 INFO     [main.py:play_learning_agent:27] Episode 24 ended with score: 675
+04-11-2017:15:51:37,176 INFO     [main.py:play_learning_agent:27] Episode 25 ended with score: 700
+04-11-2017:15:51:37,956 INFO     [main.py:play_learning_agent:27] Episode 26 ended with score: 700
+04-11-2017:15:51:39,381 INFO     [main.py:play_learning_agent:27] Episode 27 ended with score: 675
+04-11-2017:15:51:40,854 INFO     [main.py:play_learning_agent:27] Episode 28 ended with score: 625
+04-11-2017:15:51:41,806 INFO     [main.py:play_learning_agent:27] Episode 29 ended with score: 575
+04-11-2017:15:51:42,596 INFO     [main.py:play_learning_agent:27] Episode 30 ended with score: 275
+04-11-2017:15:51:43,915 INFO     [main.py:play_learning_agent:27] Episode 31 ended with score: 525
+04-11-2017:15:51:45,586 INFO     [world.py:perform_action:326] Current level: 1
+04-11-2017:15:51:45,587 INFO     [world.py:perform_action:328] Level won! Progressing to level 2
+04-11-2017:15:51:45,864 INFO     [main.py:play_learning_agent:27] Episode 32 ended with score: 1925
+04-11-2017:15:51:46,332 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:47,481 INFO     [main.py:play_learning_agent:27] Episode 33 ended with score: 1225
+04-11-2017:15:51:48,221 INFO     [world.py:perform_action:317] Killed Coily!
+04-11-2017:15:51:49,1 INFO     [main.py:play_learning_agent:27] Episode 34 ended with score: 1275
+04-11-2017:15:51:49,642 INFO     [main.py:play_learning_agent:27] Episode 35 ended with score: 550
+04-11-2017:15:51:50,966 INFO     [main.py:play_learning_agent:27] Episode 36 ended with score: 450
+04-11-2017:15:51:51,863 INFO     [main.py:play_learning_agent:27] Episode 37 ended with score: 725
+Traceback (most recent call last):
+  File "/Users/seanstappas1/PycharmProjects/qbert-reinforcement-learning/main.py", line 61, in <module>
+    play_learning_agent()
+  File "/Users/seanstappas1/PycharmProjects/qbert-reinforcement-learning/main.py", line 24, in play_learning_agent
+    total_reward += agent.action()
+  File "/Users/seanstappas1/PycharmProjects/qbert-reinforcement-learning/agent.py", line 40, in action
+    return self.agent.action()
+  File "/Users/seanstappas1/PycharmProjects/qbert-reinforcement-learning/agent.py", line 130, in action
+    block_score, friendly_score, enemy_score, enemy_penalty = self.world.perform_action(chosen_action)
+  File "/Users/seanstappas1/PycharmProjects/qbert-reinforcement-learning/world.py", line 305, in perform_action
+    score += self.ale.act(a)
+  File "/Users/seanstappas1/miniconda2/lib/python2.7/site-packages/ale_python_interface/ale_python_interface.py", line 129, in act
+    return ale_lib.act(self.obj, int(action))
+TypeError: int() argument must be a string or a number, not 'NoneType'
+
+Process finished with exit code 1
