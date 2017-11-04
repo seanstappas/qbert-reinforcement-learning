@@ -20,10 +20,10 @@ def play_learning_agent(world, num_episodes=10, exploration='random', distance_m
         agent = QbertAgent(world, exploration=exploration, distance_metric=distance_metric)
     for episode in range(num_episodes):
         total_reward = 0
-        world.reset_position()
+        world.reset()
         while not world.ale.game_over():
             total_reward += agent.action()
-        logging.info('Episode %d ended with score: %d' % (episode, total_reward))
+        logging.info('Episode {} ended with score: {}'.format(episode + 1, total_reward))
         world.ale.reset_game()
         # TODO: plot results here
 
@@ -59,7 +59,7 @@ def play():
     setup_logging('info')
 
     world = setup_world(display_screen=True)
-    play_learning_agent(world, num_episodes=20, exploration='optimistic', distance_metric='adjacent', subsumption=True)
+    play_learning_agent(world, num_episodes=100, exploration='optimistic', distance_metric='adjacent', subsumption=True)
 
 
 if __name__ == '__main__':

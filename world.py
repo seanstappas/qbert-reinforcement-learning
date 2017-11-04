@@ -3,6 +3,7 @@ from abc import ABCMeta, abstractmethod
 
 import numpy as np
 import sys
+import matplotlib.pyplot as plt
 from ale_python_interface import ALEInterface
 
 from actions import get_valid_actions, action_name_to_number, get_action_diffs, action_number_to_name, \
@@ -60,12 +61,18 @@ COLOR_GREEN = 50, 132, 50
 COLOR_PURPLE = 146, 70, 192
 
 AGENT_BLOCK_OFFSET = -10
+AGENT_BLOCK_OFFSET_RANGE = 10
 
 NO_OP = 0
 
 SAM_SCORE = 300
 GREEN_BALL_SCORE = 100
 LOSE_LIFE_PENALTY = -100
+
+LEVEL_WON_THRESHOLD = 1000
+
+
+LEVEL_BYTE = 99
 
 
 class World:
@@ -131,9 +138,14 @@ class QbertWorld(World):
             score += score_diff
             self.ale.getRAM(self.ram)
 
-        self.ale.getScreenRGB(self.rgb_screen)
         self.update_position(action)
         self.update_colors()
+
+        if self.ram[LEVEL_BYTE] + 1 != self.level:
+            logging.info('Current level: {}'.format(self.level))
+            self.level = self.ram[LEVEL_BYTE] + 1
+            logging.info('Level won! Progressing to level {}'.format(self.level))
+            self.reset_position()
         return score, friendly_score, enemy_penalty
 
     def valid_actions(self):
@@ -148,10 +160,10 @@ class QbertWorld(World):
         return self.current_row + diff_row, self.current_col + diff_col
 
     def update_colors(self):
+        self.ale.getScreenRGB(self.rgb_screen)
         score_color = self.rgb_screen[SCORE_Y][SCORE_X]
         if not np.array_equal(score_color, COLOR_BLACK):
             self.desired_color = score_color
-        level_won = True
         self.enemy_present = False
         self.friendly_present = False
         for row in range(NUM_ROWS):
@@ -163,26 +175,20 @@ class QbertWorld(World):
                     self.desired_colors[row][col] = 1
                 else:
                     self.desired_colors[row][col] = 0
-                    level_won = False
 
-                # Enemy (purple)
-                if np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_PURPLE):
-                    self.enemies[row][col] = 1
-                    self.enemy_present = True
-                else:
-                    self.enemies[row][col] = 0
+                self.enemies[row][col] = 0
+                self.friendlies[row][col] = 0
+                for y_offset in range(AGENT_BLOCK_OFFSET_RANGE):
+                    agent_offset = AGENT_BLOCK_OFFSET - y_offset
+                    # Enemy (purple)
+                    if np.array_equal(self.rgb_screen[rgb_y + agent_offset][rgb_x], COLOR_PURPLE):
+                        self.enemies[row][col] = 1
+                        self.enemy_present = True
 
-                # Friendly (green)
-                if np.array_equal(self.rgb_screen[rgb_y + AGENT_BLOCK_OFFSET][rgb_x], COLOR_GREEN):
-                    self.friendlies[row][col] = 1
-                    self.friendly_present = True
-                else:
-                    self.friendlies[row][col] = 0
-
-        if level_won:
-            self.level += 1
-            logging.info('Level won! Progressing to level {}'.format(self.level))
-            self.reset_position()
+                    # Friendly (green)
+                    if np.array_equal(self.rgb_screen[rgb_y + agent_offset][rgb_x], COLOR_GREEN):
+                        self.friendlies[row][col] = 1
+                        self.friendly_present = True
 
     def update_position(self, a):
         self.current_row, self.current_col = self.result_position(a)
@@ -192,6 +198,11 @@ class QbertWorld(World):
             self.ale.act(NO_OP)
             self.ale.getRAM(self.ram)
         self.current_col, self.current_row = 0, 0
+
+    def reset(self):
+        self.ale.getRAM(self.ram)
+        self.level = self.ram[LEVEL_BYTE] + 1
+        self.reset_position()
 
     def get_next_state(self, a):
         diff_row, diff_col = get_action_number_diffs(a)
@@ -238,7 +249,7 @@ def setup_world(random_seed=123, frame_skip=4, repeat_action_probability=0, soun
             import pygame
             pygame.init()
         ale.setBool('sound', sound)
-        
+
     ale.setBool('display_screen', display_screen)
 
     # Load the ROM file

@@ -44,30 +44,40 @@ class QbertSubsumptionAgent(Agent):
         s_enemies = None
         s_friendlies = None
         if enemy_present:
-            logging.info('Enemy present!')
+            logging.debug('Enemy present!')
             s_enemies = self.world.to_state_enemies()
             a_enemies = self.enemy_learner.get_best_action(s_enemies)
         if friendly_present:
-            logging.info('Friendly present!')
+            logging.debug('Friendly present!')
             s_friendlies = self.world.to_state_friendlies()
             a_friendlies = self.friendly_learner.get_best_action(s_friendlies)
         s = self.world.to_state_blocks()
         a = self.block_learner.get_best_action(s)
         if enemy_present:
+            logging.debug('Chose enemy action!')
             chosen_action = a_enemies
         elif friendly_present:
+            logging.debug('Chose friendly action!')
             chosen_action = a_friendlies
         else:
+            logging.debug('Chose block action!')
             chosen_action = a
         score, friendly_score, enemy_penalty = self.world.perform_action(chosen_action)
         if enemy_present:
             s_next_enemies = self.world.to_state_enemies()
             self.enemy_learner.update(s_enemies, a_enemies, s_next_enemies, enemy_penalty)
+            if enemy_penalty != 0:
+                logging.debug('Enemy starting state: {}'.format(s_enemies))
+                logging.debug('Enemy ending state: {}'.format(s_next_enemies))
+                logging.debug('Penalty: {}'.format(enemy_penalty))
+            logging.debug('Enemy Q: {}'.format(self.enemy_learner.Q))
         if friendly_present:
             s_next_friendlies = self.world.to_state_friendlies()
             self.friendly_learner.update(s_friendlies, a_friendlies, s_next_friendlies, friendly_score)
         s_next = self.world.to_state_blocks()
         self.block_learner.update(s, a, s_next, score)
+        if score > 500:
+            logging.info('Score: {}'.format(score))
         return score
 
     # TODO: see and select actions on every kth frame: recommended every 4th frame

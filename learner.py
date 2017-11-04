@@ -122,5 +122,6 @@ class QLearner(Learner):
         for s_close, a_close in zip(states_close, actions_close):
             self.Q[s_close, a_close] = new_q
 
-            # TODO: Implement subsumption: only learn from enemies when they are on the board, and enemies take priority
+    # TODO: Initialize Q values to something that makes sense
+    # TODO: Generalize better (when hitting block or enemy: equivalent on all blocks...)
 
