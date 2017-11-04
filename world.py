@@ -6,7 +6,7 @@ import numpy as np
 from ale_python_interface import ALEInterface
 
 from actions import get_action_diffs, action_number_to_name, \
-    get_action_number_diffs, get_valid_action_numbers, get_inverse_action
+    get_action_number_diffs, get_valid_action_numbers, get_inverse_action, ACTION_NUM_DIFFS
 
 NUM_ROWS = 6
 NUM_COLS = 6
@@ -139,12 +139,14 @@ class QbertWorld(World):
         self.discs = INITIAL_DISCS
         self.current_row, self.current_col = 0, 0
         self.level = 1
-        self.enemy_present = False
+        self.enemy_present = False  # TODO: Enemy nearby...
         self.friendly_present = False
         self.state_repr = state_repr
 
     def to_state_blocks(self):
         if self.state_repr is 'simple':
+            return self.to_state_blocks_simple()
+        elif self.state_repr is 'adjacent':
             return self.to_state_blocks_simple()
         elif self.state_repr is 'verbose':
             return self.to_state_blocks_verbose()
@@ -184,6 +186,8 @@ class QbertWorld(World):
     def to_state_enemies(self):
         if self.state_repr is 'simple':
             return self.to_state_enemies_simple()
+        elif self.state_repr is 'adjacent':
+            return self.to_state_enemies_adjacent()
         elif self.state_repr is 'verbose':
             return self.to_state_enemies_verbose()
         else:
@@ -224,7 +228,92 @@ class QbertWorld(World):
                 bot_right = 1
         return top_left, top_right, bot_left, bot_right
 
-    # TODO: Expand simple enemy state to include 2 blocks away
+    def to_state_enemies_adjacent(self):
+        """
+        Adjacent state representation for enemies around Qbert.
+
+        None: unattainable/enemy/enemy adjacent
+        0: block
+        1: disc
+        """
+        row, col = self.current_row, self.current_col
+        top_left = None
+        top_right = None
+        bot_left = None
+        bot_right = None
+
+        if self.is_enemy_adjacent(row - 1, col - 1):
+            top_left = None
+        elif col != 0 and self.enemies[row - 1][col - 1] == 0:
+            top_left = 0
+        elif col == 0 and self.discs[row][0] == 1:
+            top_left = 1
+            # TODO: Only go to discs when Coily is here, not purple ball..
+
+        if self.is_enemy_adjacent(row - 1, col):
+            top_right = None
+        elif col != row and self.enemies[row - 1][col] == 0:
+            top_right = 0
+        elif col == row and self.discs[row][1] == 1:
+            top_right = 1
+
+        if row != NUM_ROWS - 1:
+            if self.is_enemy_adjacent(row + 1, col):
+                bot_left = None
+            elif self.enemies[row + 1][col] == 0:
+                bot_left = 0
+
+            if self.is_enemy_adjacent(row + 1, col + 1):
+                bot_right = None
+            elif self.enemies[row + 1][col + 1] == 0:
+                bot_right = 0
+        return top_left, top_right, bot_left, bot_right
+
+    def to_state_enemies_adjacent_old(self):
+        """
+        Adjacent state representation for enemies around Qbert.
+
+        None: unattainable/enemy
+        0: block/disc
+        1: enemy adjacent to this block
+        """
+        row, col = self.current_row, self.current_col
+        top_left = None
+        top_right = None
+        bot_left = None
+        bot_right = None
+
+        if self.is_enemy_adjacent(row - 1, col - 1):
+            top_left = 1
+        elif col != 0 and self.enemies[row - 1][col - 1] == 0 or col == 0 and self.discs[row][0] == 1:
+            top_left = 0
+
+        if self.is_enemy_adjacent(row - 1, col):
+            top_right = 1
+        elif col != row and self.enemies[row - 1][col] == 0 or col == row and self.discs[row][1] == 1:
+            top_right = 0
+
+        if row != NUM_ROWS - 1:
+            if self.is_enemy_adjacent(row + 1, col):
+                bot_left = 1
+            elif self.enemies[row + 1][col] == 0:
+                bot_left = 0
+
+            if self.is_enemy_adjacent(row + 1, col + 1):
+                bot_right = 1
+            elif self.enemies[row + 1][col + 1] == 0:
+                bot_right = 0
+        return top_left, top_right, bot_left, bot_right
+
+    def is_enemy_adjacent(self, row, col):
+        if 0 <= row < NUM_ROWS and 0 <= col <= row and self.enemies[row][col] != 1:
+            for diff_row, diff_col in ACTION_NUM_DIFFS.values():
+                r = row + diff_row
+                c = col + diff_col
+                if 0 <= r < NUM_ROWS and 0 <= c <= r and self.enemies[r][c] == 1:
+                    # Enemy present
+                    return True
+        return False
 
     def to_state_enemies_simple_old(self):
         """
@@ -264,6 +353,8 @@ class QbertWorld(World):
 
     def to_state_friendlies(self):
         if self.state_repr is 'simple':
+            return self.to_state_friendlies_simple()
+        elif self.state_repr is 'adjacent':
             return self.to_state_friendlies_simple()
         elif self.state_repr is 'verbose':
             return self.to_state_friendlies_verbose()
@@ -305,6 +396,7 @@ class QbertWorld(World):
         score += self.ale.act(a)
         initial_num_lives = self.ale.lives()
         self.ale.getRAM(self.ram)
+        self.update()
         while not (self.ram[0] == 0 and self.ram[self.ram_size - 1] & 1):  # last bit = 1 and first byte = 0
             if self.ale.lives() < initial_num_lives:
                 enemy_penalty = LOSE_LIFE_PENALTY

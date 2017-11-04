@@ -3,7 +3,6 @@ RIGHT_EDGE_BLOCKS = [(1, 1), (2, 2), (3, 3), (4, 4)]
 BOTTOM_BLOCKS = [(5, 1), (5, 2), (5, 3), (5, 4)]
 
 ACTIONS_TO_NUMBERS = {
-    'noop': 0,
     'up': 2,
     'right': 3,
     'left': 4,
@@ -11,7 +10,6 @@ ACTIONS_TO_NUMBERS = {
 }
 
 ACTION_DIFFS = {
-    'noop': (0, 0),
     'up': (-1, 0),
     'right': (1, 1),
     'left': (-1, -1),
@@ -40,7 +38,6 @@ ACTIONS = [
 ]
 
 ACTION_NUM_DIFFS = {
-    0: (0, 0),
     2: (-1, 0),
     3: (1, 1),
     4: (-1, -1),
@@ -48,7 +45,6 @@ ACTION_NUM_DIFFS = {
 }
 
 INVERSE_ACTIONS = {
-    0: 0,
     2: 5,
     3: 4,
     4: 3,
@@ -57,7 +53,7 @@ INVERSE_ACTIONS = {
 
 
 def get_valid_action_numbers_from_state(s, state_repr='simple'):
-    if state_repr is 'simple':
+    if state_repr is 'simple' or state_repr is 'adjacent':
         actions = []
         top_left, top_right, bot_left, bot_right = s
         if top_left is not None:
