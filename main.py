@@ -64,7 +64,7 @@ def play():
     setup_logging('info')
 
     world = setup_world(display_screen=True)
-    play_learning_agent(world, num_episodes=100, exploration='optimistic', distance_metric='adjacent', subsumption=True)
+    play_learning_agent(world, num_episodes=100, exploration='optimistic', distance_metric='', subsumption=True)
 
 
 if __name__ == '__main__':

@@ -118,6 +118,20 @@ class QbertWorld(World):
         self.enemy_present = False
         self.friendly_present = False
 
+    def to_simple_state_blocks(self):
+        row, col = self.current_row, self.current_col
+        top_left = None
+        if col != 0:
+            pass
+        top_right = None
+        if col != row:
+            pass
+        bot_left = None
+        bot_right = None
+        if row == NUM_ROWS - 1:
+            pass
+        return top_left, top_right, bot_left, bot_right
+
     def to_state_blocks(self):
         current_position = self.current_row, self.current_col
         logging.debug('Current position: {}'.format(current_position))
