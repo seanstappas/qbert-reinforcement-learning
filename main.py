@@ -1,11 +1,8 @@
 import logging
 
-import matplotlib.pyplot as plt
-
 from argparse import ArgumentParser
 
-from agent import QbertAgent, QbertSubsumptionAgent
-from world import setup_world
+from agent import QbertAgent
 
 LOGGING_LEVELS = {
     'info': logging.INFO,
@@ -16,11 +13,10 @@ LOGGING_LEVELS = {
 }
 
 
-def play_learning_agent(world, num_episodes=10, exploration='random', distance_metric='simple', subsumption=True):
-    if subsumption:
-        agent = QbertSubsumptionAgent(world, exploration=exploration, distance_metric=distance_metric)
-    else:
-        agent = QbertAgent(world, exploration=exploration, distance_metric=distance_metric)
+def play_learning_agent(num_episodes=10):
+
+    agent = QbertAgent()
+    world = agent.world
     for episode in range(num_episodes):
         total_reward = 0
         world.reset()
@@ -60,12 +56,6 @@ def parse_command_line_arguments():
     args.func(args)
 
 
-def play():
-    setup_logging('info')
-
-    world = setup_world(display_screen=True)
-    play_learning_agent(world, num_episodes=100, exploration='optimistic', distance_metric='', subsumption=True)
-
-
 if __name__ == '__main__':
-    play()
+    setup_logging('info')
+    play_learning_agent()

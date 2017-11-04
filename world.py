@@ -93,13 +93,39 @@ class World:
     def perform_action(self, a):
         raise NotImplementedError
 
-    @abstractmethod
-    def valid_actions(self):
-        raise NotImplementedError
-
 
 class QbertWorld(World):
-    def __init__(self, ale, rgb_screen, ram):
+    def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, state_repr):
+        ale = ALEInterface()
+
+        # Get & Set the desired settings
+        ale.setInt('random_seed', random_seed)
+        ale.setInt('frame_skip', frame_skip)
+        ale.setFloat('repeat_action_probability', repeat_action_probability)
+
+        if display_screen:
+            if sys.platform == 'darwin':
+                import pygame
+                pygame.init()
+            ale.setBool('sound', sound)
+
+        ale.setBool('display_screen', display_screen)
+
+        # Load the ROM file
+        ale.loadROM('qbert.bin')
+
+        # Get the list of legal actions
+        legal_actions = ale.getLegalActionSet()
+        minimal_actions = ale.getMinimalActionSet()
+        logging.debug('Legal actions: {}'.format([action_number_to_name(a) for a in legal_actions]))
+        logging.debug('Minimal actions: {}'.format([action_number_to_name(a) for a in minimal_actions]))
+
+        width, height = ale.getScreenDims()
+        rgb_screen = np.empty([height, width, 3], dtype=np.uint8)
+
+        ram_size = ale.getRAMSize()
+        ram = np.zeros(ram_size, dtype=np.uint8)
+
         # ALE components
         self.ale = ale
         self.lives = ale.lives()
@@ -117,22 +143,32 @@ class QbertWorld(World):
         self.level = 1
         self.enemy_present = False
         self.friendly_present = False
-
-    def to_simple_state_blocks(self):
-        row, col = self.current_row, self.current_col
-        top_left = None
-        if col != 0:
-            pass
-        top_right = None
-        if col != row:
-            pass
-        bot_left = None
-        bot_right = None
-        if row == NUM_ROWS - 1:
-            pass
-        return top_left, top_right, bot_left, bot_right
+        self.state_repr = state_repr
 
     def to_state_blocks(self):
+        if self.state_repr is 'simple':
+            return self.to_state_blocks_simple()
+        else:
+            return self.to_state_blocks_verbose()
+
+    def to_state_blocks_simple(self):
+        row, col = self.current_row, self.current_col
+        top_left = None
+        top_right = None
+        bot_left = None
+        bot_right = None
+        if col != 0:
+            top_left = self.block_colors[row - 1][col - 1]
+        if col != row:
+            top_right = self.block_colors[row - 1][col]
+        if row != NUM_ROWS - 1:
+            bot_left = self.block_colors[row + 1][col]
+            bot_right = self.block_colors[row + 1][col + 1]
+        return top_left, top_right, bot_left, bot_right
+
+    def to_state_blocks_verbose(self):
+        if self.state_repr is 'simple':
+            return self.to_state_blocks_simple()
         current_position = self.current_row, self.current_col
         logging.debug('Current position: {}'.format(current_position))
         colors = list_to_tuple(self.block_colors)
@@ -163,7 +199,8 @@ class QbertWorld(World):
             score_diff = self.ale.act(NO_OP)
             if score_diff == SAM_SCORE or score_diff == GREEN_BALL_SCORE:
                 friendly_score = score_diff
-            score += score_diff
+            else:
+                score += score_diff
             self.ale.getRAM(self.ram)
 
         self.update()
@@ -174,13 +211,6 @@ class QbertWorld(World):
             logging.info('Level won! Progressing to level {}'.format(self.level))
             self.reset_position()
         return score, friendly_score, enemy_penalty
-
-    def valid_actions(self):
-        return get_valid_actions(self.current_row, self.current_col)
-
-    def valid_action_numbers(self):
-        valid_actions = self.valid_actions()
-        return [action_name_to_number(a) for a in valid_actions]
 
     def result_position(self, action):
         diff_row, diff_col = get_action_diffs(action)
@@ -279,37 +309,3 @@ def list_to_tuple(lst):
 def list_to_tuple_with_value(lst, row_num, col_num, val):
     return tuple(tuple(x if i != row_num or j != col_num else val for j, x in enumerate(row))
                  for i, row in enumerate(lst))
-
-
-def setup_world(random_seed=123, frame_skip=4, repeat_action_probability=0, sound=True, display_screen=False):
-    ale = ALEInterface()
-
-    # Get & Set the desired settings
-    ale.setInt('random_seed', random_seed)
-    ale.setInt('frame_skip', frame_skip)
-    ale.setFloat('repeat_action_probability', repeat_action_probability)
-
-    if display_screen:
-        if sys.platform == 'darwin':
-            import pygame
-            pygame.init()
-        ale.setBool('sound', sound)
-
-    ale.setBool('display_screen', display_screen)
-
-    # Load the ROM file
-    ale.loadROM('qbert.bin')
-
-    # Get the list of legal actions
-    legal_actions = ale.getLegalActionSet()
-    minimal_actions = ale.getMinimalActionSet()
-    logging.debug('Legal actions: {}'.format([action_number_to_name(a) for a in legal_actions]))
-    logging.debug('Minimal actions: {}'.format([action_number_to_name(a) for a in minimal_actions]))
-
-    width, height = ale.getScreenDims()
-    rgb_screen = np.empty([height, width, 3], dtype=np.uint8)
-
-    ram_size = ale.getRAMSize()
-    ram = np.zeros(ram_size, dtype=np.uint8)
-    world = QbertWorld(ale, rgb_screen, ram)
-    return world

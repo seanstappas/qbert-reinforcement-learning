@@ -56,9 +56,24 @@ INVERSE_ACTIONS = {
 }
 
 
-def get_valid_action_numbers_from_state(s):
-    row, col = s[0]
-    return get_valid_action_numbers(row, col)
+def get_valid_action_numbers_from_state(s, state_repr='simple'):
+    if state_repr is 'simple':
+        actions = []
+        top_left, top_right, bot_left, bot_right = s
+        if top_left is not None:
+            actions.append(ACTIONS_TO_NUMBERS['left'])
+        if top_right is not None:
+            actions.append(ACTIONS_TO_NUMBERS['up'])
+        if bot_left is not None:
+            actions.append(ACTIONS_TO_NUMBERS['down'])
+        if bot_right is not None:
+            actions.append(ACTIONS_TO_NUMBERS['right'])
+        return actions
+    elif state_repr is 'verbose':
+        row, col = s[0]
+        return get_valid_action_numbers(row, col)
+    else:
+        return []
 
 
 def get_valid_action_numbers(row, col):

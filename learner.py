@@ -18,8 +18,8 @@ class Learner:
 
 
 class QLearner(Learner):
-    def __init__(self, world, alpha=0.5, gamma=0.9, epsilon=0.1, unexplored_threshold=5, unexplored_reward=50,
-                 exploration='random', distance_metric='simple'):
+    def __init__(self, world, alpha, gamma, epsilon, unexplored_threshold, unexplored_reward, exploration,
+                 distance_metric, state_repr):
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
@@ -30,6 +30,7 @@ class QLearner(Learner):
         self.Q = {}
         self.N = {}
         self.world = world
+        self.state_repr = state_repr
 
     def get_best_action(self, s):
         if self.exploration is 'optimistic':
@@ -53,7 +54,7 @@ class QLearner(Learner):
         return self.Q.get((s, a), 0)
 
     def get_best_action_random(self, s):
-        actions = get_valid_action_numbers_from_state(s)
+        actions = get_valid_action_numbers_from_state(s, self.state_repr)
         logging.debug('Valid actions: {}'.format([action_number_to_name(a) for a in actions]))
         if random.random() < self.epsilon:
             action = random.choice(actions)
@@ -69,7 +70,7 @@ class QLearner(Learner):
         return max_action
 
     def get_best_action_optimistic(self, s):
-        actions = get_valid_action_numbers_from_state(s)
+        actions = get_valid_action_numbers_from_state(s, self.state_repr)
         logging.debug('Valid actions: {}'.format([action_number_to_name(a) for a in actions]))
         max_q = float('-inf')
         max_action = None
@@ -82,7 +83,7 @@ class QLearner(Learner):
         return max_action
 
     def get_best_action_combined(self, s):
-        actions = get_valid_action_numbers_from_state(s)
+        actions = get_valid_action_numbers_from_state(s, self.state_repr)
         if random.random() < self.epsilon:
             action = random.choice(actions)
             logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
