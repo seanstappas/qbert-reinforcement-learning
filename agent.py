@@ -154,28 +154,4 @@ class QbertSubsumptionAgent(Agent):
         self.block_learner.update(s, a, s_next, block_score)
         return block_score + friendly_score + enemy_score
 
-        # TODO: see and select actions on every kth frame: recommended every 4th frame
-
-        # TODO: OR act at 12 steps/second (frame skip=5 within the stellarc configuration file.)
-
-        # TODO: construct feature set (Basic or RAM best for Qbert, as shown in Bellemare et al.)
-        # Aaron et al.: Tile coding is the most practical feature extraction technique. We also experimented
-        # with convolutional features, where a set of predefined filters were run over the image each
-        # step. The large number of convolutions required was too slow, at least using OpenCV2 or
-        # Theano3 convolutional codes.
-        # We performed our experiments using a variant of the BASIC representation, limited
-        # to the SECAM color set. This representation is simply an encoding of the screen with a
-        # courser grid, with a resolution of 14x16. Colors that occur in each 15x10 block are encoded
-        # using indicator features, 1 for each of the 8 SECAM colors. Background subtraction is used
-        # before encoding, as detailed in Bellemare et al. (2013).
-
-        # TODO: Choose algo (SARSA, Q-learning) (Q-l better if death can occur by exploration with e-greedy: Qbert!)
-
-        # ETTR method performed best for Qbert (minimize expected time to next positive reward)
-        # ^ Aaron et al.
-
-        # Guo: no actions can change state of game while falling from cubes (can ignore these states if possible)
-
-        # TODO: Use pickle to save parameter weights
-
         # Human high scores: 15825, 27000

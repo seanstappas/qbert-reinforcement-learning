@@ -41,5 +41,14 @@ def test_dicts_and_lists():
     print(d[(3, 4), (1, 2, 3)])
 
 
+def test_return_none(param):
+    if param is 0:
+        return 'ZERO'
+    if param is 1:
+        return 'ONE'
+    if param is 2:
+        return None
+
+
 if __name__ == '__main__':
-    test_dicts_and_lists()
+    print(test_return_none(5))

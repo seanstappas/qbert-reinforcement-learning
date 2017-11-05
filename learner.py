@@ -123,6 +123,3 @@ class QLearner(Learner):
         for s_close, a_close in zip(states_close, actions_close):
             self.Q[s_close, a_close] = new_q
 
-    # TODO: Initialize Q values to something that makes sense
-    # TODO: Generalize better (when hitting block or enemy: equivalent on all blocks...)
-

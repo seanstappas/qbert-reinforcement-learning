@@ -1,5 +1,7 @@
 import logging
 
+import matplotlib.pyplot as plt
+
 from argparse import ArgumentParser
 
 from agent import QbertAgent
@@ -13,7 +15,7 @@ LOGGING_LEVELS = {
 }
 
 
-def play_learning_agent(num_episodes=100):
+def play_learning_agent(num_episodes=100, show_image=False):
 
     agent = QbertAgent()
     world = agent.world
@@ -22,8 +24,9 @@ def play_learning_agent(num_episodes=100):
         world.reset()
         while not world.ale.game_over():
             total_reward += agent.action()
-            # plt.imshow(world.rgb_screen)
-            # plt.show()
+            if show_image:
+                plt.imshow(world.rgb_screen)
+                plt.show()
         logging.info('Episode {} ended with score: {}'.format(episode + 1, total_reward))
         world.ale.reset_game()
         # TODO: plot results here

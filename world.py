@@ -68,8 +68,8 @@ COLOR_QBERT = 181, 83, 40
 COLOR_GREEN = 50, 132, 50
 COLOR_PURPLE = 146, 70, 192
 
-AGENT_BLOCK_OFFSET = -10
-AGENT_BLOCK_OFFSET_RANGE = 10
+AGENT_BLOCK_OFFSET = -5
+AGENT_BLOCK_OFFSET_RANGE = 30
 
 DISC_OFFSET_Y = 14
 DISC_OFFSET_X = 14
@@ -82,6 +82,8 @@ KILL_COILY_SCORE = 500
 LOSE_LIFE_PENALTY = -100
 
 LEVEL_BYTE = 99
+
+FLASH_CHECK_Y, FLASH_CHECK_X = 40, 140
 
 
 class World:
@@ -150,8 +152,22 @@ class QbertWorld(World):
             return self.to_state_blocks_simple()
         elif self.state_repr is 'verbose':
             return self.to_state_blocks_verbose()
-        else:
-            return None
+
+    def to_state_enemies(self):
+        if self.state_repr is 'simple':
+            return self.to_state_enemies_simple()
+        elif self.state_repr is 'adjacent':
+            return self.to_state_enemies_adjacent()
+        elif self.state_repr is 'verbose':
+            return self.to_state_enemies_verbose()
+
+    def to_state_friendlies(self):
+        if self.state_repr is 'simple':
+            return self.to_state_friendlies_simple()
+        elif self.state_repr is 'adjacent':
+            return self.to_state_friendlies_simple()
+        elif self.state_repr is 'verbose':
+            return self.to_state_friendlies_verbose()
 
     def to_state_blocks_simple(self):
         """
@@ -182,16 +198,6 @@ class QbertWorld(World):
         logging.debug('Current position: {}'.format(current_position))
         colors = list_to_tuple(self.block_colors)
         return current_position, colors
-
-    def to_state_enemies(self):
-        if self.state_repr is 'simple':
-            return self.to_state_enemies_simple()
-        elif self.state_repr is 'adjacent':
-            return self.to_state_enemies_adjacent()
-        elif self.state_repr is 'verbose':
-            return self.to_state_enemies_verbose()
-        else:
-            return None
 
     def to_state_enemies_simple(self):
         """
@@ -248,7 +254,7 @@ class QbertWorld(World):
             top_left = 0
         elif col == 0 and self.discs[row][0] == 1:
             top_left = 1
-            # TODO: Only go to discs when Coily is here, not purple ball..
+            # TODO: Only go to discs when Coily is here, not purple ball.. (coily position in 0x27 and 0x45)
 
         if self.is_enemy_adjacent(row - 1, col):
             top_right = None
@@ -351,16 +357,6 @@ class QbertWorld(World):
         enemies = list_to_tuple(self.enemies)
         return current_position, enemies
 
-    def to_state_friendlies(self):
-        if self.state_repr is 'simple':
-            return self.to_state_friendlies_simple()
-        elif self.state_repr is 'adjacent':
-            return self.to_state_friendlies_simple()
-        elif self.state_repr is 'verbose':
-            return self.to_state_friendlies_verbose()
-        else:
-            return None
-
     def to_state_friendlies_simple(self):
         """
         Simple state representation for green agents around Qbert.
@@ -396,7 +392,6 @@ class QbertWorld(World):
         score += self.ale.act(a)
         initial_num_lives = self.ale.lives()
         self.ale.getRAM(self.ram)
-        self.update()
         while not (self.ram[0] == 0 and self.ram[self.ram_size - 1] & 1):  # last bit = 1 and first byte = 0
             if self.ale.lives() < initial_num_lives:
                 enemy_penalty = LOSE_LIFE_PENALTY
@@ -404,7 +399,7 @@ class QbertWorld(World):
                 break
             score_diff = self.ale.act(NO_OP)
             if score_diff == SAM_SCORE or score_diff == GREEN_BALL_SCORE:
-                friendly_score = score_diff
+                friendly_score = score_diff  # TODO: Misidentifying level up as a power-up?
             elif score_diff == KILL_COILY_SCORE:
                 logging.info('Killed Coily!')
                 enemy_score = score_diff
@@ -412,20 +407,21 @@ class QbertWorld(World):
                 score += score_diff
             self.ale.getRAM(self.ram)
 
-        self.update()
-
         if self.ram[LEVEL_BYTE] + 1 != self.level:
             logging.info('Current level: {}'.format(self.level))
             self.level = self.ram[LEVEL_BYTE] + 1
             logging.info('Level won! Progressing to level {}'.format(self.level))
-            self.reset_position()
+            score += self.reset_position()
+        self.update_rgb()
         return score, friendly_score, enemy_score, enemy_penalty
+
+    # TODO: When Qbert gets powerup, jumps off screen
 
     def result_position(self, action):
         diff_row, diff_col = get_action_diffs(action)
         return self.current_row + diff_row, self.current_col + diff_col
 
-    def update(self):
+    def update_rgb(self):
         self.ale.getScreenRGB(self.rgb_screen)
 
         # Score
@@ -465,31 +461,33 @@ class QbertWorld(World):
                         self.current_row, self.current_col = row, col
 
                 # Discs (relative to edge blocks)
-                if col == 0:
-                    if np.array_equal(self.rgb_screen[rgb_y - DISC_OFFSET_Y][rgb_x - DISC_OFFSET_X], COLOR_BLACK):
-                        self.discs[row][0] = 0
-                    else:
-                        self.discs[row][0] = 1
-                if col == row:
-                    if np.array_equal(self.rgb_screen[rgb_y - DISC_OFFSET_Y][rgb_x + DISC_OFFSET_X], COLOR_BLACK):
-                        self.discs[row][1] = 0
-                    else:
-                        self.discs[row][1] = 1
+                if np.array_equal(self.rgb_screen[FLASH_CHECK_Y][FLASH_CHECK_X], COLOR_BLACK):
+                    if col == 0:
+                        if np.array_equal(self.rgb_screen[rgb_y - DISC_OFFSET_Y][rgb_x - DISC_OFFSET_X], COLOR_BLACK):
+                            self.discs[row][0] = 0
+                        else:
+                            self.discs[row][0] = 1
+                    if col == row:
+                        if np.array_equal(self.rgb_screen[rgb_y - DISC_OFFSET_Y][rgb_x + DISC_OFFSET_X], COLOR_BLACK):
+                            self.discs[row][1] = 0
+                        else:
+                            self.discs[row][1] = 1
         logging.debug('Discs: {}'.format(self.discs))
 
-    def update_position(self, a):
-        self.current_row, self.current_col = self.result_position(a)
-
     def reset_position(self):
+        reward = 0
         while not (self.ram[0] == 0 and self.ram[self.ram_size - 1] & 1):  # last bit = 1 and first byte = 0
-            self.ale.act(NO_OP)
+            reward += self.ale.act(NO_OP)
             self.ale.getRAM(self.ram)
-        self.current_col, self.current_row = 0, 0
+        self.update_rgb()
+        if reward > 0:
+            logging.info('Nonzero reward of {} when resetting position.'.format(reward))
+        return reward
 
     def reset(self):
         self.ale.getRAM(self.ram)
         self.level = self.ram[LEVEL_BYTE] + 1
-        self.reset_position()
+        return self.reset_position()
 
     def get_next_state(self, a):
         diff_row, diff_col = get_action_number_diffs(a)
