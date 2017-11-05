@@ -149,7 +149,7 @@ class QbertWorld(World):
         if self.state_repr is 'simple':
             return self.to_state_blocks_simple()
         elif self.state_repr is 'adjacent':
-            return self.to_state_blocks_simple()
+            return self.to_state_blocks_adjacent()
         elif self.state_repr is 'verbose':
             return self.to_state_blocks_verbose()
 
@@ -165,7 +165,7 @@ class QbertWorld(World):
         if self.state_repr is 'simple':
             return self.to_state_friendlies_simple()
         elif self.state_repr is 'adjacent':
-            return self.to_state_friendlies_simple()
+            return self.to_state_friendlies_simple()  # TODO: Make adjacent version of friendlies
         elif self.state_repr is 'verbose':
             return self.to_state_friendlies_verbose()
 
@@ -190,6 +190,46 @@ class QbertWorld(World):
             bot_left = self.block_colors[row + 1][col]
             bot_right = self.block_colors[row + 1][col + 1]
         return top_left, top_right, bot_left, bot_right
+
+    def to_state_blocks_adjacent(self):
+        """
+        Simple state representation for blocks around Qbert.
+
+        None: unattainable
+        0: uncolored block
+        1: colored block
+        2: adjacent uncolored block
+        """
+        row, col = self.current_row, self.current_col
+        top_left = None
+        top_right = None
+        bot_left = None
+        bot_right = None
+        if col != 0:
+            top_left = self.adjacent_block_value(row - 1, col - 1)
+        if col != row:
+            top_right = self.adjacent_block_value(row - 1, col)
+        if row != NUM_ROWS - 1:
+            bot_left = self.adjacent_block_value(row + 1, col)
+            bot_right = self.adjacent_block_value(row + 1, col + 1)
+        return top_left, top_right, bot_left, bot_right
+
+    def adjacent_block_value(self, row, col):
+        if self.block_colors[row][col] == 0:
+            return 0
+        else:
+            if self.is_adjacent_uncolored_block(row, col):
+                return 2
+            else:
+                return 1
+
+    def is_adjacent_uncolored_block(self, row, col):
+        for diff_row, diff_col in ACTION_NUM_DIFFS.values():
+            r = row + diff_row
+            c = col + diff_col
+            if 0 <= r < NUM_ROWS and 0 <= c <= r and self.block_colors[r][c] == 0:
+                return True
+        return False
 
     def to_state_blocks_verbose(self):
         if self.state_repr is 'simple':
@@ -303,37 +343,6 @@ class QbertWorld(World):
         return self.is_friendly_adjacent(r, c) or self.is_friendly_adjacent(r - 1, c - 1) \
                or self.is_friendly_adjacent(r-1, c) or self.is_friendly_adjacent(r + 1, c) \
                or self.is_friendly_adjacent(r + 1, c + 1)
-
-    def to_state_enemies_simple_old(self):
-        """
-        Simple state representation for enemies around Qbert.
-
-        None: unattainable/enemy
-        0: block
-        1: disc
-        """
-        row, col = self.current_row, self.current_col
-        top_left = None
-        top_right = None
-        bot_left = None
-        bot_right = None
-
-        if col != 0 and self.enemies[row - 1][col - 1] == 0:
-            top_left = 0
-        elif col == 0 and self.discs[row][0] == 1:
-            top_left = 1
-
-        if col != row and self.enemies[row - 1][col] == 0:
-            top_right = 0
-        elif col == row and self.discs[row][1] == 1:
-            top_right = 1
-
-        if row != NUM_ROWS - 1:
-            if self.enemies[row + 1][col] == 0:
-                bot_left = 0
-            if self.enemies[row + 1][col + 1] == 0:
-                bot_right = 0
-        return top_left, top_right, bot_left, bot_right
 
     def to_state_enemies_verbose(self):
         current_position = self.current_row, self.current_col
