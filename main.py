@@ -19,17 +19,22 @@ def play_learning_agent(num_episodes=100, show_image=False):
 
     agent = QbertAgent()
     world = agent.world
+    max_score = 0
     for episode in range(num_episodes):
         total_reward = 0
         world.reset()
         while not world.ale.game_over():
             total_reward += agent.action()
-            if show_image:
-                plt.imshow(world.rgb_screen)
-                plt.show()
+        if show_image:
+            plt.imshow(world.rgb_screen)
+            plt.show()
         logging.info('Episode {} ended with score: {}'.format(episode + 1, total_reward))
+        max_score = max(max_score, total_reward)
         world.ale.reset_game()
-        # TODO: plot results here
+    logging.info('Maximum reward: {}'.format(max_score))
+    # TODO: plot results here
+
+    # TODO: Exploration very key... getting very high scores early on because of unexplored weighting...
 
 
 def setup_logging(level):

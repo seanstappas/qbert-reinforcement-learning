@@ -141,7 +141,7 @@ class QbertWorld(World):
         self.discs = INITIAL_DISCS
         self.current_row, self.current_col = 0, 0
         self.level = 1
-        self.enemy_present = False  # TODO: Enemy nearby...
+        self.enemy_present = False
         self.friendly_present = False
         self.state_repr = state_repr
 
@@ -275,51 +275,34 @@ class QbertWorld(World):
                 bot_right = 0
         return top_left, top_right, bot_left, bot_right
 
-    def to_state_enemies_adjacent_old(self):
-        """
-        Adjacent state representation for enemies around Qbert.
-
-        None: unattainable/enemy
-        0: block/disc
-        1: enemy adjacent to this block
-        """
-        row, col = self.current_row, self.current_col
-        top_left = None
-        top_right = None
-        bot_left = None
-        bot_right = None
-
-        if self.is_enemy_adjacent(row - 1, col - 1):
-            top_left = 1
-        elif col != 0 and self.enemies[row - 1][col - 1] == 0 or col == 0 and self.discs[row][0] == 1:
-            top_left = 0
-
-        if self.is_enemy_adjacent(row - 1, col):
-            top_right = 1
-        elif col != row and self.enemies[row - 1][col] == 0 or col == row and self.discs[row][1] == 1:
-            top_right = 0
-
-        if row != NUM_ROWS - 1:
-            if self.is_enemy_adjacent(row + 1, col):
-                bot_left = 1
-            elif self.enemies[row + 1][col] == 0:
-                bot_left = 0
-
-            if self.is_enemy_adjacent(row + 1, col + 1):
-                bot_right = 1
-            elif self.enemies[row + 1][col + 1] == 0:
-                bot_right = 0
-        return top_left, top_right, bot_left, bot_right
-
     def is_enemy_adjacent(self, row, col):
         if 0 <= row < NUM_ROWS and 0 <= col <= row and self.enemies[row][col] != 1:
             for diff_row, diff_col in ACTION_NUM_DIFFS.values():
                 r = row + diff_row
                 c = col + diff_col
                 if 0 <= r < NUM_ROWS and 0 <= c <= r and self.enemies[r][c] == 1:
-                    # Enemy present
                     return True
         return False
+
+    def is_friendly_adjacent(self, row, col):
+        if 0 <= row < NUM_ROWS and 0 <= col <= row and self.friendlies[row][col] != 1:
+            for diff_row, diff_col in ACTION_NUM_DIFFS.values():
+                r = row + diff_row
+                c = col + diff_col
+                if 0 <= r < NUM_ROWS and 0 <= c <= r and self.friendlies[r][c] == 1:
+                    return True
+        return False
+
+    def is_enemy_nearby(self):
+        r, c = self.current_row, self.current_col
+        return self.is_enemy_adjacent(r, c) or self.is_enemy_adjacent(r - 1, c - 1) or self.is_enemy_adjacent(r-1, c) \
+               or self.is_enemy_adjacent(r + 1, c) or self.is_enemy_adjacent(r + 1, c + 1)
+
+    def is_friendly_nearby(self):
+        r, c = self.current_row, self.current_col
+        return self.is_friendly_adjacent(r, c) or self.is_friendly_adjacent(r - 1, c - 1) \
+               or self.is_friendly_adjacent(r-1, c) or self.is_friendly_adjacent(r + 1, c) \
+               or self.is_friendly_adjacent(r + 1, c + 1)
 
     def to_state_enemies_simple_old(self):
         """
@@ -398,8 +381,8 @@ class QbertWorld(World):
             if self.ale.lives() == 0:
                 break
             score_diff = self.ale.act(NO_OP)
-            if score_diff == SAM_SCORE or score_diff == GREEN_BALL_SCORE:
-                friendly_score = score_diff  # TODO: Misidentifying level up as a power-up?
+            if score_diff == SAM_SCORE:
+                friendly_score = score_diff
             elif score_diff == KILL_COILY_SCORE:
                 logging.info('Killed Coily!')
                 enemy_score = score_diff

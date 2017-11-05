@@ -18,7 +18,7 @@ class Agent:
 
 class QbertAgent(Agent):
     def __init__(self, agent_type='subsumption', random_seed=123, frame_skip=4, repeat_action_probability=0,
-                 sound=True, display_screen=True, state_repr='adjacent', alpha=0.1, gamma=0.9, epsilon=0.5,
+                 sound=True, display_screen=False, state_repr='adjacent', alpha=0.1, gamma=0.9, epsilon=0.5,
                  unexplored_threshold=1, unexplored_reward=50, exploration='combined', distance_metric=None):
         if agent_type is 'block':
             self.agent = QbertBlockAgent(random_seed, frame_skip, repeat_action_probability, sound, display_screen,
@@ -105,8 +105,8 @@ class QbertSubsumptionAgent(Agent):
         # TODO: encourage exploration heavily for block learner, less for others
 
     def action(self):
-        enemy_present = self.world.enemy_present
-        friendly_present = self.world.friendly_present
+        enemy_present = self.world.is_enemy_nearby()
+        friendly_present = self.world.is_friendly_nearby()
         a_enemies = None
         a_friendlies = None
         s_enemies = None
