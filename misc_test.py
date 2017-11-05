@@ -1,5 +1,7 @@
 import numpy as np
 
+from pickler import save_to_pickle, load_from_pickle
+
 INITIAL_PARAMETERS1 = [
     [0],
     [0, 0],
@@ -50,5 +52,13 @@ def test_return_none(param):
         return None
 
 
+def test_pickle():
+    q = {(1, 2): 5, (5, 6): 10}
+    print(q)
+    save_to_pickle(q, 'test')
+    q2 = load_from_pickle('test')
+    print(q2)
+
+
 if __name__ == '__main__':
-    print(test_return_none(5))
+    test_pickle()

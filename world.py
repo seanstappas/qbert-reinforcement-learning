@@ -99,7 +99,8 @@ class QbertWorld(World):
         ale = ALEInterface()
 
         # Get & Set the desired settings
-        ale.setInt('random_seed', random_seed)
+        if random_seed is not None:
+            ale.setInt('random_seed', random_seed)
         ale.setInt('frame_skip', frame_skip)
         ale.setFloat('repeat_action_probability', repeat_action_probability)
 
@@ -148,7 +149,7 @@ class QbertWorld(World):
     def to_state_blocks(self):
         if self.state_repr is 'simple':
             return self.to_state_blocks_simple()
-        elif self.state_repr is 'adjacent':
+        elif self.state_repr is 'adjacent' or self.state_repr is 'adjacent_conservative':
             return self.to_state_blocks_adjacent()
         elif self.state_repr is 'verbose':
             return self.to_state_blocks_verbose()
@@ -158,13 +159,15 @@ class QbertWorld(World):
             return self.to_state_enemies_simple()
         elif self.state_repr is 'adjacent':
             return self.to_state_enemies_adjacent()
+        elif self.state_repr is 'adjacent_conservative':
+            return self.to_state_enemies_adjacent_conservative()
         elif self.state_repr is 'verbose':
             return self.to_state_enemies_verbose()
 
     def to_state_friendlies(self):
         if self.state_repr is 'simple':
             return self.to_state_friendlies_simple()
-        elif self.state_repr is 'adjacent':
+        elif self.state_repr is 'adjacent' or self.state_repr is 'adjacent_conservative':
             return self.to_state_friendlies_simple()  # TODO: Make adjacent version of friendlies
         elif self.state_repr is 'verbose':
             return self.to_state_friendlies_verbose()
@@ -346,7 +349,7 @@ class QbertWorld(World):
                 bot_right = 0
         return top_left, top_right, bot_left, bot_right
 
-    def to_state_enemies_adjacent_old(self):
+    def to_state_enemies_adjacent_conservative(self):
         """
         Adjacent state representation for enemies around Qbert.
 
@@ -493,7 +496,7 @@ class QbertWorld(World):
         if self.screen_not_flashing() \
                 and not np.array_equal(score_color, COLOR_BLACK) \
                 and not np.array_equal(score_color, self.desired_color):
-            logging.info('Identified {} as new desired color'.format(score_color))
+            logging.debug('Identified {} as new desired color'.format(score_color))
             self.desired_color = score_color
 
         self.enemy_present = False
@@ -553,8 +556,6 @@ class QbertWorld(World):
             reward += self.ale.act(NO_OP)
             self.ale.getRAM(self.ram)
         self.update_rgb()
-        if reward > 0:
-            logging.info('Nonzero reward of {} when resetting position.'.format(reward))
         return reward
 
     def reset(self):

@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from argparse import ArgumentParser
 
 from agent import QbertAgent
+from plotter import plot_scores
 
 LOGGING_LEVELS = {
     'info': logging.INFO,
@@ -15,11 +16,14 @@ LOGGING_LEVELS = {
 }
 
 
-def play_learning_agent(num_episodes=1000, show_image=False):
-
+def play_learning_agent(num_episodes=1000, show_image=False, load_learning_filename='test_pickle',
+                        save_learning_filename='test_pickle', plot_filename='adjacent_conservative_sub_combined'):
     agent = QbertAgent()
     world = agent.world
     max_score = 0
+    scores = []
+    if load_learning_filename is not None:
+        agent.load(load_learning_filename)
     for episode in range(num_episodes):
         total_reward = 0
         world.reset()
@@ -28,12 +32,16 @@ def play_learning_agent(num_episodes=1000, show_image=False):
         if show_image:
             plt.imshow(world.rgb_screen)
             plt.show()
+        scores.append(total_reward)
         logging.info('Episode {} ended with score: {}'.format(episode + 1, total_reward))
         max_score = max(max_score, total_reward)
         world.ale.reset_game()
+    if plot_filename is not None:
+        plot_scores(scores, plot_filename)
+    if save_learning_filename is not None:
+        agent.save(save_learning_filename)
     logging.info('Maximum reward: {}'.format(max_score))
-    # TODO: plot results here
-
+    logging.info('Total Q size: {}'.format(agent.q_size()))
     # TODO: Exploration very key... getting very high scores early on because of unexplored weighting...
 
 

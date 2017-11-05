@@ -1,11 +1,8 @@
 import logging
 from abc import ABCMeta, abstractmethod
 
-from actions import action_number_to_name
 from learner import QLearner
 from world import QbertWorld
-
-import matplotlib.pyplot as plt
 
 
 class Agent:
@@ -18,8 +15,9 @@ class Agent:
 
 class QbertAgent(Agent):
     def __init__(self, agent_type='subsumption', random_seed=123, frame_skip=4, repeat_action_probability=0,
-                 sound=True, display_screen=False, state_repr='adjacent', alpha=0.1, gamma=0.95, epsilon=0.2,
-                 unexplored_threshold=1, unexplored_reward=100, exploration='combined', distance_metric=None):
+                 sound=True, display_screen=False, state_repr='adjacent_conservative', alpha=0.1, gamma=0.95,
+                 epsilon=0.2, unexplored_threshold=1, unexplored_reward=100, exploration='combined',
+                 distance_metric=None):
         if agent_type is 'block':
             self.agent = QbertBlockAgent(random_seed, frame_skip, repeat_action_probability, sound, display_screen,
                                          state_repr, alpha, gamma, epsilon, unexplored_threshold, unexplored_reward,
@@ -41,6 +39,15 @@ class QbertAgent(Agent):
     def action(self):
         return self.agent.action()
 
+    def q_size(self):
+        return self.agent.q_size()
+
+    def save(self, filename):
+        self.agent.save(filename)
+
+    def load(self, filename):
+        self.agent.load(filename)
+
 
 class QbertBlockAgent(Agent):
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, state_repr, alpha,
@@ -56,6 +63,15 @@ class QbertBlockAgent(Agent):
         s_next = self.world.to_state_blocks()
         self.block_learner.update(s, a, s_next, block_score)
         return block_score + friendly_score + enemy_score
+
+    def q_size(self):
+        return len(self.block_learner.Q)
+
+    def save(self, filename):
+        self.block_learner.save(filename)
+
+    def load(self, filename):
+        self.block_learner.load(filename)
 
 
 class QbertEnemyAgent(Agent):
@@ -73,6 +89,15 @@ class QbertEnemyAgent(Agent):
         self.enemy_learner.update(s, a, s_next, enemy_score + enemy_penalty)
         return block_score + friendly_score + enemy_score
 
+    def q_size(self):
+        return len(self.enemy_learner.Q)
+
+    def save(self, filename):
+        self.enemy_learner.save(filename)
+
+    def load(self, filename):
+        self.enemy_learner.load(filename)
+
 
 class QbertFriendlyAgent(Agent):
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, state_repr, alpha,
@@ -88,6 +113,15 @@ class QbertFriendlyAgent(Agent):
         s_next = self.world.to_state_friendlies()
         self.friendly_learner.update(s, a, s_next, friendly_score)
         return block_score + friendly_score + enemy_score
+
+    def q_size(self):
+        return len(self.friendly_learner.Q)
+
+    def save(self, filename):
+        self.friendly_learner.save(filename)
+
+    def load(self, filename):
+        self.friendly_learner.load(filename)
 
 
 class QbertSubsumptionAgent(Agent):
@@ -130,14 +164,6 @@ class QbertSubsumptionAgent(Agent):
         else:
             logging.debug('Chose block action!')
             chosen_action = a
-        if chosen_action is None:
-            logging.info('None action!')
-            logging.info('Current row/col : {}/{}'.format(self.world.current_row, self.world.current_col))
-            logging.info('Prev block state: {}'.format(s))
-            logging.info('Prev enemy state: {}'.format(s_enemies))
-            logging.info('Prev friendly state: {}'.format(s_friendlies))
-            plt.imshow(self.world.rgb_screen)
-            plt.show()
         block_score, friendly_score, enemy_score, enemy_penalty = self.world.perform_action(chosen_action)
         if enemy_present:
             s_next_enemies = self.world.to_state_enemies()
@@ -154,4 +180,18 @@ class QbertSubsumptionAgent(Agent):
         self.block_learner.update(s, a, s_next, block_score)
         return block_score + friendly_score + enemy_score
 
+    def q_size(self):
+        return len(self.block_learner.Q) + \
+               len(self.friendly_learner.Q) + \
+               len(self.enemy_learner.Q)
+
+    def save(self, filename):
+        self.block_learner.save('{}_{}'.format(filename, 'block'))
+        self.friendly_learner.save('{}_{}'.format(filename, 'friendly'))
+        self.enemy_learner.save('{}_{}'.format(filename, 'enemy'))
+
+    def load(self, filename):
+        self.block_learner.load('{}_{}'.format(filename, 'block'))
+        self.friendly_learner.load('{}_{}'.format(filename, 'friendly'))
+        self.enemy_learner.load('{}_{}'.format(filename, 'enemy'))
         # Human high scores: 15825, 27000

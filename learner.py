@@ -3,6 +3,7 @@ import random
 from abc import ABCMeta, abstractmethod
 
 from actions import action_number_to_name, get_valid_action_numbers_from_state
+from pickler import save_to_pickle, load_from_pickle
 
 
 class Learner:
@@ -19,7 +20,7 @@ class Learner:
 
 class QLearner(Learner):
     def __init__(self, world, alpha, gamma, epsilon, unexplored_threshold, unexplored_reward, exploration,
-                 distance_metric, state_repr):
+                 distance_metric, state_repr, initial_q=None, initial_n=None):
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
@@ -27,8 +28,8 @@ class QLearner(Learner):
         self.unexplored_reward = unexplored_reward
         self.exploration = exploration
         self.distance_metric = distance_metric
-        self.Q = {}
-        self.N = {}
+        self.Q = initial_q if initial_q is not None else {}
+        self.N = initial_n if initial_n is not None else {}
         self.world = world
         self.state_repr = state_repr
 
@@ -46,6 +47,8 @@ class QLearner(Learner):
         self.q_update(s, a, s_next, reward)
 
     def q_update(self, s, a, s_next, reward):
+        if self.exploration is 'combined':
+            self.N[s, a] = self.N.get((s, a), 0) + 1
         old_q = self.get_q(s, a)
         new_q = old_q + self.alpha * (reward + self.gamma * self.get_max_q(s_next) - old_q)
         self.Q[s, a] = new_q
@@ -111,4 +114,14 @@ class QLearner(Learner):
         states_close, actions_close = self.world.get_close_states_actions(a, distance_metric=self.distance_metric)
         for s_close, a_close in zip(states_close, actions_close):
             self.Q[s_close, a_close] = new_q
+
+    def save(self, filename):
+        save_to_pickle(self.Q, '{}_{}'.format(filename, 'Q'))
+        save_to_pickle(self.N, '{}_{}'.format(filename, 'N'))
+
+    def load(self, filename):
+        self.Q = load_from_pickle('{}_{}'.format(filename, 'Q'))
+        self.N = load_from_pickle('{}_{}'.format(filename, 'N'))
+        logging.debug('Loaded Q: {}'.format(self.Q))
+        logging.debug('Loaded N: {}'.format(self.N))
 
