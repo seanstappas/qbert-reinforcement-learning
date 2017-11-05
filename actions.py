@@ -37,6 +37,14 @@ ACTIONS = [
     'down-left-fire'
 ]
 
+ACTION_NUM_DIFFS_WITH_NOOP = {
+    0: (0, 0),
+    2: (-1, 0),
+    3: (1, 1),
+    4: (-1, -1),
+    5: (1, 0)
+}
+
 ACTION_NUM_DIFFS = {
     2: (-1, 0),
     3: (1, 1),

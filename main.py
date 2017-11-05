@@ -15,7 +15,7 @@ LOGGING_LEVELS = {
 }
 
 
-def play_learning_agent(num_episodes=100, show_image=False):
+def play_learning_agent(num_episodes=1000, show_image=False):
 
     agent = QbertAgent()
     world = agent.world

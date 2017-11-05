@@ -1,0 +1,1835 @@
+/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/bin/python2.7 /Users/seanstappas1/PycharmProjects/qbert-reinforcement-learning/main.py
+A.L.E: Arcade Learning Environment (version 0.5.1)
+[Powered by Stella]
+Use -help for help screen.
+Warning: couldn't load settings file: ./ale.cfg
+Game console created:
+  ROM file:  qbert.bin
+  Cart Name: Q-bert (1988) (Atari) [!]
+  Cart MD5:  484b0076816a104875e00467d431c2d2
+  Display Format:  AUTO-DETECT ==> NTSC
+  ROM Size:        4096
+  Bankswitch Type: AUTO-DETECT ==> 4K
+
+
+WARNING: Possibly unsupported ROM: mismatched MD5.
+Cartridge_MD5: 484b0076816a104875e00467d431c2d2
+Cartridge_name: Q-bert (1988) (Atari) [!]
+
+Running ROM file...
+Random seed is 123
+05-11-2017:14:16:23,501 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:16:25,213 INFO     [main.py:play_learning_agent:31] Episode 1 ended with score: 975
+05-11-2017:14:16:26,519 INFO     [main.py:play_learning_agent:31] Episode 2 ended with score: 350
+05-11-2017:14:16:28,628 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:16:28,898 INFO     [main.py:play_learning_agent:31] Episode 3 ended with score: 1000
+05-11-2017:14:16:30,715 INFO     [main.py:play_learning_agent:31] Episode 4 ended with score: 425
+05-11-2017:14:16:32,277 INFO     [main.py:play_learning_agent:31] Episode 5 ended with score: 475
+05-11-2017:14:16:33,485 INFO     [main.py:play_learning_agent:31] Episode 6 ended with score: 400
+05-11-2017:14:16:34,123 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:16:36,338 INFO     [main.py:play_learning_agent:31] Episode 7 ended with score: 1225
+05-11-2017:14:16:38,616 INFO     [main.py:play_learning_agent:31] Episode 8 ended with score: 800
+05-11-2017:14:16:40,290 INFO     [main.py:play_learning_agent:31] Episode 9 ended with score: 750
+05-11-2017:14:16:43,208 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:16:43,208 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:16:43,292 INFO     [world.py:update_rgb:496] Identified [ 45  87 176] as new desired color
+05-11-2017:14:16:43,776 INFO     [main.py:play_learning_agent:31] Episode 10 ended with score: 3925
+05-11-2017:14:16:45,29 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:16:45,323 INFO     [main.py:play_learning_agent:31] Episode 11 ended with score: 1275
+05-11-2017:14:16:47,696 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:16:47,696 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:16:48,688 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:16:49,283 INFO     [main.py:play_learning_agent:31] Episode 12 ended with score: 5250
+05-11-2017:14:16:50,179 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:16:51,880 INFO     [main.py:play_learning_agent:31] Episode 13 ended with score: 1425
+05-11-2017:14:16:53,786 INFO     [main.py:play_learning_agent:31] Episode 14 ended with score: 675
+05-11-2017:14:16:55,844 INFO     [main.py:play_learning_agent:31] Episode 15 ended with score: 500
+05-11-2017:14:16:57,414 INFO     [main.py:play_learning_agent:31] Episode 16 ended with score: 675
+05-11-2017:14:16:59,935 INFO     [main.py:play_learning_agent:31] Episode 17 ended with score: 850
+05-11-2017:14:17:01,180 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:02,498 INFO     [main.py:play_learning_agent:31] Episode 18 ended with score: 1050
+05-11-2017:14:17:03,449 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:04,525 INFO     [main.py:play_learning_agent:31] Episode 19 ended with score: 1225
+05-11-2017:14:17:05,645 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:06,533 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:17:06,533 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:17:07,492 INFO     [main.py:play_learning_agent:31] Episode 20 ended with score: 4725
+05-11-2017:14:17:10,691 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:17:10,691 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:17:11,780 INFO     [main.py:play_learning_agent:31] Episode 21 ended with score: 4350
+05-11-2017:14:17:12,698 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:13,953 INFO     [main.py:play_learning_agent:31] Episode 22 ended with score: 1075
+05-11-2017:14:17:16,167 INFO     [main.py:play_learning_agent:31] Episode 23 ended with score: 850
+05-11-2017:14:17:16,605 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:19,124 INFO     [main.py:play_learning_agent:31] Episode 24 ended with score: 950
+05-11-2017:14:17:19,584 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:20,639 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:17:20,640 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:17:22,181 INFO     [main.py:play_learning_agent:31] Episode 25 ended with score: 5000
+05-11-2017:14:17:24,117 INFO     [main.py:play_learning_agent:31] Episode 26 ended with score: 750
+05-11-2017:14:17:26,309 INFO     [main.py:play_learning_agent:31] Episode 27 ended with score: 375
+05-11-2017:14:17:28,436 INFO     [main.py:play_learning_agent:31] Episode 28 ended with score: 500
+05-11-2017:14:17:28,986 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:30,736 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:17:30,736 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:17:31,704 INFO     [main.py:play_learning_agent:31] Episode 29 ended with score: 4475
+05-11-2017:14:17:33,569 INFO     [main.py:play_learning_agent:31] Episode 30 ended with score: 725
+05-11-2017:14:17:34,140 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:36,973 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:17:36,973 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:17:37,367 INFO     [main.py:play_learning_agent:31] Episode 31 ended with score: 5425
+05-11-2017:14:17:38,858 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:40,378 INFO     [main.py:play_learning_agent:31] Episode 32 ended with score: 1375
+05-11-2017:14:17:41,976 INFO     [main.py:play_learning_agent:31] Episode 33 ended with score: 775
+05-11-2017:14:17:43,779 INFO     [main.py:play_learning_agent:31] Episode 34 ended with score: 775
+05-11-2017:14:17:45,611 INFO     [main.py:play_learning_agent:31] Episode 35 ended with score: 375
+05-11-2017:14:17:46,802 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:47,274 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:17:47,274 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:17:49,847 INFO     [main.py:play_learning_agent:31] Episode 36 ended with score: 5350
+05-11-2017:14:17:52,350 INFO     [main.py:play_learning_agent:31] Episode 37 ended with score: 800
+05-11-2017:14:17:54,11 INFO     [main.py:play_learning_agent:31] Episode 38 ended with score: 600
+05-11-2017:14:17:54,870 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:56,903 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:17:56,903 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:17:57,818 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:17:58,889 INFO     [main.py:play_learning_agent:31] Episode 39 ended with score: 5225
+05-11-2017:14:17:59,688 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:02,69 INFO     [main.py:play_learning_agent:31] Episode 40 ended with score: 1000
+05-11-2017:14:18:03,748 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:05,43 INFO     [main.py:play_learning_agent:31] Episode 41 ended with score: 975
+05-11-2017:14:18:07,316 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:07,572 INFO     [main.py:play_learning_agent:31] Episode 42 ended with score: 1425
+05-11-2017:14:18:09,257 INFO     [main.py:play_learning_agent:31] Episode 43 ended with score: 750
+05-11-2017:14:18:10,673 INFO     [main.py:play_learning_agent:31] Episode 44 ended with score: 650
+05-11-2017:14:18:12,486 INFO     [main.py:play_learning_agent:31] Episode 45 ended with score: 750
+05-11-2017:14:18:14,308 INFO     [main.py:play_learning_agent:31] Episode 46 ended with score: 700
+05-11-2017:14:18:16,297 INFO     [main.py:play_learning_agent:31] Episode 47 ended with score: 525
+05-11-2017:14:18:18,648 INFO     [main.py:play_learning_agent:31] Episode 48 ended with score: 725
+05-11-2017:14:18:20,623 INFO     [main.py:play_learning_agent:31] Episode 49 ended with score: 625
+05-11-2017:14:18:23,110 INFO     [main.py:play_learning_agent:31] Episode 50 ended with score: 925
+05-11-2017:14:18:24,493 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:24,829 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:25,904 INFO     [main.py:play_learning_agent:31] Episode 51 ended with score: 1900
+05-11-2017:14:18:26,700 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:28,432 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:18:28,432 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:18:28,729 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:29,342 INFO     [main.py:play_learning_agent:31] Episode 52 ended with score: 4975
+05-11-2017:14:18:31,560 INFO     [main.py:play_learning_agent:31] Episode 53 ended with score: 925
+05-11-2017:14:18:32,36 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:33,623 INFO     [main.py:play_learning_agent:31] Episode 54 ended with score: 925
+05-11-2017:14:18:35,172 INFO     [main.py:play_learning_agent:31] Episode 55 ended with score: 325
+05-11-2017:14:18:35,594 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:37,963 INFO     [main.py:play_learning_agent:31] Episode 56 ended with score: 1400
+05-11-2017:14:18:39,522 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:41,522 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:18:41,522 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:18:41,782 INFO     [main.py:play_learning_agent:31] Episode 57 ended with score: 4400
+05-11-2017:14:18:44,48 INFO     [main.py:play_learning_agent:31] Episode 58 ended with score: 725
+05-11-2017:14:18:46,406 INFO     [main.py:play_learning_agent:31] Episode 59 ended with score: 500
+05-11-2017:14:18:48,13 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:18:48,13 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:18:48,537 INFO     [main.py:play_learning_agent:31] Episode 60 ended with score: 4200
+05-11-2017:14:18:50,640 INFO     [main.py:play_learning_agent:31] Episode 61 ended with score: 625
+05-11-2017:14:18:52,113 INFO     [main.py:play_learning_agent:31] Episode 62 ended with score: 700
+05-11-2017:14:18:55,0 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:18:55,221 INFO     [main.py:play_learning_agent:31] Episode 63 ended with score: 1025
+05-11-2017:14:18:57,772 INFO     [main.py:play_learning_agent:31] Episode 64 ended with score: 650
+05-11-2017:14:18:59,493 INFO     [main.py:play_learning_agent:31] Episode 65 ended with score: 700
+05-11-2017:14:19:01,645 INFO     [main.py:play_learning_agent:31] Episode 66 ended with score: 600
+05-11-2017:14:19:03,290 INFO     [main.py:play_learning_agent:31] Episode 67 ended with score: 675
+05-11-2017:14:19:06,579 INFO     [main.py:play_learning_agent:31] Episode 68 ended with score: 875
+05-11-2017:14:19:09,695 INFO     [main.py:play_learning_agent:31] Episode 69 ended with score: 750
+05-11-2017:14:19:11,470 INFO     [main.py:play_learning_agent:31] Episode 70 ended with score: 400
+05-11-2017:14:19:12,513 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:19:14,425 INFO     [main.py:play_learning_agent:31] Episode 71 ended with score: 1000
+05-11-2017:14:19:17,9 INFO     [main.py:play_learning_agent:31] Episode 72 ended with score: 700
+05-11-2017:14:19:17,445 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:19:19,758 INFO     [main.py:play_learning_agent:31] Episode 73 ended with score: 1250
+05-11-2017:14:19:22,301 INFO     [main.py:play_learning_agent:31] Episode 74 ended with score: 550
+05-11-2017:14:19:24,171 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:19:24,888 INFO     [main.py:play_learning_agent:31] Episode 75 ended with score: 1325
+05-11-2017:14:19:27,678 INFO     [main.py:play_learning_agent:31] Episode 76 ended with score: 600
+05-11-2017:14:19:29,785 INFO     [main.py:play_learning_agent:31] Episode 77 ended with score: 850
+05-11-2017:14:19:31,223 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:19:34,388 INFO     [main.py:play_learning_agent:31] Episode 78 ended with score: 1575
+05-11-2017:14:19:35,846 INFO     [main.py:play_learning_agent:31] Episode 79 ended with score: 375
+05-11-2017:14:19:38,643 INFO     [main.py:play_learning_agent:31] Episode 80 ended with score: 550
+05-11-2017:14:19:39,836 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:19:41,354 INFO     [main.py:play_learning_agent:31] Episode 81 ended with score: 950
+05-11-2017:14:19:44,227 INFO     [main.py:play_learning_agent:31] Episode 82 ended with score: 575
+05-11-2017:14:19:46,134 INFO     [main.py:play_learning_agent:31] Episode 83 ended with score: 400
+05-11-2017:14:19:47,817 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:19:48,781 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:19:48,781 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:19:49,932 INFO     [main.py:play_learning_agent:31] Episode 84 ended with score: 5275
+05-11-2017:14:19:50,390 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:19:52,302 INFO     [main.py:play_learning_agent:31] Episode 85 ended with score: 1050
+05-11-2017:14:19:55,281 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:19:55,281 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:19:55,658 INFO     [main.py:play_learning_agent:31] Episode 86 ended with score: 4325
+05-11-2017:14:19:56,649 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:19:57,880 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:19:59,128 INFO     [main.py:play_learning_agent:31] Episode 87 ended with score: 1500
+05-11-2017:14:20:02,208 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:20:02,208 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:20:02,980 INFO     [main.py:play_learning_agent:31] Episode 88 ended with score: 4250
+05-11-2017:14:20:03,817 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:20:06,66 INFO     [main.py:play_learning_agent:31] Episode 89 ended with score: 1025
+05-11-2017:14:20:07,447 INFO     [main.py:play_learning_agent:31] Episode 90 ended with score: 425
+05-11-2017:14:20:09,11 INFO     [main.py:play_learning_agent:31] Episode 91 ended with score: 650
+05-11-2017:14:20:09,969 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:20:11,66 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:20:11,272 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:20:11,272 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:20:13,188 INFO     [main.py:play_learning_agent:31] Episode 92 ended with score: 5700
+05-11-2017:14:20:14,922 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:20:15,554 INFO     [main.py:play_learning_agent:31] Episode 93 ended with score: 1300
+05-11-2017:14:20:16,886 INFO     [main.py:play_learning_agent:31] Episode 94 ended with score: 700
+05-11-2017:14:20:18,666 INFO     [main.py:play_learning_agent:31] Episode 95 ended with score: 775
+05-11-2017:14:20:20,887 INFO     [main.py:play_learning_agent:31] Episode 96 ended with score: 750
+05-11-2017:14:20:23,562 INFO     [main.py:play_learning_agent:31] Episode 97 ended with score: 475
+05-11-2017:14:20:24,530 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:20:26,299 INFO     [main.py:play_learning_agent:31] Episode 98 ended with score: 1025
+05-11-2017:14:20:26,767 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:20:29,466 INFO     [main.py:play_learning_agent:31] Episode 99 ended with score: 1250
+05-11-2017:14:20:31,321 INFO     [main.py:play_learning_agent:31] Episode 100 ended with score: 725
+05-11-2017:14:20:32,185 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:20:33,247 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:20:33,247 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:20:34,958 INFO     [main.py:play_learning_agent:31] Episode 101 ended with score: 5100
+05-11-2017:14:20:37,264 INFO     [main.py:play_learning_agent:31] Episode 102 ended with score: 825
+05-11-2017:14:20:39,54 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:20:40,105 INFO     [main.py:play_learning_agent:31] Episode 103 ended with score: 1025
+05-11-2017:14:20:42,858 INFO     [main.py:play_learning_agent:31] Episode 104 ended with score: 400
+05-11-2017:14:20:45,18 INFO     [main.py:play_learning_agent:31] Episode 105 ended with score: 525
+05-11-2017:14:20:47,871 INFO     [main.py:play_learning_agent:31] Episode 106 ended with score: 775
+05-11-2017:14:20:48,339 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:20:50,876 INFO     [main.py:play_learning_agent:31] Episode 107 ended with score: 1475
+05-11-2017:14:20:52,867 INFO     [main.py:play_learning_agent:31] Episode 108 ended with score: 725
+05-11-2017:14:20:54,391 INFO     [main.py:play_learning_agent:31] Episode 109 ended with score: 525
+05-11-2017:14:20:54,949 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:20:57,964 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:20:57,964 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:20:59,34 INFO     [main.py:play_learning_agent:31] Episode 110 ended with score: 4975
+05-11-2017:14:21:01,459 INFO     [main.py:play_learning_agent:31] Episode 111 ended with score: 525
+05-11-2017:14:21:02,675 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:04,144 INFO     [main.py:play_learning_agent:31] Episode 112 ended with score: 1375
+05-11-2017:14:21:06,616 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:07,21 INFO     [main.py:play_learning_agent:31] Episode 113 ended with score: 1075
+05-11-2017:14:21:08,619 INFO     [main.py:play_learning_agent:31] Episode 114 ended with score: 500
+05-11-2017:14:21:10,194 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:11,221 INFO     [main.py:play_learning_agent:31] Episode 115 ended with score: 1100
+05-11-2017:14:21:13,575 INFO     [main.py:play_learning_agent:31] Episode 116 ended with score: 550
+05-11-2017:14:21:14,412 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:15,841 INFO     [main.py:play_learning_agent:31] Episode 117 ended with score: 1100
+05-11-2017:14:21:17,289 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:18,513 INFO     [main.py:play_learning_agent:31] Episode 118 ended with score: 1375
+05-11-2017:14:21:20,831 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:21:20,831 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:21:21,354 INFO     [main.py:play_learning_agent:31] Episode 119 ended with score: 4300
+05-11-2017:14:21:22,795 INFO     [main.py:play_learning_agent:31] Episode 120 ended with score: 725
+05-11-2017:14:21:24,938 INFO     [main.py:play_learning_agent:31] Episode 121 ended with score: 650
+05-11-2017:14:21:27,617 INFO     [main.py:play_learning_agent:31] Episode 122 ended with score: 800
+05-11-2017:14:21:29,18 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:30,465 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:21:30,465 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:21:30,846 INFO     [main.py:play_learning_agent:31] Episode 123 ended with score: 4325
+05-11-2017:14:21:31,404 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:34,170 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:21:34,170 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:21:35,637 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:36,743 INFO     [main.py:play_learning_agent:31] Episode 124 ended with score: 5200
+05-11-2017:14:21:39,348 INFO     [main.py:play_learning_agent:31] Episode 125 ended with score: 850
+05-11-2017:14:21:41,83 INFO     [main.py:play_learning_agent:31] Episode 126 ended with score: 725
+05-11-2017:14:21:43,363 INFO     [main.py:play_learning_agent:31] Episode 127 ended with score: 875
+05-11-2017:14:21:45,381 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:45,713 INFO     [main.py:play_learning_agent:31] Episode 128 ended with score: 1250
+05-11-2017:14:21:48,306 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:21:48,307 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:21:48,566 INFO     [main.py:play_learning_agent:31] Episode 129 ended with score: 4150
+05-11-2017:14:21:50,31 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:51,42 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:21:51,42 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:21:51,603 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:52,282 INFO     [main.py:play_learning_agent:31] Episode 130 ended with score: 5525
+05-11-2017:14:21:54,52 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:21:54,598 INFO     [main.py:play_learning_agent:31] Episode 131 ended with score: 1400
+05-11-2017:14:21:57,971 INFO     [main.py:play_learning_agent:31] Episode 132 ended with score: 925
+05-11-2017:14:21:59,662 INFO     [main.py:play_learning_agent:31] Episode 133 ended with score: 750
+05-11-2017:14:22:01,304 INFO     [main.py:play_learning_agent:31] Episode 134 ended with score: 700
+05-11-2017:14:22:03,64 INFO     [main.py:play_learning_agent:31] Episode 135 ended with score: 700
+05-11-2017:14:22:03,533 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:22:05,471 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:22:06,97 INFO     [main.py:play_learning_agent:31] Episode 136 ended with score: 1475
+05-11-2017:14:22:06,873 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:22:09,245 INFO     [main.py:play_learning_agent:31] Episode 137 ended with score: 1375
+05-11-2017:14:22:11,325 INFO     [main.py:play_learning_agent:31] Episode 138 ended with score: 725
+05-11-2017:14:22:13,706 INFO     [main.py:play_learning_agent:31] Episode 139 ended with score: 750
+05-11-2017:14:22:15,496 INFO     [main.py:play_learning_agent:31] Episode 140 ended with score: 375
+05-11-2017:14:22:17,856 INFO     [main.py:play_learning_agent:31] Episode 141 ended with score: 550
+05-11-2017:14:22:19,181 INFO     [main.py:play_learning_agent:31] Episode 142 ended with score: 750
+05-11-2017:14:22:20,748 INFO     [main.py:play_learning_agent:31] Episode 143 ended with score: 750
+05-11-2017:14:22:22,118 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:22:23,161 INFO     [main.py:play_learning_agent:31] Episode 144 ended with score: 1050
+05-11-2017:14:22:24,987 INFO     [main.py:play_learning_agent:31] Episode 145 ended with score: 975
+05-11-2017:14:22:26,494 INFO     [main.py:play_learning_agent:31] Episode 146 ended with score: 350
+05-11-2017:14:22:28,248 INFO     [main.py:play_learning_agent:31] Episode 147 ended with score: 650
+05-11-2017:14:22:29,742 INFO     [main.py:play_learning_agent:31] Episode 148 ended with score: 725
+05-11-2017:14:22:31,701 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:22:32,468 INFO     [main.py:play_learning_agent:31] Episode 149 ended with score: 1025
+05-11-2017:14:22:34,102 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:22:34,775 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:22:34,775 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:22:35,828 INFO     [main.py:play_learning_agent:31] Episode 150 ended with score: 4875
+05-11-2017:14:22:38,406 INFO     [main.py:play_learning_agent:31] Episode 151 ended with score: 825
+05-11-2017:14:22:39,800 INFO     [main.py:play_learning_agent:31] Episode 152 ended with score: 625
+05-11-2017:14:22:40,316 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:22:43,227 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:22:43,227 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:22:44,62 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:22:44,939 INFO     [main.py:play_learning_agent:31] Episode 153 ended with score: 5700
+05-11-2017:14:22:45,851 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:22:47,410 INFO     [main.py:play_learning_agent:31] Episode 154 ended with score: 1425
+05-11-2017:14:22:49,834 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:22:49,834 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:22:50,475 INFO     [main.py:play_learning_agent:31] Episode 155 ended with score: 4525
+05-11-2017:14:22:51,999 INFO     [main.py:play_learning_agent:31] Episode 156 ended with score: 650
+05-11-2017:14:22:53,904 INFO     [main.py:play_learning_agent:31] Episode 157 ended with score: 450
+05-11-2017:14:22:56,79 INFO     [main.py:play_learning_agent:31] Episode 158 ended with score: 750
+05-11-2017:14:22:58,638 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:22:58,638 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:22:59,34 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:23:00,47 INFO     [main.py:play_learning_agent:31] Episode 159 ended with score: 4675
+05-11-2017:14:23:02,363 INFO     [main.py:play_learning_agent:31] Episode 160 ended with score: 425
+05-11-2017:14:23:03,652 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:23:04,502 INFO     [main.py:play_learning_agent:31] Episode 161 ended with score: 950
+05-11-2017:14:23:05,120 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:23:07,952 INFO     [main.py:play_learning_agent:31] Episode 162 ended with score: 1300
+05-11-2017:14:23:10,269 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:23:11,373 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:23:11,373 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:23:11,691 INFO     [main.py:play_learning_agent:31] Episode 163 ended with score: 4625
+05-11-2017:14:23:13,136 INFO     [main.py:play_learning_agent:31] Episode 164 ended with score: 775
+05-11-2017:14:23:14,819 INFO     [main.py:play_learning_agent:31] Episode 165 ended with score: 750
+05-11-2017:14:23:16,436 INFO     [main.py:play_learning_agent:31] Episode 166 ended with score: 525
+05-11-2017:14:23:17,861 INFO     [main.py:play_learning_agent:31] Episode 167 ended with score: 775
+05-11-2017:14:23:20,301 INFO     [main.py:play_learning_agent:31] Episode 168 ended with score: 800
+05-11-2017:14:23:23,491 INFO     [main.py:play_learning_agent:31] Episode 169 ended with score: 500
+05-11-2017:14:23:25,797 INFO     [main.py:play_learning_agent:31] Episode 170 ended with score: 550
+05-11-2017:14:23:28,447 INFO     [main.py:play_learning_agent:31] Episode 171 ended with score: 550
+05-11-2017:14:23:31,33 INFO     [main.py:play_learning_agent:31] Episode 172 ended with score: 775
+05-11-2017:14:23:32,943 INFO     [main.py:play_learning_agent:31] Episode 173 ended with score: 700
+05-11-2017:14:23:35,227 INFO     [main.py:play_learning_agent:31] Episode 174 ended with score: 750
+05-11-2017:14:23:38,106 INFO     [main.py:play_learning_agent:31] Episode 175 ended with score: 775
+05-11-2017:14:23:39,820 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:23:40,456 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:23:41,24 INFO     [main.py:play_learning_agent:31] Episode 176 ended with score: 1800
+05-11-2017:14:23:43,461 INFO     [main.py:play_learning_agent:31] Episode 177 ended with score: 475
+05-11-2017:14:23:44,380 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:23:45,716 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:23:45,716 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:23:46,834 INFO     [main.py:play_learning_agent:31] Episode 178 ended with score: 4925
+05-11-2017:14:23:47,984 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:23:48,555 INFO     [main.py:play_learning_agent:31] Episode 179 ended with score: 1200
+05-11-2017:14:23:49,50 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:23:51,94 INFO     [main.py:play_learning_agent:31] Episode 180 ended with score: 1250
+05-11-2017:14:23:53,472 INFO     [main.py:play_learning_agent:31] Episode 181 ended with score: 825
+05-11-2017:14:23:55,62 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:23:56,414 INFO     [main.py:play_learning_agent:31] Episode 182 ended with score: 1325
+05-11-2017:14:23:57,706 INFO     [main.py:play_learning_agent:31] Episode 183 ended with score: 650
+05-11-2017:14:24:00,51 INFO     [main.py:play_learning_agent:31] Episode 184 ended with score: 825
+05-11-2017:14:24:00,486 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:01,741 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:24:01,742 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:24:02,260 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:03,912 INFO     [main.py:play_learning_agent:31] Episode 185 ended with score: 5400
+05-11-2017:14:24:05,349 INFO     [main.py:play_learning_agent:31] Episode 186 ended with score: 625
+05-11-2017:14:24:06,207 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:07,873 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:09,836 INFO     [main.py:play_learning_agent:31] Episode 187 ended with score: 1925
+05-11-2017:14:24:10,880 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:12,145 INFO     [main.py:play_learning_agent:31] Episode 188 ended with score: 1250
+05-11-2017:14:24:14,66 INFO     [main.py:play_learning_agent:31] Episode 189 ended with score: 825
+05-11-2017:14:24:15,631 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:15,928 INFO     [main.py:play_learning_agent:31] Episode 190 ended with score: 925
+05-11-2017:14:24:18,804 INFO     [main.py:play_learning_agent:31] Episode 191 ended with score: 550
+05-11-2017:14:24:19,801 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:21,662 INFO     [main.py:play_learning_agent:31] Episode 192 ended with score: 1000
+05-11-2017:14:24:22,607 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:24,462 INFO     [main.py:play_learning_agent:31] Episode 193 ended with score: 1425
+05-11-2017:14:24:24,947 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:26,645 INFO     [main.py:play_learning_agent:31] Episode 194 ended with score: 1225
+05-11-2017:14:24:27,627 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:29,400 INFO     [main.py:play_learning_agent:31] Episode 195 ended with score: 1225
+05-11-2017:14:24:30,853 INFO     [main.py:play_learning_agent:31] Episode 196 ended with score: 675
+05-11-2017:14:24:31,380 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:31,937 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:33,566 INFO     [main.py:play_learning_agent:31] Episode 197 ended with score: 1500
+05-11-2017:14:24:36,403 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:24:36,403 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:24:36,848 INFO     [main.py:play_learning_agent:31] Episode 198 ended with score: 4200
+05-11-2017:14:24:38,337 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:40,186 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:24:40,186 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:24:40,807 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:24:41,224 INFO     [main.py:play_learning_agent:31] Episode 199 ended with score: 5700
+05-11-2017:14:24:43,218 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:24:43,218 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:24:43,853 INFO     [main.py:play_learning_agent:31] Episode 200 ended with score: 4300
+05-11-2017:14:24:45,725 INFO     [main.py:play_learning_agent:31] Episode 201 ended with score: 500
+05-11-2017:14:24:48,306 INFO     [main.py:play_learning_agent:31] Episode 202 ended with score: 500
+05-11-2017:14:24:51,407 INFO     [main.py:play_learning_agent:31] Episode 203 ended with score: 775
+05-11-2017:14:24:53,941 INFO     [main.py:play_learning_agent:31] Episode 204 ended with score: 800
+05-11-2017:14:24:55,448 INFO     [main.py:play_learning_agent:31] Episode 205 ended with score: 400
+05-11-2017:14:24:57,277 INFO     [main.py:play_learning_agent:31] Episode 206 ended with score: 475
+05-11-2017:14:24:59,164 INFO     [main.py:play_learning_agent:31] Episode 207 ended with score: 825
+05-11-2017:14:25:00,380 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:25:01,632 INFO     [main.py:play_learning_agent:31] Episode 208 ended with score: 1000
+05-11-2017:14:25:03,229 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:25:03,975 INFO     [main.py:play_learning_agent:31] Episode 209 ended with score: 1375
+05-11-2017:14:25:05,779 INFO     [main.py:play_learning_agent:31] Episode 210 ended with score: 425
+05-11-2017:14:25:08,590 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:25:08,590 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:25:09,253 INFO     [main.py:play_learning_agent:31] Episode 211 ended with score: 4575
+05-11-2017:14:25:10,824 INFO     [main.py:play_learning_agent:31] Episode 212 ended with score: 500
+05-11-2017:14:25:13,105 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:25:13,552 INFO     [main.py:play_learning_agent:31] Episode 213 ended with score: 1300
+05-11-2017:14:25:15,274 INFO     [main.py:play_learning_agent:31] Episode 214 ended with score: 750
+05-11-2017:14:25:15,976 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:25:17,914 INFO     [main.py:play_learning_agent:31] Episode 215 ended with score: 875
+05-11-2017:14:25:20,417 INFO     [main.py:play_learning_agent:31] Episode 216 ended with score: 375
+05-11-2017:14:25:22,343 INFO     [main.py:play_learning_agent:31] Episode 217 ended with score: 750
+05-11-2017:14:25:22,901 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:25:25,147 INFO     [main.py:play_learning_agent:31] Episode 218 ended with score: 1025
+05-11-2017:14:25:26,877 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:25:27,884 INFO     [main.py:play_learning_agent:31] Episode 219 ended with score: 975
+05-11-2017:14:25:30,329 INFO     [main.py:play_learning_agent:31] Episode 220 ended with score: 575
+05-11-2017:14:25:31,598 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:25:33,742 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:25:33,742 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:25:34,303 INFO     [main.py:play_learning_agent:31] Episode 221 ended with score: 4675
+05-11-2017:14:25:37,404 INFO     [main.py:play_learning_agent:31] Episode 222 ended with score: 625
+05-11-2017:14:25:38,906 INFO     [main.py:play_learning_agent:31] Episode 223 ended with score: 675
+05-11-2017:14:25:39,334 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:25:41,410 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:25:41,884 INFO     [main.py:play_learning_agent:31] Episode 224 ended with score: 1800
+05-11-2017:14:25:42,371 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:25:44,649 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:25:44,649 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:25:45,691 INFO     [main.py:play_learning_agent:31] Episode 225 ended with score: 4775
+05-11-2017:14:25:47,939 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:25:47,939 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:25:48,238 INFO     [main.py:play_learning_agent:31] Episode 226 ended with score: 4175
+05-11-2017:14:25:50,254 INFO     [main.py:play_learning_agent:31] Episode 227 ended with score: 775
+05-11-2017:14:25:52,200 INFO     [main.py:play_learning_agent:31] Episode 228 ended with score: 775
+05-11-2017:14:25:54,315 INFO     [main.py:play_learning_agent:31] Episode 229 ended with score: 850
+05-11-2017:14:25:57,109 INFO     [main.py:play_learning_agent:31] Episode 230 ended with score: 625
+05-11-2017:14:25:59,564 INFO     [main.py:play_learning_agent:31] Episode 231 ended with score: 550
+05-11-2017:14:26:01,59 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:02,194 INFO     [main.py:play_learning_agent:31] Episode 232 ended with score: 1000
+05-11-2017:14:26:02,800 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:05,525 INFO     [main.py:play_learning_agent:31] Episode 233 ended with score: 1150
+05-11-2017:14:26:06,76 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:08,61 INFO     [main.py:play_learning_agent:31] Episode 234 ended with score: 1250
+05-11-2017:14:26:10,107 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:26:10,107 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:26:11,370 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:11,607 INFO     [main.py:play_learning_agent:31] Episode 235 ended with score: 4700
+05-11-2017:14:26:13,631 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:26:13,631 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:26:14,578 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:15,135 INFO     [main.py:play_learning_agent:31] Episode 236 ended with score: 4875
+05-11-2017:14:26:16,651 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:17,985 INFO     [main.py:play_learning_agent:31] Episode 237 ended with score: 1050
+05-11-2017:14:26:19,833 INFO     [main.py:play_learning_agent:31] Episode 238 ended with score: 450
+05-11-2017:14:26:21,3 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:22,429 INFO     [main.py:play_learning_agent:31] Episode 239 ended with score: 1325
+05-11-2017:14:26:24,664 INFO     [main.py:play_learning_agent:31] Episode 240 ended with score: 850
+05-11-2017:14:26:26,904 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:28,616 INFO     [main.py:play_learning_agent:31] Episode 241 ended with score: 1200
+05-11-2017:14:26:30,323 INFO     [main.py:play_learning_agent:31] Episode 242 ended with score: 850
+05-11-2017:14:26:31,639 INFO     [main.py:play_learning_agent:31] Episode 243 ended with score: 675
+05-11-2017:14:26:34,391 INFO     [main.py:play_learning_agent:31] Episode 244 ended with score: 775
+05-11-2017:14:26:36,2 INFO     [main.py:play_learning_agent:31] Episode 245 ended with score: 675
+05-11-2017:14:26:38,355 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:38,816 INFO     [main.py:play_learning_agent:31] Episode 246 ended with score: 1400
+05-11-2017:14:26:41,503 INFO     [main.py:play_learning_agent:31] Episode 247 ended with score: 825
+05-11-2017:14:26:44,87 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:44,295 INFO     [main.py:play_learning_agent:31] Episode 248 ended with score: 1225
+05-11-2017:14:26:46,612 INFO     [main.py:play_learning_agent:31] Episode 249 ended with score: 725
+05-11-2017:14:26:48,830 INFO     [main.py:play_learning_agent:31] Episode 250 ended with score: 825
+05-11-2017:14:26:51,426 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:26:51,426 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:26:52,217 INFO     [main.py:play_learning_agent:31] Episode 251 ended with score: 4375
+05-11-2017:14:26:53,694 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:26:54,653 INFO     [main.py:play_learning_agent:31] Episode 252 ended with score: 1250
+05-11-2017:14:26:56,680 INFO     [main.py:play_learning_agent:31] Episode 253 ended with score: 750
+05-11-2017:14:26:58,162 INFO     [main.py:play_learning_agent:31] Episode 254 ended with score: 775
+05-11-2017:14:26:59,156 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:00,536 INFO     [main.py:play_learning_agent:31] Episode 255 ended with score: 1300
+05-11-2017:14:27:03,79 INFO     [main.py:play_learning_agent:31] Episode 256 ended with score: 925
+05-11-2017:14:27:04,339 INFO     [main.py:play_learning_agent:31] Episode 257 ended with score: 475
+05-11-2017:14:27:05,264 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:06,367 INFO     [main.py:play_learning_agent:31] Episode 258 ended with score: 1275
+05-11-2017:14:27:09,82 INFO     [main.py:play_learning_agent:31] Episode 259 ended with score: 850
+05-11-2017:14:27:11,115 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:11,761 INFO     [main.py:play_learning_agent:31] Episode 260 ended with score: 1000
+05-11-2017:14:27:13,511 INFO     [main.py:play_learning_agent:31] Episode 261 ended with score: 625
+05-11-2017:14:27:14,380 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:16,42 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:27:16,42 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:27:16,293 INFO     [main.py:play_learning_agent:31] Episode 262 ended with score: 4750
+05-11-2017:14:27:17,394 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:19,874 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:20,455 INFO     [main.py:play_learning_agent:31] Episode 263 ended with score: 1675
+05-11-2017:14:27:23,32 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:27:23,32 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:27:23,476 INFO     [main.py:play_learning_agent:31] Episode 264 ended with score: 4300
+05-11-2017:14:27:25,792 INFO     [main.py:play_learning_agent:31] Episode 265 ended with score: 775
+05-11-2017:14:27:26,301 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:27,66 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:29,810 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:27:29,810 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:27:30,289 INFO     [main.py:play_learning_agent:31] Episode 266 ended with score: 4900
+05-11-2017:14:27:33,161 INFO     [main.py:play_learning_agent:31] Episode 267 ended with score: 925
+05-11-2017:14:27:35,585 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:35,912 INFO     [main.py:play_learning_agent:31] Episode 268 ended with score: 1150
+05-11-2017:14:27:37,795 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:38,463 INFO     [main.py:play_learning_agent:31] Episode 269 ended with score: 1000
+05-11-2017:14:27:40,877 INFO     [main.py:play_learning_agent:31] Episode 270 ended with score: 725
+05-11-2017:14:27:41,621 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:43,562 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:27:43,562 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:27:44,319 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:44,742 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:45,884 INFO     [main.py:play_learning_agent:31] Episode 271 ended with score: 6200
+05-11-2017:14:27:48,260 INFO     [main.py:play_learning_agent:31] Episode 272 ended with score: 725
+05-11-2017:14:27:50,348 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:51,815 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:27:51,815 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:27:52,413 INFO     [main.py:play_learning_agent:31] Episode 273 ended with score: 4725
+05-11-2017:14:27:53,207 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:54,616 INFO     [main.py:play_learning_agent:31] Episode 274 ended with score: 950
+05-11-2017:14:27:57,401 INFO     [main.py:play_learning_agent:31] Episode 275 ended with score: 725
+05-11-2017:14:27:58,698 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:27:59,689 INFO     [main.py:play_learning_agent:31] Episode 276 ended with score: 1450
+05-11-2017:14:28:01,441 INFO     [main.py:play_learning_agent:31] Episode 277 ended with score: 675
+05-11-2017:14:28:02,959 INFO     [main.py:play_learning_agent:31] Episode 278 ended with score: 550
+05-11-2017:14:28:03,860 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:05,405 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:06,94 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:28:06,94 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:28:06,579 INFO     [main.py:play_learning_agent:31] Episode 279 ended with score: 5175
+05-11-2017:14:28:08,732 INFO     [main.py:play_learning_agent:31] Episode 280 ended with score: 700
+05-11-2017:14:28:11,132 INFO     [main.py:play_learning_agent:31] Episode 281 ended with score: 600
+05-11-2017:14:28:12,873 INFO     [main.py:play_learning_agent:31] Episode 282 ended with score: 475
+05-11-2017:14:28:14,660 INFO     [main.py:play_learning_agent:31] Episode 283 ended with score: 725
+05-11-2017:14:28:17,434 INFO     [main.py:play_learning_agent:31] Episode 284 ended with score: 550
+05-11-2017:14:28:19,495 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:28:19,495 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:28:20,121 INFO     [main.py:play_learning_agent:31] Episode 285 ended with score: 4275
+05-11-2017:14:28:22,158 INFO     [main.py:play_learning_agent:31] Episode 286 ended with score: 350
+05-11-2017:14:28:24,222 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:24,563 INFO     [main.py:play_learning_agent:31] Episode 287 ended with score: 1350
+05-11-2017:14:28:26,996 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:27,772 INFO     [main.py:play_learning_agent:31] Episode 288 ended with score: 1425
+05-11-2017:14:28:30,264 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:31,11 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:28:31,11 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:28:31,369 INFO     [main.py:play_learning_agent:31] Episode 289 ended with score: 4400
+05-11-2017:14:28:32,842 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:34,878 INFO     [main.py:play_learning_agent:31] Episode 290 ended with score: 1275
+05-11-2017:14:28:36,818 INFO     [main.py:play_learning_agent:31] Episode 291 ended with score: 400
+05-11-2017:14:28:37,857 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:40,335 INFO     [main.py:play_learning_agent:31] Episode 292 ended with score: 950
+05-11-2017:14:28:41,861 INFO     [main.py:play_learning_agent:31] Episode 293 ended with score: 450
+05-11-2017:14:28:44,43 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:28:44,43 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:28:44,529 INFO     [main.py:play_learning_agent:31] Episode 294 ended with score: 3875
+05-11-2017:14:28:45,454 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:45,988 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:46,708 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:28:46,708 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:28:47,853 INFO     [main.py:play_learning_agent:31] Episode 295 ended with score: 5350
+05-11-2017:14:28:49,600 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:50,263 INFO     [main.py:play_learning_agent:31] Episode 296 ended with score: 975
+05-11-2017:14:28:52,81 INFO     [main.py:play_learning_agent:31] Episode 297 ended with score: 750
+05-11-2017:14:28:53,879 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:28:54,38 INFO     [main.py:play_learning_agent:31] Episode 298 ended with score: 1200
+05-11-2017:14:28:55,779 INFO     [main.py:play_learning_agent:31] Episode 299 ended with score: 700
+05-11-2017:14:28:57,996 INFO     [main.py:play_learning_agent:31] Episode 300 ended with score: 550
+05-11-2017:14:28:59,667 INFO     [main.py:play_learning_agent:31] Episode 301 ended with score: 775
+05-11-2017:14:29:01,286 INFO     [main.py:play_learning_agent:31] Episode 302 ended with score: 700
+05-11-2017:14:29:01,798 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:03,409 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:29:03,409 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:29:04,400 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:04,735 INFO     [main.py:play_learning_agent:31] Episode 303 ended with score: 5475
+05-11-2017:14:29:06,694 INFO     [main.py:play_learning_agent:31] Episode 304 ended with score: 725
+05-11-2017:14:29:07,698 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:08,720 INFO     [main.py:play_learning_agent:31] Episode 305 ended with score: 1250
+05-11-2017:14:29:09,429 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:11,273 INFO     [main.py:play_learning_agent:31] Episode 306 ended with score: 925
+05-11-2017:14:29:12,350 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:14,318 INFO     [main.py:play_learning_agent:31] Episode 307 ended with score: 1275
+05-11-2017:14:29:16,470 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:29:16,470 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:29:16,675 INFO     [main.py:play_learning_agent:31] Episode 308 ended with score: 4075
+05-11-2017:14:29:17,159 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:19,55 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:19,368 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:29:19,368 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:29:20,433 INFO     [main.py:play_learning_agent:31] Episode 309 ended with score: 5400
+05-11-2017:14:29:21,477 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:23,24 INFO     [main.py:play_learning_agent:31] Episode 310 ended with score: 1350
+05-11-2017:14:29:23,570 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:25,490 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:29:25,490 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:29:26,39 INFO     [main.py:play_learning_agent:31] Episode 311 ended with score: 4350
+05-11-2017:14:29:28,44 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:28,841 INFO     [main.py:play_learning_agent:31] Episode 312 ended with score: 975
+05-11-2017:14:29:30,326 INFO     [main.py:play_learning_agent:31] Episode 313 ended with score: 425
+05-11-2017:14:29:30,858 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:32,325 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:29:32,325 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:29:33,303 INFO     [main.py:play_learning_agent:31] Episode 314 ended with score: 4475
+05-11-2017:14:29:35,56 INFO     [main.py:play_learning_agent:31] Episode 315 ended with score: 450
+05-11-2017:14:29:36,742 INFO     [main.py:play_learning_agent:31] Episode 316 ended with score: 525
+05-11-2017:14:29:38,949 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:29:38,950 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:29:39,247 INFO     [main.py:play_learning_agent:31] Episode 317 ended with score: 4250
+05-11-2017:14:29:39,900 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:42,554 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:29:42,554 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:29:42,756 INFO     [main.py:play_learning_agent:31] Episode 318 ended with score: 4250
+05-11-2017:14:29:44,876 INFO     [main.py:play_learning_agent:31] Episode 319 ended with score: 650
+05-11-2017:14:29:47,329 INFO     [main.py:play_learning_agent:31] Episode 320 ended with score: 875
+05-11-2017:14:29:49,331 INFO     [main.py:play_learning_agent:31] Episode 321 ended with score: 775
+05-11-2017:14:29:51,561 INFO     [main.py:play_learning_agent:31] Episode 322 ended with score: 550
+05-11-2017:14:29:53,231 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:53,899 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:29:53,899 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:29:54,487 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:54,611 INFO     [main.py:play_learning_agent:31] Episode 323 ended with score: 5375
+05-11-2017:14:29:56,254 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:56,824 INFO     [main.py:play_learning_agent:31] Episode 324 ended with score: 1000
+05-11-2017:14:29:59,181 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:29:59,299 INFO     [main.py:play_learning_agent:31] Episode 325 ended with score: 1350
+05-11-2017:14:30:00,895 INFO     [main.py:play_learning_agent:31] Episode 326 ended with score: 700
+05-11-2017:14:30:03,700 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:30:03,700 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:30:04,500 INFO     [main.py:play_learning_agent:31] Episode 327 ended with score: 4675
+05-11-2017:14:30:05,885 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:06,903 INFO     [main.py:play_learning_agent:31] Episode 328 ended with score: 1050
+05-11-2017:14:30:07,392 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:09,547 INFO     [main.py:play_learning_agent:31] Episode 329 ended with score: 1050
+05-11-2017:14:30:10,334 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:11,756 INFO     [main.py:play_learning_agent:31] Episode 330 ended with score: 1350
+05-11-2017:14:30:12,692 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:13,980 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:14,224 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:30:14,224 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:30:15,337 INFO     [main.py:play_learning_agent:31] Episode 331 ended with score: 5100
+05-11-2017:14:30:17,120 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:17,668 INFO     [main.py:play_learning_agent:31] Episode 332 ended with score: 1100
+05-11-2017:14:30:18,673 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:19,212 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:21,874 INFO     [main.py:play_learning_agent:31] Episode 333 ended with score: 1525
+05-11-2017:14:30:23,816 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:30:23,816 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:30:24,811 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:26,560 INFO     [main.py:play_learning_agent:31] Episode 334 ended with score: 4725
+05-11-2017:14:30:28,133 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:29,672 INFO     [main.py:play_learning_agent:31] Episode 335 ended with score: 1025
+05-11-2017:14:30:31,63 INFO     [main.py:play_learning_agent:31] Episode 336 ended with score: 450
+05-11-2017:14:30:33,134 INFO     [main.py:play_learning_agent:31] Episode 337 ended with score: 525
+05-11-2017:14:30:35,820 INFO     [main.py:play_learning_agent:31] Episode 338 ended with score: 500
+05-11-2017:14:30:36,300 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:38,71 INFO     [main.py:play_learning_agent:31] Episode 339 ended with score: 1275
+05-11-2017:14:30:39,752 INFO     [main.py:play_learning_agent:31] Episode 340 ended with score: 775
+05-11-2017:14:30:41,317 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:41,566 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:30:41,566 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:30:42,397 INFO     [main.py:play_learning_agent:31] Episode 341 ended with score: 4825
+05-11-2017:14:30:44,28 INFO     [main.py:play_learning_agent:31] Episode 342 ended with score: 600
+05-11-2017:14:30:44,766 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:48,164 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:48,488 INFO     [main.py:play_learning_agent:31] Episode 343 ended with score: 1550
+05-11-2017:14:30:50,303 INFO     [main.py:play_learning_agent:31] Episode 344 ended with score: 475
+05-11-2017:14:30:52,66 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:30:53,260 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:30:53,260 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:30:53,944 INFO     [main.py:play_learning_agent:31] Episode 345 ended with score: 4700
+05-11-2017:14:30:56,24 INFO     [main.py:play_learning_agent:31] Episode 346 ended with score: 525
+05-11-2017:14:30:57,634 INFO     [main.py:play_learning_agent:31] Episode 347 ended with score: 675
+05-11-2017:14:30:59,369 INFO     [main.py:play_learning_agent:31] Episode 348 ended with score: 425
+05-11-2017:14:31:00,390 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:01,399 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:02,430 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:31:02,430 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:31:03,103 INFO     [main.py:play_learning_agent:31] Episode 349 ended with score: 5400
+05-11-2017:14:31:05,473 INFO     [main.py:play_learning_agent:31] Episode 350 ended with score: 575
+05-11-2017:14:31:07,194 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:08,176 INFO     [main.py:play_learning_agent:31] Episode 351 ended with score: 950
+05-11-2017:14:31:10,293 INFO     [main.py:play_learning_agent:31] Episode 352 ended with score: 750
+05-11-2017:14:31:12,411 INFO     [main.py:play_learning_agent:31] Episode 353 ended with score: 375
+05-11-2017:14:31:14,604 INFO     [main.py:play_learning_agent:31] Episode 354 ended with score: 875
+05-11-2017:14:31:16,42 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:16,377 INFO     [main.py:play_learning_agent:31] Episode 355 ended with score: 1250
+05-11-2017:14:31:17,481 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:19,5 INFO     [main.py:play_learning_agent:31] Episode 356 ended with score: 1000
+05-11-2017:14:31:21,120 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:22,868 INFO     [main.py:play_learning_agent:31] Episode 357 ended with score: 1025
+05-11-2017:14:31:25,173 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:25,699 INFO     [main.py:play_learning_agent:31] Episode 358 ended with score: 1225
+05-11-2017:14:31:27,986 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:28,233 INFO     [main.py:play_learning_agent:31] Episode 359 ended with score: 975
+05-11-2017:14:31:29,530 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:29,992 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:31:29,992 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:31:31,354 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:32,454 INFO     [main.py:play_learning_agent:31] Episode 360 ended with score: 5375
+05-11-2017:14:31:34,578 INFO     [main.py:play_learning_agent:31] Episode 361 ended with score: 875
+05-11-2017:14:31:36,369 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:37,45 INFO     [main.py:play_learning_agent:31] Episode 362 ended with score: 1300
+05-11-2017:14:31:37,533 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:39,359 INFO     [main.py:play_learning_agent:31] Episode 363 ended with score: 975
+05-11-2017:14:31:41,465 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:31:41,465 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:31:42,299 INFO     [main.py:play_learning_agent:31] Episode 364 ended with score: 4650
+05-11-2017:14:31:43,799 INFO     [main.py:play_learning_agent:31] Episode 365 ended with score: 650
+05-11-2017:14:31:45,547 INFO     [main.py:play_learning_agent:31] Episode 366 ended with score: 500
+05-11-2017:14:31:46,119 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:48,26 INFO     [main.py:play_learning_agent:31] Episode 367 ended with score: 1125
+05-11-2017:14:31:49,412 INFO     [main.py:play_learning_agent:31] Episode 368 ended with score: 325
+05-11-2017:14:31:49,993 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:50,738 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:52,543 INFO     [main.py:play_learning_agent:31] Episode 369 ended with score: 1500
+05-11-2017:14:31:53,42 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:54,237 INFO     [main.py:play_learning_agent:31] Episode 370 ended with score: 950
+05-11-2017:14:31:55,876 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:31:56,452 INFO     [main.py:play_learning_agent:31] Episode 371 ended with score: 1375
+05-11-2017:14:31:58,728 INFO     [main.py:play_learning_agent:31] Episode 372 ended with score: 850
+05-11-2017:14:32:00,184 INFO     [main.py:play_learning_agent:31] Episode 373 ended with score: 800
+05-11-2017:14:32:00,826 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:02,802 INFO     [main.py:play_learning_agent:31] Episode 374 ended with score: 1100
+05-11-2017:14:32:03,628 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:05,283 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:05,676 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:32:05,676 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:32:06,142 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:06,894 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:07,587 INFO     [main.py:play_learning_agent:31] Episode 375 ended with score: 6225
+05-11-2017:14:32:09,912 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:10,672 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:32:10,672 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:32:11,454 INFO     [main.py:play_learning_agent:31] Episode 376 ended with score: 5000
+05-11-2017:14:32:12,233 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:14,90 INFO     [main.py:play_learning_agent:31] Episode 377 ended with score: 1075
+05-11-2017:14:32:16,10 INFO     [main.py:play_learning_agent:31] Episode 378 ended with score: 650
+05-11-2017:14:32:18,78 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:18,736 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:32:18,736 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:32:19,164 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:19,377 INFO     [main.py:play_learning_agent:31] Episode 379 ended with score: 5025
+05-11-2017:14:32:20,672 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:22,154 INFO     [main.py:play_learning_agent:31] Episode 380 ended with score: 1300
+05-11-2017:14:32:22,590 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:24,926 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:32:24,926 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:32:25,32 INFO     [main.py:play_learning_agent:31] Episode 381 ended with score: 4600
+05-11-2017:14:32:25,742 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:27,59 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:27,545 INFO     [main.py:play_learning_agent:31] Episode 382 ended with score: 1500
+05-11-2017:14:32:28,433 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:30,548 INFO     [main.py:play_learning_agent:31] Episode 383 ended with score: 1450
+05-11-2017:14:32:33,3 INFO     [main.py:play_learning_agent:31] Episode 384 ended with score: 925
+05-11-2017:14:32:34,326 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:35,147 INFO     [main.py:play_learning_agent:31] Episode 385 ended with score: 1250
+05-11-2017:14:32:36,239 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:37,222 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:32:37,222 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:32:37,589 INFO     [main.py:play_learning_agent:31] Episode 386 ended with score: 4375
+05-11-2017:14:32:39,163 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:40,524 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:32:40,525 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:32:40,926 INFO     [main.py:play_learning_agent:31] Episode 387 ended with score: 4625
+05-11-2017:14:32:43,230 INFO     [main.py:play_learning_agent:31] Episode 388 ended with score: 625
+05-11-2017:14:32:43,896 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:45,843 INFO     [main.py:play_learning_agent:31] Episode 389 ended with score: 1250
+05-11-2017:14:32:46,680 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:48,332 INFO     [main.py:play_learning_agent:31] Episode 390 ended with score: 1025
+05-11-2017:14:32:50,57 INFO     [main.py:play_learning_agent:31] Episode 391 ended with score: 825
+05-11-2017:14:32:52,198 INFO     [main.py:play_learning_agent:31] Episode 392 ended with score: 475
+05-11-2017:14:32:53,571 INFO     [main.py:play_learning_agent:31] Episode 393 ended with score: 725
+05-11-2017:14:32:54,923 INFO     [main.py:play_learning_agent:31] Episode 394 ended with score: 825
+05-11-2017:14:32:57,681 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:32:58,123 INFO     [main.py:play_learning_agent:31] Episode 395 ended with score: 1400
+05-11-2017:14:33:00,109 INFO     [main.py:play_learning_agent:31] Episode 396 ended with score: 500
+05-11-2017:14:33:01,441 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:33:02,244 INFO     [main.py:play_learning_agent:31] Episode 397 ended with score: 975
+05-11-2017:14:33:05,110 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:33:05,110 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:33:05,895 INFO     [main.py:play_learning_agent:31] Episode 398 ended with score: 3975
+05-11-2017:14:33:08,481 INFO     [main.py:play_learning_agent:31] Episode 399 ended with score: 550
+05-11-2017:14:33:10,665 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:33:11,466 INFO     [main.py:play_learning_agent:31] Episode 400 ended with score: 950
+05-11-2017:14:33:13,429 INFO     [main.py:play_learning_agent:31] Episode 401 ended with score: 725
+05-11-2017:14:33:14,854 INFO     [main.py:play_learning_agent:31] Episode 402 ended with score: 725
+05-11-2017:14:33:16,596 INFO     [main.py:play_learning_agent:31] Episode 403 ended with score: 525
+05-11-2017:14:33:17,205 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:33:18,930 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:33:19,921 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:33:19,921 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:33:20,635 INFO     [main.py:play_learning_agent:31] Episode 404 ended with score: 5175
+05-11-2017:14:33:22,421 INFO     [main.py:play_learning_agent:31] Episode 405 ended with score: 475
+05-11-2017:14:33:24,348 INFO     [main.py:play_learning_agent:31] Episode 406 ended with score: 700
+05-11-2017:14:33:25,384 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:33:27,411 INFO     [main.py:play_learning_agent:31] Episode 407 ended with score: 1300
+05-11-2017:14:33:27,916 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:33:29,598 INFO     [main.py:play_learning_agent:31] Episode 408 ended with score: 1325
+05-11-2017:14:33:31,812 INFO     [main.py:play_learning_agent:31] Episode 409 ended with score: 525
+05-11-2017:14:33:33,346 INFO     [main.py:play_learning_agent:31] Episode 410 ended with score: 650
+05-11-2017:14:33:34,895 INFO     [main.py:play_learning_agent:31] Episode 411 ended with score: 450
+05-11-2017:14:33:37,555 INFO     [main.py:play_learning_agent:31] Episode 412 ended with score: 850
+05-11-2017:14:33:38,35 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:33:39,623 INFO     [main.py:play_learning_agent:31] Episode 413 ended with score: 1225
+05-11-2017:14:33:42,233 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:33:42,233 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:33:43,363 INFO     [main.py:play_learning_agent:31] Episode 414 ended with score: 4450
+05-11-2017:14:33:44,924 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:33:46,149 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:33:46,149 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:33:46,438 INFO     [main.py:play_learning_agent:31] Episode 415 ended with score: 4750
+05-11-2017:14:33:48,44 INFO     [main.py:play_learning_agent:31] Episode 416 ended with score: 525
+05-11-2017:14:33:50,409 INFO     [main.py:play_learning_agent:31] Episode 417 ended with score: 800
+05-11-2017:14:33:52,328 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:33:52,328 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:33:52,975 INFO     [main.py:play_learning_agent:31] Episode 418 ended with score: 3975
+05-11-2017:14:33:55,511 INFO     [main.py:play_learning_agent:31] Episode 419 ended with score: 650
+05-11-2017:14:33:57,255 INFO     [main.py:play_learning_agent:31] Episode 420 ended with score: 600
+05-11-2017:14:33:58,146 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:33:59,584 INFO     [main.py:play_learning_agent:31] Episode 421 ended with score: 1325
+05-11-2017:14:34:00,454 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:01,896 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:34:01,896 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:34:03,791 INFO     [main.py:play_learning_agent:31] Episode 422 ended with score: 4850
+05-11-2017:14:34:05,517 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:34:05,517 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:34:06,227 INFO     [main.py:play_learning_agent:31] Episode 423 ended with score: 4175
+05-11-2017:14:34:07,619 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:09,799 INFO     [main.py:play_learning_agent:31] Episode 424 ended with score: 1025
+05-11-2017:14:34:10,453 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:11,976 INFO     [main.py:play_learning_agent:31] Episode 425 ended with score: 1275
+05-11-2017:14:34:13,647 INFO     [main.py:play_learning_agent:31] Episode 426 ended with score: 675
+05-11-2017:14:34:15,156 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:17,499 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:34:17,499 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:34:17,918 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:19,85 INFO     [main.py:play_learning_agent:31] Episode 427 ended with score: 5550
+05-11-2017:14:34:21,147 INFO     [main.py:play_learning_agent:31] Episode 428 ended with score: 775
+05-11-2017:14:34:23,56 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:23,605 INFO     [main.py:play_learning_agent:31] Episode 429 ended with score: 1025
+05-11-2017:14:34:25,807 INFO     [main.py:play_learning_agent:31] Episode 430 ended with score: 725
+05-11-2017:14:34:28,757 INFO     [main.py:play_learning_agent:31] Episode 431 ended with score: 625
+05-11-2017:14:34:31,287 INFO     [main.py:play_learning_agent:31] Episode 432 ended with score: 800
+05-11-2017:14:34:32,898 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:34,735 INFO     [main.py:play_learning_agent:31] Episode 433 ended with score: 1125
+05-11-2017:14:34:36,484 INFO     [main.py:play_learning_agent:31] Episode 434 ended with score: 425
+05-11-2017:14:34:37,58 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:39,138 INFO     [main.py:play_learning_agent:31] Episode 435 ended with score: 1300
+05-11-2017:14:34:41,581 INFO     [main.py:play_learning_agent:31] Episode 436 ended with score: 425
+05-11-2017:14:34:42,504 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:44,239 INFO     [main.py:play_learning_agent:31] Episode 437 ended with score: 1250
+05-11-2017:14:34:45,682 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:46,235 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:46,588 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:34:46,588 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:34:48,552 INFO     [main.py:play_learning_agent:31] Episode 438 ended with score: 5725
+05-11-2017:14:34:50,752 INFO     [main.py:play_learning_agent:31] Episode 439 ended with score: 650
+05-11-2017:14:34:52,813 INFO     [main.py:play_learning_agent:31] Episode 440 ended with score: 500
+05-11-2017:14:34:53,281 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:34:55,860 INFO     [main.py:play_learning_agent:31] Episode 441 ended with score: 1400
+05-11-2017:14:34:58,262 INFO     [main.py:play_learning_agent:31] Episode 442 ended with score: 625
+05-11-2017:14:34:59,36 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:35:00,926 INFO     [main.py:play_learning_agent:31] Episode 443 ended with score: 925
+05-11-2017:14:35:02,204 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:35:03,718 INFO     [main.py:play_learning_agent:31] Episode 444 ended with score: 1300
+05-11-2017:14:35:05,638 INFO     [main.py:play_learning_agent:31] Episode 445 ended with score: 750
+05-11-2017:14:35:07,854 INFO     [main.py:play_learning_agent:31] Episode 446 ended with score: 500
+05-11-2017:14:35:09,62 INFO     [main.py:play_learning_agent:31] Episode 447 ended with score: 450
+05-11-2017:14:35:10,905 INFO     [main.py:play_learning_agent:31] Episode 448 ended with score: 750
+05-11-2017:14:35:13,505 INFO     [main.py:play_learning_agent:31] Episode 449 ended with score: 500
+05-11-2017:14:35:16,831 INFO     [main.py:play_learning_agent:31] Episode 450 ended with score: 800
+05-11-2017:14:35:19,347 INFO     [main.py:play_learning_agent:31] Episode 451 ended with score: 725
+05-11-2017:14:35:21,584 INFO     [main.py:play_learning_agent:31] Episode 452 ended with score: 775
+05-11-2017:14:35:22,117 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:35:25,88 INFO     [main.py:play_learning_agent:31] Episode 453 ended with score: 1275
+05-11-2017:14:35:27,400 INFO     [main.py:play_learning_agent:31] Episode 454 ended with score: 775
+05-11-2017:14:35:28,986 INFO     [main.py:play_learning_agent:31] Episode 455 ended with score: 625
+05-11-2017:14:35:31,782 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:35:31,782 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:35:33,44 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:35:33,966 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:35:34,714 INFO     [world.py:perform_action:475] Current level: 2
+05-11-2017:14:35:34,714 INFO     [world.py:perform_action:477] Level won! Progressing to level 3
+05-11-2017:14:35:35,700 INFO     [main.py:play_learning_agent:31] Episode 456 ended with score: 9825
+05-11-2017:14:35:37,557 INFO     [main.py:play_learning_agent:31] Episode 457 ended with score: 750
+05-11-2017:14:35:39,884 INFO     [main.py:play_learning_agent:31] Episode 458 ended with score: 700
+05-11-2017:14:35:41,272 INFO     [main.py:play_learning_agent:31] Episode 459 ended with score: 675
+05-11-2017:14:35:43,96 INFO     [main.py:play_learning_agent:31] Episode 460 ended with score: 675
+05-11-2017:14:35:44,686 INFO     [main.py:play_learning_agent:31] Episode 461 ended with score: 675
+05-11-2017:14:35:45,338 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:35:47,265 INFO     [main.py:play_learning_agent:31] Episode 462 ended with score: 1375
+05-11-2017:14:35:49,20 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:35:49,702 INFO     [main.py:play_learning_agent:31] Episode 463 ended with score: 1375
+05-11-2017:14:35:51,638 INFO     [main.py:play_learning_agent:31] Episode 464 ended with score: 775
+05-11-2017:14:35:53,71 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:35:54,394 INFO     [main.py:play_learning_agent:31] Episode 465 ended with score: 1100
+05-11-2017:14:35:56,141 INFO     [main.py:play_learning_agent:31] Episode 466 ended with score: 400
+05-11-2017:14:35:57,956 INFO     [main.py:play_learning_agent:31] Episode 467 ended with score: 400
+05-11-2017:14:35:59,100 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:01,489 INFO     [main.py:play_learning_agent:31] Episode 468 ended with score: 975
+05-11-2017:14:36:02,936 INFO     [main.py:play_learning_agent:31] Episode 469 ended with score: 725
+05-11-2017:14:36:05,62 INFO     [main.py:play_learning_agent:31] Episode 470 ended with score: 775
+05-11-2017:14:36:06,826 INFO     [main.py:play_learning_agent:31] Episode 471 ended with score: 525
+05-11-2017:14:36:08,13 INFO     [main.py:play_learning_agent:31] Episode 472 ended with score: 650
+05-11-2017:14:36:10,178 INFO     [main.py:play_learning_agent:31] Episode 473 ended with score: 675
+05-11-2017:14:36:13,906 INFO     [main.py:play_learning_agent:31] Episode 474 ended with score: 900
+05-11-2017:14:36:14,398 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:15,362 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:17,275 INFO     [main.py:play_learning_agent:31] Episode 475 ended with score: 1900
+05-11-2017:14:36:19,765 INFO     [main.py:play_learning_agent:31] Episode 476 ended with score: 775
+05-11-2017:14:36:21,476 INFO     [main.py:play_learning_agent:31] Episode 477 ended with score: 600
+05-11-2017:14:36:23,868 INFO     [main.py:play_learning_agent:31] Episode 478 ended with score: 925
+05-11-2017:14:36:24,493 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:25,825 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:36:25,825 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:36:27,208 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:27,751 INFO     [main.py:play_learning_agent:31] Episode 479 ended with score: 5775
+05-11-2017:14:36:29,400 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:30,152 INFO     [main.py:play_learning_agent:31] Episode 480 ended with score: 950
+05-11-2017:14:36:32,649 INFO     [main.py:play_learning_agent:31] Episode 481 ended with score: 850
+05-11-2017:14:36:35,231 INFO     [main.py:play_learning_agent:31] Episode 482 ended with score: 525
+05-11-2017:14:36:36,711 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:37,828 INFO     [main.py:play_learning_agent:31] Episode 483 ended with score: 1000
+05-11-2017:14:36:39,82 INFO     [main.py:play_learning_agent:31] Episode 484 ended with score: 425
+05-11-2017:14:36:40,669 INFO     [main.py:play_learning_agent:31] Episode 485 ended with score: 425
+05-11-2017:14:36:42,346 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:36:42,346 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:36:42,892 INFO     [main.py:play_learning_agent:31] Episode 486 ended with score: 4950
+05-11-2017:14:36:45,130 INFO     [main.py:play_learning_agent:31] Episode 487 ended with score: 800
+05-11-2017:14:36:46,372 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:47,945 INFO     [main.py:play_learning_agent:31] Episode 488 ended with score: 1125
+05-11-2017:14:36:50,538 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:51,347 INFO     [main.py:play_learning_agent:31] Episode 489 ended with score: 1050
+05-11-2017:14:36:51,865 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:53,728 INFO     [main.py:play_learning_agent:31] Episode 490 ended with score: 1250
+05-11-2017:14:36:54,858 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:36:56,957 INFO     [main.py:play_learning_agent:31] Episode 491 ended with score: 900
+05-11-2017:14:36:58,507 INFO     [main.py:play_learning_agent:31] Episode 492 ended with score: 625
+05-11-2017:14:37:00,491 INFO     [main.py:play_learning_agent:31] Episode 493 ended with score: 550
+05-11-2017:14:37:01,533 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:03,4 INFO     [main.py:play_learning_agent:31] Episode 494 ended with score: 950
+05-11-2017:14:37:03,831 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:04,424 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:06,7 INFO     [main.py:play_learning_agent:31] Episode 495 ended with score: 1900
+05-11-2017:14:37:08,511 INFO     [main.py:play_learning_agent:31] Episode 496 ended with score: 800
+05-11-2017:14:37:11,347 INFO     [main.py:play_learning_agent:31] Episode 497 ended with score: 750
+05-11-2017:14:37:13,408 INFO     [main.py:play_learning_agent:31] Episode 498 ended with score: 475
+05-11-2017:14:37:15,271 INFO     [main.py:play_learning_agent:31] Episode 499 ended with score: 775
+05-11-2017:14:37:17,92 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:37:17,92 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:37:17,619 INFO     [main.py:play_learning_agent:31] Episode 500 ended with score: 4300
+05-11-2017:14:37:20,552 INFO     [main.py:play_learning_agent:31] Episode 501 ended with score: 850
+05-11-2017:14:37:21,975 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:24,843 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:25,470 INFO     [main.py:play_learning_agent:31] Episode 502 ended with score: 2150
+05-11-2017:14:37:27,987 INFO     [main.py:play_learning_agent:31] Episode 503 ended with score: 650
+05-11-2017:14:37:30,167 INFO     [main.py:play_learning_agent:31] Episode 504 ended with score: 475
+05-11-2017:14:37:31,835 INFO     [main.py:play_learning_agent:31] Episode 505 ended with score: 725
+05-11-2017:14:37:32,555 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:34,587 INFO     [main.py:play_learning_agent:31] Episode 506 ended with score: 1125
+05-11-2017:14:37:36,454 INFO     [main.py:play_learning_agent:31] Episode 507 ended with score: 375
+05-11-2017:14:37:38,212 INFO     [main.py:play_learning_agent:31] Episode 508 ended with score: 500
+05-11-2017:14:37:38,838 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:39,638 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:41,159 INFO     [main.py:play_learning_agent:31] Episode 509 ended with score: 1775
+05-11-2017:14:37:42,893 INFO     [main.py:play_learning_agent:31] Episode 510 ended with score: 750
+05-11-2017:14:37:44,547 INFO     [main.py:play_learning_agent:31] Episode 511 ended with score: 650
+05-11-2017:14:37:46,244 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:47,384 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:37:47,384 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:37:47,956 INFO     [main.py:play_learning_agent:31] Episode 512 ended with score: 4650
+05-11-2017:14:37:48,936 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:50,140 INFO     [main.py:play_learning_agent:31] Episode 513 ended with score: 1275
+05-11-2017:14:37:51,146 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:52,895 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:37:52,895 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:37:53,351 INFO     [main.py:play_learning_agent:31] Episode 514 ended with score: 4375
+05-11-2017:14:37:55,602 INFO     [main.py:play_learning_agent:31] Episode 515 ended with score: 900
+05-11-2017:14:37:58,474 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:37:58,891 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:37:58,891 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:38:00,208 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:01,403 INFO     [main.py:play_learning_agent:31] Episode 516 ended with score: 5575
+05-11-2017:14:38:03,279 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:04,123 INFO     [main.py:play_learning_agent:31] Episode 517 ended with score: 1150
+05-11-2017:14:38:06,16 INFO     [main.py:play_learning_agent:31] Episode 518 ended with score: 500
+05-11-2017:14:38:06,511 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:08,485 INFO     [main.py:play_learning_agent:31] Episode 519 ended with score: 1350
+05-11-2017:14:38:10,901 INFO     [main.py:play_learning_agent:31] Episode 520 ended with score: 575
+05-11-2017:14:38:12,283 INFO     [main.py:play_learning_agent:31] Episode 521 ended with score: 425
+05-11-2017:14:38:13,893 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:14,741 INFO     [main.py:play_learning_agent:31] Episode 522 ended with score: 1250
+05-11-2017:14:38:16,221 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:38:16,221 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:38:17,853 INFO     [main.py:play_learning_agent:31] Episode 523 ended with score: 4450
+05-11-2017:14:38:19,185 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:20,393 INFO     [main.py:play_learning_agent:31] Episode 524 ended with score: 1325
+05-11-2017:14:38:22,682 INFO     [main.py:play_learning_agent:31] Episode 525 ended with score: 950
+05-11-2017:14:38:24,825 INFO     [main.py:play_learning_agent:31] Episode 526 ended with score: 750
+05-11-2017:14:38:26,474 INFO     [main.py:play_learning_agent:31] Episode 527 ended with score: 750
+05-11-2017:14:38:28,307 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:28,669 INFO     [main.py:play_learning_agent:31] Episode 528 ended with score: 1375
+05-11-2017:14:38:31,612 INFO     [main.py:play_learning_agent:31] Episode 529 ended with score: 875
+05-11-2017:14:38:34,173 INFO     [main.py:play_learning_agent:31] Episode 530 ended with score: 775
+05-11-2017:14:38:35,146 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:36,350 INFO     [main.py:play_learning_agent:31] Episode 531 ended with score: 925
+05-11-2017:14:38:38,59 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:38,849 INFO     [main.py:play_learning_agent:31] Episode 532 ended with score: 1275
+05-11-2017:14:38:40,558 INFO     [main.py:play_learning_agent:31] Episode 533 ended with score: 500
+05-11-2017:14:38:42,816 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:43,101 INFO     [main.py:play_learning_agent:31] Episode 534 ended with score: 975
+05-11-2017:14:38:44,666 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:45,393 INFO     [main.py:play_learning_agent:31] Episode 535 ended with score: 1375
+05-11-2017:14:38:46,868 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:48,37 INFO     [main.py:play_learning_agent:31] Episode 536 ended with score: 1425
+05-11-2017:14:38:49,919 INFO     [main.py:play_learning_agent:31] Episode 537 ended with score: 725
+05-11-2017:14:38:51,89 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:52,119 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:38:52,119 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:38:52,940 INFO     [main.py:play_learning_agent:31] Episode 538 ended with score: 4575
+05-11-2017:14:38:55,677 INFO     [main.py:play_learning_agent:31] Episode 539 ended with score: 625
+05-11-2017:14:38:57,904 INFO     [main.py:play_learning_agent:31] Episode 540 ended with score: 900
+05-11-2017:14:38:58,321 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:38:59,980 INFO     [main.py:play_learning_agent:31] Episode 541 ended with score: 1375
+05-11-2017:14:39:01,128 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:02,802 INFO     [main.py:play_learning_agent:31] Episode 542 ended with score: 1225
+05-11-2017:14:39:04,434 INFO     [main.py:play_learning_agent:31] Episode 543 ended with score: 725
+05-11-2017:14:39:06,865 INFO     [main.py:play_learning_agent:31] Episode 544 ended with score: 450
+05-11-2017:14:39:09,118 INFO     [main.py:play_learning_agent:31] Episode 545 ended with score: 825
+05-11-2017:14:39:10,852 INFO     [main.py:play_learning_agent:31] Episode 546 ended with score: 350
+05-11-2017:14:39:12,420 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:13,738 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:39:13,738 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:39:14,255 INFO     [main.py:play_learning_agent:31] Episode 547 ended with score: 4500
+05-11-2017:14:39:15,655 INFO     [main.py:play_learning_agent:31] Episode 548 ended with score: 350
+05-11-2017:14:39:17,384 INFO     [main.py:play_learning_agent:31] Episode 549 ended with score: 650
+05-11-2017:14:39:18,270 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:19,775 INFO     [main.py:play_learning_agent:31] Episode 550 ended with score: 1050
+05-11-2017:14:39:21,686 INFO     [main.py:play_learning_agent:31] Episode 551 ended with score: 725
+05-11-2017:14:39:24,1 INFO     [main.py:play_learning_agent:31] Episode 552 ended with score: 825
+05-11-2017:14:39:26,338 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:26,793 INFO     [main.py:play_learning_agent:31] Episode 553 ended with score: 1200
+05-11-2017:14:39:29,160 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:29,294 INFO     [main.py:play_learning_agent:31] Episode 554 ended with score: 1425
+05-11-2017:14:39:30,409 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:32,340 INFO     [main.py:play_learning_agent:31] Episode 555 ended with score: 1025
+05-11-2017:14:39:33,732 INFO     [main.py:play_learning_agent:31] Episode 556 ended with score: 300
+05-11-2017:14:39:36,121 INFO     [main.py:play_learning_agent:31] Episode 557 ended with score: 775
+05-11-2017:14:39:37,813 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:39,9 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:39:39,9 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:39:39,509 INFO     [main.py:play_learning_agent:31] Episode 558 ended with score: 4725
+05-11-2017:14:39:40,993 INFO     [main.py:play_learning_agent:31] Episode 559 ended with score: 775
+05-11-2017:14:39:42,557 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:43,139 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:43,413 INFO     [main.py:play_learning_agent:31] Episode 560 ended with score: 1550
+05-11-2017:14:39:44,755 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:46,45 INFO     [main.py:play_learning_agent:31] Episode 561 ended with score: 1225
+05-11-2017:14:39:47,965 INFO     [main.py:play_learning_agent:31] Episode 562 ended with score: 825
+05-11-2017:14:39:49,473 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:50,579 INFO     [main.py:play_learning_agent:31] Episode 563 ended with score: 1175
+05-11-2017:14:39:52,204 INFO     [main.py:play_learning_agent:31] Episode 564 ended with score: 700
+05-11-2017:14:39:55,335 INFO     [main.py:play_learning_agent:31] Episode 565 ended with score: 825
+05-11-2017:14:39:57,29 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:39:57,670 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:39:57,670 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:39:58,216 INFO     [main.py:play_learning_agent:31] Episode 566 ended with score: 4500
+05-11-2017:14:39:59,834 INFO     [main.py:play_learning_agent:31] Episode 567 ended with score: 275
+05-11-2017:14:40:00,677 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:01,797 INFO     [main.py:play_learning_agent:31] Episode 568 ended with score: 1025
+05-11-2017:14:40:03,89 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:03,782 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:04,781 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:40:04,782 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:40:06,989 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:07,458 INFO     [main.py:play_learning_agent:31] Episode 569 ended with score: 5900
+05-11-2017:14:40:09,265 INFO     [main.py:play_learning_agent:31] Episode 570 ended with score: 775
+05-11-2017:14:40:11,298 INFO     [main.py:play_learning_agent:31] Episode 571 ended with score: 500
+05-11-2017:14:40:13,480 INFO     [main.py:play_learning_agent:31] Episode 572 ended with score: 500
+05-11-2017:14:40:14,289 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:16,155 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:40:16,155 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:40:16,947 INFO     [main.py:play_learning_agent:31] Episode 573 ended with score: 5150
+05-11-2017:14:40:19,463 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:19,971 INFO     [main.py:play_learning_agent:31] Episode 574 ended with score: 1300
+05-11-2017:14:40:22,341 INFO     [main.py:play_learning_agent:31] Episode 575 ended with score: 750
+05-11-2017:14:40:22,872 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:24,581 INFO     [main.py:play_learning_agent:31] Episode 576 ended with score: 1250
+05-11-2017:14:40:26,516 INFO     [main.py:play_learning_agent:31] Episode 577 ended with score: 650
+05-11-2017:14:40:29,115 INFO     [main.py:play_learning_agent:31] Episode 578 ended with score: 500
+05-11-2017:14:40:30,614 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:31,693 INFO     [main.py:play_learning_agent:31] Episode 579 ended with score: 1300
+05-11-2017:14:40:34,370 INFO     [main.py:play_learning_agent:31] Episode 580 ended with score: 525
+05-11-2017:14:40:37,225 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:40:37,225 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:40:37,632 INFO     [main.py:play_learning_agent:31] Episode 581 ended with score: 3925
+05-11-2017:14:40:39,893 INFO     [main.py:play_learning_agent:31] Episode 582 ended with score: 850
+05-11-2017:14:40:41,792 INFO     [main.py:play_learning_agent:31] Episode 583 ended with score: 375
+05-11-2017:14:40:44,4 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:44,836 INFO     [main.py:play_learning_agent:31] Episode 584 ended with score: 1325
+05-11-2017:14:40:46,659 INFO     [main.py:play_learning_agent:31] Episode 585 ended with score: 475
+05-11-2017:14:40:47,205 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:49,98 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:40:49,98 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:40:49,603 INFO     [main.py:play_learning_agent:31] Episode 586 ended with score: 4750
+05-11-2017:14:40:50,337 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:52,349 INFO     [main.py:play_learning_agent:31] Episode 587 ended with score: 1400
+05-11-2017:14:40:54,167 INFO     [main.py:play_learning_agent:31] Episode 588 ended with score: 725
+05-11-2017:14:40:55,946 INFO     [main.py:play_learning_agent:31] Episode 589 ended with score: 475
+05-11-2017:14:40:57,543 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:40:58,148 INFO     [main.py:play_learning_agent:31] Episode 590 ended with score: 1150
+05-11-2017:14:40:59,183 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:00,361 INFO     [main.py:play_learning_agent:31] Episode 591 ended with score: 1175
+05-11-2017:14:41:02,583 INFO     [main.py:play_learning_agent:31] Episode 592 ended with score: 550
+05-11-2017:14:41:04,693 INFO     [main.py:play_learning_agent:31] Episode 593 ended with score: 725
+05-11-2017:14:41:06,909 INFO     [main.py:play_learning_agent:31] Episode 594 ended with score: 775
+05-11-2017:14:41:08,252 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:08,985 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:09,325 INFO     [main.py:play_learning_agent:31] Episode 595 ended with score: 1900
+05-11-2017:14:41:10,647 INFO     [main.py:play_learning_agent:31] Episode 596 ended with score: 600
+05-11-2017:14:41:12,302 INFO     [main.py:play_learning_agent:31] Episode 597 ended with score: 750
+05-11-2017:14:41:12,911 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:14,544 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:15,816 INFO     [main.py:play_learning_agent:31] Episode 598 ended with score: 1900
+05-11-2017:14:41:17,323 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:18,633 INFO     [main.py:play_learning_agent:31] Episode 599 ended with score: 1250
+05-11-2017:14:41:19,212 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:22,5 INFO     [main.py:play_learning_agent:31] Episode 600 ended with score: 1300
+05-11-2017:14:41:22,796 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:24,638 INFO     [main.py:play_learning_agent:31] Episode 601 ended with score: 1025
+05-11-2017:14:41:26,944 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:27,292 INFO     [main.py:play_learning_agent:31] Episode 602 ended with score: 1300
+05-11-2017:14:41:28,599 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:29,143 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:41:29,143 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:41:29,915 INFO     [main.py:play_learning_agent:31] Episode 603 ended with score: 4375
+05-11-2017:14:41:31,86 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:32,331 INFO     [main.py:play_learning_agent:31] Episode 604 ended with score: 1300
+05-11-2017:14:41:33,9 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:34,411 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:34,739 INFO     [main.py:play_learning_agent:31] Episode 605 ended with score: 1800
+05-11-2017:14:41:36,418 INFO     [main.py:play_learning_agent:31] Episode 606 ended with score: 775
+05-11-2017:14:41:39,201 INFO     [main.py:play_learning_agent:31] Episode 607 ended with score: 775
+05-11-2017:14:41:39,978 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:41,790 INFO     [main.py:play_learning_agent:31] Episode 608 ended with score: 1200
+05-11-2017:14:41:44,86 INFO     [main.py:play_learning_agent:31] Episode 609 ended with score: 800
+05-11-2017:14:41:45,666 INFO     [main.py:play_learning_agent:31] Episode 610 ended with score: 675
+05-11-2017:14:41:47,207 INFO     [main.py:play_learning_agent:31] Episode 611 ended with score: 400
+05-11-2017:14:41:48,855 INFO     [main.py:play_learning_agent:31] Episode 612 ended with score: 775
+05-11-2017:14:41:49,692 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:50,997 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:41:50,997 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:41:52,104 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:53,556 INFO     [main.py:play_learning_agent:31] Episode 613 ended with score: 5450
+05-11-2017:14:41:55,142 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:41:55,627 INFO     [main.py:play_learning_agent:31] Episode 614 ended with score: 1325
+05-11-2017:14:41:57,604 INFO     [main.py:play_learning_agent:31] Episode 615 ended with score: 675
+05-11-2017:14:41:58,259 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:00,149 INFO     [main.py:play_learning_agent:31] Episode 616 ended with score: 1000
+05-11-2017:14:42:02,878 INFO     [main.py:play_learning_agent:31] Episode 617 ended with score: 500
+05-11-2017:14:42:05,92 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:05,796 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:42:05,796 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:42:06,273 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:06,930 INFO     [main.py:play_learning_agent:31] Episode 618 ended with score: 5375
+05-11-2017:14:42:09,119 INFO     [main.py:play_learning_agent:31] Episode 619 ended with score: 725
+05-11-2017:14:42:10,843 INFO     [main.py:play_learning_agent:31] Episode 620 ended with score: 725
+05-11-2017:14:42:12,621 INFO     [main.py:play_learning_agent:31] Episode 621 ended with score: 400
+05-11-2017:14:42:14,829 INFO     [main.py:play_learning_agent:31] Episode 622 ended with score: 750
+05-11-2017:14:42:16,539 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:17,213 INFO     [main.py:play_learning_agent:31] Episode 623 ended with score: 1325
+05-11-2017:14:42:19,688 INFO     [main.py:play_learning_agent:31] Episode 624 ended with score: 875
+05-11-2017:14:42:21,288 INFO     [main.py:play_learning_agent:31] Episode 625 ended with score: 700
+05-11-2017:14:42:24,117 INFO     [main.py:play_learning_agent:31] Episode 626 ended with score: 650
+05-11-2017:14:42:25,328 INFO     [main.py:play_learning_agent:31] Episode 627 ended with score: 725
+05-11-2017:14:42:27,492 INFO     [main.py:play_learning_agent:31] Episode 628 ended with score: 725
+05-11-2017:14:42:28,12 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:29,591 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:42:29,591 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:42:30,227 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:30,831 INFO     [main.py:play_learning_agent:31] Episode 629 ended with score: 5475
+05-11-2017:14:42:32,902 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:42:32,902 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:42:34,75 INFO     [main.py:play_learning_agent:31] Episode 630 ended with score: 4625
+05-11-2017:14:42:36,711 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:37,333 INFO     [main.py:play_learning_agent:31] Episode 631 ended with score: 1025
+05-11-2017:14:42:40,166 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:40,490 INFO     [main.py:play_learning_agent:31] Episode 632 ended with score: 1275
+05-11-2017:14:42:42,846 INFO     [main.py:play_learning_agent:31] Episode 633 ended with score: 900
+05-11-2017:14:42:45,116 INFO     [main.py:play_learning_agent:31] Episode 634 ended with score: 700
+05-11-2017:14:42:45,769 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:47,763 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:42:47,763 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:42:48,617 INFO     [main.py:play_learning_agent:31] Episode 635 ended with score: 4450
+05-11-2017:14:42:50,781 INFO     [main.py:play_learning_agent:31] Episode 636 ended with score: 775
+05-11-2017:14:42:52,294 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:53,633 INFO     [main.py:play_learning_agent:31] Episode 637 ended with score: 1050
+05-11-2017:14:42:55,520 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:42:56,317 INFO     [main.py:play_learning_agent:31] Episode 638 ended with score: 1300
+05-11-2017:14:42:58,760 INFO     [main.py:play_learning_agent:31] Episode 639 ended with score: 900
+05-11-2017:14:43:01,259 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:43:01,259 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:43:01,937 INFO     [main.py:play_learning_agent:31] Episode 640 ended with score: 4250
+05-11-2017:14:43:03,801 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:04,297 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:43:04,297 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:43:05,247 INFO     [main.py:play_learning_agent:31] Episode 641 ended with score: 4975
+05-11-2017:14:43:05,817 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:07,24 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:08,117 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:43:08,117 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:43:08,447 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:09,340 INFO     [main.py:play_learning_agent:31] Episode 642 ended with score: 5800
+05-11-2017:14:43:10,280 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:11,888 INFO     [main.py:play_learning_agent:31] Episode 643 ended with score: 1100
+05-11-2017:14:43:14,680 INFO     [main.py:play_learning_agent:31] Episode 644 ended with score: 725
+05-11-2017:14:43:16,54 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:17,824 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:43:17,824 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:43:18,535 INFO     [main.py:play_learning_agent:31] Episode 645 ended with score: 4450
+05-11-2017:14:43:19,254 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:20,849 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:21,476 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:43:21,476 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:43:22,285 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:24,108 INFO     [main.py:play_learning_agent:31] Episode 646 ended with score: 6000
+05-11-2017:14:43:25,617 INFO     [main.py:play_learning_agent:31] Episode 647 ended with score: 700
+05-11-2017:14:43:26,673 INFO     [main.py:play_learning_agent:31] Episode 648 ended with score: 375
+05-11-2017:14:43:28,400 INFO     [main.py:play_learning_agent:31] Episode 649 ended with score: 700
+05-11-2017:14:43:30,115 INFO     [main.py:play_learning_agent:31] Episode 650 ended with score: 725
+05-11-2017:14:43:32,717 INFO     [main.py:play_learning_agent:31] Episode 651 ended with score: 475
+05-11-2017:14:43:35,428 INFO     [main.py:play_learning_agent:31] Episode 652 ended with score: 575
+05-11-2017:14:43:38,88 INFO     [main.py:play_learning_agent:31] Episode 653 ended with score: 725
+05-11-2017:14:43:40,500 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:41,386 INFO     [main.py:play_learning_agent:31] Episode 654 ended with score: 1300
+05-11-2017:14:43:43,661 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:44,552 INFO     [main.py:play_learning_agent:31] Episode 655 ended with score: 1325
+05-11-2017:14:43:46,263 INFO     [main.py:play_learning_agent:31] Episode 656 ended with score: 775
+05-11-2017:14:43:48,934 INFO     [main.py:play_learning_agent:31] Episode 657 ended with score: 525
+05-11-2017:14:43:51,451 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:52,109 INFO     [main.py:play_learning_agent:31] Episode 658 ended with score: 1100
+05-11-2017:14:43:54,109 INFO     [main.py:play_learning_agent:31] Episode 659 ended with score: 700
+05-11-2017:14:43:56,33 INFO     [main.py:play_learning_agent:31] Episode 660 ended with score: 350
+05-11-2017:14:43:56,786 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:43:58,135 INFO     [main.py:play_learning_agent:31] Episode 661 ended with score: 1000
+05-11-2017:14:43:59,106 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:00,85 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:00,505 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:44:00,505 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:44:01,160 INFO     [main.py:play_learning_agent:31] Episode 662 ended with score: 5300
+05-11-2017:14:44:02,859 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:04,416 INFO     [main.py:play_learning_agent:31] Episode 663 ended with score: 1325
+05-11-2017:14:44:06,349 INFO     [main.py:play_learning_agent:31] Episode 664 ended with score: 325
+05-11-2017:14:44:06,762 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:07,392 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:44:07,393 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:44:08,817 INFO     [main.py:play_learning_agent:31] Episode 665 ended with score: 4825
+05-11-2017:14:44:10,618 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:44:10,619 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:44:10,851 INFO     [main.py:play_learning_agent:31] Episode 666 ended with score: 4100
+05-11-2017:14:44:11,911 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:12,822 INFO     [main.py:play_learning_agent:31] Episode 667 ended with score: 1125
+05-11-2017:14:44:14,371 INFO     [main.py:play_learning_agent:31] Episode 668 ended with score: 450
+05-11-2017:14:44:15,125 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:16,523 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:44:16,523 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:44:17,942 INFO     [main.py:play_learning_agent:31] Episode 669 ended with score: 5275
+05-11-2017:14:44:18,525 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:20,374 INFO     [main.py:play_learning_agent:31] Episode 670 ended with score: 1325
+05-11-2017:14:44:21,437 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:22,404 INFO     [main.py:play_learning_agent:31] Episode 671 ended with score: 1325
+05-11-2017:14:44:24,566 INFO     [main.py:play_learning_agent:31] Episode 672 ended with score: 500
+05-11-2017:14:44:26,747 INFO     [main.py:play_learning_agent:31] Episode 673 ended with score: 875
+05-11-2017:14:44:27,401 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:29,115 INFO     [main.py:play_learning_agent:31] Episode 674 ended with score: 1050
+05-11-2017:14:44:30,511 INFO     [main.py:play_learning_agent:31] Episode 675 ended with score: 650
+05-11-2017:14:44:32,242 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:44:32,242 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:44:33,127 INFO     [main.py:play_learning_agent:31] Episode 676 ended with score: 3950
+05-11-2017:14:44:35,22 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:36,400 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:37,852 INFO     [main.py:play_learning_agent:31] Episode 677 ended with score: 1800
+05-11-2017:14:44:39,498 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:40,210 INFO     [main.py:play_learning_agent:31] Episode 678 ended with score: 1175
+05-11-2017:14:44:41,568 INFO     [main.py:play_learning_agent:31] Episode 679 ended with score: 475
+05-11-2017:14:44:42,236 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:43,389 INFO     [main.py:play_learning_agent:31] Episode 680 ended with score: 1125
+05-11-2017:14:44:44,270 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:45,907 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:46,458 INFO     [main.py:play_learning_agent:31] Episode 681 ended with score: 1550
+05-11-2017:14:44:48,49 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:49,38 INFO     [main.py:play_learning_agent:31] Episode 682 ended with score: 1175
+05-11-2017:14:44:52,444 INFO     [main.py:play_learning_agent:31] Episode 683 ended with score: 925
+05-11-2017:14:44:54,962 INFO     [main.py:play_learning_agent:31] Episode 684 ended with score: 575
+05-11-2017:14:44:56,101 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:57,99 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:44:57,100 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:44:58,579 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:44:58,868 INFO     [main.py:play_learning_agent:31] Episode 685 ended with score: 5625
+05-11-2017:14:45:00,453 INFO     [main.py:play_learning_agent:31] Episode 686 ended with score: 450
+05-11-2017:14:45:01,908 INFO     [main.py:play_learning_agent:31] Episode 687 ended with score: 750
+05-11-2017:14:45:03,689 INFO     [main.py:play_learning_agent:31] Episode 688 ended with score: 775
+05-11-2017:14:45:05,917 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:45:06,486 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:45:06,848 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:45:06,848 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:45:07,476 INFO     [main.py:play_learning_agent:31] Episode 689 ended with score: 4975
+05-11-2017:14:45:09,37 INFO     [main.py:play_learning_agent:31] Episode 690 ended with score: 350
+05-11-2017:14:45:10,377 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:45:12,232 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:45:12,232 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:45:12,690 INFO     [main.py:play_learning_agent:31] Episode 691 ended with score: 4350
+05-11-2017:14:45:15,588 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:45:16,455 INFO     [main.py:play_learning_agent:31] Episode 692 ended with score: 1350
+05-11-2017:14:45:17,788 INFO     [main.py:play_learning_agent:31] Episode 693 ended with score: 700
+05-11-2017:14:45:20,22 INFO     [main.py:play_learning_agent:31] Episode 694 ended with score: 550
+05-11-2017:14:45:21,413 INFO     [main.py:play_learning_agent:31] Episode 695 ended with score: 375
+05-11-2017:14:45:22,853 INFO     [main.py:play_learning_agent:31] Episode 696 ended with score: 700
+05-11-2017:14:45:24,535 INFO     [main.py:play_learning_agent:31] Episode 697 ended with score: 750
+05-11-2017:14:45:26,887 INFO     [main.py:play_learning_agent:31] Episode 698 ended with score: 525
+05-11-2017:14:45:27,676 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:45:29,787 INFO     [main.py:play_learning_agent:31] Episode 699 ended with score: 1250
+05-11-2017:14:45:32,87 INFO     [main.py:play_learning_agent:31] Episode 700 ended with score: 500
+05-11-2017:14:45:34,283 INFO     [main.py:play_learning_agent:31] Episode 701 ended with score: 750
+05-11-2017:14:45:36,856 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:45:36,857 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:45:37,94 INFO     [main.py:play_learning_agent:31] Episode 702 ended with score: 4100
+05-11-2017:14:45:39,105 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:45:39,105 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:45:39,529 INFO     [main.py:play_learning_agent:31] Episode 703 ended with score: 4525
+05-11-2017:14:45:42,68 INFO     [main.py:play_learning_agent:31] Episode 704 ended with score: 850
+05-11-2017:14:45:43,928 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:45:43,929 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:45:44,351 INFO     [main.py:play_learning_agent:31] Episode 705 ended with score: 4250
+05-11-2017:14:45:45,991 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:45:46,833 INFO     [main.py:play_learning_agent:31] Episode 706 ended with score: 1100
+05-11-2017:14:45:49,338 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:45:49,557 INFO     [main.py:play_learning_agent:31] Episode 707 ended with score: 1100
+05-11-2017:14:45:50,729 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:45:51,748 INFO     [main.py:play_learning_agent:31] Episode 708 ended with score: 1125
+05-11-2017:14:45:53,418 INFO     [main.py:play_learning_agent:31] Episode 709 ended with score: 800
+05-11-2017:14:45:54,919 INFO     [main.py:play_learning_agent:31] Episode 710 ended with score: 700
+05-11-2017:14:45:56,655 INFO     [main.py:play_learning_agent:31] Episode 711 ended with score: 750
+05-11-2017:14:45:58,861 INFO     [main.py:play_learning_agent:31] Episode 712 ended with score: 850
+05-11-2017:14:46:01,581 INFO     [main.py:play_learning_agent:31] Episode 713 ended with score: 775
+05-11-2017:14:46:03,763 INFO     [main.py:play_learning_agent:31] Episode 714 ended with score: 750
+05-11-2017:14:46:05,615 INFO     [main.py:play_learning_agent:31] Episode 715 ended with score: 825
+05-11-2017:14:46:06,857 INFO     [main.py:play_learning_agent:31] Episode 716 ended with score: 300
+05-11-2017:14:46:09,59 INFO     [main.py:play_learning_agent:31] Episode 717 ended with score: 750
+05-11-2017:14:46:10,614 INFO     [main.py:play_learning_agent:31] Episode 718 ended with score: 775
+05-11-2017:14:46:12,877 INFO     [main.py:play_learning_agent:31] Episode 719 ended with score: 825
+05-11-2017:14:46:14,0 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:15,229 INFO     [main.py:play_learning_agent:31] Episode 720 ended with score: 1300
+05-11-2017:14:46:17,20 INFO     [main.py:play_learning_agent:31] Episode 721 ended with score: 525
+05-11-2017:14:46:18,733 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:20,148 INFO     [main.py:play_learning_agent:31] Episode 722 ended with score: 950
+05-11-2017:14:46:22,659 INFO     [main.py:play_learning_agent:31] Episode 723 ended with score: 550
+05-11-2017:14:46:25,132 INFO     [main.py:play_learning_agent:31] Episode 724 ended with score: 800
+05-11-2017:14:46:26,404 INFO     [main.py:play_learning_agent:31] Episode 725 ended with score: 675
+05-11-2017:14:46:27,274 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:28,738 INFO     [main.py:play_learning_agent:31] Episode 726 ended with score: 1025
+05-11-2017:14:46:31,472 INFO     [main.py:play_learning_agent:31] Episode 727 ended with score: 950
+05-11-2017:14:46:32,908 INFO     [main.py:play_learning_agent:31] Episode 728 ended with score: 425
+05-11-2017:14:46:34,797 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:35,136 INFO     [main.py:play_learning_agent:31] Episode 729 ended with score: 1225
+05-11-2017:14:46:37,112 INFO     [main.py:play_learning_agent:31] Episode 730 ended with score: 675
+05-11-2017:14:46:38,397 INFO     [main.py:play_learning_agent:31] Episode 731 ended with score: 675
+05-11-2017:14:46:39,668 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:41,121 INFO     [main.py:play_learning_agent:31] Episode 732 ended with score: 950
+05-11-2017:14:46:41,990 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:43,577 INFO     [main.py:play_learning_agent:31] Episode 733 ended with score: 1325
+05-11-2017:14:46:45,836 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:46,261 INFO     [main.py:play_learning_agent:31] Episode 734 ended with score: 1050
+05-11-2017:14:46:47,922 INFO     [main.py:play_learning_agent:31] Episode 735 ended with score: 750
+05-11-2017:14:46:49,609 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:50,543 INFO     [main.py:play_learning_agent:31] Episode 736 ended with score: 1125
+05-11-2017:14:46:51,286 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:53,501 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:46:53,501 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:46:54,58 INFO     [main.py:play_learning_agent:31] Episode 737 ended with score: 4625
+05-11-2017:14:46:54,611 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:56,101 INFO     [main.py:play_learning_agent:31] Episode 738 ended with score: 925
+05-11-2017:14:46:57,446 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:57,876 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:46:57,876 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:46:59,547 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:46:59,978 INFO     [main.py:play_learning_agent:31] Episode 739 ended with score: 5475
+05-11-2017:14:47:03,93 INFO     [main.py:play_learning_agent:31] Episode 740 ended with score: 725
+05-11-2017:14:47:04,245 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:05,558 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:47:05,558 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:47:06,126 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:07,569 INFO     [main.py:play_learning_agent:31] Episode 741 ended with score: 5025
+05-11-2017:14:47:08,562 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:10,844 INFO     [main.py:play_learning_agent:31] Episode 742 ended with score: 1375
+05-11-2017:14:47:12,666 INFO     [main.py:play_learning_agent:31] Episode 743 ended with score: 725
+05-11-2017:14:47:14,365 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:14,802 INFO     [main.py:play_learning_agent:31] Episode 744 ended with score: 1250
+05-11-2017:14:47:16,925 INFO     [main.py:play_learning_agent:31] Episode 745 ended with score: 550
+05-11-2017:14:47:17,443 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:18,810 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:47:18,811 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:47:19,908 INFO     [main.py:play_learning_agent:31] Episode 746 ended with score: 5000
+05-11-2017:14:47:21,269 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:22,678 INFO     [main.py:play_learning_agent:31] Episode 747 ended with score: 1400
+05-11-2017:14:47:24,731 INFO     [main.py:play_learning_agent:31] Episode 748 ended with score: 450
+05-11-2017:14:47:25,212 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:26,54 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:26,900 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:47:26,900 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:47:28,840 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:29,304 INFO     [main.py:play_learning_agent:31] Episode 749 ended with score: 6000
+05-11-2017:14:47:31,220 INFO     [main.py:play_learning_agent:31] Episode 750 ended with score: 650
+05-11-2017:14:47:31,938 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:34,614 INFO     [main.py:play_learning_agent:31] Episode 751 ended with score: 1000
+05-11-2017:14:47:36,103 INFO     [main.py:play_learning_agent:31] Episode 752 ended with score: 475
+05-11-2017:14:47:38,187 INFO     [main.py:play_learning_agent:31] Episode 753 ended with score: 675
+05-11-2017:14:47:40,594 INFO     [main.py:play_learning_agent:31] Episode 754 ended with score: 350
+05-11-2017:14:47:42,832 INFO     [main.py:play_learning_agent:31] Episode 755 ended with score: 350
+05-11-2017:14:47:45,527 INFO     [main.py:play_learning_agent:31] Episode 756 ended with score: 800
+05-11-2017:14:47:48,437 INFO     [main.py:play_learning_agent:31] Episode 757 ended with score: 725
+05-11-2017:14:47:49,852 INFO     [main.py:play_learning_agent:31] Episode 758 ended with score: 650
+05-11-2017:14:47:51,312 INFO     [main.py:play_learning_agent:31] Episode 759 ended with score: 475
+05-11-2017:14:47:52,556 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:47:54,166 INFO     [main.py:play_learning_agent:31] Episode 760 ended with score: 1000
+05-11-2017:14:47:56,120 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:47:56,121 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:47:57,527 INFO     [main.py:play_learning_agent:31] Episode 761 ended with score: 4450
+05-11-2017:14:47:59,22 INFO     [main.py:play_learning_agent:31] Episode 762 ended with score: 625
+05-11-2017:14:48:01,191 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:48:01,191 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:48:01,498 INFO     [main.py:play_learning_agent:31] Episode 763 ended with score: 3950
+05-11-2017:14:48:03,358 INFO     [main.py:play_learning_agent:31] Episode 764 ended with score: 775
+05-11-2017:14:48:04,284 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:48:05,818 INFO     [main.py:play_learning_agent:31] Episode 765 ended with score: 1100
+05-11-2017:14:48:06,694 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:48:08,359 INFO     [main.py:play_learning_agent:31] Episode 766 ended with score: 1325
+05-11-2017:14:48:10,198 INFO     [main.py:play_learning_agent:31] Episode 767 ended with score: 425
+05-11-2017:14:48:11,633 INFO     [main.py:play_learning_agent:31] Episode 768 ended with score: 650
+05-11-2017:14:48:13,967 INFO     [main.py:play_learning_agent:31] Episode 769 ended with score: 775
+05-11-2017:14:48:17,246 INFO     [main.py:play_learning_agent:31] Episode 770 ended with score: 925
+05-11-2017:14:48:19,479 INFO     [main.py:play_learning_agent:31] Episode 771 ended with score: 500
+05-11-2017:14:48:21,5 INFO     [main.py:play_learning_agent:31] Episode 772 ended with score: 525
+05-11-2017:14:48:22,889 INFO     [main.py:play_learning_agent:31] Episode 773 ended with score: 525
+05-11-2017:14:48:24,634 INFO     [main.py:play_learning_agent:31] Episode 774 ended with score: 650
+05-11-2017:14:48:25,745 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:48:27,645 INFO     [main.py:play_learning_agent:31] Episode 775 ended with score: 1300
+05-11-2017:14:48:29,644 INFO     [main.py:play_learning_agent:31] Episode 776 ended with score: 800
+05-11-2017:14:48:30,627 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:48:32,800 INFO     [main.py:play_learning_agent:31] Episode 777 ended with score: 1325
+05-11-2017:14:48:34,185 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:48:34,185 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:48:35,629 INFO     [main.py:play_learning_agent:31] Episode 778 ended with score: 4275
+05-11-2017:14:48:37,319 INFO     [main.py:play_learning_agent:31] Episode 779 ended with score: 450
+05-11-2017:14:48:39,406 INFO     [main.py:play_learning_agent:31] Episode 780 ended with score: 575
+05-11-2017:14:48:40,27 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:48:42,139 INFO     [main.py:play_learning_agent:31] Episode 781 ended with score: 1300
+05-11-2017:14:48:42,893 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:48:43,292 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:48:45,87 INFO     [main.py:play_learning_agent:31] Episode 782 ended with score: 1900
+05-11-2017:14:48:47,201 INFO     [main.py:play_learning_agent:31] Episode 783 ended with score: 775
+05-11-2017:14:48:49,612 INFO     [main.py:play_learning_agent:31] Episode 784 ended with score: 825
+05-11-2017:14:48:51,790 INFO     [main.py:play_learning_agent:31] Episode 785 ended with score: 425
+05-11-2017:14:48:53,258 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:48:53,741 INFO     [main.py:play_learning_agent:31] Episode 786 ended with score: 1375
+05-11-2017:14:48:55,227 INFO     [main.py:play_learning_agent:31] Episode 787 ended with score: 375
+05-11-2017:14:48:56,450 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:48:56,981 INFO     [main.py:play_learning_agent:31] Episode 788 ended with score: 1275
+05-11-2017:14:48:58,809 INFO     [main.py:play_learning_agent:31] Episode 789 ended with score: 750
+05-11-2017:14:49:01,683 INFO     [main.py:play_learning_agent:31] Episode 790 ended with score: 450
+05-11-2017:14:49:02,568 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:49:04,516 INFO     [main.py:play_learning_agent:31] Episode 791 ended with score: 1000
+05-11-2017:14:49:06,880 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:49:07,340 INFO     [main.py:play_learning_agent:31] Episode 792 ended with score: 1000
+05-11-2017:14:49:08,830 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:49:09,983 INFO     [main.py:play_learning_agent:31] Episode 793 ended with score: 1300
+05-11-2017:14:49:10,452 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:49:12,265 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:49:12,265 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:49:13,311 INFO     [main.py:play_learning_agent:31] Episode 794 ended with score: 5075
+05-11-2017:14:49:14,416 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:49:16,60 INFO     [main.py:play_learning_agent:31] Episode 795 ended with score: 1350
+05-11-2017:14:49:16,598 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:49:17,419 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:49:17,419 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:49:20,194 INFO     [main.py:play_learning_agent:31] Episode 796 ended with score: 5225
+05-11-2017:14:49:21,708 INFO     [main.py:play_learning_agent:31] Episode 797 ended with score: 550
+05-11-2017:14:49:23,882 INFO     [main.py:play_learning_agent:31] Episode 798 ended with score: 450
+05-11-2017:14:49:25,677 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:49:26,793 INFO     [main.py:play_learning_agent:31] Episode 799 ended with score: 1400
+05-11-2017:14:49:29,237 INFO     [main.py:play_learning_agent:31] Episode 800 ended with score: 900
+05-11-2017:14:49:31,88 INFO     [main.py:play_learning_agent:31] Episode 801 ended with score: 725
+05-11-2017:14:49:33,701 INFO     [main.py:play_learning_agent:31] Episode 802 ended with score: 700
+05-11-2017:14:49:35,321 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:49:36,585 INFO     [main.py:play_learning_agent:31] Episode 803 ended with score: 1375
+05-11-2017:14:49:38,954 INFO     [main.py:play_learning_agent:31] Episode 804 ended with score: 800
+05-11-2017:14:49:40,909 INFO     [main.py:play_learning_agent:31] Episode 805 ended with score: 775
+05-11-2017:14:49:42,694 INFO     [main.py:play_learning_agent:31] Episode 806 ended with score: 725
+05-11-2017:14:49:44,170 INFO     [main.py:play_learning_agent:31] Episode 807 ended with score: 650
+05-11-2017:14:49:45,599 INFO     [main.py:play_learning_agent:31] Episode 808 ended with score: 650
+05-11-2017:14:49:47,984 INFO     [main.py:play_learning_agent:31] Episode 809 ended with score: 850
+05-11-2017:14:49:49,470 INFO     [main.py:play_learning_agent:31] Episode 810 ended with score: 450
+05-11-2017:14:49:51,725 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:49:51,725 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:49:52,280 INFO     [main.py:play_learning_agent:31] Episode 811 ended with score: 4325
+05-11-2017:14:49:53,865 INFO     [main.py:play_learning_agent:31] Episode 812 ended with score: 675
+05-11-2017:14:49:56,191 INFO     [main.py:play_learning_agent:31] Episode 813 ended with score: 900
+05-11-2017:14:49:58,268 INFO     [main.py:play_learning_agent:31] Episode 814 ended with score: 775
+05-11-2017:14:50:00,696 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:50:00,696 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:50:01,31 INFO     [main.py:play_learning_agent:31] Episode 815 ended with score: 3850
+05-11-2017:14:50:02,889 INFO     [main.py:play_learning_agent:31] Episode 816 ended with score: 475
+05-11-2017:14:50:04,150 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:05,814 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:50:05,814 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:50:05,987 INFO     [main.py:play_learning_agent:31] Episode 817 ended with score: 4625
+05-11-2017:14:50:07,903 INFO     [main.py:play_learning_agent:31] Episode 818 ended with score: 700
+05-11-2017:14:50:08,444 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:10,853 INFO     [main.py:play_learning_agent:31] Episode 819 ended with score: 1225
+05-11-2017:14:50:13,940 INFO     [main.py:play_learning_agent:31] Episode 820 ended with score: 875
+05-11-2017:14:50:15,893 INFO     [main.py:play_learning_agent:31] Episode 821 ended with score: 450
+05-11-2017:14:50:17,781 INFO     [main.py:play_learning_agent:31] Episode 822 ended with score: 500
+05-11-2017:14:50:19,686 INFO     [main.py:play_learning_agent:31] Episode 823 ended with score: 725
+05-11-2017:14:50:20,305 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:22,681 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:23,547 INFO     [main.py:play_learning_agent:31] Episode 824 ended with score: 1900
+05-11-2017:14:50:26,445 INFO     [main.py:play_learning_agent:31] Episode 825 ended with score: 800
+05-11-2017:14:50:28,696 INFO     [main.py:play_learning_agent:31] Episode 826 ended with score: 625
+05-11-2017:14:50:30,684 INFO     [main.py:play_learning_agent:31] Episode 827 ended with score: 800
+05-11-2017:14:50:32,248 INFO     [main.py:play_learning_agent:31] Episode 828 ended with score: 725
+05-11-2017:14:50:33,892 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:35,532 INFO     [main.py:play_learning_agent:31] Episode 829 ended with score: 1000
+05-11-2017:14:50:35,986 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:38,63 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:38,541 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:50:38,542 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:50:39,72 INFO     [main.py:play_learning_agent:31] Episode 830 ended with score: 5200
+05-11-2017:14:50:40,514 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:40,973 INFO     [main.py:play_learning_agent:31] Episode 831 ended with score: 1450
+05-11-2017:14:50:42,915 INFO     [main.py:play_learning_agent:31] Episode 832 ended with score: 725
+05-11-2017:14:50:44,626 INFO     [main.py:play_learning_agent:31] Episode 833 ended with score: 500
+05-11-2017:14:50:46,854 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:47,488 INFO     [main.py:play_learning_agent:31] Episode 834 ended with score: 1300
+05-11-2017:14:50:49,961 INFO     [main.py:play_learning_agent:31] Episode 835 ended with score: 600
+05-11-2017:14:50:50,986 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:52,437 INFO     [main.py:play_learning_agent:31] Episode 836 ended with score: 1225
+05-11-2017:14:50:54,124 INFO     [main.py:play_learning_agent:31] Episode 837 ended with score: 450
+05-11-2017:14:50:55,126 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:50:56,332 INFO     [main.py:play_learning_agent:31] Episode 838 ended with score: 1050
+05-11-2017:14:50:58,386 INFO     [main.py:play_learning_agent:31] Episode 839 ended with score: 700
+05-11-2017:14:51:00,131 INFO     [main.py:play_learning_agent:31] Episode 840 ended with score: 675
+05-11-2017:14:51:00,583 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:02,556 INFO     [main.py:play_learning_agent:31] Episode 841 ended with score: 1300
+05-11-2017:14:51:03,858 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:05,170 INFO     [main.py:play_learning_agent:31] Episode 842 ended with score: 1350
+05-11-2017:14:51:06,788 INFO     [main.py:play_learning_agent:31] Episode 843 ended with score: 350
+05-11-2017:14:51:09,430 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:09,980 INFO     [main.py:play_learning_agent:31] Episode 844 ended with score: 1050
+05-11-2017:14:51:11,645 INFO     [main.py:play_learning_agent:31] Episode 845 ended with score: 700
+05-11-2017:14:51:14,66 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:14,222 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:51:14,222 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:51:15,8 INFO     [main.py:play_learning_agent:31] Episode 846 ended with score: 4625
+05-11-2017:14:51:16,785 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:17,712 INFO     [main.py:play_learning_agent:31] Episode 847 ended with score: 1325
+05-11-2017:14:51:19,399 INFO     [main.py:play_learning_agent:31] Episode 848 ended with score: 725
+05-11-2017:14:51:20,531 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:22,455 INFO     [main.py:play_learning_agent:31] Episode 849 ended with score: 1225
+05-11-2017:14:51:23,949 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:24,908 INFO     [main.py:play_learning_agent:31] Episode 850 ended with score: 1350
+05-11-2017:14:51:27,33 INFO     [main.py:play_learning_agent:31] Episode 851 ended with score: 775
+05-11-2017:14:51:29,893 INFO     [main.py:play_learning_agent:31] Episode 852 ended with score: 850
+05-11-2017:14:51:31,351 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:32,590 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:51:32,590 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:51:33,818 INFO     [main.py:play_learning_agent:31] Episode 853 ended with score: 4700
+05-11-2017:14:51:35,119 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:51:35,119 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:51:36,918 INFO     [main.py:play_learning_agent:31] Episode 854 ended with score: 4375
+05-11-2017:14:51:39,88 INFO     [main.py:play_learning_agent:31] Episode 855 ended with score: 700
+05-11-2017:14:51:41,105 INFO     [main.py:play_learning_agent:31] Episode 856 ended with score: 775
+05-11-2017:14:51:42,835 INFO     [main.py:play_learning_agent:31] Episode 857 ended with score: 500
+05-11-2017:14:51:45,662 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:51:45,662 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:51:46,488 INFO     [main.py:play_learning_agent:31] Episode 858 ended with score: 4375
+05-11-2017:14:51:47,416 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:48,590 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:51:48,590 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:51:49,329 INFO     [main.py:play_learning_agent:31] Episode 859 ended with score: 4575
+05-11-2017:14:51:50,285 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:51,691 INFO     [main.py:play_learning_agent:31] Episode 860 ended with score: 975
+05-11-2017:14:51:53,618 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:51:53,618 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:51:54,162 INFO     [main.py:play_learning_agent:31] Episode 861 ended with score: 4275
+05-11-2017:14:51:57,23 INFO     [main.py:play_learning_agent:31] Episode 862 ended with score: 800
+05-11-2017:14:51:58,746 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:51:58,921 INFO     [main.py:play_learning_agent:31] Episode 863 ended with score: 1025
+05-11-2017:14:52:01,346 INFO     [main.py:play_learning_agent:31] Episode 864 ended with score: 450
+05-11-2017:14:52:02,910 INFO     [main.py:play_learning_agent:31] Episode 865 ended with score: 350
+05-11-2017:14:52:05,367 INFO     [main.py:play_learning_agent:31] Episode 866 ended with score: 1250
+05-11-2017:14:52:07,302 INFO     [main.py:play_learning_agent:31] Episode 867 ended with score: 800
+05-11-2017:14:52:09,595 INFO     [main.py:play_learning_agent:31] Episode 868 ended with score: 800
+05-11-2017:14:52:12,73 INFO     [main.py:play_learning_agent:31] Episode 869 ended with score: 700
+05-11-2017:14:52:13,513 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:52:14,639 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:52:15,228 INFO     [main.py:play_learning_agent:31] Episode 870 ended with score: 1775
+05-11-2017:14:52:17,388 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:52:17,389 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:52:18,86 INFO     [main.py:play_learning_agent:31] Episode 871 ended with score: 3925
+05-11-2017:14:52:18,683 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:52:20,611 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:52:20,863 INFO     [main.py:play_learning_agent:31] Episode 872 ended with score: 1775
+05-11-2017:14:52:21,344 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:52:24,157 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:52:24,157 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:52:24,862 INFO     [main.py:play_learning_agent:31] Episode 873 ended with score: 4750
+05-11-2017:14:52:27,527 INFO     [main.py:play_learning_agent:31] Episode 874 ended with score: 550
+05-11-2017:14:52:28,131 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:52:31,14 INFO     [main.py:play_learning_agent:31] Episode 875 ended with score: 1025
+05-11-2017:14:52:33,19 INFO     [main.py:play_learning_agent:31] Episode 876 ended with score: 700
+05-11-2017:14:52:35,162 INFO     [main.py:play_learning_agent:31] Episode 877 ended with score: 500
+05-11-2017:14:52:36,691 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:52:38,91 INFO     [main.py:play_learning_agent:31] Episode 878 ended with score: 1300
+05-11-2017:14:52:39,406 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:52:41,346 INFO     [main.py:play_learning_agent:31] Episode 879 ended with score: 1425
+05-11-2017:14:52:42,613 INFO     [main.py:play_learning_agent:31] Episode 880 ended with score: 600
+05-11-2017:14:52:44,200 INFO     [main.py:play_learning_agent:31] Episode 881 ended with score: 775
+05-11-2017:14:52:45,937 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:52:46,338 INFO     [main.py:play_learning_agent:31] Episode 882 ended with score: 1050
+05-11-2017:14:52:47,985 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:52:47,985 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:52:49,704 INFO     [main.py:play_learning_agent:31] Episode 883 ended with score: 4175
+05-11-2017:14:52:52,260 INFO     [main.py:play_learning_agent:31] Episode 884 ended with score: 825
+05-11-2017:14:52:53,544 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:52:54,875 INFO     [main.py:play_learning_agent:31] Episode 885 ended with score: 1000
+05-11-2017:14:52:56,747 INFO     [main.py:play_learning_agent:31] Episode 886 ended with score: 750
+05-11-2017:14:52:58,611 INFO     [main.py:play_learning_agent:31] Episode 887 ended with score: 775
+05-11-2017:14:52:59,410 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:00,609 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:53:00,609 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:53:01,875 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:03,341 INFO     [world.py:perform_action:475] Current level: 2
+05-11-2017:14:53:03,341 INFO     [world.py:perform_action:477] Level won! Progressing to level 3
+05-11-2017:14:53:03,901 INFO     [main.py:play_learning_agent:31] Episode 888 ended with score: 9150
+05-11-2017:14:53:04,467 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:06,342 INFO     [main.py:play_learning_agent:31] Episode 889 ended with score: 1450
+05-11-2017:14:53:08,757 INFO     [main.py:play_learning_agent:31] Episode 890 ended with score: 625
+05-11-2017:14:53:09,918 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:11,54 INFO     [main.py:play_learning_agent:31] Episode 891 ended with score: 1050
+05-11-2017:14:53:13,73 INFO     [main.py:play_learning_agent:31] Episode 892 ended with score: 825
+05-11-2017:14:53:14,856 INFO     [main.py:play_learning_agent:31] Episode 893 ended with score: 675
+05-11-2017:14:53:17,112 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:53:17,112 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:53:17,790 INFO     [main.py:play_learning_agent:31] Episode 894 ended with score: 4250
+05-11-2017:14:53:19,318 INFO     [main.py:play_learning_agent:31] Episode 895 ended with score: 600
+05-11-2017:14:53:21,127 INFO     [main.py:play_learning_agent:31] Episode 896 ended with score: 1200
+05-11-2017:14:53:23,368 INFO     [main.py:play_learning_agent:31] Episode 897 ended with score: 750
+05-11-2017:14:53:25,533 INFO     [main.py:play_learning_agent:31] Episode 898 ended with score: 475
+05-11-2017:14:53:26,719 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:28,686 INFO     [main.py:play_learning_agent:31] Episode 899 ended with score: 1025
+05-11-2017:14:53:29,490 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:31,254 INFO     [main.py:play_learning_agent:31] Episode 900 ended with score: 1000
+05-11-2017:14:53:33,285 INFO     [main.py:play_learning_agent:31] Episode 901 ended with score: 675
+05-11-2017:14:53:35,48 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:35,600 INFO     [main.py:play_learning_agent:31] Episode 902 ended with score: 1050
+05-11-2017:14:53:38,87 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:38,465 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:53:38,466 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:53:39,94 INFO     [main.py:play_learning_agent:31] Episode 903 ended with score: 4650
+05-11-2017:14:53:40,802 INFO     [main.py:play_learning_agent:31] Episode 904 ended with score: 725
+05-11-2017:14:53:42,906 INFO     [main.py:play_learning_agent:31] Episode 905 ended with score: 525
+05-11-2017:14:53:44,399 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:45,248 INFO     [main.py:play_learning_agent:31] Episode 906 ended with score: 1275
+05-11-2017:14:53:46,998 INFO     [main.py:play_learning_agent:31] Episode 907 ended with score: 450
+05-11-2017:14:53:48,318 INFO     [main.py:play_learning_agent:31] Episode 908 ended with score: 475
+05-11-2017:14:53:50,71 INFO     [main.py:play_learning_agent:31] Episode 909 ended with score: 650
+05-11-2017:14:53:51,14 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:53,78 INFO     [main.py:play_learning_agent:31] Episode 910 ended with score: 1400
+05-11-2017:14:53:53,988 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:53:56,209 INFO     [main.py:play_learning_agent:31] Episode 911 ended with score: 1000
+05-11-2017:14:53:58,12 INFO     [main.py:play_learning_agent:31] Episode 912 ended with score: 500
+05-11-2017:14:54:00,12 INFO     [main.py:play_learning_agent:31] Episode 913 ended with score: 850
+05-11-2017:14:54:01,604 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:02,204 INFO     [main.py:play_learning_agent:31] Episode 914 ended with score: 1300
+05-11-2017:14:54:03,657 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:05,14 INFO     [main.py:play_learning_agent:31] Episode 915 ended with score: 1050
+05-11-2017:14:54:05,553 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:07,511 INFO     [main.py:play_learning_agent:31] Episode 916 ended with score: 1025
+05-11-2017:14:54:08,67 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:10,161 INFO     [main.py:play_learning_agent:31] Episode 917 ended with score: 1075
+05-11-2017:14:54:12,669 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:13,98 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:54:13,98 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:54:13,569 INFO     [main.py:play_learning_agent:31] Episode 918 ended with score: 4325
+05-11-2017:14:54:14,633 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:16,34 INFO     [main.py:play_learning_agent:31] Episode 919 ended with score: 1325
+05-11-2017:14:54:17,995 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:54:17,996 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:54:18,300 INFO     [main.py:play_learning_agent:31] Episode 920 ended with score: 4150
+05-11-2017:14:54:20,712 INFO     [main.py:play_learning_agent:31] Episode 921 ended with score: 825
+05-11-2017:14:54:22,457 INFO     [main.py:play_learning_agent:31] Episode 922 ended with score: 775
+05-11-2017:14:54:24,69 INFO     [main.py:play_learning_agent:31] Episode 923 ended with score: 450
+05-11-2017:14:54:24,926 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:25,438 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:26,843 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:54:26,843 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:54:27,189 INFO     [main.py:play_learning_agent:31] Episode 924 ended with score: 4825
+05-11-2017:14:54:29,52 INFO     [main.py:play_learning_agent:31] Episode 925 ended with score: 700
+05-11-2017:14:54:29,693 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:32,380 INFO     [main.py:play_learning_agent:31] Episode 926 ended with score: 1375
+05-11-2017:14:54:33,464 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:35,668 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:54:35,668 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:54:35,989 INFO     [main.py:play_learning_agent:31] Episode 927 ended with score: 4800
+05-11-2017:14:54:37,687 INFO     [main.py:play_learning_agent:31] Episode 928 ended with score: 675
+05-11-2017:14:54:38,415 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:40,486 INFO     [main.py:play_learning_agent:31] Episode 929 ended with score: 1150
+05-11-2017:14:54:42,315 INFO     [main.py:play_learning_agent:31] Episode 930 ended with score: 475
+05-11-2017:14:54:43,431 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:44,504 INFO     [main.py:play_learning_agent:31] Episode 931 ended with score: 1300
+05-11-2017:14:54:47,25 INFO     [main.py:play_learning_agent:31] Episode 932 ended with score: 775
+05-11-2017:14:54:49,485 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:54:49,485 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:54:50,17 INFO     [main.py:play_learning_agent:31] Episode 933 ended with score: 4250
+05-11-2017:14:54:51,61 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:52,746 INFO     [main.py:play_learning_agent:31] Episode 934 ended with score: 1350
+05-11-2017:14:54:54,881 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:56,122 INFO     [main.py:play_learning_agent:31] Episode 935 ended with score: 1300
+05-11-2017:14:54:57,741 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:54:58,325 INFO     [main.py:play_learning_agent:31] Episode 936 ended with score: 1225
+05-11-2017:14:54:59,266 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:00,809 INFO     [main.py:play_learning_agent:31] Episode 937 ended with score: 1000
+05-11-2017:14:55:02,852 INFO     [main.py:play_learning_agent:31] Episode 938 ended with score: 850
+05-11-2017:14:55:03,709 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:05,843 INFO     [main.py:play_learning_agent:31] Episode 939 ended with score: 1075
+05-11-2017:14:55:07,389 INFO     [main.py:play_learning_agent:31] Episode 940 ended with score: 700
+05-11-2017:14:55:08,785 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:09,357 INFO     [main.py:play_learning_agent:31] Episode 941 ended with score: 1325
+05-11-2017:14:55:10,838 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:11,425 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:11,948 INFO     [main.py:play_learning_agent:31] Episode 942 ended with score: 1775
+05-11-2017:14:55:12,718 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:14,625 INFO     [main.py:play_learning_agent:31] Episode 943 ended with score: 1325
+05-11-2017:14:55:17,92 INFO     [main.py:play_learning_agent:31] Episode 944 ended with score: 575
+05-11-2017:14:55:18,733 INFO     [main.py:play_learning_agent:31] Episode 945 ended with score: 750
+05-11-2017:14:55:19,266 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:20,772 INFO     [main.py:play_learning_agent:31] Episode 946 ended with score: 1300
+05-11-2017:14:55:23,311 INFO     [main.py:play_learning_agent:31] Episode 947 ended with score: 525
+05-11-2017:14:55:25,308 INFO     [main.py:play_learning_agent:31] Episode 948 ended with score: 750
+05-11-2017:14:55:27,461 INFO     [main.py:play_learning_agent:31] Episode 949 ended with score: 450
+05-11-2017:14:55:29,597 INFO     [main.py:play_learning_agent:31] Episode 950 ended with score: 775
+05-11-2017:14:55:31,164 INFO     [main.py:play_learning_agent:31] Episode 951 ended with score: 800
+05-11-2017:14:55:33,55 INFO     [main.py:play_learning_agent:31] Episode 952 ended with score: 775
+05-11-2017:14:55:35,294 INFO     [main.py:play_learning_agent:31] Episode 953 ended with score: 475
+05-11-2017:14:55:37,93 INFO     [main.py:play_learning_agent:31] Episode 954 ended with score: 725
+05-11-2017:14:55:38,694 INFO     [main.py:play_learning_agent:31] Episode 955 ended with score: 450
+05-11-2017:14:55:40,72 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:42,291 INFO     [main.py:play_learning_agent:31] Episode 956 ended with score: 1425
+05-11-2017:14:55:43,654 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:45,480 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:55:45,480 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:55:46,191 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:47,688 INFO     [main.py:play_learning_agent:31] Episode 957 ended with score: 5600
+05-11-2017:14:55:48,516 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:50,974 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:51,862 INFO     [main.py:play_learning_agent:31] Episode 958 ended with score: 1900
+05-11-2017:14:55:53,551 INFO     [main.py:play_learning_agent:31] Episode 959 ended with score: 625
+05-11-2017:14:55:55,305 INFO     [main.py:play_learning_agent:31] Episode 960 ended with score: 750
+05-11-2017:14:55:56,794 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:55:57,614 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:55:57,614 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:55:58,709 INFO     [main.py:play_learning_agent:31] Episode 961 ended with score: 4850
+05-11-2017:14:56:00,826 INFO     [main.py:play_learning_agent:31] Episode 962 ended with score: 500
+05-11-2017:14:56:01,555 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:03,927 INFO     [main.py:play_learning_agent:31] Episode 963 ended with score: 975
+05-11-2017:14:56:06,97 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:56:06,97 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:56:06,399 INFO     [main.py:play_learning_agent:31] Episode 964 ended with score: 3825
+05-11-2017:14:56:08,263 INFO     [main.py:play_learning_agent:31] Episode 965 ended with score: 425
+05-11-2017:14:56:10,443 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:10,790 INFO     [main.py:play_learning_agent:31] Episode 966 ended with score: 1000
+05-11-2017:14:56:14,8 INFO     [main.py:play_learning_agent:31] Episode 967 ended with score: 875
+05-11-2017:14:56:16,755 INFO     [main.py:play_learning_agent:31] Episode 968 ended with score: 500
+05-11-2017:14:56:17,886 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:19,170 INFO     [main.py:play_learning_agent:31] Episode 969 ended with score: 1300
+05-11-2017:14:56:20,898 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:21,994 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:22,404 INFO     [main.py:play_learning_agent:31] Episode 970 ended with score: 1950
+05-11-2017:14:56:23,849 INFO     [main.py:play_learning_agent:31] Episode 971 ended with score: 400
+05-11-2017:14:56:25,337 INFO     [main.py:play_learning_agent:31] Episode 972 ended with score: 675
+05-11-2017:14:56:27,970 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:28,131 INFO     [main.py:play_learning_agent:31] Episode 973 ended with score: 1350
+05-11-2017:14:56:30,209 INFO     [main.py:play_learning_agent:31] Episode 974 ended with score: 650
+05-11-2017:14:56:32,614 INFO     [main.py:play_learning_agent:31] Episode 975 ended with score: 900
+05-11-2017:14:56:34,289 INFO     [main.py:play_learning_agent:31] Episode 976 ended with score: 700
+05-11-2017:14:56:34,726 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:35,251 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:37,71 INFO     [main.py:play_learning_agent:31] Episode 977 ended with score: 1575
+05-11-2017:14:56:38,311 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:38,748 INFO     [main.py:play_learning_agent:31] Episode 978 ended with score: 1325
+05-11-2017:14:56:40,781 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:41,609 INFO     [main.py:play_learning_agent:31] Episode 979 ended with score: 1025
+05-11-2017:14:56:42,358 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:44,803 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:45,636 INFO     [main.py:play_learning_agent:31] Episode 980 ended with score: 1550
+05-11-2017:14:56:46,252 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:48,645 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:56:48,645 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:56:49,488 INFO     [main.py:play_learning_agent:31] Episode 981 ended with score: 4475
+05-11-2017:14:56:52,592 INFO     [world.py:perform_action:475] Current level: 1
+05-11-2017:14:56:52,592 INFO     [world.py:perform_action:477] Level won! Progressing to level 2
+05-11-2017:14:56:52,998 INFO     [main.py:play_learning_agent:31] Episode 982 ended with score: 3925
+05-11-2017:14:56:54,802 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:56:55,585 INFO     [main.py:play_learning_agent:31] Episode 983 ended with score: 1050
+05-11-2017:14:56:58,174 INFO     [main.py:play_learning_agent:31] Episode 984 ended with score: 500
+05-11-2017:14:56:59,553 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:57:00,406 INFO     [main.py:play_learning_agent:31] Episode 985 ended with score: 1075
+05-11-2017:14:57:01,646 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:57:02,525 INFO     [main.py:play_learning_agent:31] Episode 986 ended with score: 875
+05-11-2017:14:57:04,494 INFO     [main.py:play_learning_agent:31] Episode 987 ended with score: 725
+05-11-2017:14:57:06,809 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:57:07,62 INFO     [main.py:play_learning_agent:31] Episode 988 ended with score: 1325
+05-11-2017:14:57:07,597 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:57:09,785 INFO     [main.py:play_learning_agent:31] Episode 989 ended with score: 1275
+05-11-2017:14:57:11,766 INFO     [main.py:play_learning_agent:31] Episode 990 ended with score: 725
+05-11-2017:14:57:14,217 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:57:14,776 INFO     [main.py:play_learning_agent:31] Episode 991 ended with score: 1150
+05-11-2017:14:57:16,942 INFO     [main.py:play_learning_agent:31] Episode 992 ended with score: 800
+05-11-2017:14:57:18,678 INFO     [main.py:play_learning_agent:31] Episode 993 ended with score: 700
+05-11-2017:14:57:20,584 INFO     [main.py:play_learning_agent:31] Episode 994 ended with score: 625
+05-11-2017:14:57:22,199 INFO     [main.py:play_learning_agent:31] Episode 995 ended with score: 725
+05-11-2017:14:57:24,678 INFO     [main.py:play_learning_agent:31] Episode 996 ended with score: 525
+05-11-2017:14:57:26,885 INFO     [main.py:play_learning_agent:31] Episode 997 ended with score: 825
+05-11-2017:14:57:28,409 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:57:29,304 INFO     [main.py:play_learning_agent:31] Episode 998 ended with score: 1025
+05-11-2017:14:57:29,992 INFO     [world.py:perform_action:468] Killed Coily!
+05-11-2017:14:57:31,926 INFO     [main.py:play_learning_agent:31] Episode 999 ended with score: 975
+05-11-2017:14:57:34,137 INFO     [main.py:play_learning_agent:31] Episode 1000 ended with score: 900
+05-11-2017:14:57:34,150 INFO     [main.py:play_learning_agent:34] Maximum reward: 9825
+
+Process finished with exit code 0

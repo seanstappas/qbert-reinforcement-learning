@@ -6,7 +6,7 @@ import numpy as np
 from ale_python_interface import ALEInterface
 
 from actions import get_action_diffs, action_number_to_name, \
-    get_action_number_diffs, get_valid_action_numbers, get_inverse_action, ACTION_NUM_DIFFS
+    get_action_number_diffs, get_valid_action_numbers, get_inverse_action, ACTION_NUM_DIFFS, ACTION_NUM_DIFFS_WITH_NOOP
 
 NUM_ROWS = 6
 NUM_COLS = 6
@@ -196,6 +196,36 @@ class QbertWorld(World):
         Simple state representation for blocks around Qbert.
 
         None: unattainable
+        x: number of adjacent uncolored blocks, including current block (0, 1, 2, 3 or 4)
+        """
+        row, col = self.current_row, self.current_col
+        top_left = None
+        top_right = None
+        bot_left = None
+        bot_right = None
+        if col != 0:
+            top_left = self.num_adjacent_uncolored_blocks(row - 1, col - 1)
+        if col != row:
+            top_right = self.num_adjacent_uncolored_blocks(row - 1, col)
+        if row != NUM_ROWS - 1:
+            bot_left = self.num_adjacent_uncolored_blocks(row + 1, col)
+            bot_right = self.num_adjacent_uncolored_blocks(row + 1, col + 1)
+        return top_left, top_right, bot_left, bot_right
+
+    def num_adjacent_uncolored_blocks(self, row, col):
+        num_adjacent = 0
+        for diff_row, diff_col in ACTION_NUM_DIFFS_WITH_NOOP.values():
+            r = row + diff_row
+            c = col + diff_col
+            if 0 <= r < NUM_ROWS and 0 <= c <= r and self.block_colors[r][c] == 0:
+                num_adjacent += 1
+        return num_adjacent
+
+    def to_state_blocks_adjacent_old(self):
+        """
+        Simple state representation for blocks around Qbert.
+
+        None: unattainable
         0: uncolored block
         1: colored block
         2: adjacent uncolored block
@@ -275,6 +305,48 @@ class QbertWorld(World):
         return top_left, top_right, bot_left, bot_right
 
     def to_state_enemies_adjacent(self):
+        """
+        Adjacent state representation for enemies around Qbert.
+
+        None: unattainable/enemy
+        0: block
+        1: disc
+        2: enemy adjacent
+        """
+        row, col = self.current_row, self.current_col
+        top_left = None
+        top_right = None
+        bot_left = None
+        bot_right = None
+
+        if self.is_enemy_adjacent(row - 1, col - 1):
+            top_left = 2
+        elif col != 0 and self.enemies[row - 1][col - 1] == 0:
+            top_left = 0
+        elif col == 0 and self.discs[row][0] == 1:
+            top_left = 1
+            # TODO: Only go to discs when Coily is here, not purple ball.. (coily position in 0x27 and 0x45)
+
+        if self.is_enemy_adjacent(row - 1, col):
+            top_right = 2
+        elif col != row and self.enemies[row - 1][col] == 0:
+            top_right = 0
+        elif col == row and self.discs[row][1] == 1:
+            top_right = 1
+
+        if row != NUM_ROWS - 1:
+            if self.is_enemy_adjacent(row + 1, col):
+                bot_left = 2
+            elif self.enemies[row + 1][col] == 0:
+                bot_left = 0
+
+            if self.is_enemy_adjacent(row + 1, col + 1):
+                bot_right = 2
+            elif self.enemies[row + 1][col + 1] == 0:
+                bot_right = 0
+        return top_left, top_right, bot_left, bot_right
+
+    def to_state_enemies_adjacent_old(self):
         """
         Adjacent state representation for enemies around Qbert.
 
@@ -418,7 +490,10 @@ class QbertWorld(World):
 
         # Score
         score_color = self.rgb_screen[SCORE_Y][SCORE_X]
-        if not np.array_equal(score_color, COLOR_BLACK):
+        if self.screen_not_flashing() \
+                and not np.array_equal(score_color, COLOR_BLACK) \
+                and not np.array_equal(score_color, self.desired_color):
+            logging.info('Identified {} as new desired color'.format(score_color))
             self.desired_color = score_color
 
         self.enemy_present = False
@@ -453,7 +528,7 @@ class QbertWorld(World):
                         self.current_row, self.current_col = row, col
 
                 # Discs (relative to edge blocks)
-                if np.array_equal(self.rgb_screen[FLASH_CHECK_Y][FLASH_CHECK_X], COLOR_BLACK):
+                if self.screen_not_flashing():
                     if col == 0:
                         if np.array_equal(self.rgb_screen[rgb_y - DISC_OFFSET_Y][rgb_x - DISC_OFFSET_X], COLOR_BLACK):
                             self.discs[row][0] = 0
@@ -465,6 +540,12 @@ class QbertWorld(World):
                         else:
                             self.discs[row][1] = 1
         logging.debug('Discs: {}'.format(self.discs))
+
+    def screen_not_flashing(self):
+        """
+        Indicates the screen is flashing after a powerup.
+        """
+        return np.array_equal(self.rgb_screen[FLASH_CHECK_Y][FLASH_CHECK_X], COLOR_BLACK)
 
     def reset_position(self):
         reward = 0

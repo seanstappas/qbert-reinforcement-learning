@@ -43,12 +43,13 @@ class QLearner(Learner):
             return None
 
     def update(self, s, a, s_next, reward):
-        if self.exploration is 'optimistic' or self.exploration is 'combined':
-            self.q_update_optimistic(s, a, s_next, reward)
-        elif self.exploration is 'random':
-            self.q_update_random(s, a, s_next, reward)
-        logging.debug('Q matrix: {}'.format(self.Q.values()))
-        logging.debug('N matrix: {}'.format(self.N.values()))
+        self.q_update(s, a, s_next, reward)
+
+    def q_update(self, s, a, s_next, reward):
+        old_q = self.get_q(s, a)
+        new_q = old_q + self.alpha * (reward + self.gamma * self.get_max_q(s_next) - old_q)
+        self.Q[s, a] = new_q
+        self.update_close(a, new_q)
 
     def get_q(self, s, a):
         return self.Q.get((s, a), 0)
@@ -64,8 +65,9 @@ class QLearner(Learner):
         max_q = float('-inf')
         max_action = None
         for a in actions:
-            if self.get_q(s, a) > max_q:
-                max_q = self.get_q(s, a)
+            q = self.get_q(s, a)
+            if q > max_q:
+                max_q = q
                 max_action = a
         return max_action
 
@@ -104,19 +106,6 @@ class QLearner(Learner):
         for a in get_valid_action_numbers_from_state(s):
             max_q = max(max_q, self.Q.get((s, a), 0))
         return max_q
-
-    def q_update_optimistic(self, s, a, s_next, reward):
-        old_q = self.get_q(s, a)
-        self.N[s, a] = self.N.get((s, a), 0) + 1
-        new_q = old_q + self.alpha * self.N.get((s, a), 0) * (reward + self.gamma * self.get_max_q(s_next) - old_q)
-        self.Q[s, a] = new_q
-        self.update_close(a, new_q)
-
-    def q_update_random(self, s, a, s_next, reward):
-        old_q = self.get_q(s, a)
-        new_q = old_q + self.alpha * (reward + self.gamma * self.get_max_q(s_next) - old_q)
-        self.Q[s, a] = new_q
-        self.update_close(a, new_q)
 
     def update_close(self, a, new_q):
         states_close, actions_close = self.world.get_close_states_actions(a, distance_metric=self.distance_metric)
