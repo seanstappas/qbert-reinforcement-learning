@@ -55,6 +55,12 @@
 	
 	Many different state representations were used with varying results. First, a state representation was used keeping track of the color of every block, the position of disks, Qbert's position, the position of enemies (purple agents) and the position of friendlies (green agents). While this state representation completely encapsulates Qbert's world, it is very verbose and intractable if not using any distance metric, as described previously.
 	
+	With 21 blocks in the pyramid, an agent has 21 possible positions, representing 5 bits of entropy. This applies for Qbert, the enemies and the friendlies. A simple representation of the colors of the blocks can indicate if the block color is the goal color or not. With this binary value for each block, the colors can be represented with 21 bits. Finally, there are 12 possible locations for the disks, with each disk either being present or not, representing 12 bits of entropy. With all these elements in a state representation, we would need a total of $5*3 + 21 + 12 = 48$ bits to represent a state completely. This represents a state space with $2^{48} \approx 3 \times 10^{14}$ states. Clearly, this number of states is intractable for learning, showing the necessity for generalization with an appropriate distance metric.
+	
+	Another approach to generalization is to use a simpler state representation. A simpler state may not completely represent the game world, but can be enough for an agent to learn how to behave correctly. For example, instead of keeping track of all enemies and all blocks, one can only keep track of enemies and blocks around Qbert, since that is what is important for Qbert. One problem with this approach, however, is that it can be hard for the agent to learn to go towards all the blocks in a level to change all the colors and finish the level. More information, such as the number of colored blocks on the board, can then be provided as well.
+	
+	Finally, another way to deal with a very large state space is to separate the learning problem into sub-tasks. This is the subsumption model described by Mahadevan and Connell \cite{mahadevan}, and is explored further in \cref{sec:performance}.
+	
 	\section{Results of generalization}
 	% 10. results provided for at least 3 different generalization approaches (i.e., choice of components of the distance metric) and meaningful discussion regarding consequences to behaviour of game agent
 	
@@ -83,16 +89,28 @@
 	\section{Results of exploration}
 	% 10. results provided for at least 2 different exploration functions (i.e., weighting or N[s,a] in optimistic prior calculation) and meaningful discussion regarding consequences to behaviour of game agent
 	
-	The random exploration results can be seen in...
+	The $\epsilon$-greedy results can be seen in...
 	
 	% TODO: Tabulate score/level/screenshots for epsilon exploration
 	
+	One problem that was clear with $\epsilon$-greedy exploration is that it can be very slow to learn and waste a great deal of training time in the same states. For example, with $\epsilon$-greedy, Qbert would often oscillate between two adjacent blocks, not seeing the need to explore further until the it randomly chose (with probability $\epsilon$) to explore further. This can be seen in \cref{fig:random_oscillations}, where Qbert is oscillating between the bottom right block and the block to the top right of it.
+	
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[width=\columnwidth]{screenshots/random_oscillations_2.png}
+		\caption
+		{Screen capture during Qbert's oscillation between two states.}
+		\label{fig:random_oscillations}
+	\end{figure}
+
 	The weighted prior results can be seen in...
 	
 	% TODO: Tabulate score/level/screenshots for optimistic prior
 	
+	It was clear that using weighted prior led to much better results, since Qbert must visit all states in a level to complete it, and weighting the unvisited ones is intuitive.
 	
-	\section{Agent Performance}
+	
+	\section{Agent Performance} \label{sec:performance}
 	% 30. as above, including analysis of effects of game events on agent behaviour and strategies (e.g., enemy avoidance) AND explanation of results over trials with multiple seeds to demonstrate generalization of learning
 	
 	To learn individual strategies, the subsumption approach described by Mahadevan and Connell was employed \cite{mahadevan}. The agent is separated into three learners: an ``enemy avoider'', a ``friendly finder'' and a ``block finder''. The structure is shown in \cref{fig:subsumption}, where the ``S'' suppressor nodes denote priority, i.e., avoiding enemies takes priority over catching friendlies and going on blocks. This approach allows the agent to learn various aspects of the Qbert game independently, with a reduced state space for each task. This separation also makes intuitive sense, since learning how to avoid enemies should have little to do with finding blocks.
@@ -105,7 +123,7 @@
 		\label{fig:subsumption}
 	\end{figure}
 
-	The enemy avoider is active whenever an enemy (``Coily'' and ``Purple Ball'') is close to Qbert, i.e. in any of the blocks directly adjacent to Qbert or 2 blocks away. An important strategy is to kill the purple snake enemy (``Coily'') by jumping on to the floating discs on the left and right of the board. If Coily is nearby, he will jump off the board, giving Qbert 500 points. This score is fed as a reward to the enemy avoider learner. As a penalty for dying to Coily, a negative reward of $-100$ is given to the learner. This combination of positive and negative reinforcement allows the agent to learn how to avoid and kill Coily.
+	The enemy avoider is active whenever an enemy (``Coily'' and ``Purple Ball'') is close to Qbert, i.e. in any of the blocks directly adjacent to Qbert or 2 blocks away. An important strategy is to kill the purple snake enemy (``Coily'') by jumping on to the floating disks on the left and right of the board. If Coily is nearby, he will jump off the board, giving Qbert 500 points. This score is fed as a reward to the enemy avoider learner. As a penalty for dying to Coily, a negative reward of $-100$ is given to the learner. This combination of positive and negative reinforcement allows the agent to learn how to avoid and kill Coily.
 	
 	The friendly catcher is active whenever a friendly green agent (``Sam'' and ``Green Ball'') is within 2 blocks of Qbert. This learner encourages Qbert to catch Sam for 300 points and Green Ball for 100 points. Stopping Sam is also important because he changes the colors of blocks back to their original values, making Qbert do more work.
 	
