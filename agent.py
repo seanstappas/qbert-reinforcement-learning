@@ -71,7 +71,7 @@ class QbertBlockAgent(Agent):
 
     def action(self):
         s = self.world.to_state_blocks()
-        a = self.block_learner.get_best_action(s)
+        a = self.block_learner.get_best_single_action(s)
         block_score, friendly_score, enemy_score, enemy_penalty = self.world.perform_action(a)
         s_next = self.world.to_state_blocks()
         self.block_learner.update(s, a, s_next, block_score)
@@ -102,7 +102,7 @@ class QbertEnemyAgent(Agent):
 
     def action(self):
         s = self.world.to_state_enemies()
-        a = self.enemy_learner.get_best_action(s)
+        a = self.enemy_learner.get_best_single_action(s)
         block_score, friendly_score, enemy_score, enemy_penalty = self.world.perform_action(a)
         s_next = self.world.to_state_enemies()
         self.enemy_learner.update(s, a, s_next, enemy_score + enemy_penalty)
@@ -133,7 +133,7 @@ class QbertFriendlyAgent(Agent):
 
     def action(self):
         s = self.world.to_state_friendlies()
-        a = self.friendly_learner.get_best_action(s)
+        a = self.friendly_learner.get_best_single_action(s)
         block_score, friendly_score, enemy_score, enemy_penalty = self.world.perform_action(a)
         s_next = self.world.to_state_friendlies()
         self.friendly_learner.update(s, a, s_next, friendly_score)
@@ -159,7 +159,7 @@ class QbertCombinedVerboseAgent(Agent):
 
     def action(self):
         s = self.world.to_state_combined_verbose()
-        a = self.learner.get_best_action(s)
+        a = self.learner.get_best_single_action(s)
         block_score, friendly_score, enemy_score, enemy_penalty = self.world.perform_action(a)
         s_next = self.world.to_state_combined_verbose()
         self.learner.update(s, a, s_next, block_score + friendly_score + enemy_score + enemy_penalty)
@@ -180,12 +180,13 @@ class QbertSubsumptionAgent(Agent):
                  gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric,
                  combined_reward, state_representation):
         if state_representation is 'simple':
-            state_repr = 'simple'
+            block_state_repr = 'adjacent'
+            enemy_state_repr = 'adjacent_conservative'
+            friendly_state_repr = 'simple'
         else:
-            state_repr = 'verbose'
-        block_state_repr = 'adjacent'
-        enemy_state_repr = 'adjacent_conservative'
-        friendly_state_repr = 'simple'
+            block_state_repr = 'verbose'
+            enemy_state_repr = 'verbose'
+            friendly_state_repr = 'verbose'
         self.world = QbertWorld(random_seed, frame_skip, repeat_action_probability, sound, display_screen,
                                 block_state_repr=block_state_repr,
                                 enemy_state_repr=enemy_state_repr,

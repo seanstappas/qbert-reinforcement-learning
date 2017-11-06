@@ -21,6 +21,7 @@ def play_learning_agent(num_episodes=2, show_image=False, load_learning_filename
                         save_learning_filename=None, plot_filename=None, csv_filename=None, display_screen=False,
                         state_representation='simple', agent_type='subsumption', exploration=None,
                         distance_metric=None):
+    logging.info('Distance metric: {}'.format(distance_metric))
     agent = QbertAgent(display_screen=display_screen, state_representation=state_representation, agent_type=agent_type,
                        exploration=exploration, distance_metric=distance_metric)
     world = agent.world

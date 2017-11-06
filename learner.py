@@ -48,7 +48,7 @@ class QLearner(Learner):
         else:
             return self.get_best_actions_no_exploration(s)
 
-    def get_best_action(self, s):
+    def get_best_single_action(self, s):
         if self.exploration is 'optimistic':
             actions = self.get_best_actions_optimistic(s)
         elif self.exploration is 'random':
