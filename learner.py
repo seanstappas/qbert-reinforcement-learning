@@ -2,8 +2,10 @@ import logging
 import random
 from abc import ABCMeta, abstractmethod
 
-from actions import action_number_to_name, get_valid_action_numbers_from_state
+from actions import action_number_to_name, get_valid_action_numbers_from_state, get_action_number_diffs, \
+    get_valid_action_numbers, get_inverse_action
 from pickler import save_to_pickle, load_from_pickle
+from tuple_utils import list_to_tuple_with_value
 
 
 class Learner:

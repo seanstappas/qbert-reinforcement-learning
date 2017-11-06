@@ -78,11 +78,7 @@ def parse_command_line_arguments():
     args.func(args)
 
 
-if __name__ == '__main__':
-    setup_logging('info')
-    # play_learning_agent()
-
-    # Generalization results
+def save_generalization_results():
     distance_metric = 'no_generalization'
     play_learning_agent(num_episodes=100, plot_filename=distance_metric, csv_filename=distance_metric,
                         display_screen=False, agent_type='combined_verbose', exploration=None, distance_metric=None)
@@ -103,4 +99,15 @@ if __name__ == '__main__':
                         distance_metric=distance_metric)
 
 
-    # Exploration results
+def save_exploration_results():
+    pass
+
+
+def save_performance_results():
+    pass
+
+
+if __name__ == '__main__':
+    setup_logging('info')
+    # play_learning_agent()
+    save_generalization_results()

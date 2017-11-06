@@ -7,6 +7,7 @@ from ale_python_interface import ALEInterface
 
 from actions import get_action_diffs, action_number_to_name, \
     get_action_number_diffs, get_valid_action_numbers, get_inverse_action, ACTION_NUM_DIFFS, ACTION_NUM_DIFFS_WITH_NOOP
+from tuple_utils import list_to_tuple, list_to_tuple_with_value
 
 NUM_ROWS = 6
 NUM_COLS = 6
@@ -697,31 +698,30 @@ class QbertWorld(World):
         self.level = self.ram[LEVEL_BYTE] + 1
         return self.reset_position()
 
-    def get_next_state(self, a):
+    def get_next_state_verbose(self, a):
         diff_row, diff_col = get_action_number_diffs(a)
         new_position = self.current_row + diff_row, self.current_col + diff_col
         new_colors = list_to_tuple_with_value(self.block_colors, new_position[0], new_position[1], 1)
-        return new_position, new_colors
+        enemies = list_to_tuple(self.enemies)
+        friendlies = list_to_tuple(self.friendlies)
+        discs = list_to_tuple(self.discs)
+        return new_position, new_colors, enemies, friendlies, discs
 
     def get_close_states_actions(self, initial_action, distance_metric='simple'):
         states = []
         actions = []
-        if distance_metric is 'simple':
+        if distance_metric is 'manhattan':
             for a in get_valid_action_numbers(self.current_row, self.current_col):
-                states.append(self.get_next_state(a))
+                states.append(self.get_next_state_verbose(a))
                 actions.append(initial_action)
-        elif distance_metric is 'adjacent':
+        elif distance_metric is 'hamming':
             for a in get_valid_action_numbers(self.current_row, self.current_col):
-                states.append(self.get_next_state(a))
+                states.append(self.get_next_state_verbose(a))
+                actions.append(get_inverse_action(a))
+        elif distance_metric is 'same_result':
+            for a in get_valid_action_numbers(self.current_row, self.current_col):
+                s = self.get_next_state_verbose(a)
+                states.append(s)
                 actions.append(get_inverse_action(a))
         return states, actions
         # TODO: Update this distance metric
-
-
-def list_to_tuple(lst):
-    return tuple(tuple(x for x in row) for row in lst)
-
-
-def list_to_tuple_with_value(lst, row_num, col_num, val):
-    return tuple(tuple(x if i != row_num or j != col_num else val for j, x in enumerate(row))
-                 for i, row in enumerate(lst))
