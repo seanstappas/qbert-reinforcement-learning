@@ -45,24 +45,36 @@
 	\section{Description of approach to generalization}
 	% 10. provides expression for distance metric between two states and describes state representation used by the RL agent, also includes rationale for choice of components of the distance metric
 	
-	Many different distance metrics were used in the program.
+	Q-learning is the learning algorithm chosen for the agent. Many different distance metrics were used in the program, and close states are grouped based on this distance, as described by Mahadevan and Connell \cite{mahadevan}. Here are three simple distance metrics, with the rationale for each choice of components.
 	
+	\begin{description}
+		\item[Manhattan] The Manhattan distance represents how close two states are on the Qbert pyramid, i.e., the number of blocks between them. This is a natural representation of distance in this environment, since Qbert can only change state by switching blocks and can only travel one block at a time (with the exception of using disks to jump back to the starting position).
+		\item[Hamming] Hamming distance represents the number of different state bits between two given states. The rationale behind this distance metric is that nearby states should have a similar bit pattern, assuming a sane state representation.
+		\item[SameResult] This approach groups adjacent states together, such that, whenever a Q-update occurs for a certain Qbert position, all possible states that could have directly led to that state also get updated. The rationale here is that, for most states in the Qbert world, the path Qbert takes to get to that state is usually not important.
+	\end{description}
+	
+	Many different state representations were used with varying results. First, a state representation was used keeping track of the color of every block, the position of disks, Qbert's position, the position of enemies (purple agents) and the position of friendlies (green agents). While this state representation completely encapsulates Qbert's world, it is very verbose and intractable if not using any distance metric, as described previously.
 	
 	\section{Results of generalization}
 	% 10. results provided for at least 3 different generalization approaches (i.e., choice of components of the distance metric) and meaningful discussion regarding consequences to behaviour of game agent
 	
+	The results of using the previous three distance metrics can be seen in...
 	
 	\section{Description of approach to exploration}
 	% 10 provides expression for optimistic prior for (state, action) pairs with clear explanation of how agent chose action at each step and convincing rationale for the approach taken
 	
-	First, a simple random approach to exploration was implemented, where a random action is chosen with probability $\epsilon$ and the greedy action is chosen otherwise.
+	First, the $\epsilon$-greedy approach to exploration was implemented, where a random action is chosen with probability $\epsilon$ and the greedy action is chosen otherwise. An $\epsilon$ value of \SI{10}{\percent} was chosen. This is the approach chosen by many researchers using reinforcement learning in the ALE \cite{defazio,bellemare,mnih}. This method is attractive for many reasons. First, it is very simple to implement with any standard random number generator. Second, despite its simplicity, it can lead to very powerful results, since it can allow an agent to explore states it would never normally explore. However, convergence to an optimal policy can be slow with $\epsilon$-greedy. Also, this method can be dangerous in the Qbert game, where a bad random action can lead to sudden death.
 	
 	% TODO: Tabulate score/level/screenshots for epsilon exploration
 	
-	Next, weighting with optimistic priors was implemented, using $N(s, a)$, i.e., the number of times action $a$ has been attempted in state $s$.
+	Next, weighting with optimistic priors was implemented, using $N(s, a)$, i.e., the number of times action $a$ has been attempted in state $s$. The simple exploration function used can be seen in \cref{eq:exploration_function}. This method can often lead to meaningful convergence much faster than $\epsilon$-greedy, since it will directly explore unvisited states, instead of choosing randomly. This method is very attractive in the Qbert world, since exploring unexplored states usually means going on blocks without the goal color, turning them to the correct color.
 	
-	\begin{equation}
-		content...
+	\begin{equation} \label{eq:exploration_function}
+		f(u, n) =
+		\begin{cases}
+			100 & n < 1 \\
+			u & n \geq 1
+		\end{cases}
 	\end{equation}
 	
 	% TODO: Tabulate score/level/screenshots for optimistic prior
@@ -83,22 +95,35 @@
 	\section{Agent Performance}
 	% 30. as above, including analysis of effects of game events on agent behaviour and strategies (e.g., enemy avoidance) AND explanation of results over trials with multiple seeds to demonstrate generalization of learning
 	
+	To learn individual strategies, the subsumption approach described by Mahadevan and Connell was employed \cite{mahadevan}. The agent is separated into three learners: an ``enemy avoider'', a ``friendly finder'' and a ``block finder''. The structure is shown in \cref{fig:subsumption}, where the ``S'' suppressor nodes denote priority, i.e., avoiding enemies takes priority over catching friendlies and going on blocks. This approach allows the agent to learn various aspects of the Qbert game independently, with a reduced state space for each task. This separation also makes intuitive sense, since learning how to avoid enemies should have little to do with finding blocks.
+	
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[width=\columnwidth]{plots/subsumption.pdf}
+		\caption
+		{Subsumption network used by the agent.}
+		\label{fig:subsumption}
+	\end{figure}
+
+	The enemy avoider is active whenever an enemy (``Coily'' and ``Purple Ball'') is close to Qbert, i.e. in any of the blocks directly adjacent to Qbert or 2 blocks away. An important strategy is to kill the purple snake enemy (``Coily'') by jumping on to the floating discs on the left and right of the board. If Coily is nearby, he will jump off the board, giving Qbert 500 points. This score is fed as a reward to the enemy avoider learner. As a penalty for dying to Coily, a negative reward of $-100$ is given to the learner. This combination of positive and negative reinforcement allows the agent to learn how to avoid and kill Coily.
+	
+	The friendly catcher is active whenever a friendly green agent (``Sam'' and ``Green Ball'') is within 2 blocks of Qbert. This learner encourages Qbert to catch Sam for 300 points and Green Ball for 100 points. Stopping Sam is also important because he changes the colors of blocks back to their original values, making Qbert do more work.
+	
+	The block finder is always active and keeps track of the colors of blocks within 2 blocks' distance of Qbert. It specifically keeps track of the number of adjacent blocks that are not of the desired color, encouraging Qbert to change them to their correct color to eventually complete the level.
+	
+	Note that, although one learner's decision always has priority for executing an action, multiple learners can still learn simultaneously. For example, while Qbert is avoiding an enemy, the block finder learner can still be learning from the actions being taken.
+	
 	% TODO: Show score as function of number of games played (with multiple seeds, game events [enemies])
 	
 	% TODO: Explain how game events were handled (with subsumption diagram and suppressor nodes, agents taking precedence over blocks...)
-
-	\section*{Conclusion}
 	
-	
-	\section{Acknowledgments}
+	\section*{Acknowledgments}
 	
 	There was a discussion with Andrei Purcarus and Andrew Lowther concerning the positions of various important bytes in the ALE RAM, including the bytes indicating a safe move update and the byte indicating a level change.
 	
 	
-	% 
-	
-	%\renewcommand\refname{}
-	%\bibliographystyle{unsrt}
-	%\bibliography{readings}{}
+%	\renewcommand\refname{}
+	\bibliographystyle{unsrt}
+	\bibliography{readings}{}
 	
 \end{document}
