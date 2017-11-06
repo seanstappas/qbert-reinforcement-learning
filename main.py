@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from argparse import ArgumentParser
 
 from agent import QbertAgent
+from csv_utils import save_to_csv
 from plotter import plot_scores
 
 LOGGING_LEVELS = {
@@ -16,9 +17,12 @@ LOGGING_LEVELS = {
 }
 
 
-def play_learning_agent(num_episodes=50, show_image=False, load_learning_filename=None,
-                        save_learning_filename='test_combined_one_block_left_50', plot_filename='test2'):
-    agent = QbertAgent(display_screen=True)
+def play_learning_agent(num_episodes=2, show_image=False, load_learning_filename=None,
+                        save_learning_filename=None, plot_filename=None, csv_filename=None, display_screen=False,
+                        state_representation='simple', agent_type='subsumption', exploration=None,
+                        distance_metric=None):
+    agent = QbertAgent(display_screen=display_screen, state_representation=state_representation, agent_type=agent_type,
+                       exploration=exploration, distance_metric=distance_metric)
     world = agent.world
     max_score = 0
     scores = []
@@ -36,6 +40,8 @@ def play_learning_agent(num_episodes=50, show_image=False, load_learning_filenam
         logging.info('Episode {} ended with score: {}'.format(episode + 1, total_reward))
         max_score = max(max_score, total_reward)
         world.ale.reset_game()
+    if csv_filename is not None:
+        save_to_csv(scores, csv_filename)
     if plot_filename is not None:
         plot_scores(scores, plot_filename)
     if save_learning_filename is not None:
@@ -74,4 +80,27 @@ def parse_command_line_arguments():
 
 if __name__ == '__main__':
     setup_logging('info')
-    play_learning_agent()
+    # play_learning_agent()
+
+    # Generalization results
+    distance_metric = 'no_generalization'
+    play_learning_agent(num_episodes=100, plot_filename=distance_metric, csv_filename=distance_metric,
+                        display_screen=False, agent_type='combined_verbose', exploration=None, distance_metric=None)
+
+    distance_metric = 'manhattan'
+    play_learning_agent(num_episodes=100, plot_filename=distance_metric, csv_filename=distance_metric,
+                        display_screen=False, agent_type='combined_verbose', exploration=None,
+                        distance_metric=distance_metric)
+
+    distance_metric = 'hamming'
+    play_learning_agent(num_episodes=100, plot_filename=distance_metric, csv_filename=distance_metric,
+                        display_screen=False, agent_type='combined_verbose', exploration=None,
+                        distance_metric=distance_metric)
+
+    distance_metric = 'same_result'
+    play_learning_agent(num_episodes=100, plot_filename=distance_metric, csv_filename=distance_metric,
+                        display_screen=False, agent_type='combined_verbose', exploration=None,
+                        distance_metric=distance_metric)
+
+
+    # Exploration results

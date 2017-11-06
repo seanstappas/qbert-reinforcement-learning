@@ -150,6 +150,14 @@ class QbertWorld(World):
         self.friendly_state_repr = friendly_state_repr
         self.num_colored_blocks = 0
 
+    def to_state_combined_verbose(self):
+        current_position = self.current_row, self.current_col
+        colors = list_to_tuple(self.block_colors)
+        enemies = list_to_tuple(self.enemies)
+        friendlies = list_to_tuple(self.friendlies)
+        discs = list_to_tuple(self.discs)
+        return current_position, colors, enemies, friendlies, discs
+
     def to_state_blocks(self):
         if self.block_state_repr is 'simple':
             return self.to_state_blocks_simple()
@@ -333,8 +341,6 @@ class QbertWorld(World):
         return False
 
     def to_state_blocks_verbose(self):
-        if self.state_repr is 'simple':
-            return self.to_state_blocks_simple()
         current_position = self.current_row, self.current_col
         logging.debug('Current position: {}'.format(current_position))
         colors = list_to_tuple(self.block_colors)
@@ -709,6 +715,7 @@ class QbertWorld(World):
                 states.append(self.get_next_state(a))
                 actions.append(get_inverse_action(a))
         return states, actions
+        # TODO: Update this distance metric
 
 
 def list_to_tuple(lst):

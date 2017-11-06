@@ -1,6 +1,8 @@
 import numpy as np
 
+from csv_utils import save_to_csv, read_from_csv
 from pickler import save_to_pickle, load_from_pickle
+from plotter import plot_scores
 
 INITIAL_PARAMETERS1 = [
     [0],
@@ -60,5 +62,17 @@ def test_pickle():
     print(q2)
 
 
+def test_plot():
+    plot_scores([1, 10, 6, 3], 'test_plot')
+
+
+def test_csv():
+    lst = [4, 0, 19, 300, 20, 1]
+    filename = 'test'
+    save_to_csv(lst, filename)
+    lst2 = read_from_csv(filename)
+    print(lst2)
+
+
 if __name__ == '__main__':
-    test_pickle()
+    test_csv()

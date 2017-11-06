@@ -44,7 +44,18 @@ class QLearner(Learner):
         elif self.exploration is 'combined':
             return self.get_best_actions_combined(s)
         else:
-            return []
+            return self.get_best_actions_no_exploration(s)
+
+    def get_best_action(self, s):
+        if self.exploration is 'optimistic':
+            actions = self.get_best_actions_optimistic(s)
+        elif self.exploration is 'random':
+            actions = self.get_best_actions_random(s)
+        elif self.exploration is 'combined':
+            actions = self.get_best_actions_combined(s)
+        else:
+            actions = self.get_best_actions_no_exploration(s)
+        return random.choice(actions)
 
     def update(self, s, a, s_next, reward):
         self.q_update(s, a, s_next, reward)
@@ -64,13 +75,8 @@ class QLearner(Learner):
     def get_q(self, s, a):
         return self.Q.get((s, a), 0)
 
-    def get_best_actions_random(self, s):
+    def get_best_actions_no_exploration(self, s):
         actions = get_valid_action_numbers_from_state(s, self.state_repr)
-        logging.debug('Valid actions: {}'.format([action_number_to_name(a) for a in actions]))
-        if random.random() < self.epsilon:
-            action = random.choice(actions)
-            logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
-            return [action]
         max_q = float('-inf')
         max_actions = []
         for a in actions:
@@ -79,9 +85,17 @@ class QLearner(Learner):
                 max_q = q
                 max_actions = [a]
             elif q == max_q:
-                # Equal value actions
                 max_actions.append(a)
         return max_actions
+
+    def get_best_actions_random(self, s):
+        if random.random() < self.epsilon:
+            actions = get_valid_action_numbers_from_state(s, self.state_repr)
+            action = random.choice(actions)
+            logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
+            return [action]
+        else:
+            return self.get_best_actions_no_exploration(s)
 
     def exploration_function(self, s, a):
         if self.exploration_function_type is 'simple':
@@ -108,8 +122,8 @@ class QLearner(Learner):
         return max_actions
 
     def get_best_actions_combined(self, s):
-        actions = get_valid_action_numbers_from_state(s, self.state_repr)
         if random.random() < self.epsilon:
+            actions = get_valid_action_numbers_from_state(s, self.state_repr)
             action = random.choice(actions)
             logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
             return [action]

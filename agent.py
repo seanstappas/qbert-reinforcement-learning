@@ -18,23 +18,29 @@ class QbertAgent(Agent):
     def __init__(self, agent_type='subsumption', random_seed=123, frame_skip=4, repeat_action_probability=0,
                  sound=True, display_screen=True, alpha=0.1, gamma=0.95,
                  epsilon=0.2, unexplored_threshold=1, unexplored_reward=100, exploration='combined',
-                 distance_metric=None, combined_reward=True):
+                 distance_metric=None, combined_reward=True, state_representation='simple'):
         if agent_type is 'block':
             self.agent = QbertBlockAgent(random_seed, frame_skip, repeat_action_probability, sound, display_screen,
                                          alpha, gamma, epsilon, unexplored_threshold, unexplored_reward,
-                                         exploration, distance_metric)
+                                         exploration, distance_metric, state_representation)
         elif agent_type is 'enemy':
             self.agent = QbertEnemyAgent(random_seed, frame_skip, repeat_action_probability, sound, display_screen,
                                          alpha, gamma, epsilon, unexplored_threshold, unexplored_reward,
-                                         exploration, distance_metric)
+                                         exploration, distance_metric, state_representation)
         elif agent_type is 'friendly':
             self.agent = QbertFriendlyAgent(random_seed, frame_skip, repeat_action_probability, sound, display_screen,
                                             alpha, gamma, epsilon, unexplored_threshold, unexplored_reward,
-                                            exploration, distance_metric)
+                                            exploration, distance_metric, state_representation)
         elif agent_type is 'subsumption':
             self.agent = QbertSubsumptionAgent(random_seed, frame_skip, repeat_action_probability, sound,
                                                display_screen, alpha, gamma, epsilon, unexplored_threshold,
-                                               unexplored_reward, exploration, distance_metric, combined_reward)
+                                               unexplored_reward, exploration, distance_metric, combined_reward,
+                                               state_representation)
+        elif agent_type is 'combined_verbose':
+            self.agent = QbertCombinedVerboseAgent(random_seed, frame_skip, repeat_action_probability, sound,
+                                                   display_screen, alpha, gamma, epsilon, unexplored_threshold,
+                                                   unexplored_reward, exploration, distance_metric)
+
         self.world = self.agent.world
 
     def action(self):
@@ -52,8 +58,12 @@ class QbertAgent(Agent):
 
 class QbertBlockAgent(Agent):
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, alpha,
-                 gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric):
-        state_repr = 'along_direction'
+                 gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric,
+                 state_representation):
+        if state_representation is 'simple':
+            state_repr = 'along_direction'
+        else:
+            state_repr = 'verbose'
         self.world = QbertWorld(random_seed, frame_skip, repeat_action_probability, sound, display_screen,
                                 block_state_repr=state_repr)
         self.block_learner = QLearner(self.world, alpha, gamma, epsilon, unexplored_threshold, unexplored_reward,
@@ -61,7 +71,7 @@ class QbertBlockAgent(Agent):
 
     def action(self):
         s = self.world.to_state_blocks()
-        a = self.block_learner.get_best_actions(s)[0]
+        a = self.block_learner.get_best_action(s)
         block_score, friendly_score, enemy_score, enemy_penalty = self.world.perform_action(a)
         s_next = self.world.to_state_blocks()
         self.block_learner.update(s, a, s_next, block_score)
@@ -79,8 +89,12 @@ class QbertBlockAgent(Agent):
 
 class QbertEnemyAgent(Agent):
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, alpha,
-                 gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric):
-        state_repr = 'adjacent_conservative'
+                 gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric,
+                 state_representation):
+        if state_representation is 'simple':
+            state_repr = 'adjacent_conservative'
+        else:
+            state_repr = 'verbose'
         self.world = QbertWorld(random_seed, frame_skip, repeat_action_probability, sound, display_screen,
                                 enemy_state_repr=state_repr)
         self.enemy_learner = QLearner(self.world, alpha, gamma, epsilon, unexplored_threshold, unexplored_reward,
@@ -88,7 +102,7 @@ class QbertEnemyAgent(Agent):
 
     def action(self):
         s = self.world.to_state_enemies()
-        a = self.enemy_learner.get_best_actions(s)[0]
+        a = self.enemy_learner.get_best_action(s)
         block_score, friendly_score, enemy_score, enemy_penalty = self.world.perform_action(a)
         s_next = self.world.to_state_enemies()
         self.enemy_learner.update(s, a, s_next, enemy_score + enemy_penalty)
@@ -106,8 +120,12 @@ class QbertEnemyAgent(Agent):
 
 class QbertFriendlyAgent(Agent):
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, alpha,
-                 gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric):
-        state_repr = 'simple'
+                 gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric,
+                 state_representation):
+        if state_representation is 'simple':
+            state_repr = 'simple'
+        else:
+            state_repr = 'verbose'
         self.world = QbertWorld(random_seed, frame_skip, repeat_action_probability, sound, display_screen,
                                 friendly_state_repr=state_repr)
         self.friendly_learner = QLearner(self.world, alpha, gamma, epsilon, unexplored_threshold, unexplored_reward,
@@ -115,7 +133,7 @@ class QbertFriendlyAgent(Agent):
 
     def action(self):
         s = self.world.to_state_friendlies()
-        a = self.friendly_learner.get_best_actions(s)[0]
+        a = self.friendly_learner.get_best_action(s)
         block_score, friendly_score, enemy_score, enemy_penalty = self.world.perform_action(a)
         s_next = self.world.to_state_friendlies()
         self.friendly_learner.update(s, a, s_next, friendly_score)
@@ -131,10 +149,40 @@ class QbertFriendlyAgent(Agent):
         self.friendly_learner.load(filename)
 
 
+class QbertCombinedVerboseAgent(Agent):
+    def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, alpha,
+                 gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric):
+        state_repr = 'verbose'
+        self.world = QbertWorld(random_seed, frame_skip, repeat_action_probability, sound, display_screen)
+        self.learner = QLearner(self.world, alpha, gamma, epsilon, unexplored_threshold, unexplored_reward,
+                                exploration, distance_metric, state_repr)
+
+    def action(self):
+        s = self.world.to_state_combined_verbose()
+        a = self.learner.get_best_action(s)
+        block_score, friendly_score, enemy_score, enemy_penalty = self.world.perform_action(a)
+        s_next = self.world.to_state_combined_verbose()
+        self.learner.update(s, a, s_next, block_score + friendly_score + enemy_score + enemy_penalty)
+        return block_score + friendly_score + enemy_score
+
+    def q_size(self):
+        return len(self.learner.Q)
+
+    def save(self, filename):
+        self.learner.save(filename)
+
+    def load(self, filename):
+        self.learner.load(filename)
+
+
 class QbertSubsumptionAgent(Agent):
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, alpha,
                  gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric,
-                 combined_reward):
+                 combined_reward, state_representation):
+        if state_representation is 'simple':
+            state_repr = 'simple'
+        else:
+            state_repr = 'verbose'
         block_state_repr = 'adjacent'
         enemy_state_repr = 'adjacent_conservative'
         friendly_state_repr = 'simple'
@@ -154,7 +202,6 @@ class QbertSubsumptionAgent(Agent):
 
         # TODO: encourage exploration heavily for block learner, less for others
         # TODO: Qbert gets stuck in corners, dies to Coily
-        # TODO: Maybe problem giving green ball score to blocks? Stays at top...
         # TODO: Have number of blocks remaining in state?
         # TODO: Have distance to center in state for blocks?
         # TODO: Have level in state? To encourage exploration at every level?
