@@ -16,9 +16,9 @@ LOGGING_LEVELS = {
 }
 
 
-def play_learning_agent(num_episodes=1, show_image=False, load_learning_filename='test_pickle_130',
-                        save_learning_filename='test_pickle_131', plot_filename='adjacent_conservative_sub_combined'):
-    agent = QbertAgent()
+def play_learning_agent(num_episodes=50, show_image=False, load_learning_filename=None,
+                        save_learning_filename='test_combined_one_block_left_50', plot_filename='test2'):
+    agent = QbertAgent(display_screen=True)
     world = agent.world
     max_score = 0
     scores = []

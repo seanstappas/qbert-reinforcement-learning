@@ -77,7 +77,7 @@ DISC_OFFSET_X = 14
 NO_OP = 0
 
 SAM_SCORE = 300
-GREEN_BALL_SCORE = 100
+GREEN_BALL_OR_LEVEL_UP_SCORE = 100
 KILL_COILY_SCORE = 500
 LOSE_LIFE_PENALTY = -100
 
@@ -95,7 +95,8 @@ class World:
 
 
 class QbertWorld(World):
-    def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, state_repr):
+    def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen,
+                 block_state_repr=None, enemy_state_repr=None, friendly_state_repr=None):
         ale = ALEInterface()
 
         # Get & Set the desired settings
@@ -144,32 +145,39 @@ class QbertWorld(World):
         self.level = 1
         self.enemy_present = False
         self.friendly_present = False
-        self.state_repr = state_repr
+        self.block_state_repr = block_state_repr
+        self.enemy_state_repr = enemy_state_repr
+        self.friendly_state_repr = friendly_state_repr
+        self.num_colored_blocks = 0
 
     def to_state_blocks(self):
-        if self.state_repr is 'simple':
+        if self.block_state_repr is 'simple':
             return self.to_state_blocks_simple()
-        elif self.state_repr is 'adjacent' or self.state_repr is 'adjacent_conservative':
+        elif self.block_state_repr is 'adjacent':
             return self.to_state_blocks_adjacent()
-        elif self.state_repr is 'verbose':
+        elif self.block_state_repr is 'adjacent_one_block_left':
+            return self.to_state_blocks_adjacent_one_block_left()
+        elif self.block_state_repr is 'along_direction':
+            return self.to_state_blocks_along_direction()
+        elif self.block_state_repr is 'verbose':
             return self.to_state_blocks_verbose()
 
     def to_state_enemies(self):
-        if self.state_repr is 'simple':
+        if self.enemy_state_repr is 'simple':
             return self.to_state_enemies_simple()
-        elif self.state_repr is 'adjacent':
+        elif self.enemy_state_repr is 'adjacent':
             return self.to_state_enemies_adjacent()
-        elif self.state_repr is 'adjacent_conservative':
+        elif self.enemy_state_repr is 'adjacent_conservative':
             return self.to_state_enemies_adjacent_conservative()
-        elif self.state_repr is 'verbose':
+        elif self.enemy_state_repr is 'adjacent_conservative_with_position':
+            return self.to_state_enemies_adjacent_conservative_with_position()
+        elif self.enemy_state_repr is 'verbose':
             return self.to_state_enemies_verbose()
 
     def to_state_friendlies(self):
-        if self.state_repr is 'simple':
+        if self.friendly_state_repr is 'simple':
             return self.to_state_friendlies_simple()
-        elif self.state_repr is 'adjacent' or self.state_repr is 'adjacent_conservative':
-            return self.to_state_friendlies_simple()  # TODO: Make adjacent version of friendlies
-        elif self.state_repr is 'verbose':
+        elif self.friendly_state_repr is 'verbose':
             return self.to_state_friendlies_verbose()
 
     def to_state_blocks_simple(self):
@@ -214,6 +222,66 @@ class QbertWorld(World):
             bot_left = self.num_adjacent_uncolored_blocks(row + 1, col)
             bot_right = self.num_adjacent_uncolored_blocks(row + 1, col + 1)
         return top_left, top_right, bot_left, bot_right
+
+    def to_state_blocks_along_direction(self):
+        """
+        Simple state representation for blocks around Qbert.
+
+        None: unattainable
+        x: number of colored blocks along each action direction (0, 1, 2, 3, 4 or 5)
+        """
+        row = self.current_row
+        col = self.current_col
+        top_left = None
+        top_right = None
+        bot_left = None
+        bot_right = None
+        if col != 0:
+            top_left = self.num_blocks_along_direction(-1, -1)
+        if col != row:
+            top_right = self.num_blocks_along_direction(-1, 0)
+        if row != NUM_ROWS - 1:
+            bot_left = self.num_blocks_along_direction(1, 0)
+            bot_right = self.num_blocks_along_direction(1, 1)
+        return top_left, top_right, bot_left, bot_right
+
+    def num_blocks_along_direction(self, row_diff, col_diff):
+        r = self.current_row + row_diff
+        c = self.current_col + col_diff
+        num_colored = 0
+        while 0 <= r < NUM_ROWS and 0 <= c <= r:
+            if self.block_colors[r][c] == 1:
+                num_colored += 1
+            r += row_diff
+            c += col_diff
+        return num_colored
+
+    def to_state_blocks_adjacent_one_block_left(self):
+        """
+        Simple state representation for blocks around Qbert.
+
+        None: unattainable
+        x: number of adjacent uncolored blocks, including current block (0, 1, 2, 3 or 4)
+
+        final boolean: True if one uncolored block remaining
+        """
+        row, col = self.current_row, self.current_col
+        top_left = None
+        top_right = None
+        bot_left = None
+        bot_right = None
+        if col != 0:
+            top_left = self.num_adjacent_uncolored_blocks(row - 1, col - 1)
+        if col != row:
+            top_right = self.num_adjacent_uncolored_blocks(row - 1, col)
+        if row != NUM_ROWS - 1:
+            bot_left = self.num_adjacent_uncolored_blocks(row + 1, col)
+            bot_right = self.num_adjacent_uncolored_blocks(row + 1, col + 1)
+        one_block_remaining = self.is_one_block_remaining()
+        return top_left, top_right, bot_left, bot_right, one_block_remaining
+
+    def is_one_block_remaining(self):
+        return self.num_colored_blocks == 20
 
     def num_adjacent_uncolored_blocks(self, row, col):
         num_adjacent = 0
@@ -390,6 +458,53 @@ class QbertWorld(World):
                 bot_right = 0
         return top_left, top_right, bot_left, bot_right
 
+    def to_state_enemies_adjacent_conservative_with_position(self):
+        """
+        Adjacent state representation for enemies around Qbert.
+
+        (top_left, top_right, bot_left, bot_right, row, col)
+
+        For top_left, top_right, bot_left, bot_right:
+            None: unattainable/enemy/enemy adjacent
+            0: block
+            1: disc
+
+        row and col:
+            Represent Qbert's position on the board
+        """
+        row, col = self.current_row, self.current_col
+        top_left = None
+        top_right = None
+        bot_left = None
+        bot_right = None
+
+        if self.is_enemy_adjacent(row - 1, col - 1):
+            top_left = None
+        elif col != 0 and self.enemies[row - 1][col - 1] == 0:
+            top_left = 0
+        elif col == 0 and self.discs[row][0] == 1:
+            top_left = 1
+            # TODO: Only go to discs when Coily is here, not purple ball.. (coily position in 0x27 and 0x45)
+
+        if self.is_enemy_adjacent(row - 1, col):
+            top_right = None
+        elif col != row and self.enemies[row - 1][col] == 0:
+            top_right = 0
+        elif col == row and self.discs[row][1] == 1:
+            top_right = 1
+
+        if row != NUM_ROWS - 1:
+            if self.is_enemy_adjacent(row + 1, col):
+                bot_left = None
+            elif self.enemies[row + 1][col] == 0:
+                bot_left = 0
+
+            if self.is_enemy_adjacent(row + 1, col + 1):
+                bot_right = None
+            elif self.enemies[row + 1][col + 1] == 0:
+                bot_right = 0
+        return top_left, top_right, bot_left, bot_right, self.current_row, self.current_col
+
     def is_enemy_adjacent(self, row, col):
         if 0 <= row < NUM_ROWS and 0 <= col <= row and self.enemies[row][col] != 1:
             for diff_row, diff_col in ACTION_NUM_DIFFS.values():
@@ -459,6 +574,7 @@ class QbertWorld(World):
         score += self.ale.act(a)
         initial_num_lives = self.ale.lives()
         self.ale.getRAM(self.ram)
+        level_up_score = 0
         while not (self.ram[0] == 0 and self.ram[self.ram_size - 1] & 1):  # last bit = 1 and first byte = 0
             if self.ale.lives() < initial_num_lives:
                 enemy_penalty = LOSE_LIFE_PENALTY
@@ -470,15 +586,27 @@ class QbertWorld(World):
             elif score_diff == KILL_COILY_SCORE:
                 logging.info('Killed Coily!')
                 enemy_score = score_diff
+            elif score_diff == GREEN_BALL_OR_LEVEL_UP_SCORE:
+                while score_diff == GREEN_BALL_OR_LEVEL_UP_SCORE:
+                    level_up_score += score_diff
+                    score_diff = self.ale.act(NO_OP)
             else:
                 score += score_diff
             self.ale.getRAM(self.ram)
 
+        if level_up_score != 0:
+            if level_up_score == GREEN_BALL_OR_LEVEL_UP_SCORE:
+                # Green Ball
+                friendly_score = level_up_score
+            else:
+                # Level Up
+                score += level_up_score
+
         if self.ram[LEVEL_BYTE] + 1 != self.level:
-            logging.info('Current level: {}'.format(self.level))
+            logging.debug('Current level: {}'.format(self.level))
             self.level = self.ram[LEVEL_BYTE] + 1
             logging.info('Level won! Progressing to level {}'.format(self.level))
-            score += self.reset_position()
+            # score += self.reset_position()
         self.update_rgb()
         return score, friendly_score, enemy_score, enemy_penalty
 
@@ -499,12 +627,14 @@ class QbertWorld(World):
 
         self.enemy_present = False
         self.friendly_present = False
+        self.num_colored_blocks = 0
         for row in range(NUM_ROWS):
             for col in range(row + 1):
                 rgb_y, rgb_x = BLOCK_COORDINATES[row][col]
 
                 # Color of block
                 if np.array_equal(self.rgb_screen[rgb_y][rgb_x], self.desired_color):
+                    self.num_colored_blocks += 1
                     self.block_colors[row][col] = 1
                 else:
                     self.block_colors[row][col] = 0

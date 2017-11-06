@@ -10,7 +10,7 @@ class Learner:
     __metaclass__ = ABCMeta
 
     @abstractmethod
-    def get_best_action(self, s):
+    def get_best_actions(self, s):
         raise NotImplementedError
 
     @abstractmethod
@@ -20,7 +20,8 @@ class Learner:
 
 class QLearner(Learner):
     def __init__(self, world, alpha, gamma, epsilon, unexplored_threshold, unexplored_reward, exploration,
-                 distance_metric, state_repr, initial_q=None, initial_n=None):
+                 distance_metric, state_repr, initial_q=None, initial_n=None, tag=None,
+                 exploration_function_type='simple'):
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
@@ -32,16 +33,18 @@ class QLearner(Learner):
         self.N = initial_n if initial_n is not None else {}
         self.world = world
         self.state_repr = state_repr
+        self.tag = tag
+        self.exploration_function_type = exploration_function_type
 
-    def get_best_action(self, s):
+    def get_best_actions(self, s):
         if self.exploration is 'optimistic':
-            return self.get_best_action_optimistic(s)
+            return self.get_best_actions_optimistic(s)
         elif self.exploration is 'random':
-            return self.get_best_action_random(s)
+            return self.get_best_actions_random(s)
         elif self.exploration is 'combined':
-            return self.get_best_action_combined(s)
+            return self.get_best_actions_combined(s)
         else:
-            return None
+            return []
 
     def update(self, s, a, s_next, reward):
         self.q_update(s, a, s_next, reward)
@@ -61,52 +64,67 @@ class QLearner(Learner):
     def get_q(self, s, a):
         return self.Q.get((s, a), 0)
 
-    def get_best_action_random(self, s):
+    def get_best_actions_random(self, s):
         actions = get_valid_action_numbers_from_state(s, self.state_repr)
         logging.debug('Valid actions: {}'.format([action_number_to_name(a) for a in actions]))
         if random.random() < self.epsilon:
             action = random.choice(actions)
             logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
-            return action
-        random.shuffle(actions)  # If equal values, will choose random one
+            return [action]
         max_q = float('-inf')
-        max_action = None
+        max_actions = []
         for a in actions:
             q = self.get_q(s, a)
             if q > max_q:
                 max_q = q
-                max_action = a
-        return max_action
+                max_actions = [a]
+            elif q == max_q:
+                # Equal value actions
+                max_actions.append(a)
+        return max_actions
 
-    def get_best_action_optimistic(self, s):
+    def exploration_function(self, s, a):
+        if self.exploration_function_type is 'simple':
+            return self.exploration_function_simple(s, a)
+        else:
+            return None
+
+    def exploration_function_simple(self, s, a):
+        return self.unexplored_reward if self.N.get((s, a), 0) < self.unexplored_threshold else self.get_q(s, a)
+
+    def get_best_actions_optimistic(self, s):
         actions = get_valid_action_numbers_from_state(s, self.state_repr)
         logging.debug('Valid actions: {}'.format([action_number_to_name(a) for a in actions]))
         max_q = float('-inf')
-        max_action = None
-        random.shuffle(actions)
+        max_actions = []
         for a in actions:
-            q = self.unexplored_reward if self.N.get((s, a), 0) < self.unexplored_threshold else self.get_q(s, a)
+            q = self.exploration_function(s, a)
             if q > max_q:
                 max_q = q
-                max_action = a
-        return max_action
+                max_actions = [a]
+            elif q == max_q:
+                # Equal value actions
+                max_actions.append(a)
+        return max_actions
 
-    def get_best_action_combined(self, s):
+    def get_best_actions_combined(self, s):
         actions = get_valid_action_numbers_from_state(s, self.state_repr)
         if random.random() < self.epsilon:
             action = random.choice(actions)
             logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
-            return action
-        logging.debug('Valid actions: {}'.format([action_number_to_name(a) for a in actions]))
+            return [action]
+        else:
+            return self.get_best_actions_optimistic(s)
+
+    def get_best_action(self, s, actions):
+        best_action = None
         max_q = float('-inf')
-        max_action = None
-        random.shuffle(actions)
         for a in actions:
-            q = self.unexplored_reward if self.N.get((s, a), 0) < self.unexplored_threshold else self.get_q(s, a)
+            q = self.get_q(s, a)
             if q > max_q:
                 max_q = q
-                max_action = a
-        return max_action
+                best_action = a
+        return best_action
 
     def get_max_q(self, s):
         max_q = float('-inf')

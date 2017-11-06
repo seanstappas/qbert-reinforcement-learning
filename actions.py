@@ -61,9 +61,15 @@ INVERSE_ACTIONS = {
 
 
 def get_valid_action_numbers_from_state(s, state_repr='simple'):
-    if state_repr is 'simple' or state_repr is 'adjacent' or state_repr is 'adjacent_conservative':
+    if state_repr is 'verbose':
+        row, col = s[0]
+        return get_valid_action_numbers(row, col)
+    else:
         actions = []
-        top_left, top_right, bot_left, bot_right = s
+        top_left = s[0]
+        top_right = s[1]
+        bot_left = s[2]
+        bot_right = s[3]
         if top_left is not None:
             actions.append(ACTIONS_TO_NUMBERS['left'])
         if top_right is not None:
@@ -73,11 +79,6 @@ def get_valid_action_numbers_from_state(s, state_repr='simple'):
         if bot_right is not None:
             actions.append(ACTIONS_TO_NUMBERS['right'])
         return actions
-    elif state_repr is 'verbose':
-        row, col = s[0]
-        return get_valid_action_numbers(row, col)
-    else:
-        return []
 
 
 def get_valid_action_numbers(row, col):
