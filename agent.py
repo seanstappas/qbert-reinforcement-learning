@@ -15,7 +15,7 @@ class Agent:
 
 class QbertAgent(Agent):
     def __init__(self, agent_type='subsumption', random_seed=123, frame_skip=4, repeat_action_probability=0,
-                 sound=True, display_screen=False, state_repr='adjacent_conservative', alpha=0.1, gamma=0.95,
+                 sound=True, display_screen=True, state_repr='adjacent_conservative', alpha=0.1, gamma=0.95,
                  epsilon=0.2, unexplored_threshold=1, unexplored_reward=100, exploration='combined',
                  distance_metric=None):
         if agent_type is 'block':
@@ -137,7 +137,10 @@ class QbertSubsumptionAgent(Agent):
                                       exploration, distance_metric, state_repr)
 
         # TODO: encourage exploration heavily for block learner, less for others
-        # TODO: Qbert gets stuck in corners...
+        # TODO: Qbert gets stuck in corners, dies to Coily
+        # TODO: Maybe problem giving green ball score to blocks? Stays at top...
+        # TODO: Have number of blocks remaining in state?
+        # TODO: Have distance to center in state for blocks?
 
     def action(self):
         enemy_present = self.world.is_enemy_nearby()
