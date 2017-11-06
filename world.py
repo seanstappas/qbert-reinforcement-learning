@@ -482,8 +482,6 @@ class QbertWorld(World):
         self.update_rgb()
         return score, friendly_score, enemy_score, enemy_penalty
 
-    # TODO: When Qbert gets powerup, jumps off screen
-
     def result_position(self, action):
         diff_row, diff_col = get_action_diffs(action)
         return self.current_row + diff_row, self.current_col + diff_col

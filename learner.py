@@ -51,6 +51,10 @@ class QLearner(Learner):
             self.N[s, a] = self.N.get((s, a), 0) + 1
         old_q = self.get_q(s, a)
         new_q = old_q + self.alpha * (reward + self.gamma * self.get_max_q(s_next) - old_q)
+        if new_q == float('inf'):
+            logging.info('Infinite Q saved!')
+        if new_q == float('-inf'):
+            logging.info('-Infinite Q saved!')
         self.Q[s, a] = new_q
         self.update_close(a, new_q)
 
@@ -108,7 +112,7 @@ class QLearner(Learner):
         max_q = float('-inf')
         for a in get_valid_action_numbers_from_state(s):
             max_q = max(max_q, self.Q.get((s, a), 0))
-        return max_q
+        return max_q if max_q != float('-inf') else 0
 
     def update_close(self, a, new_q):
         states_close, actions_close = self.world.get_close_states_actions(a, distance_metric=self.distance_metric)

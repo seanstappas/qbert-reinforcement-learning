@@ -53,7 +53,7 @@ def test_return_none(param):
 
 
 def test_pickle():
-    q = {(1, 2): 5, (5, 6): 10}
+    q = {(1, 2): 5, (5, 6): 10, 4: float('-inf')}
     print(q)
     save_to_pickle(q, 'test')
     q2 = load_from_pickle('test')

@@ -137,6 +137,7 @@ class QbertSubsumptionAgent(Agent):
                                       exploration, distance_metric, state_repr)
 
         # TODO: encourage exploration heavily for block learner, less for others
+        # TODO: Qbert gets stuck in corners...
 
     def action(self):
         enemy_present = self.world.is_enemy_nearby()
