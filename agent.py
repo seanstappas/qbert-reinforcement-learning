@@ -141,6 +141,7 @@ class QbertSubsumptionAgent(Agent):
         # TODO: Maybe problem giving green ball score to blocks? Stays at top...
         # TODO: Have number of blocks remaining in state?
         # TODO: Have distance to center in state for blocks?
+        # TODO: Have level in state? To encourage exploration at every level?
 
     def action(self):
         enemy_present = self.world.is_enemy_nearby()
