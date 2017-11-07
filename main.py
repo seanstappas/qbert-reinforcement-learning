@@ -1,12 +1,8 @@
 import logging
 
-import matplotlib.pyplot as plt
-
 from argparse import ArgumentParser
-
 from agent import QbertAgent
 from csv_utils import save_to_csv
-from plotter import plot_scores
 
 LOGGING_LEVELS = {
     'info': logging.INFO,
@@ -42,6 +38,7 @@ def play_learning_agent(num_episodes=2, show_image=False, load_learning_filename
         while not world.ale.game_over():
             total_reward += agent.action()
         if show_image:
+            import matplotlib.pyplot as plt
             plt.imshow(world.rgb_screen)
             plt.show()
         scores.append(total_reward)
@@ -52,6 +49,7 @@ def play_learning_agent(num_episodes=2, show_image=False, load_learning_filename
     if csv_filename is not None:
         save_to_csv(scores, csv_filename)
     if plot_filename is not None:
+        from plotter import plot_scores
         plot_scores(scores, plot_filename)
     if save_learning_filename is not None:
         agent.save(save_learning_filename)
@@ -99,7 +97,7 @@ def parse_command_line_arguments():
                         help='The exploration mode to use.')
     parser.add_argument('-m', '--distance_metric', default=None, choices=['manhattan', 'hamming', 'same_result'],
                         help='The distance metric to use.')
-    parser.add_argument('-r', '--random_seed', default=None, type=int,
+    parser.add_argument('-r', '--random_seed', default=123, type=int,
                         help='The random seed to use.')
     parser.add_argument('-i', '--show_image', default=False, type=bool,
                         help='Whether to show a screenshot at the end of every episode.')
