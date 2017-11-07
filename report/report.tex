@@ -45,7 +45,7 @@
 	\section{Description of approach to generalization} \label{sec:generalization_description}
 	% 10. provides expression for distance metric between two states and describes state representation used by the RL agent, also includes rationale for choice of components of the distance metric
 	
-	Q-learning is the learning algorithm chosen for the agent. Many different distance metrics were used in the program, and close states are grouped based on this distance, as described by Mahadevan and Connell \cite{mahadevan}. Here are three simple distance metrics, with the rationale for each choice of components.
+	Q-learning is the learning algorithm chosen for the agent. Many different distance metrics experimented with in the program, as described by Mahadevan and Connell \cite{mahadevan}. Here are three simple distance metrics, with the rationale for each choice of components.
 	
 	\begin{description}
 		\item[Manhattan] The \textsc{Manhattan} distance represents how close two states are on the Qbert pyramid, i.e., the number of blocks between them. This is a natural representation of distance in this environment, since Qbert can only change state by switching blocks and can only travel one block at a time (with the exception of using disks to jump back to the starting position). A distance of 1 was used for \textsc{Manhattan}.
@@ -172,7 +172,7 @@
 		\label{fig:subsumption_optimistic}
 	\end{figure}
 	
-	The results of the \textsc{Subsumption} agent using \textsc{Combined} exploration can be seen in \cref{fig:subsumption_combined}. These results are much more encouraging. We can see the same initial high score values as for \textsc{Random} exploration, with a clear increasing trend.
+	The results of the \textsc{Subsumption} agent using \textsc{Combined} exploration can be seen in \cref{fig:subsumption_combined}. These results are much more encouraging. We can see the same initial high score values as for \textsc{Random} exploration, with a clear increasing trend. This approach encourages Qbert to visit unexplored states, while also randomly visiting states that may lead to more unexplored states.
 	
 	\begin{figure}[!htb]
 		\centering
@@ -182,6 +182,7 @@
 		\label{fig:subsumption_combined}
 	\end{figure}
 	
+	Of course, as described previously, the task of avoiding enemies is itself a good way of exploring the state space and completing a level, since it will force Qbert to jump around the pyramid and visit blocks to make them the right color.
 	
 	\section{Agent Performance} \label{sec:performance}
 	% 30. as above, including analysis of effects of game events on agent behaviour and strategies (e.g., enemy avoidance) AND explanation of results over trials with multiple seeds to demonstrate generalization of learning
