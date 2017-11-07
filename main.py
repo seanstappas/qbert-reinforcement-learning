@@ -104,7 +104,7 @@ def parse_command_line_arguments():
     parser.add_argument('-i', '--show_image', default=False, type=bool,
                         help='Whether to show a screenshot at the end of every episode.')
 
-    args = parser.parse_args('-help'.split())
+    args = parser.parse_args()
     setup_logging(args.logging_level)
     play_learning_agent(num_episodes=args.num_episodes,
                         load_learning_filename=args.load_learning_filename,
