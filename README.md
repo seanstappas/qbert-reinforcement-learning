@@ -78,6 +78,8 @@ The default values of all the parameters can be found in the `main.py` file.
 
 The bulk of the code can be found the `actions.py`, `agent.py`, `learner.py` and `world.py` files.
 
+Saved Q-learning values are saved to the `pickle` directory via the `pickle` python library and can be loaded via command-line arguments.
+
 ## Report
 
 The report (`report.pdf`) and all related files (tex, plots, logs and CSV files) can be found in the `report` directory.
