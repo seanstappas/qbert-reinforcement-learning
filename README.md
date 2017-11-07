@@ -1,5 +1,5 @@
 # Reinforcement Learning
-Plays the Qbert game by reinforcement learning. This is assignment 3 of the ECSE-526 class, as described [here](http://www.cim.mcgill.ca/~jer/courses/ai/assignments/as3.html).
+Plays the Qbert game by reinforcement learning. This is assignment 3 of the ECSE-526 class, as described [here](http://www.cim.mcgill.ca/~jer/courses/ai/assignments/as3.html). Gameplay can be seen in [this video](https://youtu.be/BKp70AEndy8).
 
 ## Installation
 
