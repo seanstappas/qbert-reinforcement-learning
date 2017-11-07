@@ -21,6 +21,9 @@ def play_learning_agent(num_episodes=2, show_image=False, load_learning_filename
                         save_learning_filename=None, plot_filename=None, csv_filename=None, display_screen=False,
                         state_representation='simple', agent_type='subsumption', exploration=None,
                         distance_metric=None, random_seed=123):
+    """
+    Let the learning agent play with the specified parameters.
+    """
     logging.info('Plot filename: {}'.format(plot_filename))
     logging.info('Agent type: {}'.format(agent_type))
     logging.info('Distance metric: {}'.format(distance_metric))
@@ -68,105 +71,55 @@ def setup_logging(level):
         datefmt='%d-%m-%Y:%H:%M:%S',
         level=LOGGING_LEVELS[level])
 
-
 def parse_command_line_arguments():
     """
     Parse the command-line arguments provided by the user.
     """
-    parser = ArgumentParser(description='Reinforcement Learning with Q*bert.')
+    parser = ArgumentParser(description='Reinforcement Learning with Qbert.')
     parser.add_argument('-l', '--logging_level', default='info', choices=LOGGING_LEVELS.keys(),
                         help='The logging level.')
+    parser.add_argument('-e', '--num_episodes', default=100, type=int, help='The number of training episodes.')
+    parser.add_argument('-o', '--load_learning_filename', default=None,
+                        help="The pickle file to load learning data from. To run the agent with pre-trained Q data, set"
+                             " this parameter to 'data'")
+    parser.add_argument('-f', '--save_learning_filename', default=None,
+                        help='The pickle file to save learning data to.')
+    parser.add_argument('-p', '--plot_filename', default=None,
+                        help='The filename to save a score plot to.')
+    parser.add_argument('-c', '--csv_filename', default=None,
+                        help='The filename to save a score CSV file to.')
+    parser.add_argument('-d', '--display_screen', default=False, type=bool,
+                        help='Whether to display the ALE screen.')
+    parser.add_argument('-s', '--state_representation', default='simple', choices=['simple', 'verbose'],
+                        help='The state representation to use.')
+    parser.add_argument('-a', '--agent_type', default='subsumption',
+                        choices=['block', 'enemy', 'friendly', 'subsumption', 'combined_verbose'],
+                        help='The agent type to use.')
+    parser.add_argument('-x', '--exploration', default='combined', choices=['random', 'optimistic', 'combined'],
+                        help='The exploration mode to use.')
+    parser.add_argument('-m', '--distance_metric', default=None, choices=['manhattan', 'hamming', 'same_result'],
+                        help='The distance metric to use.')
+    parser.add_argument('-r', '--random_seed', default=None, type=int,
+                        help='The random seed to use.')
+    parser.add_argument('-i', '--show_image', default=False, type=bool,
+                        help='Whether to show a screenshot at the end of every episode.')
 
-    subparsers = parser.add_subparsers()
-
-    args = parser.parse_args()
+    args = parser.parse_args('-help'.split())
     setup_logging(args.logging_level)
-    args.func(args)
-
-
-def save_generalization_results():
-    distance_metric = 'no_generalization'
-    play_learning_agent(num_episodes=100, plot_filename=distance_metric, csv_filename=distance_metric,
-                        display_screen=False, agent_type='combined_verbose', exploration=None, distance_metric=None)
-
-    distance_metric = 'manhattan'
-    play_learning_agent(num_episodes=100, plot_filename=distance_metric, csv_filename=distance_metric,
-                        display_screen=False, agent_type='combined_verbose', exploration=None,
-                        distance_metric=distance_metric)
-
-    distance_metric = 'hamming'
-    play_learning_agent(num_episodes=100, plot_filename=distance_metric, csv_filename=distance_metric,
-                        display_screen=False, agent_type='combined_verbose', exploration=None,
-                        distance_metric=distance_metric)
-
-    distance_metric = 'same_result'
-    play_learning_agent(num_episodes=100, plot_filename=distance_metric, csv_filename=distance_metric,
-                        display_screen=False, agent_type='combined_verbose', exploration=None,
-                        distance_metric=distance_metric)
-
-    filename = 'subsumption_generalization'
-    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
-                        display_screen=False, agent_type='subsumption', exploration=None,
-                        distance_metric=None, save_learning_filename='subsumption_dangerous_no_exploration')
-
-
-def save_exploration_results():
-    filename = 'subsumption_random'
-    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
-                        display_screen=False, agent_type='subsumption', exploration='random',
-                        distance_metric=None, save_learning_filename='subsumption_dangerous_random')
-
-    filename = 'subsumption_optimistic'
-    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
-                        display_screen=False, agent_type='subsumption', exploration='optimistic',
-                        distance_metric=None, save_learning_filename='subsumption_dangerous_optimistic')
-
-    filename = 'subsumption_combined'
-    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
-                        display_screen=False, agent_type='subsumption', exploration='combined',
-                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined')
-
-
-def save_performance_results():
-    filename = 'seed123'
-    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
-                        display_screen=False, agent_type='subsumption', exploration='combined',
-                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_123',
-                        random_seed=123)
-
-    filename = 'seed459'
-    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
-                        display_screen=False, agent_type='subsumption', exploration='combined',
-                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_459',
-                        random_seed=459)
-
-    filename = 'seed598'
-    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
-                        display_screen=False, agent_type='subsumption', exploration='combined',
-                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_598',
-                        random_seed=459)
-
-
-def continued_learning():
-    filename = 'seed459_600'
-    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
-                        display_screen=False, agent_type='subsumption', exploration='combined',
-                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_459_600',
-                        random_seed=459, load_learning_filename='subsumption_dangerous_combined_459_500')
-
-
-def sample_play():
-    play_learning_agent(num_episodes=100,
-                        display_screen=True, agent_type='subsumption', exploration='combined',
-                        distance_metric=None,
-                        random_seed=459, load_learning_filename='subsumption_dangerous_combined_459_400')
+    play_learning_agent(num_episodes=args.num_episodes,
+                        load_learning_filename=args.load_learning_filename,
+                        save_learning_filename=args.save_learning_filename,
+                        plot_filename=args.plot_filename,
+                        csv_filename=args.csv_filename,
+                        display_screen=args.display_screen,
+                        state_representation=args.state_representation,
+                        agent_type=args.agent_type,
+                        exploration=args.exploration,
+                        distance_metric=args.distance_metric,
+                        random_seed=args.random_seed,
+                        show_image=args.show_image)
 
 
 if __name__ == '__main__':
     setup_logging('info')
-    # play_learning_agent()
-    # save_generalization_results()
-    # save_exploration_results()
-    # save_performance_results()
-    continued_learning()
-    # sample_play()
+    parse_command_line_arguments()

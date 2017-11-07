@@ -21,7 +21,6 @@ def plot_scores(scores, filename):
     x_smooth = np.linspace(1, len(scores), 200)
     y_smooth = spline(x_points, y_points, x_smooth)
 
-    # plt.plot(x_points, y_points, 'o', label='Data')
     plt.plot(x_smooth, y_smooth, 'C0', label='Score')
     plt.xlabel('Number of episodes')
     plt.ylabel('Score')

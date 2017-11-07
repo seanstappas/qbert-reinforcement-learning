@@ -46,7 +46,6 @@ class QbertAgent(Agent):
             self.agent = QbertCombinedVerboseAgent(random_seed, frame_skip, repeat_action_probability, sound,
                                                    display_screen, alpha, gamma, epsilon, unexplored_threshold,
                                                    unexplored_reward, exploration, distance_metric)
-
         self.world = self.agent.world
 
     def action(self):
