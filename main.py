@@ -102,7 +102,7 @@ def save_generalization_results():
                         display_screen=False, agent_type='combined_verbose', exploration=None,
                         distance_metric=distance_metric)
 
-    filename = 'subsumption_generalization2'
+    filename = 'subsumption_generalization'
     play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
                         display_screen=False, agent_type='subsumption', exploration=None,
                         distance_metric=None, save_learning_filename='subsumption_dangerous_no_exploration')
