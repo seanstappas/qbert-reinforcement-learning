@@ -202,7 +202,7 @@ class QbertSubsumptionAgent(Agent):
                  combined_reward, state_representation):
         if state_representation is 'simple':
             block_state_repr = 'adjacent'
-            enemy_state_repr = 'adjacent_dangerous'  # TODO: change to adjacent conservative
+            enemy_state_repr = 'adjacent_dangerous'
             friendly_state_repr = 'simple'
         else:
             block_state_repr = 'verbose'
