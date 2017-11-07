@@ -198,15 +198,33 @@
 		\label{fig:subsumption}
 	\end{figure}
 
-	The \textsc{EnemyAvoider} is active whenever an enemy (``Coily'' and ``Purple Ball'') is close to Qbert, i.e. in any of the blocks directly adjacent to Qbert or 2 blocks away. An important strategy is to kill the purple snake enemy (``Coily'') by jumping on to the floating disks on the left and right of the board. If Coily is nearby, he will jump off the board, giving Qbert 500 points. This score is fed as a reward to the enemy avoider learner. As a penalty for dying to Coily, a negative reward of $-100$ is given to the learner. This combination of positive and negative reinforcement allows the agent to learn how to avoid and kill Coily.
+	The \textsc{EnemyAvoider} is active whenever an enemy (\textsc{Coily} and \textsc{PurpleBall}) is close to Qbert, i.e. in any of the blocks directly adjacent to Qbert or 2 blocks away. An important strategy is to kill the purple snake enemy (\textsc{Coily}) by jumping on to the floating disks on the left and right of the board. If \textsc{Coily} is nearby, he will jump off the board, giving Qbert 500 points. This maneuver can be seen in \cref{fig:kill_coily}. This score is fed as a reward to the enemy avoider learner. As a penalty for dying to \textsc{Coily}, a negative reward of $-100$ is given to the learner. This combination of positive and negative reinforcement allows the agent to learn how to avoid and kill \textsc{Coily}.
 	
-	The \textsc{FriendlyCatcher} is active whenever a friendly green agent (``Sam'' and ``Green Ball'') is within 2 blocks of Qbert. This learner encourages Qbert to catch Sam for 300 points and Green Ball for 100 points. Stopping Sam is also important because he changes the colors of blocks back to their original values, making Qbert do more work.
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[width=\columnwidth]{screenshots/kill_coily.png}
+		\caption
+		{Screen capture during Qbert's jump on a disk to kill Coily.}
+		\label{fig:kill_coily}
+	\end{figure}
+
+	Indeed, avoiding \textsc{Coily} is probably the most important task to learn in the game. Not only does it prevent Qbert from dying, but it inadvertently makes him explore the entire map while avoiding \textsc{Coily}. This avoidance is essential, and after many runs, the \textsc{Subsumption} agent learns to go back and forth between tiles to out-maneuver \textsc{Coily}. This can be seen in \cref{fig:avoid_coily}.
 	
-	The \textsc{BlockFinder} is always active and keeps track of the colors of blocks within 2 blocks' distance of Qbert. It specifically keeps track of the number of adjacent blocks that are not of the desired color, encouraging Qbert to change them to their correct color to eventually complete the level.
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[width=\columnwidth]{screenshots/avoid_coily.png}
+		\caption
+		{Screen capture during Qbert's back-and-forth maneuver on the bottom corner to avoid \textsc{Coily}.}
+		\label{fig:avoid_coily}
+	\end{figure}
+	
+	The \textsc{FriendlyCatcher} is active whenever a friendly green agent (\textsc{Sam} and \textsc{GreenBall}) is within 2 blocks of Qbert. This learner encourages Qbert to catch \textsc{Sam} for 300 points and \textsc{GreenBall} for 100 points. Stopping Sam is also important because he changes the colors of blocks back to their original values, making Qbert do more work.
+	
+	The \textsc{BlockFinder} is always active and keeps track of the colors of blocks within 2 blocks' distance of Qbert. It specifically keeps track of the number of adjacent blocks that are not of the desired color, encouraging Qbert to change them to their correct color to eventually complete the level. It receives a 25 point reward for turning a block to the goal color, and a 3100 point reward for completing a level.
 	
 	Note that, although one learner's decision always has priority for executing an action, multiple learners can still learn simultaneously. For example, while Qbert is avoiding an enemy, the block finder learner can still be learning from the actions being taken.
 	
-	The score results of the \textsc{Subsumption} agent with seeds of 123, 459 and 598 can be seen in \cref{fig:seed123,fig:seed459,fig:seed598}. We can see that the agent performs relatively well for all of these seed values, showing that the agent generalizes well.
+	The score results of the \textsc{Subsumption} agent with seeds of 123, 459 and 598 can be seen in \cref{fig:seed123,fig:seed459,fig:seed598}. We can see that the agent performs relatively well for all of these seed values, showing that the agent generalizes well. To fully appreciate the upward trend of learning, it would require more than 100 episodes, but the training is relatively time consuming.
 	
 	\begin{figure}[!htb]
 		\centering
@@ -231,9 +249,11 @@
 		{Score achieved by the \textsc{Subsumption} agent with a seed of 598.}
 		\label{fig:seed598}
 	\end{figure}
+
+	With repeated training, the highest score achieved by the agent is around 41000 and the maximum level reached is 9.
+
 	\section*{Acknowledgments}
-	
-	There was a discussion with Andrei Purcarus and Andrew Lowther concerning the positions of various important bytes in the ALE RAM, including the bytes indicating a safe move update and the byte indicating a level change.
+	There was a discussion with Andrei Purcarus, Andrew Lowther and Juliette Valenchon concerning extracting relevant data from the ALE and high-level learning strategies. Notably, the positions of various important bytes in the ALE RAM were discussed, such as the bytes indicating a safe move update and the byte indicating a level change.
 	
 	
 %	\renewcommand\refname{}
