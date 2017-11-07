@@ -148,18 +148,18 @@ def save_performance_results():
 
 
 def continued_learning():
-    filename = 'seed459_400'
+    filename = 'seed459_500'
     play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
                         display_screen=False, agent_type='subsumption', exploration='combined',
-                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_459_400',
-                        random_seed=459, load_learning_filename='subsumption_dangerous_combined_459_300')
+                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_459_500',
+                        random_seed=459, load_learning_filename='subsumption_dangerous_combined_459_400')
 
 
 def sample_play():
     play_learning_agent(num_episodes=100,
                         display_screen=True, agent_type='subsumption', exploration='combined',
                         distance_metric=None,
-                        random_seed=459, load_learning_filename='subsumption_dangerous_combined_459_200')
+                        random_seed=459, load_learning_filename='subsumption_dangerous_combined_459_400')
 
 
 if __name__ == '__main__':
