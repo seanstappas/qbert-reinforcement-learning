@@ -250,7 +250,7 @@
 		\label{fig:seed598}
 	\end{figure}
 
-	With repeated training, the highest score achieved by the agent is around 41000 and the maximum level reached is 9.
+	With repeated training, the highest score achieved by the agent is around 41800 and the maximum level reached is 9. There are multiple possible improvements to be made to the agent's behaviour. One would be to discourage it from staying near the top of the pyramid, since this is where \textsc{PurpleBall} spawns. This could possibly be achieved by keeping the \textsc{EnemyAvoider} learner active even when there are no enemies, or only when Qbert is near the top of the pyramid. Another problem is that Qbert doesn't seem to explore very well when he is not avoiding \textsc{Coily}. This could possibly be addressed by encouraging Qbert further to find uncolored blocks by specifying how many blocks are left without the goal color.
 
 	\section*{Acknowledgments}
 	There was a discussion with Andrei Purcarus, Andrew Lowther and Juliette Valenchon concerning extracting relevant data from the ALE and high-level learning strategies. Notably, the positions of various important bytes in the ALE RAM were discussed, such as the bytes indicating a safe move update and the byte indicating a level change.
