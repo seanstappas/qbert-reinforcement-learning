@@ -2,10 +2,8 @@ import logging
 import random
 from abc import ABCMeta, abstractmethod
 
-from actions import action_number_to_name, get_valid_action_numbers_from_state, get_action_number_diffs, \
-    get_valid_action_numbers, get_inverse_action
+from actions import action_number_to_name, get_valid_action_numbers_from_state
 from pickler import save_to_pickle, load_from_pickle
-from tuple_utils import list_to_tuple_with_value
 
 
 class Learner:
@@ -13,10 +11,16 @@ class Learner:
 
     @abstractmethod
     def get_best_actions(self, s):
+        """
+        Get the best actions from the given state.
+        """
         raise NotImplementedError
 
     @abstractmethod
     def update(self, s, a, s_next, reward):
+        """
+        Update the learner parameters.
+        """
         raise NotImplementedError
 
 
@@ -48,21 +52,54 @@ class QLearner(Learner):
         else:
             return self.get_best_actions_no_exploration(s)
 
-    def get_best_single_action(self, s):
-        if self.exploration is 'optimistic':
-            actions = self.get_best_actions_optimistic(s)
-        elif self.exploration is 'random':
-            actions = self.get_best_actions_random(s)
-        elif self.exploration is 'combined':
-            actions = self.get_best_actions_combined(s)
-        else:
-            actions = self.get_best_actions_no_exploration(s)
-        return random.choice(actions)
-
     def update(self, s, a, s_next, reward):
         self.q_update(s, a, s_next, reward)
 
+    def get_best_actions_random(self, s):
+        """
+        Get the best actions from the given state using epsilon-greedy.
+        """
+        if random.random() < self.epsilon:
+            actions = get_valid_action_numbers_from_state(s, self.state_repr)
+            action = random.choice(actions)
+            logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
+            return [action]
+        else:
+            return self.get_best_actions_no_exploration(s)
+
+    def get_best_actions_optimistic(self, s):
+        """
+        Get the best actions from the given state using an optimistic prior.
+        """
+        actions = get_valid_action_numbers_from_state(s, self.state_repr)
+        logging.debug('Valid actions: {}'.format([action_number_to_name(a) for a in actions]))
+        max_q = float('-inf')
+        max_actions = []
+        for a in actions:
+            q = self.exploration_function(s, a)
+            if q > max_q:
+                max_q = q
+                max_actions = [a]
+            elif q == max_q:
+                max_actions.append(a)
+        return max_actions
+
+    def get_best_actions_combined(self, s):
+        """
+        Get the best actions from the given state using epsilon-greedy and an optimistic prior.
+        """
+        if random.random() < self.epsilon:
+            actions = get_valid_action_numbers_from_state(s, self.state_repr)
+            action = random.choice(actions)
+            logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
+            return [action]
+        else:
+            return self.get_best_actions_optimistic(s)
+
     def q_update(self, s, a, s_next, reward):
+        """
+        Q-learning update.
+        """
         if self.exploration is 'combined':
             self.N[s, a] = self.N.get((s, a), 0) + 1
         old_q = self.get_q(s, a)
@@ -73,6 +110,33 @@ class QLearner(Learner):
             logging.info('-Infinite Q saved!')
         self.Q[s, a] = new_q
         self.update_close(a, new_q)
+
+    def save(self, filename):
+        """
+        Save the current learning parameters to a pickle file.
+        """
+        save_to_pickle(self.Q, '{}_{}'.format(filename, 'Q'))
+        save_to_pickle(self.N, '{}_{}'.format(filename, 'N'))
+
+    def load(self, filename):
+        """
+        Load learning parameters from a pickle file.
+        """
+        self.Q = load_from_pickle('{}_{}'.format(filename, 'Q'))
+        self.N = load_from_pickle('{}_{}'.format(filename, 'N'))
+        logging.debug('Loaded Q: {}'.format(self.Q))
+        logging.debug('Loaded N: {}'.format(self.N))
+
+    def get_best_single_action(self, s):
+        if self.exploration is 'optimistic':
+            actions = self.get_best_actions_optimistic(s)
+        elif self.exploration is 'random':
+            actions = self.get_best_actions_random(s)
+        elif self.exploration is 'combined':
+            actions = self.get_best_actions_combined(s)
+        else:
+            actions = self.get_best_actions_no_exploration(s)
+        return random.choice(actions)
 
     def get_q(self, s, a):
         return self.Q.get((s, a), 0)
@@ -90,15 +154,6 @@ class QLearner(Learner):
                 max_actions.append(a)
         return max_actions
 
-    def get_best_actions_random(self, s):
-        if random.random() < self.epsilon:
-            actions = get_valid_action_numbers_from_state(s, self.state_repr)
-            action = random.choice(actions)
-            logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
-            return [action]
-        else:
-            return self.get_best_actions_no_exploration(s)
-
     def exploration_function(self, s, a):
         if self.exploration_function_type is 'simple':
             return self.exploration_function_simple(s, a)
@@ -107,30 +162,6 @@ class QLearner(Learner):
 
     def exploration_function_simple(self, s, a):
         return self.unexplored_reward if self.N.get((s, a), 0) < self.unexplored_threshold else self.get_q(s, a)
-
-    def get_best_actions_optimistic(self, s):
-        actions = get_valid_action_numbers_from_state(s, self.state_repr)
-        logging.debug('Valid actions: {}'.format([action_number_to_name(a) for a in actions]))
-        max_q = float('-inf')
-        max_actions = []
-        for a in actions:
-            q = self.exploration_function(s, a)
-            if q > max_q:
-                max_q = q
-                max_actions = [a]
-            elif q == max_q:
-                # Equal value actions
-                max_actions.append(a)
-        return max_actions
-
-    def get_best_actions_combined(self, s):
-        if random.random() < self.epsilon:
-            actions = get_valid_action_numbers_from_state(s, self.state_repr)
-            action = random.choice(actions)
-            logging.debug('Randomly chose {}'.format(action_number_to_name(action)))
-            return [action]
-        else:
-            return self.get_best_actions_optimistic(s)
 
     def get_best_action(self, s, actions):
         best_action = None
@@ -152,14 +183,4 @@ class QLearner(Learner):
         states_close, actions_close = self.world.get_close_states_actions(a, distance_metric=self.distance_metric)
         for s_close, a_close in zip(states_close, actions_close):
             self.Q[s_close, a_close] = new_q
-
-    def save(self, filename):
-        save_to_pickle(self.Q, '{}_{}'.format(filename, 'Q'))
-        save_to_pickle(self.N, '{}_{}'.format(filename, 'N'))
-
-    def load(self, filename):
-        self.Q = load_from_pickle('{}_{}'.format(filename, 'Q'))
-        self.N = load_from_pickle('{}_{}'.format(filename, 'N'))
-        logging.debug('Loaded Q: {}'.format(self.Q))
-        logging.debug('Loaded N: {}'.format(self.N))
 

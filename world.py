@@ -30,7 +30,7 @@ INITIAL_COLORS = [
     [0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
-]  # Indicates if the desired colors are obtained at a block position (0 for starting, 1 for destination color)
+]  # Indicates if the desired colors are obtained at a block position (0 for non-goal color, 1 for goal color)
 
 INITIAL_ENEMY_POSITIONS = [
     [0],
@@ -92,6 +92,9 @@ class World:
 
     @abstractmethod
     def perform_action(self, a):
+        """
+        Perform the given action number a.
+        """
         raise NotImplementedError
 
 
@@ -150,6 +153,50 @@ class QbertWorld(World):
         self.enemy_state_repr = enemy_state_repr
         self.friendly_state_repr = friendly_state_repr
         self.num_colored_blocks = 0
+
+    def perform_action(self, a):
+        score = 0
+        friendly_score = 0
+        enemy_score = 0
+        enemy_penalty = 0
+        score += self.ale.act(a)
+        initial_num_lives = self.ale.lives()
+        self.ale.getRAM(self.ram)
+        level_up_score = 0
+        while not (self.ram[0] == 0 and self.ram[self.ram_size - 1] & 1):  # last bit = 1 and first byte = 0
+            if self.ale.lives() < initial_num_lives:
+                enemy_penalty = LOSE_LIFE_PENALTY
+            if self.ale.lives() == 0:
+                break
+            score_diff = self.ale.act(NO_OP)
+            if score_diff == SAM_SCORE:
+                friendly_score = score_diff
+            elif score_diff == KILL_COILY_SCORE:
+                logging.info('Killed Coily!')
+                enemy_score = score_diff
+            elif score_diff == GREEN_BALL_OR_LEVEL_UP_SCORE:
+                while score_diff == GREEN_BALL_OR_LEVEL_UP_SCORE:
+                    level_up_score += score_diff
+                    score_diff = self.ale.act(NO_OP)
+            else:
+                score += score_diff
+            self.ale.getRAM(self.ram)
+
+        if level_up_score != 0:
+            if level_up_score == GREEN_BALL_OR_LEVEL_UP_SCORE:
+                # Green Ball
+                friendly_score = level_up_score
+            else:
+                # Level Up
+                score += level_up_score
+
+        if self.ram[LEVEL_BYTE] + 1 != self.level:
+            logging.debug('Current level: {}'.format(self.level))
+            self.level = self.ram[LEVEL_BYTE] + 1
+            logging.info('Level won! Progressing to level {}'.format(self.level))
+            # score += self.reset_position()
+        self.update_rgb()
+        return score, friendly_score, enemy_score, enemy_penalty
 
     def to_state_combined_verbose(self):
         current_position = self.current_row, self.current_col
@@ -625,50 +672,6 @@ class QbertWorld(World):
         current_position = self.current_row, self.current_col
         friendlies = list_to_tuple(self.friendlies)
         return current_position, friendlies
-
-    def perform_action(self, a):
-        score = 0
-        friendly_score = 0
-        enemy_score = 0
-        enemy_penalty = 0
-        score += self.ale.act(a)
-        initial_num_lives = self.ale.lives()
-        self.ale.getRAM(self.ram)
-        level_up_score = 0
-        while not (self.ram[0] == 0 and self.ram[self.ram_size - 1] & 1):  # last bit = 1 and first byte = 0
-            if self.ale.lives() < initial_num_lives:
-                enemy_penalty = LOSE_LIFE_PENALTY
-            if self.ale.lives() == 0:
-                break
-            score_diff = self.ale.act(NO_OP)
-            if score_diff == SAM_SCORE:
-                friendly_score = score_diff
-            elif score_diff == KILL_COILY_SCORE:
-                logging.info('Killed Coily!')
-                enemy_score = score_diff
-            elif score_diff == GREEN_BALL_OR_LEVEL_UP_SCORE:
-                while score_diff == GREEN_BALL_OR_LEVEL_UP_SCORE:
-                    level_up_score += score_diff
-                    score_diff = self.ale.act(NO_OP)
-            else:
-                score += score_diff
-            self.ale.getRAM(self.ram)
-
-        if level_up_score != 0:
-            if level_up_score == GREEN_BALL_OR_LEVEL_UP_SCORE:
-                # Green Ball
-                friendly_score = level_up_score
-            else:
-                # Level Up
-                score += level_up_score
-
-        if self.ram[LEVEL_BYTE] + 1 != self.level:
-            logging.debug('Current level: {}'.format(self.level))
-            self.level = self.ram[LEVEL_BYTE] + 1
-            logging.info('Level won! Progressing to level {}'.format(self.level))
-            # score += self.reset_position()
-        self.update_rgb()
-        return score, friendly_score, enemy_score, enemy_penalty
 
     def result_position(self, action):
         diff_row, diff_col = get_action_diffs(action)

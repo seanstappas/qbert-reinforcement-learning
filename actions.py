@@ -61,6 +61,10 @@ INVERSE_ACTIONS = {
 
 
 def get_valid_action_numbers_from_state(s, state_repr='simple'):
+    """
+    Gets the valid actions from the given state
+
+    """
     if state_repr is 'verbose':
         row, col = s[0]
         return get_valid_action_numbers(row, col)
@@ -82,6 +86,9 @@ def get_valid_action_numbers_from_state(s, state_repr='simple'):
 
 
 def get_valid_action_numbers(row, col):
+    """
+    Gets the valid action numbers from the row/col position.
+    """
     if (row, col) == (0, 0):
         return [3, 5]
     elif (row, col) == (5, 0):
@@ -99,6 +106,9 @@ def get_valid_action_numbers(row, col):
 
 
 def get_valid_actions(row, col):
+    """
+    Gets the valid actions from the row/col position.
+    """
     if (row, col) == (0, 0):
         return ['right', 'down']
     elif (row, col) == (5, 0):
@@ -116,20 +126,35 @@ def get_valid_actions(row, col):
 
 
 def action_number_to_name(a):
+    """
+    Gets the action name corresponding to the given action number.
+    """
     return ACTIONS[a]
 
 
 def action_name_to_number(action):
+    """
+    Gets the action number corresponding to the given action name.
+    """
     return ACTIONS_TO_NUMBERS[action]
 
 
 def get_action_diffs(action):
+    """
+    Gets the row/coll diff corresponding to the given action name.
+    """
     return ACTION_DIFFS[action]
 
 
 def get_action_number_diffs(a):
+    """
+    Gets the row/coll diff corresponding to the given action number.
+    """
     return ACTION_NUM_DIFFS[a]
 
 
 def get_inverse_action(a):
+    """
+    Gets the inverse of an action number.
+    """
     return INVERSE_ACTIONS[a]

@@ -11,10 +11,16 @@ class Agent:
 
     @abstractmethod
     def action(self):
+        """
+        Perform an action.
+        """
         raise NotImplementedError
 
 
 class QbertAgent(Agent):
+    """
+    Obert agent which can be of multiple types.
+    """
     def __init__(self, agent_type='subsumption', random_seed=123, frame_skip=4, repeat_action_probability=0,
                  sound=True, display_screen=True, alpha=0.1, gamma=0.95,
                  epsilon=0.2, unexplored_threshold=1, unexplored_reward=100, exploration='combined',
@@ -57,6 +63,9 @@ class QbertAgent(Agent):
 
 
 class QbertBlockAgent(Agent):
+    """
+    Obert agent which learns to explore blocks.
+    """
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, alpha,
                  gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric,
                  state_representation):
@@ -88,6 +97,9 @@ class QbertBlockAgent(Agent):
 
 
 class QbertEnemyAgent(Agent):
+    """
+    Obert agent which learns to avoid enemies (purple agents).
+    """
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, alpha,
                  gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric,
                  state_representation):
@@ -119,6 +131,9 @@ class QbertEnemyAgent(Agent):
 
 
 class QbertFriendlyAgent(Agent):
+    """
+    Obert agent which learns to capture friendlies (green agents).
+    """
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, alpha,
                  gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric,
                  state_representation):
@@ -150,6 +165,9 @@ class QbertFriendlyAgent(Agent):
 
 
 class QbertCombinedVerboseAgent(Agent):
+    """
+    Obert agent which uses a verbose state for enemies, blocks and friendlies.
+    """
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, alpha,
                  gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric):
         state_repr = 'verbose'
@@ -176,6 +194,10 @@ class QbertCombinedVerboseAgent(Agent):
 
 
 class QbertSubsumptionAgent(Agent):
+    """
+    Obert agent which uses a subsumption model, separating learning block exploring, avoiding enemies and capturing
+    friendlies.
+    """
     def __init__(self, random_seed, frame_skip, repeat_action_probability, sound, display_screen, alpha,
                  gamma, epsilon, unexplored_threshold, unexplored_reward, exploration, distance_metric,
                  combined_reward, state_representation):
@@ -200,13 +222,6 @@ class QbertSubsumptionAgent(Agent):
         self.enemy_learner = QLearner(self.world, alpha, gamma, enemy_epsilon, unexplored_threshold, unexplored_reward,
                                       exploration, distance_metric, state_repr=enemy_state_repr, tag='enemies')
         self.combined_reward = combined_reward
-
-        # TODO: encourage exploration heavily for block learner, less for others
-        # TODO: Qbert gets stuck in corners, dies to Coily
-        # TODO: Have number of blocks remaining in state?
-        # TODO: Have distance to center in state for blocks?
-        # TODO: Have level in state? To encourage exploration at every level?
-        # TODO: Level-up learner?
 
     def action(self):
         enemy_present = self.world.is_enemy_nearby()
