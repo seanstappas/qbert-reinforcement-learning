@@ -34,7 +34,4 @@ def plot_from_csv(filename):
 
 
 if __name__ == '__main__':
-    plot_from_csv('hamming')
-    plot_from_csv('manhattan')
-    plot_from_csv('no_generalization')
-    plot_from_csv('same_result')
+    plot_from_csv('seed459_combined')
