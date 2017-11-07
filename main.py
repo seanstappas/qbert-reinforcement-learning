@@ -29,6 +29,7 @@ def play_learning_agent(num_episodes=2, show_image=False, load_learning_filename
                        exploration=exploration, distance_metric=distance_metric, random_seed=random_seed)
     world = agent.world
     max_score = 0
+    max_level = 1
     scores = []
     if load_learning_filename is not None:
         agent.load(load_learning_filename)
@@ -43,6 +44,7 @@ def play_learning_agent(num_episodes=2, show_image=False, load_learning_filename
         scores.append(total_reward)
         logging.info('Episode {} ended with score: {}'.format(episode + 1, total_reward))
         max_score = max(max_score, total_reward)
+        max_level = max(max_level, agent.world.level)
         world.ale.reset_game()
     if csv_filename is not None:
         save_to_csv(scores, csv_filename)
@@ -51,8 +53,8 @@ def play_learning_agent(num_episodes=2, show_image=False, load_learning_filename
     if save_learning_filename is not None:
         agent.save(save_learning_filename)
     logging.info('Maximum reward: {}'.format(max_score))
+    logging.info('Maximum level: {}'.format(max_level))
     logging.info('Total Q size: {}'.format(agent.q_size()))
-    # TODO: Exploration very key... getting very high scores early on because of unexplored weighting...
 
 
 def setup_logging(level):
@@ -146,11 +148,18 @@ def save_performance_results():
 
 
 def continued_learning():
-    filename = 'seed459_200'
+    filename = 'seed459_400'
     play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
                         display_screen=False, agent_type='subsumption', exploration='combined',
-                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_459_200',
-                        random_seed=459, load_learning_filename='subsumption_dangerous_combined_459')
+                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_459_400',
+                        random_seed=459, load_learning_filename='subsumption_dangerous_combined_459_300')
+
+
+def sample_play():
+    play_learning_agent(num_episodes=100,
+                        display_screen=True, agent_type='subsumption', exploration='combined',
+                        distance_metric=None,
+                        random_seed=459, load_learning_filename='subsumption_dangerous_combined_459_200')
 
 
 if __name__ == '__main__':
@@ -159,4 +168,5 @@ if __name__ == '__main__':
     # save_generalization_results()
     # save_exploration_results()
     # save_performance_results()
-    continued_learning()
+    # continued_learning()
+    sample_play()
