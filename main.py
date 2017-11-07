@@ -20,10 +20,13 @@ LOGGING_LEVELS = {
 def play_learning_agent(num_episodes=2, show_image=False, load_learning_filename=None,
                         save_learning_filename=None, plot_filename=None, csv_filename=None, display_screen=False,
                         state_representation='simple', agent_type='subsumption', exploration=None,
-                        distance_metric=None):
+                        distance_metric=None, random_seed=123):
+    logging.info('Plot filename: {}'.format(plot_filename))
+    logging.info('Agent type: {}'.format(agent_type))
     logging.info('Distance metric: {}'.format(distance_metric))
+    logging.info('Exploration: {}'.format(exploration))
     agent = QbertAgent(display_screen=display_screen, state_representation=state_representation, agent_type=agent_type,
-                       exploration=exploration, distance_metric=distance_metric)
+                       exploration=exploration, distance_metric=distance_metric, random_seed=random_seed)
     world = agent.world
     max_score = 0
     scores = []
@@ -99,16 +102,52 @@ def save_generalization_results():
                         display_screen=False, agent_type='combined_verbose', exploration=None,
                         distance_metric=distance_metric)
 
+    filename = 'subsumption_generalization2'
+    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
+                        display_screen=False, agent_type='subsumption', exploration=None,
+                        distance_metric=None, save_learning_filename='subsumption_dangerous_no_exploration')
+
 
 def save_exploration_results():
-    pass
+    filename = 'subsumption_random'
+    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
+                        display_screen=False, agent_type='subsumption', exploration='random',
+                        distance_metric=None, save_learning_filename='subsumption_dangerous_random')
+
+    filename = 'subsumption_optimistic'
+    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
+                        display_screen=False, agent_type='subsumption', exploration='optimistic',
+                        distance_metric=None, save_learning_filename='subsumption_dangerous_optimistic')
+
+    filename = 'subsumption_combined'
+    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
+                        display_screen=False, agent_type='subsumption', exploration='combined',
+                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined')
 
 
 def save_performance_results():
-    pass
+    filename = 'seed123'
+    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
+                        display_screen=False, agent_type='subsumption', exploration='combined',
+                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_123',
+                        random_seed=123)
+
+    filename = 'seed459'
+    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
+                        display_screen=False, agent_type='subsumption', exploration='combined',
+                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_459',
+                        random_seed=459)
+
+    filename = 'seed598'
+    play_learning_agent(num_episodes=100, plot_filename=filename, csv_filename=filename,
+                        display_screen=False, agent_type='subsumption', exploration='combined',
+                        distance_metric=None, save_learning_filename='subsumption_dangerous_combined_598',
+                        random_seed=459)
 
 
 if __name__ == '__main__':
     setup_logging('info')
     # play_learning_agent()
-    save_generalization_results()
+    # save_generalization_results()
+    # save_exploration_results()
+    save_performance_results()

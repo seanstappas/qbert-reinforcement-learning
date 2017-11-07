@@ -180,6 +180,8 @@ class QbertWorld(World):
             return self.to_state_enemies_adjacent_conservative()
         elif self.enemy_state_repr is 'adjacent_conservative_with_position':
             return self.to_state_enemies_adjacent_conservative_with_position()
+        elif self.enemy_state_repr is 'adjacent_dangerous':
+            return self.to_state_enemies_adjacent_dangerous()
         elif self.enemy_state_repr is 'verbose':
             return self.to_state_enemies_verbose()
 
@@ -380,6 +382,57 @@ class QbertWorld(World):
                 bot_right = 0
             else:
                 bot_right = 1
+        return top_left, top_right, bot_left, bot_right
+
+    def to_state_enemies_adjacent_dangerous(self):
+        """
+        Adjacent state representation for enemies around Qbert.
+
+        None: unattainable
+        0: block
+        1: disc
+        2: enemy adjacent
+        3: enemy
+        """
+        row, col = self.current_row, self.current_col
+        top_left = None
+        top_right = None
+        bot_left = None
+        bot_right = None
+
+        if col != 0 and self.enemies[row - 1][col - 1] == 1:
+            top_left = 3
+        elif self.is_enemy_adjacent(row - 1, col - 1):
+            top_left = 2
+        elif col != 0 and self.enemies[row - 1][col - 1] == 0:
+            top_left = 0
+        elif col == 0 and self.discs[row][0] == 1:
+            top_left = 1
+            # TODO: Only go to discs when Coily is here, not purple ball.. (coily position in 0x27 and 0x45)
+
+        if col != row and self.enemies[row - 1][col - 1] == 1:
+            top_right = 3
+        elif self.is_enemy_adjacent(row - 1, col):
+            top_right = 2
+        elif col != row and self.enemies[row - 1][col] == 0:
+            top_right = 0
+        elif col == row and self.discs[row][1] == 1:
+            top_right = 1
+
+        if row != NUM_ROWS - 1:
+            if self.enemies[row + 1][col] == 1:
+                bot_left = 3
+            elif self.is_enemy_adjacent(row + 1, col):
+                bot_left = 2
+            elif self.enemies[row + 1][col] == 0:
+                bot_left = 0
+
+            if self.enemies[row + 1][col + 1] == 1:
+                bot_right = 3
+            elif self.is_enemy_adjacent(row + 1, col + 1):
+                bot_right = 2
+            elif self.enemies[row + 1][col + 1] == 0:
+                bot_right = 0
         return top_left, top_right, bot_left, bot_right
 
     def to_state_enemies_adjacent(self):

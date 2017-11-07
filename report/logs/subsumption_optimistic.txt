@@ -1,0 +1,137 @@
+/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/bin/python2.7 /Users/seanstappas1/PycharmProjects/qbert-reinforcement-learning/main.py
+06-11-2017:18:35:38,353 INFO     [main.py:play_learning_agent:24] Agent type: subsumption
+06-11-2017:18:35:38,354 INFO     [main.py:play_learning_agent:25] Distance metric: None
+06-11-2017:18:35:38,354 INFO     [main.py:play_learning_agent:26] Exploration: optimistic
+A.L.E: Arcade Learning Environment (version 0.5.1)
+[Powered by Stella]
+Use -help for help screen.
+Warning: couldn't load settings file: ./ale.cfg
+Game console created:
+  ROM file:  qbert.bin
+  Cart Name: Q-bert (1988) (Atari) [!]
+  Cart MD5:  484b0076816a104875e00467d431c2d2
+  Display Format:  AUTO-DETECT ==> NTSC
+  ROM Size:        4096
+  Bankswitch Type: AUTO-DETECT ==> 4K
+
+
+WARNING: Possibly unsupported ROM: mismatched MD5.
+Cartridge_MD5: 484b0076816a104875e00467d431c2d2
+Cartridge_name: Q-bert (1988) (Atari) [!]
+
+Running ROM file...
+Random seed is 123
+06-11-2017:18:35:42,46 INFO     [main.py:play_learning_agent:43] Episode 1 ended with score: 350
+06-11-2017:18:35:45,141 INFO     [main.py:play_learning_agent:43] Episode 2 ended with score: 375
+06-11-2017:18:35:49,265 INFO     [main.py:play_learning_agent:43] Episode 3 ended with score: 475
+06-11-2017:18:35:54,123 INFO     [main.py:play_learning_agent:43] Episode 4 ended with score: 675
+06-11-2017:18:35:59,752 INFO     [main.py:play_learning_agent:43] Episode 5 ended with score: 750
+06-11-2017:18:36:03,468 INFO     [main.py:play_learning_agent:43] Episode 6 ended with score: 350
+06-11-2017:18:36:06,122 INFO     [main.py:play_learning_agent:43] Episode 7 ended with score: 275
+06-11-2017:18:36:10,187 INFO     [main.py:play_learning_agent:43] Episode 8 ended with score: 475
+06-11-2017:18:36:14,600 INFO     [main.py:play_learning_agent:43] Episode 9 ended with score: 450
+06-11-2017:18:36:19,166 INFO     [main.py:play_learning_agent:43] Episode 10 ended with score: 475
+06-11-2017:18:36:24,534 INFO     [main.py:play_learning_agent:43] Episode 11 ended with score: 800
+06-11-2017:18:36:28,502 INFO     [main.py:play_learning_agent:43] Episode 12 ended with score: 500
+06-11-2017:18:36:32,278 INFO     [main.py:play_learning_agent:43] Episode 13 ended with score: 425
+06-11-2017:18:36:36,489 INFO     [main.py:play_learning_agent:43] Episode 14 ended with score: 350
+06-11-2017:18:36:41,327 INFO     [main.py:play_learning_agent:43] Episode 15 ended with score: 400
+06-11-2017:18:36:45,36 INFO     [main.py:play_learning_agent:43] Episode 16 ended with score: 525
+06-11-2017:18:36:48,742 INFO     [main.py:play_learning_agent:43] Episode 17 ended with score: 350
+06-11-2017:18:36:51,841 INFO     [main.py:play_learning_agent:43] Episode 18 ended with score: 475
+06-11-2017:18:36:54,852 INFO     [main.py:play_learning_agent:43] Episode 19 ended with score: 550
+06-11-2017:18:36:58,158 INFO     [main.py:play_learning_agent:43] Episode 20 ended with score: 725
+06-11-2017:18:37:00,825 INFO     [world.py:perform_action:668] Level won! Progressing to level 2
+06-11-2017:18:37:01,296 INFO     [main.py:play_learning_agent:43] Episode 21 ended with score: 3775
+06-11-2017:18:37:06,439 INFO     [world.py:perform_action:668] Level won! Progressing to level 2
+06-11-2017:18:37:06,789 INFO     [main.py:play_learning_agent:43] Episode 22 ended with score: 4100
+06-11-2017:18:37:11,468 INFO     [main.py:play_learning_agent:43] Episode 23 ended with score: 500
+06-11-2017:18:37:15,711 INFO     [main.py:play_learning_agent:43] Episode 24 ended with score: 500
+06-11-2017:18:37:19,927 INFO     [world.py:perform_action:668] Level won! Progressing to level 2
+06-11-2017:18:37:20,653 INFO     [main.py:play_learning_agent:43] Episode 25 ended with score: 4100
+06-11-2017:18:37:24,419 INFO     [world.py:perform_action:668] Level won! Progressing to level 2
+06-11-2017:18:37:24,887 INFO     [main.py:play_learning_agent:43] Episode 26 ended with score: 4025
+06-11-2017:18:37:28,783 INFO     [main.py:play_learning_agent:43] Episode 27 ended with score: 725
+06-11-2017:18:37:32,994 INFO     [main.py:play_learning_agent:43] Episode 28 ended with score: 425
+06-11-2017:18:37:36,969 INFO     [main.py:play_learning_agent:43] Episode 29 ended with score: 475
+06-11-2017:18:37:41,671 INFO     [main.py:play_learning_agent:43] Episode 30 ended with score: 425
+06-11-2017:18:37:45,110 INFO     [main.py:play_learning_agent:43] Episode 31 ended with score: 775
+06-11-2017:18:37:50,36 INFO     [main.py:play_learning_agent:43] Episode 32 ended with score: 525
+06-11-2017:18:37:53,527 INFO     [main.py:play_learning_agent:43] Episode 33 ended with score: 725
+06-11-2017:18:37:57,658 INFO     [world.py:perform_action:668] Level won! Progressing to level 2
+06-11-2017:18:37:58,880 INFO     [main.py:play_learning_agent:43] Episode 34 ended with score: 4325
+06-11-2017:18:38:02,969 INFO     [main.py:play_learning_agent:43] Episode 35 ended with score: 700
+06-11-2017:18:38:06,198 INFO     [world.py:perform_action:668] Level won! Progressing to level 2
+06-11-2017:18:38:08,438 INFO     [main.py:play_learning_agent:43] Episode 36 ended with score: 4000
+06-11-2017:18:38:11,307 INFO     [main.py:play_learning_agent:43] Episode 37 ended with score: 700
+06-11-2017:18:38:14,559 INFO     [world.py:perform_action:668] Level won! Progressing to level 2
+06-11-2017:18:38:15,555 INFO     [main.py:play_learning_agent:43] Episode 38 ended with score: 3900
+06-11-2017:18:38:18,897 INFO     [world.py:perform_action:668] Level won! Progressing to level 2
+06-11-2017:18:38:19,697 INFO     [main.py:play_learning_agent:43] Episode 39 ended with score: 4100
+06-11-2017:18:38:24,755 INFO     [main.py:play_learning_agent:43] Episode 40 ended with score: 800
+06-11-2017:18:38:28,827 INFO     [main.py:play_learning_agent:43] Episode 41 ended with score: 425
+06-11-2017:18:38:32,964 INFO     [main.py:play_learning_agent:43] Episode 42 ended with score: 500
+06-11-2017:18:38:37,306 INFO     [main.py:play_learning_agent:43] Episode 43 ended with score: 675
+06-11-2017:18:38:40,1 INFO     [main.py:play_learning_agent:43] Episode 44 ended with score: 650
+06-11-2017:18:38:44,476 INFO     [main.py:play_learning_agent:43] Episode 45 ended with score: 400
+06-11-2017:18:38:48,327 INFO     [main.py:play_learning_agent:43] Episode 46 ended with score: 550
+06-11-2017:18:38:52,985 INFO     [main.py:play_learning_agent:43] Episode 47 ended with score: 500
+06-11-2017:18:38:56,157 INFO     [main.py:play_learning_agent:43] Episode 48 ended with score: 600
+06-11-2017:18:38:59,752 INFO     [main.py:play_learning_agent:43] Episode 49 ended with score: 475
+06-11-2017:18:39:04,382 INFO     [main.py:play_learning_agent:43] Episode 50 ended with score: 750
+06-11-2017:18:39:07,177 INFO     [main.py:play_learning_agent:43] Episode 51 ended with score: 425
+06-11-2017:18:39:09,407 INFO     [main.py:play_learning_agent:43] Episode 52 ended with score: 500
+06-11-2017:18:39:11,999 INFO     [main.py:play_learning_agent:43] Episode 53 ended with score: 525
+06-11-2017:18:39:15,444 INFO     [main.py:play_learning_agent:43] Episode 54 ended with score: 450
+06-11-2017:18:39:19,514 INFO     [world.py:perform_action:668] Level won! Progressing to level 2
+06-11-2017:18:39:20,440 INFO     [main.py:play_learning_agent:43] Episode 55 ended with score: 4425
+06-11-2017:18:39:24,218 INFO     [main.py:play_learning_agent:43] Episode 56 ended with score: 375
+06-11-2017:18:39:27,970 INFO     [main.py:play_learning_agent:43] Episode 57 ended with score: 750
+06-11-2017:18:39:32,657 INFO     [main.py:play_learning_agent:43] Episode 58 ended with score: 800
+06-11-2017:18:39:36,914 INFO     [main.py:play_learning_agent:43] Episode 59 ended with score: 475
+06-11-2017:18:39:40,119 INFO     [main.py:play_learning_agent:43] Episode 60 ended with score: 725
+06-11-2017:18:39:43,835 INFO     [main.py:play_learning_agent:43] Episode 61 ended with score: 775
+06-11-2017:18:39:47,945 INFO     [main.py:play_learning_agent:43] Episode 62 ended with score: 475
+06-11-2017:18:39:51,445 INFO     [main.py:play_learning_agent:43] Episode 63 ended with score: 750
+06-11-2017:18:39:56,262 INFO     [main.py:play_learning_agent:43] Episode 64 ended with score: 750
+06-11-2017:18:40:00,202 INFO     [main.py:play_learning_agent:43] Episode 65 ended with score: 450
+06-11-2017:18:40:03,873 INFO     [main.py:play_learning_agent:43] Episode 66 ended with score: 725
+06-11-2017:18:40:07,861 INFO     [main.py:play_learning_agent:43] Episode 67 ended with score: 775
+06-11-2017:18:40:11,138 INFO     [main.py:play_learning_agent:43] Episode 68 ended with score: 275
+06-11-2017:18:40:15,989 INFO     [main.py:play_learning_agent:43] Episode 69 ended with score: 625
+06-11-2017:18:40:19,95 INFO     [main.py:play_learning_agent:43] Episode 70 ended with score: 650
+06-11-2017:18:40:23,961 INFO     [main.py:play_learning_agent:43] Episode 71 ended with score: 525
+06-11-2017:18:40:26,478 INFO     [main.py:play_learning_agent:43] Episode 72 ended with score: 375
+06-11-2017:18:40:29,534 INFO     [main.py:play_learning_agent:43] Episode 73 ended with score: 525
+06-11-2017:18:40:32,684 INFO     [main.py:play_learning_agent:43] Episode 74 ended with score: 425
+06-11-2017:18:40:36,616 INFO     [main.py:play_learning_agent:43] Episode 75 ended with score: 450
+06-11-2017:18:40:40,462 INFO     [main.py:play_learning_agent:43] Episode 76 ended with score: 775
+06-11-2017:18:40:44,744 INFO     [main.py:play_learning_agent:43] Episode 77 ended with score: 850
+06-11-2017:18:40:49,19 INFO     [main.py:play_learning_agent:43] Episode 78 ended with score: 450
+06-11-2017:18:40:54,84 INFO     [main.py:play_learning_agent:43] Episode 79 ended with score: 525
+06-11-2017:18:40:57,555 INFO     [main.py:play_learning_agent:43] Episode 80 ended with score: 525
+06-11-2017:18:41:00,708 INFO     [main.py:play_learning_agent:43] Episode 81 ended with score: 750
+06-11-2017:18:41:03,783 INFO     [main.py:play_learning_agent:43] Episode 82 ended with score: 500
+06-11-2017:18:41:06,843 INFO     [main.py:play_learning_agent:43] Episode 83 ended with score: 800
+06-11-2017:18:41:10,351 INFO     [main.py:play_learning_agent:43] Episode 84 ended with score: 425
+06-11-2017:18:41:13,524 INFO     [main.py:play_learning_agent:43] Episode 85 ended with score: 400
+06-11-2017:18:41:18,80 INFO     [main.py:play_learning_agent:43] Episode 86 ended with score: 800
+06-11-2017:18:41:22,376 INFO     [main.py:play_learning_agent:43] Episode 87 ended with score: 750
+06-11-2017:18:41:25,771 INFO     [main.py:play_learning_agent:43] Episode 88 ended with score: 525
+06-11-2017:18:41:28,192 INFO     [main.py:play_learning_agent:43] Episode 89 ended with score: 600
+06-11-2017:18:41:30,872 INFO     [main.py:play_learning_agent:43] Episode 90 ended with score: 275
+06-11-2017:18:41:35,182 INFO     [main.py:play_learning_agent:43] Episode 91 ended with score: 275
+06-11-2017:18:41:38,577 INFO     [main.py:play_learning_agent:43] Episode 92 ended with score: 425
+06-11-2017:18:41:42,332 INFO     [main.py:play_learning_agent:43] Episode 93 ended with score: 500
+06-11-2017:18:41:44,920 INFO     [main.py:play_learning_agent:43] Episode 94 ended with score: 500
+06-11-2017:18:41:47,691 INFO     [main.py:play_learning_agent:43] Episode 95 ended with score: 500
+06-11-2017:18:41:50,831 INFO     [main.py:play_learning_agent:43] Episode 96 ended with score: 675
+06-11-2017:18:41:54,39 INFO     [main.py:play_learning_agent:43] Episode 97 ended with score: 800
+06-11-2017:18:41:58,661 INFO     [world.py:perform_action:668] Level won! Progressing to level 2
+06-11-2017:18:41:59,893 INFO     [main.py:play_learning_agent:43] Episode 98 ended with score: 3800
+06-11-2017:18:42:03,650 INFO     [main.py:play_learning_agent:43] Episode 99 ended with score: 400
+06-11-2017:18:42:07,395 INFO     [main.py:play_learning_agent:43] Episode 100 ended with score: 300
+06-11-2017:18:42:11,781 INFO     [main.py:play_learning_agent:52] Maximum reward: 4425
+06-11-2017:18:42:11,781 INFO     [main.py:play_learning_agent:53] Total Q size: 899
+
+Process finished with exit code 0
