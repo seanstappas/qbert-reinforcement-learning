@@ -68,7 +68,9 @@
 	\section{Results of generalization}
 	% 10. results provided for at least 3 different generalization approaches (i.e., choice of components of the distance metric) and meaningful discussion regarding consequences to behaviour of game agent
 	
-	The results of using the previous three distance metrics can be seen in...
+	For all the plots in this report, scores were reported for 100 episodes of playing Qbert. For each episode, Qbert keeps playing until he has no more lives yet, and the total score obtained is recorded. Also, for the following plots showing various generalization results, no exploration is being used.
+	
+	The results of the Qbert agent with no generalization can be seen in \cref{fig:no_generalization}. We can see that learning takes place relatively slowly because of the massive state space.
 	
 	\begin{figure}[!htb]
 		\centering
@@ -78,6 +80,8 @@
 		\label{fig:no_generalization}
 	\end{figure}
 
+	The results of the Qbert agent using the \textsc{Manhattan} distance metric can be seen in \cref{fig:manhattan}. It seems that learning is actually hindered with this metric, with overall lower scores being obtained. This may be explained by the fact that assigning the same Q-value to adjacent states may not always be wise. For instance, if Qbert dies to an enemy at a specific block, it probably doesn't make to assign the same penalty to all nearby blocks.
+
 	\begin{figure}[!htb]
 		\centering
 		\includegraphics[width=\columnwidth]{plots/manhattan.pdf}
@@ -85,6 +89,8 @@
 		{Score achieved by the agent using the \textsc{Manhattan} distance metric.}
 		\label{fig:manhattan}
 	\end{figure}
+
+	The results of the Qbert agent using the \textsc{Hamming} distance metric can be seen in \cref{fig:hamming}. While the learning converges relatively quickly to a score, it clearly fails to converge to a very high one. Once again, the distance metric may have caused unintended states to have the same reward, causing repetitive destructive behaviour.
 
 	\begin{figure}[!htb]
 		\centering
@@ -94,6 +100,8 @@
 		\label{fig:hamming}
 	\end{figure}
 
+	The results of the Qbert agent using the \textsc{SameResult} distance metric can be seen in \cref{fig:same_result}. Here, the distance metric clearly failed to provide learning, with the score converging to a lower value than the starting one. By assigning the same utility to states that lead to the same other states, the agent has degenerated to repetitive behaviour, leading to easy prey for the purple enemies.
+
 	\begin{figure}[!htb]
 		\centering
 		\includegraphics[width=\columnwidth]{plots/same_result.pdf}
@@ -101,6 +109,8 @@
 		{Score achieved by the agent using the \textsc{SameResult} distance metric.}
 		\label{fig:same_result}
 	\end{figure}
+
+	It is clear that all the described distance metrics have not been successful. This can be explained by the simple fact that, even with distance metrics, the \textsc{Verbose} state space is much too big. To address this issue, we have created a \textsc{Subsumption} agent using the \textsc{Simple} state representation. The details of this model will be described in \cref{sec:performance}, but its performance as a generalization technique can be seen in \cref{fig:subsumption_generalization}. Here, we see a clear upward learning trend despite the spiky data. Note that the spikiness in the data is due to the great danger in the Qbert world, where death is very easy near purple enemies.
 
 	\begin{figure}[!htb]
 		\centering
@@ -110,14 +120,14 @@
 		\label{fig:subsumption_generalization}
 	\end{figure}
 
-	The main reason most of these results are mediocre is the fact that exploration has been completely ignored here, since it will be discussed in the next section. It should be noted, however, that with the subsumption model, the agent learns with the \textsc{EnemyAvoider} quickly enough to avoid purple enemies, and this acts in a way as a form of exploration, since the enemies will force Qbert to go around the pyramid to avoid death. Indeed, this will force Qbert to visit states that he would normally not visit.
+	Note that exploration has been completely ignored here, since it will be discussed in the next section. This explains the relatively mediocre score results. It should be noted, however, that with the subsumption model, the agent learns with the \textsc{EnemyAvoider} quickly enough to avoid purple enemies, and this acts in a way as a form of exploration, since the enemies will force Qbert to go around the pyramid to avoid death. Indeed, this will force Qbert to visit states that he would normally not visit.
 	
 	\section{Description of approach to exploration}
 	% 10 provides expression for optimistic prior for (state, action) pairs with clear explanation of how agent chose action at each step and convincing rationale for the approach taken
 	
-	First, the $\epsilon$-greedy approach to exploration was implemented, where a random action is chosen with probability $\epsilon$ and the greedy action is chosen otherwise. An $\epsilon$ value of \SI{20}{\percent} was chosen, since exploration is very important to finding all the blocks to complete a level. The $\epsilon$-greedy approach is the one chosen by many researchers using reinforcement learning in the ALE \cite{defazio,bellemare,mnih}. This method is attractive for many reasons. First, it is very simple to implement with any standard random number generator. Second, despite its simplicity, it can lead to very powerful results, since it can allow an agent to explore states it would never normally explore. However, convergence to an optimal policy can be slow with $\epsilon$-greedy. Also, this method can be dangerous in the Qbert game, where a bad random action can lead to sudden death. For this reason, the random action is only chosen for the \textsc{FriendlyCatcher} and \textsc{BlockFinder}, since a bad random action from the \textsc{EnemyAvoider} can lead to sudden death.
+	First, the $\epsilon$-greedy approach to exploration was implemented, where a random action is chosen with probability $\epsilon$ and the greedy action is chosen otherwise. An $\epsilon$ value of \SI{20}{\percent} was chosen, since exploration is very important to finding all the blocks to complete a level. The $\epsilon$-greedy approach is the one chosen by many researchers using reinforcement learning in the ALE \cite{defazio,bellemare,mnih}. This method is attractive for many reasons. First, it is very simple to implement with any standard random number generator. Second, despite its simplicity, it can lead to very powerful results, since it can allow an agent to explore states it would never normally explore. However, convergence to an optimal policy can be slow with $\epsilon$-greedy. Also, this method can be dangerous in the Qbert game, where a bad random action can lead to sudden death. For this reason, the random action is only chosen for the \textsc{FriendlyCatcher} and \textsc{BlockFinder}, since a bad random action from the \textsc{EnemyAvoider} can lead to sudden death. This approach will be referred to as \textsc{Random} exploration.
 	
-	Next, weighting with optimistic priors was implemented, using $N(s, a)$, i.e., the number of times action $a$ has been attempted in state $s$. The simple exploration function used can be seen in \cref{eq:exploration_function}. This method can often lead to meaningful convergence much faster than $\epsilon$-greedy, since it will directly explore unvisited states, instead of choosing randomly. This method is theoretically very attractive in the Qbert world, since exploring unexplored states usually means going on blocks without the goal color, turning them to the correct color.
+	Next, weighting with optimistic priors was implemented, using $N(s, a)$, i.e., the number of times action $a$ has been attempted in state $s$. The simple exploration function used can be seen in \cref{eq:exploration_function}. An optimistic score of 100 was chosen, since it is higher than the score obtained by jumping on a block without a goal color (25). This method can often lead to meaningful convergence much faster than $\epsilon$-greedy, since it will directly explore unvisited states, instead of choosing randomly. This method is theoretically very attractive in the Qbert world, since exploring unexplored states usually means going on blocks without the goal color, turning them to the correct color. This approach will be referred to as \textsc{Optimistic} exploration.
 	
 	\begin{equation} \label{eq:exploration_function}
 		f(u, n) =
@@ -127,23 +137,22 @@
 		\end{cases}
 	\end{equation}
 	
+	Finally, a combination of $\epsilon$-greedy and optimistic prior was also experimented with. With this approach, the agent chooses a random action with probability $\epsilon$ and uses the exploration function given in \cref{eq:exploration_function}. This can theoretically offer the benefits of both $\epsilon$-greedy and optimistic prior, i.e., the benefits of random exploration and optimistic unexplored states. This approach will be referred to as \textsc{Combined} exploration.
 	
 	\section{Results of exploration}
 	% 10. results provided for at least 2 different exploration functions (i.e., weighting or N[s,a] in optimistic prior calculation) and meaningful discussion regarding consequences to behaviour of game agent
 	
-	The $\epsilon$-greedy results can be seen in...
-	
-	% TODO: Tabulate score/level/screenshots for epsilon exploration
-	
-	One problem that was clear with $\epsilon$-greedy exploration is that it can be very slow to learn and waste a great deal of training time in the same states. For example, with $\epsilon$-greedy, Qbert would often oscillate between two adjacent blocks, not seeing the need to explore further until the it randomly chose (with probability $\epsilon$) to explore further. This can be seen in \cref{fig:random_oscillations}, where Qbert is oscillating between the bottom right block and the block to the top right of it.
+	The results of the \textsc{Subsumption} agent using \textsc{Random} exploration can be seen in \cref{fig:subsumption_random}. The results are relatively good, although it is hard to tell if the agent is correctly learning. This is most probably due to the fact that 100 is a relatively low number of episodes.
 	
 	\begin{figure}[!htb]
 		\centering
 		\includegraphics[width=\columnwidth]{plots/subsumption_random.pdf}
 		\caption
-		{Score achieved by the \textsc{Subsumption} agent with $\epsilon$-greedy exploration.}
+		{Score achieved by the \textsc{Subsumption} agent with \textsc{Random} exploration.}
 		\label{fig:subsumption_random}
 	\end{figure}
+	
+	One problem that was clear with $\epsilon$-greedy exploration is that it can be very slow to learn and waste a great deal of training time in the same states. For example, with $\epsilon$-greedy, Qbert would often oscillate between two adjacent blocks, not seeing the need to explore further until the it randomly chose (with probability $\epsilon$) to explore further. This can be seen in \cref{fig:random_oscillations}, where Qbert is oscillating between the bottom right block and the block to the top right of it. This can explain the slow learning seen in \cref{fig:subsumption_random}.
 
 	\begin{figure}[!htb]
 		\centering
@@ -153,22 +162,23 @@
 		\label{fig:random_oscillations}
 	\end{figure}
 
-	The weighted prior results can be seen in...
+	The results of the \textsc{Subsumption} agent using \textsc{Optimistic} exploration can be seen in \cref{fig:subsumption_optimistic}. These results are not as encouraging, with the score oscillating around a relatively low value. This can most likely be explained by the fact that we used a relatively simplistic exploration function. With a more sophisticated one, we can most likely obtain better results.
 	
 	\begin{figure}[!htb]
 		\centering
 		\includegraphics[width=\columnwidth]{plots/subsumption_optimistic.pdf}
 		\caption
-		{Score achieved by the \textsc{Subsumption} agent with optimistic-prior exploration.}
+		{Score achieved by the \textsc{Subsumption} agent with \textsc{Optimistic} exploration.}
 		\label{fig:subsumption_optimistic}
 	\end{figure}
 	
+	The results of the \textsc{Subsumption} agent using \textsc{Combined} exploration can be seen in \cref{fig:subsumption_combined}. These results are much more encouraging. We can see the same initial high score values as for \textsc{Random} exploration, with a clear increasing trend.
 	
 	\begin{figure}[!htb]
 		\centering
 		\includegraphics[width=\columnwidth]{plots/subsumption_combined.pdf}
 		\caption
-		{Score achieved by the \textsc{Subsumption} agent with $\epsilon$-greedy and optimistic-prior exploration.}
+		{Score achieved by the \textsc{Subsumption} agent with \textsc{Combined} exploration ($\epsilon$-greedy and optimistic-prior exploration).}
 		\label{fig:subsumption_combined}
 	\end{figure}
 	
@@ -196,10 +206,31 @@
 	
 	Note that, although one learner's decision always has priority for executing an action, multiple learners can still learn simultaneously. For example, while Qbert is avoiding an enemy, the block finder learner can still be learning from the actions being taken.
 	
-	% TODO: Show score as function of number of games played (with multiple seeds, game events [enemies])
+	The score results of the \textsc{Subsumption} agent with seeds of 123, 459 and 598 can be seen in \cref{fig:seed123,fig:seed459,fig:seed598}. We can see that the agent performs relatively well for all of these seed values, showing that the agent generalizes well.
 	
-	% TODO: Explain how game events were handled (with subsumption diagram and suppressor nodes, agents taking precedence over blocks...)
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[width=\columnwidth]{plots/seed123.pdf}
+		\caption
+		{Score achieved by the \textsc{Subsumption} agent with a seed of 123.}
+		\label{fig:seed123}
+	\end{figure}
 	
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[width=\columnwidth]{plots/seed459.pdf}
+		\caption
+		{Score achieved by the \textsc{Subsumption} agent with a seed of 459.}
+		\label{fig:seed459}
+	\end{figure}
+
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[width=\columnwidth]{plots/seed598.pdf}
+		\caption
+		{Score achieved by the \textsc{Subsumption} agent with a seed of 598.}
+		\label{fig:seed598}
+	\end{figure}
 	\section*{Acknowledgments}
 	
 	There was a discussion with Andrei Purcarus and Andrew Lowther concerning the positions of various important bytes in the ALE RAM, including the bytes indicating a safe move update and the byte indicating a level change.
