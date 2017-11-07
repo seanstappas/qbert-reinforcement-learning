@@ -455,7 +455,6 @@ class QbertWorld(World):
             top_left = 0
         elif col == 0 and self.discs[row][0] == 1:
             top_left = 1
-            # TODO: Only go to discs when Coily is here, not purple ball.. (coily position in 0x27 and 0x45)
 
         if col != row and self.enemies[row - 1][col - 1] == 1:
             top_right = 3
@@ -503,7 +502,6 @@ class QbertWorld(World):
             top_left = 0
         elif col == 0 and self.discs[row][0] == 1:
             top_left = 1
-            # TODO: Only go to discs when Coily is here, not purple ball.. (coily position in 0x27 and 0x45)
 
         if self.is_enemy_adjacent(row - 1, col):
             top_right = 2
@@ -544,7 +542,6 @@ class QbertWorld(World):
             top_left = 0
         elif col == 0 and self.discs[row][0] == 1:
             top_left = 1
-            # TODO: Only go to discs when Coily is here, not purple ball.. (coily position in 0x27 and 0x45)
 
         if self.is_enemy_adjacent(row - 1, col):
             top_right = None
@@ -591,7 +588,6 @@ class QbertWorld(World):
             top_left = 0
         elif col == 0 and self.discs[row][0] == 1:
             top_left = 1
-            # TODO: Only go to discs when Coily is here, not purple ball.. (coily position in 0x27 and 0x45)
 
         if self.is_enemy_adjacent(row - 1, col):
             top_right = None
@@ -780,4 +776,3 @@ class QbertWorld(World):
                 states.append(s)
                 actions.append(get_inverse_action(a))
         return states, actions
-        # TODO: Update this distance metric
